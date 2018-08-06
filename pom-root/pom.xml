@@ -8,34 +8,46 @@
   <name>pom-root</name>
   <modules>
     <module>webapp</module>
-    <module>interfaces</module>
-    <module>models</module>
     <module>persistence</module>
+    <module>models</module>
     <module>services</module>
+    <module>interfaces</module>
   </modules>
-  
-<properties>
-<org.springframework.version>4.2.5.RELEASE</org.springframework.version>
-<maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
-</properties>
-<build>
-<plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-eclipse-plugin</artifactId>
-<version>${maven-eclipse-plugin.version}</version>
-</plugin>
-</plugins>
-</build>
-<dependencyManagement>
-<dependencies>
-<dependency>
-<groupId>org.springframework</groupId>
-<artifactId>spring-webmvc</artifactId>
-<version>${org.springframework.version}</version>
-</dependency>
-</dependencies>
-</dependencyManagement>
 
+  <properties>
+    <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
+    <org.springframework.version>4.2.5.RELEASE</org.springframework.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>${maven-eclipse-plugin.version}</version>
+        <configuration>
+          <downloadSources>true</downloadSources>
+          <downloadJavadocs>true</downloadJavadocs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${org.springframework.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${org.springframework.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
 
 </project>
