@@ -35,4 +35,8 @@ public class UserDaoImpl implements UserDao {
 		}
 		return list.get(0);
 	}
+
+	public User GetUser() {
+		return new User("jorge",1);
+	}
 }
