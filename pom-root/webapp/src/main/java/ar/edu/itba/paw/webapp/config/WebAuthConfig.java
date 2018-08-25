@@ -20,16 +20,15 @@ import java.util.concurrent.TimeUnit;
 @ComponentScan("ar.edu.itba.paw.webapp.auth")
 public class WebAuthConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     private PawUserDetailsService userDetailsService;
-//TODO autenticar solo comentarios y paginas de adminitrador de prop
+
     protected void configure(final HttpSecurity http)throws Exception {
-        http.userDetailsService(userDetailsService).sessionManagement().invalidSessionUrl("/user/register").and().authorizeRequests()
-                //.antMatchers("/user/login").anonymous()
+        http.userDetailsService(userDetailsService).sessionManagement().invalidSessionUrl("/user/login").and().authorizeRequests()
+                .antMatchers("/user/login").anonymous()
                 .antMatchers("/user/register").anonymous()
                 // .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").authenticated()
+                //.antMatchers("/**").authenticated()
                 .and().formLogin().usernameParameter("mail").passwordParameter("password").defaultSuccessUrl("/", false).loginPage("/user/login")
                 .failureUrl("/user/login?error=true")
                 .and().rememberMe().rememberMeParameter("j_rememberme")

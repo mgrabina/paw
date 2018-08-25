@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix ="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@taglib prefix ="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -21,7 +22,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script src="../../resources/js/bootstrap.min.js"> </script>
 	</head>
 	<body>
-		<form:form modelAttribute="registerForm" action ='<%= response.encodeURL(request.getContextPath() + "/user/register") %>' method="post" enctype="multipart/form-data">
+		<form:form modelAttribute="registerForm" action ='<%= response.encodeURL(request.getContextPath() + "/user/register") %>' method="post" >
 			<div class="login-page">
 			  <div class="form">
 				<h1 class="title">Sign Up</h1>
@@ -32,7 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				  <input type="password" placeholder="Repeat password"/>
 				  <form:input type="text" path="phone" placeholder="Phone"/>
 				  <form:input type="text" path="mail" placeholder="Mail"/>
-				  <button>Create account</button>
+					<input type="submit" class="btn btn-outline-success" value="registrar"/>
 				  <p class="message">Already registered? <a href="#">Sign In</a></p>
 				</form>
 			  </div>

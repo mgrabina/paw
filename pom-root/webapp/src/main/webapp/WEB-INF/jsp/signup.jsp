@@ -50,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="submit" value="Submit">
 					</label>
 					<p>Already register</p>
-				<a href="signin.jsp" class="hvr-shutter-in-horizontal">Login</a>
+				<a href="login.jsp" class="hvr-shutter-in-horizontal">Login</a>
 			</div>
 			<div class="clearfix"> </div>
 		</div>

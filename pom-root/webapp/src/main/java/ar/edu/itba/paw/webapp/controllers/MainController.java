@@ -17,9 +17,8 @@ public class MainController {
 	@RequestMapping("/")
 	public ModelAndView index() {
 		final ModelAndView mav = new ModelAndView("index");
-		final User user = us.GetUser();
-		
-		mav.addObject("user", user);
+//		final User user = us.GetUser();
+//		mav.addObject("user", user);
 		return mav;
 	}
 

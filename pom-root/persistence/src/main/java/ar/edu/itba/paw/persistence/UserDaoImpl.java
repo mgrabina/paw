@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.net.URISyntaxException;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +27,14 @@ public class UserDaoImpl implements UserDao {
 	private SimpleJdbcInsert jdbcInsert;
 
 
-	private final static SimpleUserMapper ROW_MAPPER = new SimpleUserMapper();
-
+	private final static RowMapper<User> ROW_MAPPER = (rs, rowNum) -> new User(
+            rs.getInt("id"),
+            rs.getString("name"),
+			rs.getString("surname"),
+            rs.getString("password"),
+            rs.getString("phone"),
+            rs.getString("mail")
+            );
 	@Autowired
 	public UserDaoImpl(final DataSource ds) throws IOException, URISyntaxException {
 
@@ -90,22 +98,36 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
+	public void createUser(String username, String surname ,String mail,String password, String phone) {
 
+        jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("users").usingGeneratedKeyColumns("id");
 
+        final Map<String, Object> args = new HashMap<String, Object>();
+        args.put("name", username);
+        args.put("surname", surname);
+        args.put("password", password);
+        args.put("phone", phone);
+        args.put("mail", mail);
+        final long userId = jdbcInsert.executeAndReturnKey(args).longValue();
 
-	public void createUser(String username, String surname ,String mail,String password, String phone){
+        //return User.create(userId, username, mail, psw);
+    }
+	public User findByMail(final long mail) {
+		final List<User> list = jdbcTemplate.query("SELEC T * FROM users WHERE mail = ?",
+				ROW_MAPPER, mail);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
 
-		jdbcInsert= new SimpleJdbcInsert(jdbcTemplate).withTableName("users").usingGeneratedKeyColumns("id");
-
-		final Map<String, Object> args= new HashMap<String, Object>();
-		args.put("name" , username);
-		args.put("surname",surname);
-		args.put("password",password);
-		args.put("phone",phone);
-		args.put("mail",mail);
-		final long userId =  jdbcInsert.executeAndReturnKey(args).longValue();
-
-		//return User.create(userId, username, mail, psw);
+	public List<User> getAll(){
+		final List<User> list = jdbcTemplate.query("SELEC T * FROM users",
+				ROW_MAPPER);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 
 
