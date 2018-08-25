@@ -10,6 +10,16 @@ public class User {
 	private String mail;
 	private String imageSrc;
 
+	public User(int id, String name, String surname, String password, String phone, String mail, String imageSrc) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.password = password;
+		this.phone = phone;
+		this.mail = mail;
+		this.imageSrc = imageSrc;
+	}
+
 	public User(String name, String surname, String password, String phone, String mail, String imageSrc) {
 		this.name = name;
 		this.surname = surname;

@@ -19,7 +19,15 @@ public class UserDaoImpl implements UserDao {
 	private final static RowMapper<User> ROW_MAPPER = new
 			RowMapper<User>() {
 				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return new User(rs.getString("username"), rs.getInt("userid"));
+					return new User(
+							rs.getInt("userid"),
+							rs.getString("name"),
+							rs.getString("username"),
+							rs.getString("password"),
+							rs.getString("phone"),
+							rs.getString("mail"),
+							rs.getString("imageSrc")
+							);
 				}
 			};
 	@Autowired
@@ -36,7 +44,21 @@ public class UserDaoImpl implements UserDao {
 		return list.get(0);
 	}
 
-	public User GetUser() {
-		return new User("jorge",1);
+	public User findByMail(final long mail) {
+		final List<User> list = jdbcTemplate.query("SELEC T * FROM users WHERE mail = ?",
+				ROW_MAPPER, mail);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	public List<User> getAll(){
+		final List<User> list = jdbcTemplate.query("SELEC T * FROM users",
+				ROW_MAPPER);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 }
