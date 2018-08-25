@@ -1,14 +1,16 @@
 package ar.edu.itba.paw.models;
 
 public class Property {
+    public enum Type{
+        house, apartment, duplex, office, land
+    };
+
     private Integer id;
     private String street;
     private Integer number;
     private Integer floor;
     private String apartment;
-    private enum type{
-        house, apartment, duplex, office, land
-    };
+    private Type type;
     private Integer userId;
     private Long price;
     //Images in Imagesxproperty relation
@@ -18,6 +20,39 @@ public class Property {
     private Integer baths;
     private Boolean garage;
     private Integer taxPrice;
+
+    public Property(Integer id, String street, Integer number, Integer floor, String apartment, Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.floor = floor;
+        this.apartment = apartment;
+        this.type = type;
+        this.userId = userId;
+        this.price = price;
+        this.coveredArea = coveredArea;
+        this.totalArea = totalArea;
+        this.rooms = rooms;
+        this.baths = baths;
+        this.garage = garage;
+        this.taxPrice = taxPrice;
+    }
+
+    public Property(String street, Integer number, Integer floor, String apartment, Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+        this.street = street;
+        this.number = number;
+        this.floor = floor;
+        this.apartment = apartment;
+        this.type = type;
+        this.userId = userId;
+        this.price = price;
+        this.coveredArea = coveredArea;
+        this.totalArea = totalArea;
+        this.rooms = rooms;
+        this.baths = baths;
+        this.garage = garage;
+        this.taxPrice = taxPrice;
+    }
 
     public Property(String street, Integer number, Integer floor, String apartment, Integer userId, Long price) {
         this.street = street;
@@ -33,22 +68,6 @@ public class Property {
         this.number = number;
         this.userId = userId;
         this.price = price;
-    }
-
-    public Property(String street, Integer number, Integer floor, String apartment, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
-
-        this.street = street;
-        this.number = number;
-        this.floor = floor;
-        this.apartment = apartment;
-        this.userId = userId;
-        this.price = price;
-        this.coveredArea = coveredArea;
-        this.totalArea = totalArea;
-        this.rooms = rooms;
-        this.baths = baths;
-        this.garage = garage;
-        this.taxPrice = taxPrice;
     }
 
     public void setPrice(Long price) {

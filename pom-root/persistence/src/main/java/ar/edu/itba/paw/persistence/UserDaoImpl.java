@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
 			RowMapper<User>() {
 				public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 					return new User(
-							rs.getInt("userid"),
+							rs.getInt("id"),
 							rs.getString("name"),
 							rs.getString("username"),
 							rs.getString("password"),
