@@ -3,6 +3,9 @@ package ar.edu.itba.paw.webapp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -10,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+
+
 import javax.sql.DataSource;
 
 @EnableWebMvc
@@ -33,6 +38,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		ds.setUrl("jdbc:postgresql://35.199.77.209:5432/dev-paw-db");
 		ds.setUsername("dev");
 		ds.setPassword("paw2018");
+		//TODO mover
+//		Resource resource = new ClassPathResource("/resources/table.sql");
+//		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
+//		databasePopulator.execute(ds);
 		return ds;
 	}
 

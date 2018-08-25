@@ -12,13 +12,18 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao userDao;
-	
-	@Override
+
 	public User GetUser() {
 		// TODO Auto-generated method stub
 		return userDao.GetUser();
 	}
-	
-	
+
+	public User findByMail(String mail) {
+		return userDao.findByMail(mail).get();
+	}
+	public void createUser(String username, String surname ,String mail,String password, String phone){
+		userDao.createUser(username,surname,mail,password,phone);
+	}
+
 
 }

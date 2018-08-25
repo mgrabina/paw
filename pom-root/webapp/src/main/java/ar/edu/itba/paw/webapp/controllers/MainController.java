@@ -28,4 +28,5 @@ public class MainController {
 		final ModelAndView mav = new ModelAndView("404");
 		return mav;
 	}
+
 }
