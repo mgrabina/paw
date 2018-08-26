@@ -20,6 +20,17 @@ public class PropertyServiceImpl implements PropertyService {
 	public List<Property> getAll(){
 		return propertyDao.getAll();
 	}
+
+	@Override
+	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
+	}
+
+	@Override
+	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Integer userId, Long price) {
+		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, null, null, null, null, null, null);
+	}
+
 	public Property findById(final long id){
 		return propertyDao.findById(id);
 	}

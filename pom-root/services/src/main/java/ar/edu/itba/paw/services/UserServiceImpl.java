@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService{
 	public User findByMail(String mail) {
 		return userDao.findByMail(mail).get();
 	}
-	public void createUser(String username, String surname ,String mail,String password, String phone){
-		userDao.createUser(username,surname,mail,password,phone);
+	public Long createUser(String username, String surname ,String mail,String password, String phone){
+		return userDao.createUser(username,surname,mail,password,phone);
 	}
 
 	public List<User> getAll(){

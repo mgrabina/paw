@@ -19,7 +19,7 @@ public interface UserDao {
 
 	public Optional<User> findByName(final String name);
 
-	public void createUser(String username, String surname, String mail, String password, String phone);
+	public Long createUser(String username, String surname, String mail, String password, String phone);
 
 
 	public User findByMail(final long mail);

@@ -5,16 +5,21 @@ import ar.edu.itba.paw.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PropertyDaoImpl implements PropertyDao {
 	private JdbcTemplate jdbcTemplate;
+	private SimpleJdbcInsert jdbcInsert;
+
 	private final static RowMapper<Property> ROW_MAPPER = new
 			RowMapper<Property>() {
 				public Property mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -57,5 +62,31 @@ public class PropertyDaoImpl implements PropertyDao {
 			return null;
 		}
 		return list;
+	}
+
+	public Long createProperty(String street, Integer number, Integer floor, String apartment,
+							   Property.Type type, Integer userId, Long price, Integer coveredArea,
+							   Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+
+		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
+
+		final Map<String, Object> args = new HashMap<String, Object>();
+		args.put("street", street);
+		args.put("number", number);
+		args.put("floor", floor);
+		args.put("apartment", apartment);
+		args.put("type", type);
+		args.put("user_id", userId);
+		args.put("price", price);
+		args.put("covered_area", coveredArea);
+		args.put("total_area", totalArea);
+		args.put("rooms", rooms);
+		args.put("baths", baths);
+		args.put("garage", garage);
+		args.put("tax_price", taxPrice);
+
+		final long propertyId = jdbcInsert.executeAndReturnKey(args).longValue();
+
+		return propertyId;
 	}
 }

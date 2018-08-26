@@ -98,7 +98,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
-	public void createUser(String username, String surname ,String mail,String password, String phone) {
+	public Long createUser(String username, String surname ,String mail,String password, String phone) {
 
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("users").usingGeneratedKeyColumns("id");
 
@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao {
         args.put("mail", mail);
         final long userId = jdbcInsert.executeAndReturnKey(args).longValue();
 
-        //return User.create(userId, username, mail, psw);
+        return userId;
     }
 	public User findByMail(final long mail) {
 		final List<User> list = jdbcTemplate.query("SELEC T * FROM users WHERE mail = ?",

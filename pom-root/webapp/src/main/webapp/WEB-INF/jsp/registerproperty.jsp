@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!--
 Author: W3layouts
@@ -25,19 +26,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<h1>Register Property</h1>
 		<div class="login-bottom">
 			<div class="container-form">
-				<input type="text" placeholder="Street" required="" class="text-register-property">
-				<input type="text" placeholder="Number" required="" class="text-register-property">
-				<input type="text" placeholder="Floor" required="" class="text-register-property">
+			<form:form modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post" >
+
+				<form:input type="text" placeholder="Street" path="street" required="" class="text-register-property"/>
+				<form:input type="text" placeholder="Number" path="number" required="" class="text-register-property"/>
+				<form:input type="text" placeholder="Floor" path="floor" required="" class="text-register-property"/>
 				<select name="selector1" id="selector1" class="text-register-property">
 					<option>Type</option>
 					<option>Building</option>
 					<option>House</option>
 				</select>
-				<input type="text" placeholder="Price" required="" class="text-register-property">
-				<input type="text" placeholder="Area" required="" class="text-register-property">
+				<form:input type="text" placeholder="Price" path="price" required="" class="text-register-property"/>
+				<form:input type="text" placeholder="Area" path="totalArea" required="" class="text-register-property"/>
 				
-				<input type="submit" value="Register" class="submit btn-primary btn">
-	
+				<input type="submit" value="Register" class="submit btn-primary btn"/>
+			</form:form>
 			</div>
 			
 			<div class="clearfix"> </div>
