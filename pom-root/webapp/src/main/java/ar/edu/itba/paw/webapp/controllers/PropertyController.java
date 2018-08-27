@@ -45,18 +45,18 @@ public class PropertyController {
 
         ps.createProperty(
                 form.getStreet(),
-                form.getNumber(),
-                form.getFloor(),
+                Integer.valueOf(form.getNumber()),
+                Integer.valueOf(form.getFloor()),
                 form.getApartment(),
-                null, //form.getType(),
-                null, //form.getUserId(),
-                form.getPrice(),
-                form.getCoveredArea(),
-                form.getTotalArea(),
-                form.getRooms(),
-                form.getBaths(),
-                form.getGarage(),
-                form.getTaxPrice()
+                Property.Type.valueOf(form.getType().toString()),
+                1, //TODO: REAL USER
+                Long.valueOf(form.getPrice()),
+                Integer.valueOf(form.getCoveredArea()),
+                Integer.valueOf(form.getTotalArea()),
+                Integer.valueOf(form.getRooms()),
+                Integer.valueOf(form.getBaths()),
+                Boolean.valueOf(form.getGarage()),
+                Integer.valueOf(form.getTaxPrice())
         );
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View
     }

@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix ="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@taglib prefix ="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!--
 Author: W3layouts
@@ -30,12 +31,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 				<form:input type="text" placeholder="Street" path="street" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Number" path="number" required="" class="text-register-property"/>
+				<form:input type="text" placeholder="Floor" path="floor" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Apartment" path="apartment" required="" class="text-register-property"/>
-				<select name="selector1" id="selector1" class="text-register-property">
-					<option>Type</option>
-					<option>Building</option>
-					<option>House</option>
-				</select>
+				<form:select name="selector1" id="selector1" path="type" class="text-register-property">
+					<form:option value="house">House</form:option>
+					<form:option value="apartment">Apartment</form:option>
+					<form:option value="duplex">Duplex</form:option>
+					<form:option value="office">Office</form:option>
+					<form:option value="land">Land</form:option>
+				</form:select>
 				<form:input type="text" placeholder="Price" path="price" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Covered Area" path="coveredArea" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Total Area" path="totalArea" required="" class="text-register-property"/>

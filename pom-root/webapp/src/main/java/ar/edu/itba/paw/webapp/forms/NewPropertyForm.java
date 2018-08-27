@@ -7,57 +7,57 @@ import javax.validation.constraints.Size;
 
 
 public class NewPropertyForm {
-
+    
     //TODO: IMAGES
 
     @Size(min = 1, max = 30)
     @Pattern(regexp = "[a-zA-Z]+")
     private String street;
-
+    
     @Size(min = 1, max = 10)
     @Pattern(regexp = "[0-9]+")
-    private Integer number;
+    private String number;
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private Integer floor;
+    private String floor;
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String apartment;
-
-
+    
+    
     private Property.Type type;
 
     @Size(min = 1, max = 20)
     @Pattern(regexp = "[0-9]+")
-    private Integer userId;
-
+    private String userId;
+    
     @Size(min = 1, max = 20)
     @Pattern(regexp = "[0-9]+")
-    private Long price;
+    private String price;
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[0-9]+")
-    private Integer coveredArea;    //In quarter meters
+    private String coveredArea;    //In quarter meters
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[0-9]+")
-    private Integer totalArea;    //In quarter meters
+    private String totalArea;    //In quarter meters
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private Integer rooms;
+    private String rooms;
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private Integer baths;
-
-    private Boolean garage;
+    private String baths;
+    
+    private String garage;
 
     @Size(min = 1, max = 15)
     @Pattern(regexp = "[0-9]+")
-    private Integer taxPrice;
+    private String taxPrice;
 
     public String getStreet() {
         return street;
@@ -67,19 +67,19 @@ public class NewPropertyForm {
         this.street = street;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public Integer getFloor() {
+    public String getFloor() {
         return floor;
     }
 
-    public void setFloor(Integer floor) {
+    public void setFloor(String floor) {
         this.floor = floor;
     }
 
@@ -99,67 +99,67 @@ public class NewPropertyForm {
         this.type = type;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Long getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Integer getCoveredArea() {
+    public String getCoveredArea() {
         return coveredArea;
     }
 
-    public void setCoveredArea(Integer coveredArea) {
+    public void setCoveredArea(String coveredArea) {
         this.coveredArea = coveredArea;
     }
 
-    public Integer getTotalArea() {
+    public String getTotalArea() {
         return totalArea;
     }
 
-    public void setTotalArea(Integer totalArea) {
+    public void setTotalArea(String totalArea) {
         this.totalArea = totalArea;
     }
 
-    public Integer getRooms() {
+    public String getRooms() {
         return rooms;
     }
 
-    public void setRooms(Integer rooms) {
+    public void setRooms(String rooms) {
         this.rooms = rooms;
     }
 
-    public Integer getBaths() {
+    public String getBaths() {
         return baths;
     }
 
-    public void setBaths(Integer baths) {
+    public void setBaths(String baths) {
         this.baths = baths;
     }
 
-    public Boolean getGarage() {
+    public String getGarage() {
         return garage;
     }
 
-    public void setGarage(Boolean garage) {
+    public void setGarage(String garage) {
         this.garage = garage;
     }
 
-    public Integer getTaxPrice() {
+    public String getTaxPrice() {
         return taxPrice;
     }
 
-    public void setTaxPrice(Integer taxPrice) {
+    public void setTaxPrice(String taxPrice) {
         this.taxPrice = taxPrice;
     }
 }
