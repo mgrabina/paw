@@ -30,7 +30,7 @@ public class PropertyDaoImpl implements PropertyDao {
 							rs.getInt("floor"),
 							rs.getString("apartment"),
 							Property.Type.valueOf(rs.getString("type")),
-							rs.getInt("user_id"),
+							rs.getLong("user_id"),
 							rs.getLong("price"),
 							rs.getInt("covered_area"),
 							rs.getInt("total_area"),
@@ -65,7 +65,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment,
-							   Property.Type type, Integer userId, Long price, Integer coveredArea,
+							   Property.Type type, Long userId, Long price, Integer coveredArea,
 							   Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
 
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
@@ -90,7 +90,7 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-	public List<Property> getFavorites(Integer userId){
+	public List<Property> getFavorites(Long userId){
 		final List<Property> list = jdbcTemplate.query("SELECT * FROM wish JOIN property WHERE wish.user_id = ?",
 				ROW_MAPPER, userId);
 		if (list.isEmpty()) {

@@ -12,5 +12,5 @@ public interface UserService {
 	public List<User> getAll();
 	public User findById(final long id);
 	public User findByMail(final long mail);
-
+	public User getCurrentUser();
 }

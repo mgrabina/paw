@@ -1,6 +1,9 @@
 package ar.edu.itba.paw.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.itba.paw.interfaces.UserDao;
@@ -37,4 +40,16 @@ public class UserServiceImpl implements UserService{
 		return userDao.findByMail(mail);
 	}
 
+	@Override
+	public User getCurrentUser() {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			User user = userDao.findByMail(authentication.getName()).get();
+			return user;
+		}
+
+		return null; // TODO: Use Optionals
+	}
 }

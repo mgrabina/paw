@@ -22,17 +22,17 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
 		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
 	}
 
 	@Override
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Integer userId, Long price) {
+	public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Long userId, Long price) {
 		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, null, null, null, null, null, null);
 	}
 
 	@Override
-	public List<Property> getFavorites(Integer userId) {
+	public List<Property> getFavorites(Long userId) {
 		return propertyDao.getFavorites(userId);
 	}
 

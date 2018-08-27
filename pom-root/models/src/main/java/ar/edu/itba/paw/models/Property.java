@@ -11,7 +11,7 @@ public class Property {
     private Integer floor;
     private String apartment;
     private Type type;
-    private Integer userId;
+    private Long userId;
     private Long price;
     //Images in Imagesxproperty relation
     private Integer coveredArea;    //In quarter meters
@@ -21,7 +21,7 @@ public class Property {
     private Boolean garage;
     private Integer taxPrice;
 
-    public Property(Integer id, String street, Integer number, Integer floor, String apartment, Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+    public Property(Integer id, String street, Integer number, Integer floor, String apartment, Type type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -38,7 +38,7 @@ public class Property {
         this.taxPrice = taxPrice;
     }
 
-    public Property(String street, Integer number, Integer floor, String apartment, Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+    public Property(String street, Integer number, Integer floor, String apartment, Type type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
         this.street = street;
         this.number = number;
         this.floor = floor;
@@ -54,7 +54,7 @@ public class Property {
         this.taxPrice = taxPrice;
     }
 
-    public Property(String street, Integer number, Integer floor, String apartment, Integer userId, Long price) {
+    public Property(String street, Integer number, Integer floor, String apartment, Long userId, Long price) {
         this.street = street;
         this.number = number;
         this.floor = floor;
@@ -63,7 +63,7 @@ public class Property {
         this.price = price;
     }
 
-    public Property(String street, Integer number, Integer userId, Long price) {
+    public Property(String street, Integer number, Long userId, Long price) {
         this.street = street;
         this.number = number;
         this.userId = userId;
@@ -119,7 +119,7 @@ public class Property {
         return apartment;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 

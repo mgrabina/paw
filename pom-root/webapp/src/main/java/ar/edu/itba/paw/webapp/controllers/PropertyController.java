@@ -23,6 +23,8 @@ public class PropertyController {
 
     @Autowired
     private PropertyService ps;
+    @Autowired
+    private UserService us;
 
     @RequestMapping(value = "/property/register", method = RequestMethod.GET)
     public ModelAndView getRegister(@ModelAttribute("newPropertyForm") final NewPropertyForm form) {
@@ -49,7 +51,7 @@ public class PropertyController {
                 Integer.valueOf(form.getFloor()),
                 form.getApartment(),
                 Property.Type.valueOf(form.getType().toString()),
-                1, //TODO: REAL USER
+                us.getCurrentUser().getId(),
                 Long.valueOf(form.getPrice()),
                 Integer.valueOf(form.getCoveredArea()),
                 Integer.valueOf(form.getTotalArea()),
