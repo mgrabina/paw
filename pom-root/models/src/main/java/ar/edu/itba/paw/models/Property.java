@@ -1,5 +1,7 @@
 package ar.edu.itba.paw.models;
 
+import java.util.List;
+
 public class Property {
     public enum Type{
         house, apartment, duplex, office, land
@@ -20,6 +22,7 @@ public class Property {
     private Integer baths;
     private Boolean garage;
     private Integer taxPrice;
+    private List<Property> wishes;
 
     public Property(Integer id, String street, Integer number, Integer floor, String apartment, Type type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
         this.id = id;
@@ -150,4 +153,13 @@ public class Property {
     public Integer getTaxPrice() {
         return taxPrice;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public List<Property> getWishes() {
+        return wishes;
+    }
+
 }

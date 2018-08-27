@@ -91,7 +91,10 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public List<Property> getFavorites(Long userId){
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM wish JOIN property WHERE wish.user_id = ?",
+		final List<Property> list = jdbcTemplate.query(
+				"SELECT * " +
+						"FROM wish " +
+						"INNER JOIN property WHERE wish.user_id = ?",
 				ROW_MAPPER, userId);
 		if (list.isEmpty()) {
 			return null;

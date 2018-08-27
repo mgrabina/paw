@@ -24,8 +24,7 @@ public class MainController {
 	public ModelAndView index() {
 		final ModelAndView mav = new ModelAndView("index");
 
-//		final List<Property> all = ps.getAll();
-//		final List<Property> favorites = ps.getFavorites(ID);
+		final List<Property> all = ps.getAll();
 
 //		final User user = us.GetUser();
 //		mav.addObject("user", user);
