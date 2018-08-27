@@ -47,7 +47,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public Property findById(final long id) {
-		final List<Property> list = jdbcTemplate.query("SELEC T * FROM property WHERE userid = ?",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE userid = ?",
 		ROW_MAPPER, id);
 		if (list.isEmpty()) {
 			return null;
@@ -56,7 +56,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public List<Property> getAll(){
-		final List<Property> list = jdbcTemplate.query("SELEC T * FROM property",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property",
 				ROW_MAPPER);
 		if (list.isEmpty()) {
 			return null;
@@ -88,5 +88,14 @@ public class PropertyDaoImpl implements PropertyDao {
 		final long propertyId = jdbcInsert.executeAndReturnKey(args).longValue();
 
 		return propertyId;
+	}
+
+	public List<Property> getFavorites(Integer userId){
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM wish JOIN property WHERE wish.user_id = ?",
+				ROW_MAPPER, userId);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 }

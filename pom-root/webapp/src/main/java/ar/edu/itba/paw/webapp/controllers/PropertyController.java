@@ -43,7 +43,21 @@ public class PropertyController {
 //        }
 
 
-        ps.createProperty(form.getStreet(), form.getNumber(), form.getFloor(),form.getApartment(), form.getType(), form.getUserId(), form.getPrice(), form.getCoveredArea(), form.getTotalArea(), form.getRooms(), form.getBaths(), form.getGarage(), form.getTaxPrice());
+        ps.createProperty(
+                form.getStreet(),
+                form.getNumber(),
+                form.getFloor(),
+                form.getApartment(),
+                null, //form.getType(),
+                null, //form.getUserId(),
+                form.getPrice(),
+                form.getCoveredArea(),
+                form.getTotalArea(),
+                form.getRooms(),
+                form.getBaths(),
+                form.getGarage(),
+                form.getTaxPrice()
+        );
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View
     }
 }

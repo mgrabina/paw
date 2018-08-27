@@ -8,5 +8,5 @@ public interface PropertyDao {
     public Property findById(final long id);
     public List<Property> getAll();
     public Long createProperty(String street, Integer number, Integer floor, String apartment, Property.Type type, Integer userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
-
-    }
+    public List<Property> getFavorites(Integer userId);
+}
