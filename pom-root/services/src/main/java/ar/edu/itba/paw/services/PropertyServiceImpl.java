@@ -31,11 +31,6 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, null, null, null, null, null, null);
 	}
 
-	@Override
-	public List<Property> getFavorites(Long userId) {
-		return propertyDao.getFavorites(userId);
-	}
-
 	public Property findById(final long id){
 		return propertyDao.findById(id);
 	}

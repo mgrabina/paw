@@ -45,9 +45,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<form:input type="text" placeholder="Total Area" path="totalArea" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Rooms" path="rooms" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Baths" path="baths" required="" class="text-register-property"/>
-				<%--<form:input type="text" placeholder="Garage" path="garage" required="" class="text-register-property"/>--%>
-				<form:checkbox path="garage" value="true" id="">Con Garage</form:checkbox>
-				<form:checkbox path="garage" value="false" id="">Sin Garage</form:checkbox>
+				<form:select name="selector2" id="selector2" path="garage" class="text-register-property">
+					<form:option value="true">Con Garage</form:option>
+					<form:option value="false">Sin Garage</form:option>
+				</form:select>
 				<form:input type="text" placeholder="Tax Price" path="taxPrice" required="" class="text-register-property"/>
 
 				<input type="submit" value="Register" class="submit btn-primary btn"/>
