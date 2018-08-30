@@ -2,15 +2,14 @@ package ar.edu.itba.paw.persistence;
 
 import ar.edu.itba.paw.interfaces.PropertyDao;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.PropertyType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,34 +19,15 @@ public class PropertyDaoImpl implements PropertyDao {
 	private JdbcTemplate jdbcTemplate;
 	private SimpleJdbcInsert jdbcInsert;
 
-	private final static RowMapper<Property> ROW_MAPPER = new
-			RowMapper<Property>() {
-				public Property mapRow(ResultSet rs, int rowNum) throws SQLException {
-					return new Property(
-							rs.getInt("id"),
-							rs.getString("street"),
-							rs.getInt("number"),
-							rs.getInt("floor"),
-							rs.getString("apartment"),
-							Property.Type.valueOf(rs.getString("type")),
-							rs.getLong("user_id"),
-							rs.getLong("price"),
-							rs.getInt("covered_area"),
-							rs.getInt("total_area"),
-							rs.getInt("rooms"),
-							rs.getInt("baths"),
-							rs.getBoolean("garage"),
-							rs.getInt("tax_price")
-							);
-				}
-			};
+	private final static PropertyMapper ROW_MAPPER = new PropertyMapper();
+			
 	@Autowired
 	public PropertyDaoImpl(final DataSource ds) {
 		jdbcTemplate = new JdbcTemplate(ds);
 	}
 
 	public Property findById(final long id) {
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE userid = ?",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE id = ?",
 		ROW_MAPPER, id);
 		if (list.isEmpty()) {
 			return null;
@@ -56,7 +36,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public List<Property> getAll(){
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM property",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id FULL OUTER JOIN property_images i on property.id = i.property_id",
 				ROW_MAPPER);
 		if (list.isEmpty()) {
 			return null;
@@ -65,7 +45,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment,
-							   Property.Type type, Long userId, Long price, Integer coveredArea,
+			PropertyType type, Long userId, Long price, Integer coveredArea,
 							   Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
 
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");

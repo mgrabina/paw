@@ -1,7 +1,9 @@
 package ar.edu.itba.paw.webapp.forms;
 
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.PropertyType;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -12,154 +14,146 @@ public class NewPropertyForm {
 
     @Size(min = 1, max = 30)
     @Pattern(regexp = "[a-zA-Z]+")
+    @NotNull
     private String street;
     
     @Size(min = 1, max = 10)
     @Pattern(regexp = "[0-9]+")
-    private String number;
+    @NotNull
+    private Integer number;
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private String floor;
+    private Integer floor;
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String apartment;
     
-    
-    private Property.Type type;
-
-    @Size(min = 1, max = 20)
-    @Pattern(regexp = "[0-9]+")
-    private String userId;
+    private PropertyType type;
     
     @Size(min = 1, max = 20)
     @Pattern(regexp = "[0-9]+")
-    private String price;
+    @NotNull
+    private Long price;
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[0-9]+")
-    private String coveredArea;    //In quarter meters
+    private Integer coveredArea;    //In quarter meters
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[0-9]+")
-    private String totalArea;    //In quarter meters
+    private Integer totalArea;    //In quarter meters
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private String rooms;
+    private Integer rooms;
 
     @Size(min = 1, max = 3)
     @Pattern(regexp = "[0-9]+")
-    private String baths;
+    private Integer baths;
     
-    private String garage;
+    private Boolean garage;
 
     @Size(min = 1, max = 15)
     @Pattern(regexp = "[0-9]+")
-    private String taxPrice;
+    private Integer taxPrice;
 
-    public String getStreet() {
-        return street;
-    }
+	public String getStreet() {
+		return street;
+	}
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
+	public void setStreet(String street) {
+		this.street = street;
+	}
 
-    public String getNumber() {
-        return number;
-    }
+	public Integer getNumber() {
+		return number;
+	}
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
 
-    public String getFloor() {
-        return floor;
-    }
+	public Integer getFloor() {
+		return floor;
+	}
 
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
 
-    public String getApartment() {
-        return apartment;
-    }
+	public String getApartment() {
+		return apartment;
+	}
 
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
-    }
+	public void setApartment(String apartment) {
+		this.apartment = apartment;
+	}
 
-    public Property.Type getType() {
-        return type;
-    }
+	public PropertyType getType() {
+		return type;
+	}
 
-    public void setType(Property.Type type) {
-        this.type = type;
-    }
+	public void setType(PropertyType type) {
+		this.type = type;
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public Long getPrice() {
+		return price;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+	public void setPrice(Long price) {
+		this.price = price;
+	}
 
-    public String getPrice() {
-        return price;
-    }
+	public Integer getCoveredArea() {
+		return coveredArea;
+	}
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+	public void setCoveredArea(Integer coveredArea) {
+		this.coveredArea = coveredArea;
+	}
 
-    public String getCoveredArea() {
-        return coveredArea;
-    }
+	public Integer getTotalArea() {
+		return totalArea;
+	}
 
-    public void setCoveredArea(String coveredArea) {
-        this.coveredArea = coveredArea;
-    }
+	public void setTotalArea(Integer totalArea) {
+		this.totalArea = totalArea;
+	}
 
-    public String getTotalArea() {
-        return totalArea;
-    }
+	public Integer getRooms() {
+		return rooms;
+	}
 
-    public void setTotalArea(String totalArea) {
-        this.totalArea = totalArea;
-    }
+	public void setRooms(Integer rooms) {
+		this.rooms = rooms;
+	}
 
-    public String getRooms() {
-        return rooms;
-    }
+	public Integer getBaths() {
+		return baths;
+	}
 
-    public void setRooms(String rooms) {
-        this.rooms = rooms;
-    }
+	public void setBaths(Integer baths) {
+		this.baths = baths;
+	}
 
-    public String getBaths() {
-        return baths;
-    }
+	public Boolean getGarage() {
+		return garage;
+	}
 
-    public void setBaths(String baths) {
-        this.baths = baths;
-    }
+	public void setGarage(Boolean garage) {
+		this.garage = garage;
+	}
 
-    public String getGarage() {
-        return garage;
-    }
+	public Integer getTaxPrice() {
+		return taxPrice;
+	}
 
-    public void setGarage(String garage) {
-        this.garage = garage;
-    }
+	public void setTaxPrice(Integer taxPrice) {
+		this.taxPrice = taxPrice;
+	}
 
-    public String getTaxPrice() {
-        return taxPrice;
-    }
 
-    public void setTaxPrice(String taxPrice) {
-        this.taxPrice = taxPrice;
-    }
 }

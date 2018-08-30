@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 final class SimpleUserMapper implements ResultSetExtractor<List<User>> {
-    @Override
-    public List<User> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+    
+	public List<User> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
         return null;
     }
 //

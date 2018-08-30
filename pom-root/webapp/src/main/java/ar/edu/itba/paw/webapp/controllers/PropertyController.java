@@ -1,8 +1,10 @@
 package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.PropertyService;
+
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 import ar.edu.itba.paw.webapp.forms.NewPropertyForm;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
@@ -43,23 +45,23 @@ public class PropertyController {
 //            m.addObject("errorMessage", "Existing user");
 //            return m;
 //        }
-
-
+    	
         ps.createProperty(
                 form.getStreet(),
-                Integer.valueOf(form.getNumber()),
-                Integer.valueOf(form.getFloor()),
+                form.getNumber(),
+                form.getFloor(),
                 form.getApartment(),
-                Property.Type.valueOf(form.getType().toString()),
+                PropertyType.valueOf(form.getType().toString()),
                 us.getCurrentUser().getId(),
-                Long.valueOf(form.getPrice()),
-                Integer.valueOf(form.getCoveredArea()),
-                Integer.valueOf(form.getTotalArea()),
-                Integer.valueOf(form.getRooms()),
-                Integer.valueOf(form.getBaths()),
+                form.getPrice(),
+                form.getCoveredArea(),
+                form.getTotalArea(),
+                form.getRooms(),
+                form.getBaths(),
                 Boolean.valueOf(form.getGarage()),
-                Integer.valueOf(form.getTaxPrice())
+                form.getTaxPrice()
         );
+                
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View
     }
 }

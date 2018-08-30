@@ -50,8 +50,8 @@ public class UserController {
 //            return m;
 //        }
 
-
-        us.createUser(form.getUsername(),form.getSurname(),form.getMail(),pw.encode(form.getPassword()), form.getPhone());
+        us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), "implementImage");
+        
         return new ModelAndView("login");
     }
 }

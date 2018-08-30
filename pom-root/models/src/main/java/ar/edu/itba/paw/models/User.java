@@ -1,23 +1,21 @@
 package ar.edu.itba.paw.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
 	private long id;
 	private String name;
-	private String surname;
 	private String password;
 	private String phone;
 	private String mail;
 	private String imageSrc;
 
+	public static User CreateUser(long id, String name, String password, String phone, String mail, String imageSrc) {
+		return new User(id, name, password, phone, mail, imageSrc);
+	}
 
-	public User(long id,String name, String surname, String password, String phone, String mail) {
-		this.id=id;
+	private User(long id, String name, String password, String phone, String mail, String imageSrc) {
+		this.id = id;
 		this.name = name;
-		this.surname = surname;
 		this.password = password;
 		this.phone = phone;
 		this.mail = mail;
@@ -28,7 +26,6 @@ public class User {
 		return id;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
@@ -36,13 +33,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-
-	@Override
-	public String toString() {
-		return "User [uId=" + id + ", name=" + name + ", mail=" + mail + ", password=" + password;
-	}
-
 
 	public String getMail() {
 		return mail;
@@ -53,14 +43,6 @@ public class User {
 
 	}
 
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -68,4 +50,33 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getImageSrc() {
+		return imageSrc;
+	}
+
+	public void setImageSrc(String imageSrc) {
+		this.imageSrc = imageSrc;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", phone=" + phone + ", mail=" + mail
+				+ ", imageSrc=" + imageSrc + "]";
+	}
+	
+	
+	
 }

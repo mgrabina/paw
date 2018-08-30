@@ -13,8 +13,6 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.net.URISyntaxException;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,14 +25,15 @@ public class UserDaoImpl implements UserDao {
 	private SimpleJdbcInsert jdbcInsert;
 
 
-	private final static RowMapper<User> ROW_MAPPER = (rs, rowNum) -> new User(
+	private final static RowMapper<User> ROW_MAPPER = (rs, rowNum) -> User.CreateUser(
             rs.getInt("id"),
             rs.getString("name"),
-			rs.getString("surname"),
-            rs.getString("password"),
+			rs.getString("password"),
             rs.getString("phone"),
-            rs.getString("mail")
+            rs.getString("mail"),
+            rs.getString("imagesrc")
             );
+	
 	@Autowired
 	public UserDaoImpl(final DataSource ds) throws IOException, URISyntaxException {
 
@@ -98,16 +97,17 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
-	public Long createUser(String username, String surname ,String mail,String password, String phone) {
+	public Long createUser(String username, String password, String mail, String phone, String imageSrc) {
 
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("users").usingGeneratedKeyColumns("id");
 
         final Map<String, Object> args = new HashMap<String, Object>();
         args.put("name", username);
-        args.put("surname", surname);
         args.put("password", password);
         args.put("phone", phone);
         args.put("mail", mail);
+        args.put("imagesrc", imageSrc);
+        
         final long userId = jdbcInsert.executeAndReturnKey(args).longValue();
 
         return userId;

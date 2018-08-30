@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService{
 	public User findByMail(String mail) {
 		return userDao.findByMail(mail).get();
 	}
-	public Long createUser(String username, String surname ,String mail,String password, String phone){
-		return userDao.createUser(username,surname,mail,password,phone);
+	public Long createUser(String username, String password, String mail, String phone, String imageSrc){
+		return userDao.createUser(username,password, mail, phone, imageSrc);
 	}
 
 	public List<User> getAll(){
@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService{
 		return userDao.findByMail(mail);
 	}
 
-	@Override
 	public User getCurrentUser() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
