@@ -41,9 +41,9 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<a href="">REGISTRARME</a>
-		  			<a href="">INGRESAR</a>
-		  			<a href="">PUBLICAR UN INMUEBLE</a>
+		  			<a href=""><spring:message code="index/register"></spring:message></a>
+		  			<a href=""><spring:message code="index/login"></spring:message></a>
+		  			<a href=""><spring:message code="index/publish"></spring:message></a>
 		  		</div>
 
 		  		<div class="extras">
@@ -52,8 +52,8 @@
 					    <li><a href="#!">A</a></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">view_module</i>English</a></li>
-					    <li><a href="#!"><i class="material-icons">cloud</i>Spanish</a></li>
+					    <li><a href="?language=en_US"><i class="material-icons">view_module</i>English</a></li>
+					    <li><a href="?language=es_AR"><i class="material-icons">cloud</i>Spanish</a></li>
 					  </ul>
 		  		</div>
 		  	</div>
