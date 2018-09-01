@@ -52,8 +52,8 @@
 					    <li><a href="#!">A</a></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="?language=en_US"><i class="material-icons">view_module</i>English</a></li>
-					    <li><a href="?language=es_AR"><i class="material-icons">cloud</i>Spanish</a></li>
+					    <li><a href="#!"><i class="material-icons">language</i>English</a></li>
+					    <li><a href="#!"><i class="material-icons">language</i>Spanish</a></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -61,12 +61,207 @@
 		</nav>
 
 		<div class="main-row-container">
-
+			
 			<div class="filters-column">
 				<div class="shadow-box filters-box">
+					<div class="title-box">
+						<span class="filters-title">FILTROS APLICADOS</span>
+					</div>
+					<div class="filters-list">
+						<div class="chip">Filter name 1<i class="close material-icons">close</i></div>
+						<div class="chip">Filter name 2<i class="close material-icons">close</i></div>
+						<div class="chip">Filter name 3<i class="close material-icons">close</i></div>
+						<div class="chip">Filter name 4<i class="close material-icons">close</i></div>
+						<div class="chip">Filter name 5<i class="close material-icons">close</i></div>
+						<div class="chip">Filter name 6<i class="close material-icons">close</i></div>
+					</div>
+					<div class="footer">
+						<a href=""><i class="material-icons left">delete</i>ELIMINAR FILTROS</a>
+					</div>
 				</div>
 
-				<div class="shadow-box filters-box test-height">
+				<div class="shadow-box filters-box">
+					<div class="title-box">
+						<span class="filters-title">FILTROS</span>
+					</div>
+
+					<div class="filters">
+						<ul id="filters-id" class="collapsible expandable">
+						    <li class="active">
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Ubicación</div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<div class="link-box">
+						      			<a href="">Capital federal</a>
+						      			<span>(28)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">San isidro</a>
+						      			<span>(21)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Quilmes</a>
+						      			<span>(8)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Tigre</a>
+						      			<span>(11)</span>
+						      		</div>
+						      	</div>
+
+						      	<div class="link-list" style="display: none;">
+						      		<label>
+								        <input type="checkbox" class="filled-in"  />
+								        <span> Barrio 1</span>
+								    </label>
+								    <label>
+								        <input type="checkbox" class="filled-in"  />
+								        <span> Barrio 2</span>
+								    </label>
+								    <label>
+								        <input type="checkbox" class="filled-in" />
+								        <span> Barrio 3</span>
+								    </label>
+						      	</div>
+
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Dirección</div>
+						      <div class="collapsible-body">
+						      	<div class="input-field">
+						          <input placeholder="Ej: Av. del Libertador" id="address" type="text" class="validate">
+						          <label for="address">Dirección</label>
+						        </div>
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Tipo de propiedad</div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<div class="link-box">
+						      			<a href="">Departamento</a>
+						      			<span>(289)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Casa</a>
+						      			<span>(211)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">PH</a>
+						      			<span>(88)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Terreno</a>
+						      			<span>(111)</span>
+						      		</div>
+						      	</div>
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Precio (US$)</div>
+						      <div class="collapsible-body">
+
+						      	<p class="range-field">
+						      		Desde 
+							      <input type="range" id="min-price" min="1" max="1000000" />
+							    </p>
+							    <p class="range-field">
+							    	Hasta
+							      <input type="range" id="max-price" min="0" max="1000000" />
+							    </p>
+							    <a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Expensas (US$)</div>
+						      <div class="collapsible-body">
+
+						      	<p class="range-field">
+						      		Desde 
+							      <input type="range" id="min-e" min="1" max="10000" />
+							    </p>
+							    <p class="range-field">
+							    	Hasta
+							      <input type="range" id="max-e" min="0" max="10000" />
+							    </p>
+
+							    <a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Amenities</div>
+						      <div class="collapsible-body">
+						      	
+						      	<div class="link-list">
+						      		<label>
+								        <input type="checkbox" class="filled-in" />
+								        <span> Piscina</span>
+								    </label>
+								    <label>
+								        <input type="checkbox" class="filled-in"  />
+								        <span> Sauna</span>
+								    </label>
+								    <label>
+								        <input type="checkbox" class="filled-in"  />
+								        <span> SUM</span>
+								    </label>
+						      	</div>
+						      	<a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>General</div>
+						      <div class="collapsible-body">
+						      	
+						      	<div class="link-list">
+						      		<label>
+								        <input type="checkbox" class="filled-in" />
+								        <span> Cochera</span>
+								    </label>
+						      	</div>
+						      	<a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Superficie</div>
+						      <div class="collapsible-body">
+						      	<p class="range-field">
+						      		Desde 
+							      <input type="range" id="min-s" min="1" max="10000" />
+							    </p>
+							    <p class="range-field">
+							    	Hasta
+							      <input type="range" id="max-s" min="0" max="10000" />
+							    </p>
+
+							    <a class="waves-effect waves-light btn" id="" href="">APLICAR FILTRO</a>
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Publicado</div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<div class="link-box">
+						      			<a href="">Hoy</a>
+						      			<span>(289)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Última semana</a>
+						      			<span>(211)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href="">Últimos 15 días</a>
+						      			<span>(88)</span>
+						      		</div>
+						      	</div>
+						      </div>
+						    </li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
@@ -107,7 +302,7 @@
 								</div>
 							</div>
 							<div class="price-text">
-								<span>U$S 38.000</span>
+								<span>US$ 38.000</span>
 							</div>
 						</div>
 						<div class="right">
@@ -124,13 +319,12 @@
 							<div class="description">
 								<span class="bold">300 m2 cubiertos</span> </br>
 								<div class="pDesc">
-									<span class="">Edificio desarrollado en Subsuelo, Planta Baja y 5 pisos.
+									<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">Edificio desarrollado en Subsuelo, Planta Baja y 5 pisos.
 									2 Ascensores principales - 1 uno de servicio que llega hasta el 4to piso - Grupo electrógeno para el 100% del edificio - Local en Planta Baja - Bóveda en subsuelo. 
 
 									Características: 
 
 									Plantas Libres - Cielorraso desmontable con luminarias - Aire Acondicionado Central y refuerzos con Splits - Detectores de Humo - 2 baños generales ambos sexos - 2 baños privados. 
-									Plantas Libres - Cielorraso desmontable con luminarias - Aire Acondicionado Central y refuerzos con Splits - Detectores de Humo - 2 baños generales ambos sexos - 2 baños privados.
 									</span> 
 								</div>
 							</div>
