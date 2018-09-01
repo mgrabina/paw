@@ -1,11 +1,10 @@
 package ar.edu.itba.paw.webapp.forms;
 
+import ar.edu.itba.paw.models.OperationType;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 
 public class NewPropertyForm {
@@ -17,47 +16,75 @@ public class NewPropertyForm {
     @NotNull
     private String street;
     
-    @Size(min = 1, max = 10)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(999999)
     @NotNull
     private Integer number;
 
-    @Size(min = 1, max = 3)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(200)
+	@NotNull
     private Integer floor;
 
     @Size(min = 1, max = 5)
     @Pattern(regexp = "[a-zA-Z0-9]+")
+	@NotNull
     private String apartment;
-    
+
+	@Size(min = 1, max = 30)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@NotNull
+    private String neighborhood;
+
+	@NotNull
+    private OperationType operationType;
+
+	@NotNull
     private PropertyType type;
-    
-    @Size(min = 1, max = 20)
-    @Pattern(regexp = "[0-9]+")
+
+	@Min(0)
     @NotNull
     private Long price;
 
-    @Size(min = 1, max = 5)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(9999999)
+	@NotNull
     private Integer coveredArea;    //In quarter meters
 
-    @Size(min = 1, max = 5)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(9999999)
+	@NotNull
     private Integer totalArea;    //In quarter meters
 
-    @Size(min = 1, max = 3)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(99)
+	@NotNull
     private Integer rooms;
 
-    @Size(min = 1, max = 3)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@Max(99)
+	@NotNull
     private Integer baths;
-    
+
+	@NotNull
     private Boolean garage;
 
-    @Size(min = 1, max = 15)
-    @Pattern(regexp = "[0-9]+")
+	@Min(1)
+	@NotNull
     private Integer taxPrice;
+
+	@Size(min = 1, max = 30)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@NotNull
+	private String adMessage;
+
+	@Size(min = 1, max = 150)
+	@Pattern(regexp = "[a-zA-Z0-9]+")
+	@NotNull
+	private String adDescription;
+
+	@NotNull
+	private Boolean inmediateDelivery;
 
 	public String getStreet() {
 		return street;
@@ -89,6 +116,22 @@ public class NewPropertyForm {
 
 	public void setApartment(String apartment) {
 		this.apartment = apartment;
+	}
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public OperationType getOperationType() {
+		return operationType;
+	}
+
+	public void setOperationType(OperationType operationType) {
+		this.operationType = operationType;
 	}
 
 	public PropertyType getType() {
@@ -155,5 +198,27 @@ public class NewPropertyForm {
 		this.taxPrice = taxPrice;
 	}
 
+	public String getAdMessage() {
+		return adMessage;
+	}
 
+	public void setAdMessage(String adMessage) {
+		this.adMessage = adMessage;
+	}
+
+	public String getAdDescription() {
+		return adDescription;
+	}
+
+	public void setAdDescription(String adDescription) {
+		this.adDescription = adDescription;
+	}
+
+	public Boolean getInmediateDelivery() {
+		return inmediateDelivery;
+	}
+
+	public void setInmediateDelivery(Boolean inmediateDelivery) {
+		this.inmediateDelivery = inmediateDelivery;
+	}
 }

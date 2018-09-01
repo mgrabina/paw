@@ -3,6 +3,7 @@ package ar.edu.itba.paw.webapp.controllers;
 import ar.edu.itba.paw.interfaces.PropertyService;
 
 import ar.edu.itba.paw.interfaces.UserService;
+import ar.edu.itba.paw.models.OperationType;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
@@ -51,15 +52,20 @@ public class PropertyController {
                 form.getNumber(),
                 form.getFloor(),
                 form.getApartment(),
+                form.getNeighborhood(),
+                OperationType.valueOf(form.getOperationType().toString()),
                 PropertyType.valueOf(form.getType().toString()),
-                us.getCurrentUser().getId(),
+                us.getCurrentUser(),
                 form.getPrice(),
                 form.getCoveredArea(),
                 form.getTotalArea(),
                 form.getRooms(),
                 form.getBaths(),
                 Boolean.valueOf(form.getGarage()),
-                form.getTaxPrice()
+                form.getTaxPrice(),
+                form.getAdMessage(),
+                form.getAdDescription(),
+                form.getInmediateDelivery()
         );
                 
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View

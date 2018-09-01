@@ -1,15 +1,20 @@
 package ar.edu.itba.paw.persistence;
 
 import ar.edu.itba.paw.interfaces.PropertyDao;
+import ar.edu.itba.paw.models.OperationType;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 
+import ar.edu.itba.paw.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +69,37 @@ public class PropertyDaoImpl implements PropertyDao {
 		args.put("baths", baths);
 		args.put("garage", garage);
 		args.put("tax_price", taxPrice);
+
+		final long propertyId = jdbcInsert.executeAndReturnKey(args).longValue();
+
+		return propertyId;
+	}
+
+	@Override
+	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
+
+		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
+
+		final Map<String, Object> args = new HashMap<String, Object>();
+		args.put("street", street);
+		args.put("number", number);
+		args.put("floor", floor);
+		args.put("apartment", apartment);
+		args.put("neighborhood", neighborhood.toLowerCase().trim());
+		args.put("operation_type", operationType);
+		args.put("type", type);
+		args.put("user_id", publisherUser.getId());
+		args.put("price", price);
+		args.put("covered_area", coveredArea);
+		args.put("total_area", totalArea);
+		args.put("rooms", rooms);
+		args.put("baths", baths);
+		args.put("garage", garage);
+		args.put("tax_price", taxPrice);
+		args.put("ad_message", adMessage);
+		args.put("ad_description", adDescription);
+		args.put("ad_date", new Timestamp(System.currentTimeMillis()));
+		args.put("inmediate_delivery", inmediateDelivery);
 
 		final long propertyId = jdbcInsert.executeAndReturnKey(args).longValue();
 

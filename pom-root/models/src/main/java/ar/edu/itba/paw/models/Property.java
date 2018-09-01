@@ -1,5 +1,8 @@
 package ar.edu.itba.paw.models;
 
+import java.sql.Time;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Property {
@@ -9,6 +12,7 @@ public class Property {
     private Integer number;
     private Integer floor;
     private String apartment;
+    private String neighborhood;
     private OperationType operationType;
     private PropertyType type;
     private User publisherUser;
@@ -19,10 +23,39 @@ public class Property {
     private Integer baths;
     private Boolean garage;
     private Integer taxPrice;
-    private List<Property> wishes;
     private List<String> images;
+    private String adMessage;
+    private String adDescription;
+    private Date adDate;
+    private Boolean inmediateDelivery;
 
-    public Property(Integer id, String street, Integer number, Integer floor, String apartment, PropertyType type, OperationType operationType, User userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+    public Property(Integer id, String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Date adDate, Boolean inmediateDelivery) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.floor = floor;
+        this.apartment = apartment;
+        this.neighborhood = neighborhood;
+        this.operationType = operationType;
+        this.type = type;
+        this.publisherUser = publisherUser;
+        this.price = price;
+        this.coveredArea = coveredArea;
+        this.totalArea = totalArea;
+        this.rooms = rooms;
+        this.baths = baths;
+        this.garage = garage;
+        this.taxPrice = taxPrice;
+        this.adMessage = adMessage;
+        this.adDescription = adDescription;
+        this.adDate = adDate;
+        this.inmediateDelivery = inmediateDelivery;
+    }
+
+    public Property(Integer id, String street, Integer number, Integer floor, String apartment,
+                    PropertyType type, OperationType operationType, User userId, Long price,
+                    Integer coveredArea, Integer totalArea, Integer rooms, Integer baths,
+                    Boolean garage, Integer taxPrice) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -38,6 +71,80 @@ public class Property {
         this.baths = baths;
         this.garage = garage;
         this.taxPrice = taxPrice;
+    }
+
+    public Property(String street, Integer number, Integer floor, String apartment, String neighborhood,
+                    OperationType operationType, PropertyType type, User publisherUser, Long price,
+                    Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
+                    Integer taxPrice, String adMessage, String adDescription, Date adDate, Boolean inmediateDelivery) {
+        this.street = street;
+        this.number = number;
+        this.floor = floor;
+        this.apartment = apartment;
+        this.neighborhood = neighborhood;
+        this.operationType = operationType;
+        this.type = type;
+        this.publisherUser = publisherUser;
+        this.price = price;
+        this.coveredArea = coveredArea;
+        this.totalArea = totalArea;
+        this.rooms = rooms;
+        this.baths = baths;
+        this.garage = garage;
+        this.taxPrice = taxPrice;
+        this.adMessage = adMessage;
+        this.adDescription = adDescription;
+        this.adDate = adDate;
+        this.images = new LinkedList<String>();
+        this.inmediateDelivery = inmediateDelivery;
+    }
+
+    public String getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public String getAdMessage() {
+        return adMessage;
+    }
+
+    public void setAdMessage(String adMessage) {
+        this.adMessage = adMessage;
+    }
+
+    public String getAdDescription() {
+        return adDescription;
+    }
+
+    public void setAdDescription(String adDescription) {
+        this.adDescription = adDescription;
+    }
+
+    public Date getAdDate() {
+        return adDate;
+    }
+
+    public void setAdDate(Date adDate) {
+        this.adDate = adDate;
+    }
+
+    public Boolean getInmediateDelivery() {
+        return inmediateDelivery;
+    }
+
+    public void setInmediateDelivery(Boolean inmediateDelivery) {
+        this.inmediateDelivery = inmediateDelivery;
+    }
+
+    public OperationType getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
     }
 
     public void setPrice(Long price) {
@@ -133,10 +240,6 @@ public class Property {
         return type;
     }
 
-    public List<Property> getWishes() {
-        return wishes;
-    }
-    
     public List<String> getImages() {
         return images;
     }
@@ -148,6 +251,7 @@ public class Property {
         private Integer nestedNumber;
         private Integer nestedFloor;
         private String nestedApartment;
+        private String nestedNeighborhood;
         private PropertyType nestedType;
         private OperationType nestedOperationType;
         private User nestedPublisherUser;
@@ -158,6 +262,10 @@ public class Property {
         private Integer nestedBaths;
         private Boolean nestedGarage;
         private Integer nestedTaxPrice;
+        private String nestedAdMessage;
+        private String nestedAdDescription;
+        private Date nestedAdDate;
+        private Boolean nestedInmediateDelivery;
         private List<Property> nestedWishes;
         private List<String> nestedImages;
         
@@ -223,15 +331,41 @@ public class Property {
             this.nestedWishes = newWishes;
             return this;
          }
-        
+
+        public PropertyBuilder Neighborhood(String newNeighborhood){
+            this.nestedNeighborhood = newNeighborhood;
+            return this;
+        }
+
+        public PropertyBuilder AdMessage(String newAdMessage){
+            this.nestedAdMessage = newAdMessage;
+            return this;
+        }
+
+        public PropertyBuilder AdDescription(String newAdDescription){
+            this.nestedAdDescription = newAdDescription;
+            return this;
+        }
+
+        public PropertyBuilder AdDate(Date newAdDate){
+            this.nestedAdDate = newAdDate;
+            return this;
+        }
+
+        public PropertyBuilder InmediateDelivery(Boolean newInmediateDelivery){
+            this.nestedInmediateDelivery = newInmediateDelivery;
+            return this;
+        }
+
         public Property build(){
         	
            return new Property(
               nestedId, nestedStreet, nestedNumber,
-              nestedFloor, nestedApartment,
-              nestedType, nestedOperationType, nestedPublisherUser, nestedPrice,
+              nestedFloor, nestedApartment, nestedNeighborhood,
+                   nestedOperationType, nestedType, nestedPublisherUser, nestedPrice,
               nestedCoveredArea, nestedTotalArea, nestedRooms,
-              nestedBaths, nestedGarage, nestedTaxPrice);
+              nestedBaths, nestedGarage, nestedTaxPrice, nestedAdMessage, nestedAdDescription, nestedAdDate,
+                   nestedInmediateDelivery);
         }
     	
     }

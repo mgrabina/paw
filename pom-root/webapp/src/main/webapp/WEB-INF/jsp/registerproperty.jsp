@@ -33,8 +33,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<form:input type="text" placeholder="Number" path="number" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Floor" path="floor" required="" class="text-register-property"/>
 				<form:input type="text" placeholder="Apartment" path="apartment" required="" class="text-register-property"/>
-				<form:select name="selector1" id="selector1" path="type" class="text-register-property">
-					<form:option value="house">House</form:option>
+				<form:input type="text" placeholder="Neighborhood" path="neighborhood" required="" class="text-register-property"/>
+                <form:select name="operationTypeSelector" id="operationTypeSelector" path="operationType" class="text-register-property">
+                    <form:option value="sell">Sell</form:option>
+                    <form:option value="rent">Rent</form:option>
+                    <form:option value="temporal_rent">Temporal Rent</form:option>
+                </form:select>
+				<form:select name="typeSelector" id="typeSelector" path="type" class="text-register-property">
+                    <form:option value="house">House</form:option>
 					<form:option value="apartment">Apartment</form:option>
 					<form:option value="duplex">Duplex</form:option>
 					<form:option value="office">Office</form:option>
@@ -50,7 +56,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<form:option value="false">Sin Garage</form:option>
 				</form:select>
 				<form:input type="text" placeholder="Tax Price" path="taxPrice" required="" class="text-register-property"/>
-
+				<form:input type="text" placeholder="Ad Message" path="adMessage" id="adMessageInput" required="" class="text-register-property"/>
+				<form:input type="text" placeholder="Ad Description" path="adDescription" required="" class="text-register-property"/>
+                <form:select name="inmediateDeliverySelector" id="inmediateDeliverySelector" path="inmediateDelivery" class="text-register-property">
+                    <form:option value="true">Entrega Inmediata</form:option>
+                    <form:option value="false">Pozo</form:option>
+                </form:select>
 				<input type="submit" value="Register" class="submit btn-primary btn"/>
 			</div>
 			
