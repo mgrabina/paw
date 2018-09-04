@@ -44,7 +44,7 @@
                                 <input type="submit" class="btn btn-outline-secondary" value="login"/>
                             </label>
                             <p>Do not have an account?</p>
-                            <a href="signup.jsp" class="hvr-shutter-in-horizontal">Signup</a>
+                            <a href='<%= response.encodeURL(request.getContextPath() + "/user/register") %>' class="hvr-shutter-in-horizontal">Signup</a>
                         </div>
                         <div class="clearfix"> </div>
                     </form>

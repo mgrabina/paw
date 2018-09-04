@@ -51,7 +51,7 @@ public class UserController {
 //        }
 
         us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), "implementImage");
-        
-        return new ModelAndView("login");
+
+        return new ModelAndView("redirect:/");
     }
 }
