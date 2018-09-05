@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-<%--<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -318,7 +318,9 @@
 									</c:choose>
 								</div>
 								<div class="price-text">
-									<span>US$ <c:out value="${property.price}"/></span>
+									<span>
+         								US$ <fmt:formatNumber value ="${property.price}" type = "number"/>
+     								</span>
 								</div>
 							</div>
 							<div class="right">
