@@ -5,12 +5,14 @@ import ar.edu.itba.paw.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.User;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -24,21 +26,39 @@ public class MainController {
 	@RequestMapping("/")
 	public ModelAndView index() {
 		
+		return new ModelAndView("redirect:/getProperties");
+	}
+	
+	@RequestMapping("/getProperties")
+	public ModelAndView getFilteredProperties(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
+		
 		final ModelAndView mav = new ModelAndView("index");
 		
-		//Aca vamos a usar un getWithFilters()
+		int pageNumber = 1;
+		
+		if ( pageNumberParam != null) {
+			try {
+				int auxPageNumber = Integer.parseInt(pageNumberParam);
+				pageNumber = auxPageNumber;
+				
+				if (pageNumber <= 0) return new ModelAndView("redirect:/getProperties");
+			} catch (NumberFormatException e) {
+				return new ModelAndView("redirect:/getProperties");
+			}
+		}
+		
+		//Usar un getFiltered y pasarle el queryMap
 		final List<Property> propertiesList = ps.getAll();
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = ps.getPageCount(propertiesList);
 		
-		mav.addObject("propertiesList", ps.getPage(propertiesList));
+		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
+
 		
-		//Add applied filters to ease client exp
-//		final User user = us.GetUser();
-//		mav.addObject("user", user);
 		return mav;
+	
 	}
 
 	@RequestMapping("/not-found")
