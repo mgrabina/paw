@@ -12,5 +12,18 @@ $(document).ready(function(){
   		accordion: false
 	});
 
+	setUpControllers();
 
 });
+
+function setUpControllers(){
+
+	$(".property-card").hover( function() {
+    		$( this ).addClass( "selected-card" );
+  		}, function() {
+    		$( this ).removeClass( "selected-card" );
+  		}
+	);
+	
+
+}

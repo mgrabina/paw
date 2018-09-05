@@ -14,18 +14,28 @@ import java.util.List;
 
 @Controller
 public class MainController {
-	
+		
 	@Autowired
 	private UserService us;
+	
 	@Autowired
 	private PropertyService ps;
 
 	@RequestMapping("/")
 	public ModelAndView index() {
+		
 		final ModelAndView mav = new ModelAndView("index");
-
-		final List<Property> all = ps.getAll();
-
+		
+		//Aca vamos a usar un getWithFilters()
+		final List<Property> propertiesList = ps.getAll();
+		final int propertiesCount = propertiesList.size();
+		final int pagesCount = ps.getPageCount(propertiesList);
+		
+		mav.addObject("propertiesList", ps.getPage(propertiesList));
+		mav.addObject("propertiesCount", propertiesCount);
+		mav.addObject("pagesCount", pagesCount);
+		
+		//Add applied filters to ease client exp
 //		final User user = us.GetUser();
 //		mav.addObject("user", user);
 		return mav;

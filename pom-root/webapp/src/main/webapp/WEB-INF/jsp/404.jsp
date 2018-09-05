@@ -25,7 +25,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<div class="four">
 		<img src="<c:url value="/resources/images/404.png"></c:url>"  alt="" />
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		<p>Roto.</p>
 		<a href="index.jsp" class="hvr-shutter-in-horizontal">Go To Home</a>
 	</div>
 		<!---->

@@ -8,8 +8,7 @@
 
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<%--<%@<title><spring:message code="page-title" /></title>%>--%>
-		<title>Choza</title>
+		<title><spring:message code="page-title" /></title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700'>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
@@ -41,9 +40,9 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<a href=""><spring:message code="index/register"></spring:message></a>
-		  			<a href=""><spring:message code="index/login"></spring:message></a>
-		  			<a href=""><spring:message code="index/publish"></spring:message></a>
+		  			<a href=""><spring:message code="index/register" /></a>
+		  			<a href=""><spring:message code="index/login"/></a>
+		  			<a href=""><spring:message code="index/publish"/></a>
 		  		</div>
 
 		  		<div class="extras">
@@ -52,8 +51,8 @@
 					    <li><a href="#!">A</a></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">language</i>English</a></li>
-					    <li><a href="#!"><i class="material-icons">language</i>Spanish</a></li>
+					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -65,30 +64,34 @@
 			<div class="filters-column">
 				<div class="shadow-box filters-box">
 					<div class="title-box">
-						<span class="filters-title">FILTROS APLICADOS</span>
+						<span class="filters-title"><spring:message code="index/applied-filters"/></span>
 					</div>
 					<div class="filters-list">
-						<div class="chip">Filter name 1<i class="close material-icons">close</i></div>
+						<div class="chip">Argentina</div>
+						<%--<%@
 						<div class="chip">Filter name 2<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 3<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 4<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 5<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 6<i class="close material-icons">close</i></div>
+						%>--%>
 					</div>
 					<div class="footer">
-						<a href=""><i class="material-icons left">delete</i>ELIMINAR FILTROS</a>
+						<%--<%@
+						<a href=""><i class="material-icons left">delete</i><spring:message code="index/filters/delete-filters"/></a>
+						%>--%>
 					</div>
 				</div>
 
 				<div class="shadow-box filters-box">
 					<div class="title-box">
-						<span class="filters-title">FILTROS</span>
+						<span class="filters-title"><spring:message code="index/filters"/></span>
 					</div>
 
 					<div class="filters">
 						<ul id="filters-id" class="collapsible expandable">
 						    <li class="active">
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Ubicación</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/location"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
 						      		<div class="link-box">
@@ -127,134 +130,138 @@
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Dirección</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/address"/></div>
 						      <div class="collapsible-body">
 						      	<div class="input-field">
 						          <input placeholder="Ej: Av. del Libertador" id="address" type="text" class="validate">
-						          <label for="address">Dirección</label>
+						          <label for="address"><spring:message code="index/filters/address"/></label>
 						        </div>
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Tipo de propiedad</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/type"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
 						      		<div class="link-box">
-						      			<a href="">Departamento</a>
+						      			<a href=""><spring:message code="index/filters/type/apartment"/></a>
 						      			<span>(289)</span>
 						      		</div>
 						      		<div class="link-box">
-						      			<a href="">Casa</a>
+						      			<a href=""><spring:message code="index/filters/type/house"/></a>
 						      			<span>(211)</span>
 						      		</div>
 						      		<div class="link-box">
-						      			<a href="">PH</a>
+						      			<a href=""><spring:message code="index/filters/type/ph"/></a>
 						      			<span>(88)</span>
 						      		</div>
 						      		<div class="link-box">
-						      			<a href="">Terreno</a>
+						      			<a href=""><spring:message code="index/filters/type/land"/></a>
 						      			<span>(111)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/type/office"/></a>
+						      			<span>(10)</span>
 						      		</div>
 						      	</div>
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Precio (US$)</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/price"/> (US$)</div>
 						      <div class="collapsible-body">
 
 						      	<p class="range-field">
-						      		Desde 
+						      		<spring:message code="index/filters/min"/> 
 							      <input type="range" id="min-price" min="1" max="1000000" />
 							    </p>
 							    <p class="range-field">
-							    	Hasta
+							    	<spring:message code="index/filters/max"/>
 							      <input type="range" id="max-price" min="0" max="1000000" />
 							    </p>
-							    <a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+							    <a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Expensas (US$)</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/tax"/> (US$)</div>
 						      <div class="collapsible-body">
 
 						      	<p class="range-field">
-						      		Desde 
+						      		<spring:message code="index/filters/min"/> 
 							      <input type="range" id="min-e" min="1" max="10000" />
 							    </p>
 							    <p class="range-field">
-							    	Hasta
+							    	<spring:message code="index/filters/max"/>
 							      <input type="range" id="max-e" min="0" max="10000" />
 							    </p>
 
-							    <a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+							    <a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Amenities</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/amenities"/></div>
 						      <div class="collapsible-body">
 						      	
 						      	<div class="link-list">
 						      		<label>
 								        <input type="checkbox" class="filled-in" />
-								        <span> Piscina</span>
+								        <span><spring:message code="index/filters/amenities/pool"/></span>
 								    </label>
 								    <label>
 								        <input type="checkbox" class="filled-in"  />
-								        <span> Sauna</span>
+								        <span><spring:message code="index/filters/amenities/sauna"/></span>
 								    </label>
 								    <label>
 								        <input type="checkbox" class="filled-in"  />
-								        <span> SUM</span>
+								        <span><spring:message code="index/filters/amenities/sum"/></span>
 								    </label>
 						      	</div>
-						      	<a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+						      	<a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>General</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/general"/></div>
 						      <div class="collapsible-body">
 						      	
 						      	<div class="link-list">
 						      		<label>
 								        <input type="checkbox" class="filled-in" />
-								        <span> Cochera</span>
+								        <span><spring:message code="index/filters/general/garage"/></span>
 								    </label>
 						      	</div>
-						      	<a class="waves-effect waves-light btn top-margin" id="" href="">APLICAR FILTRO</a>
+						      	<a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Superficie</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/meters"/></div>
 						      <div class="collapsible-body">
 						      	<p class="range-field">
-						      		Desde 
+						      		<spring:message code="index/filters/min"/> 
 							      <input type="range" id="min-s" min="1" max="10000" />
 							    </p>
 							    <p class="range-field">
-							    	Hasta
+							    	<spring:message code="index/filters/max"/>
 							      <input type="range" id="max-s" min="0" max="10000" />
 							    </p>
 
-							    <a class="waves-effect waves-light btn" id="" href="">APLICAR FILTRO</a>
+							    <a class="waves-effect waves-light btn" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 						      </div>
 						    </li>
 						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i>Publicado</div>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/published-time"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
 						      		<div class="link-box">
-						      			<a href="">Hoy</a>
+						      			<a href=""><spring:message code="index/filters/published/today"/></a>
 						      			<span>(289)</span>
 						      		</div>
 						      		<div class="link-box">
-						      			<a href="">Última semana</a>
+						      			<a href=""><spring:message code="index/filters/published/last-week"/></a>
 						      			<span>(211)</span>
 						      		</div>
 						      		<div class="link-box">
-						      			<a href="">Últimos 15 días</a>
+						      			<a href=""><spring:message code="index/filters/published/last-two-weeks"/></a>
 						      			<span>(88)</span>
 						      		</div>
 						      	</div>
@@ -267,82 +274,106 @@
 
 			<div class="properties-column">
 
-				<span class="properties-count"><span id="pCount" class="bold">1.260</span> propiedades en venta en Argentina</span>
+				<span class="properties-count"><span id="pCount" class="bold">${propertiesCount}</span> <spring:message code="index/properties-count"/> Argentina</span>
 
 				<div class="tabs-container">
 				    <div class="col">
 				      <ul class="tabs">
-				        <li class="tab col"><a class="active" href="#test1">Venta</a></li>
-				        <li class="tab col"><a href="#test2">Alquiler</a></li>
-				        <li class="tab col"><a href="#test3">Alquiler temporal</a></li>
+				        <li class="tab col"><a class="active" href="#test1"><spring:message code="index/sell"/></a></li>
+				        <li class="tab col"><a href="#test2"><spring:message code="index/rent"/></a></li>
+				        <li class="tab col"><a href="#test3"><spring:message code="index/temp-rent"/></a></li>
 				      </ul>
 				    </div>
 				</div>
 
 				<div class="order-box">
-					<span class="order-by-text">Ordenar por:</span>
+					<span class="order-by-text"><spring:message code="index/sort-by"/></span>
 					<a class='dropdown-trigger' data-target='dropdown2'><i class="material-icons right">keyboard_arrow_down</i>Relevantes</a>
 		  			  <ul id='dropdown2' class='dropdown-content'>
-		  			  	<li><a href="#!">Relevantes</a></li>
-					    <li><a href="#!">Baratos</a></li>
-					    <li><a href="#!">Caros</a></li>
-					    <li><a href="#!">Nuevos</a></li>
+		  			  	<li><a href="#!"><spring:message code="index/sort/relevant"/></a></li>
+					    <li><a href="#!"><spring:message code="index/sort/cheap"/></a></li>
+					    <li><a href="#!"><spring:message code="index/sort/expensive"/></a></li>
+					    <li><a href="#!"><spring:message code="index/sort/new"/></a></li>
 					  </ul>
 				</div>
 
 				<div class="properties-list">
 
-					<div class="shadow-box property-card">
-						<div class="left">
-							<div class="image-container">
-								<div class="carousel carousel-slider">
-									<a class="carousel-item" href="#one!"><img src="https://imgar.zonapropcdn.com/avisos/1/00/43/72/39/68/360x266/1676384293.jpg"></a>
-									<a class="carousel-item" href="#two!"><img src="https://imgar.zonapropcdn.com/avisos/1/00/43/72/39/68/360x266/1676384289.jpg"><</a>
-									<a class="carousel-item" href="#three!"><img src="https://imgar.zonapropcdn.com/avisos/1/00/43/72/39/68/360x266/1676384284.jpg"><</a>
+					<c:forEach items="${propertiesList}" var="property" varStatus="loop">
+
+						<div class="shadow-box property-card" id="property-${loop.index}">
+							<div class="left">
+								<div class="image-container">
+									<c:choose>
+										<c:when test="${fn:length(property.images) == 0}">
+											<img src="<c:url value="/resources/images/no-image.png"/>">
+										</c:when>
+										<c:otherwise>
+											<div class="carousel carousel-slider">
+												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
+													<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
+												</c:forEach>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="price-text">
+									<span>US$ <c:out value="${property.price}"/></span>
 								</div>
 							</div>
-							<div class="price-text">
-								<span>US$ 38.000</span>
+							<div class="right">
+								<div class="header">
+									<div class="left">
+										<a href="" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
+										<a href="" class="card-text-wrap subtitle"><c:out value="${property.street}"/> <c:out value="${property.number}"/> - <c:out value="${property.neighborhood}"/></a>
+									</div>
+									<div class="right">
+										<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
+									</div>
+								</div>
+
+								<div class="description">
+									<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
+									<div class="pDesc">
+										<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
+											<c:out value="${property.adDescription}"/> 
+										</span> 
+									</div>
+								</div>
+
+								<div class="footer">
+
+									<div class="bold extra-info">
+										<c:choose>
+											<c:when test="${property.inmediateDelivery}">
+												<span><spring:message code="index/card/immediate"/></span>
+											</c:when>
+											<c:otherwise>
+												<span><spring:message code="index/card/immediate"/></span>
+											</c:otherwise>
+										</c:choose>
+										<span>&#183;</span>
+										<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
+									</div>
+
+									<div class="action">
+										<a href=""><spring:message code="index/card/contact"/></a>
+									</div>
+								</div>
+
 							</div>
 						</div>
-						<div class="right">
-							<div class="header">
-								<div class="left">
-									<a href="" class="card-text-wrap title">Edificio corporativo 5 plantas 300 m2 con muchas cosas</a>
-									<a href="" class="card-text-wrap subtitle">Peron, Juan Domingo 518 - Microcentro</a>
-								</div>
-								<div class="right">
-									<img src="https://imgar.zonapropcdn.com/empresas/1/00/17/02/92/12/130x70/logo_dunod_2.jpg">
-								</div>
-							</div>
 
-							<div class="description">
-								<span class="bold">300 m2 cubiertos</span> </br>
-								<div class="pDesc">
-									<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">Edificio desarrollado en Subsuelo, Planta Baja y 5 pisos.
-									2 Ascensores principales - 1 uno de servicio que llega hasta el 4to piso - Grupo electrógeno para el 100% del edificio - Local en Planta Baja - Bóveda en subsuelo. 
+					</c:forEach>
 
-									Características: 
-
-									Plantas Libres - Cielorraso desmontable con luminarias - Aire Acondicionado Central y refuerzos con Splits - Detectores de Humo - 2 baños generales ambos sexos - 2 baños privados. 
-									</span> 
-								</div>
-							</div>
-
-							<div class="footer">
-
-								<div class="bold extra-info">
-									<span>Entrega inmediata</span>
-									<span>&#183;</span>
-									<span>Publicado hace 45 dias</span>
-								</div>
-
-								<div class="action">
-									<a href="">CONTACTAR</a>
-								</div>
-							</div>
-
-						</div>
+					<div class="pagination-container">
+						<ul class="pagination">
+						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+						    <c:forEach begin="0" end="${pagesCount}" varStatus="loop">
+						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a href="">${loop.index + 1}</a></li>
+						    </c:forEach>
+						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+					  	</ul>
 					</div>
 
 				</div>
@@ -402,7 +433,7 @@
 
 
                 <div class="no-people-available <c:if test="${fn:length(usersList) > 0}">invisible</c:if>">
-                	<span><spring:message code="no-people-available"></spring:message> </span>
+                	<span><spring:message code="no-people-available"/> </span>
                 	<div class="searchingImgContainer">
                 		<img src="<c:url value="/resources/images/searching.gif"></c:url>">
                 	</div>
@@ -460,7 +491,7 @@
 		  				<div class="column">
 			  				<h4><spring:message code="matches-header" /><b class="matchs-quantity">(${fn:length(matchesList)})</b></h4>
 			  				<c:if test="${fn:length(notifications) > 0}">
-								  <span class="new badge" data-badge-caption=" <spring:message code="new-matches"></spring:message>">${fn:length(notifications)}</span>
+								  <span class="new badge" data-badge-caption=" <spring:message code="new-matches"/>">${fn:length(notifications)}</span>
 							</c:if>
 						</div>
 

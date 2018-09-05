@@ -49,6 +49,7 @@ public class PropertyDaoImpl implements PropertyDao {
 		return list;
 	}
 
+	
 	public Long createProperty(String street, Integer number, Integer floor, String apartment,
 			PropertyType type, Long userId, Long price, Integer coveredArea,
 							   Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
@@ -117,4 +118,5 @@ public class PropertyDaoImpl implements PropertyDao {
 		}
 		return list;
 	}
+
 }

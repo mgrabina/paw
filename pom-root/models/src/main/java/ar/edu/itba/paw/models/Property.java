@@ -1,35 +1,36 @@
 package ar.edu.itba.paw.models;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Property {
 	    
-    private Integer id;
+    private int id;
     private String street;
-    private Integer number;
-    private Integer floor;
+    private int number;
+    private int floor;
     private String apartment;
     private String neighborhood;
     private OperationType operationType;
     private PropertyType type;
     private User publisherUser;
-    private Long price;
-    private Integer coveredArea;    //In quarter meters
-    private Integer totalArea;    //In quarter meters
-    private Integer rooms;
-    private Integer baths;
+    private long price;
+    private int coveredArea;    //In quarter meters
+    private int totalArea;    //In quarter meters
+    private int rooms;
+    private int baths;
     private Boolean garage;
-    private Integer taxPrice;
+    private int taxPrice;
     private List<String> images;
     private String adMessage;
     private String adDescription;
-    private Date adDate;
+    private int adDate;
     private Boolean inmediateDelivery;
 
-    public Property(Integer id, String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Date adDate, Boolean inmediateDelivery) {
+    public Property(int id, String street, int number, int floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, long price, int coveredArea, int totalArea, int rooms, int baths, Boolean garage, int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -50,12 +51,13 @@ public class Property {
         this.adDescription = adDescription;
         this.adDate = adDate;
         this.inmediateDelivery = inmediateDelivery;
+        this.images = new ArrayList<String>();
     }
 
-    public Property(Integer id, String street, Integer number, Integer floor, String apartment,
-                    PropertyType type, OperationType operationType, User userId, Long price,
-                    Integer coveredArea, Integer totalArea, Integer rooms, Integer baths,
-                    Boolean garage, Integer taxPrice) {
+    public Property(int id, String street, int number, int floor, String apartment,
+                    PropertyType type, OperationType operationType, User userId, long price,
+                    int coveredArea, int totalArea, int rooms, int baths,
+                    Boolean garage, int taxPrice) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -73,10 +75,10 @@ public class Property {
         this.taxPrice = taxPrice;
     }
 
-    public Property(String street, Integer number, Integer floor, String apartment, String neighborhood,
-                    OperationType operationType, PropertyType type, User publisherUser, Long price,
-                    Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
-                    Integer taxPrice, String adMessage, String adDescription, Date adDate, Boolean inmediateDelivery) {
+    public Property(String street, int number, int floor, String apartment, String neighborhood,
+                    OperationType operationType, PropertyType type, User publisherUser, long price,
+                    int coveredArea, int totalArea, int rooms, int baths, Boolean garage,
+                    int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
         this.street = street;
         this.number = number;
         this.floor = floor;
@@ -123,11 +125,11 @@ public class Property {
         this.adDescription = adDescription;
     }
 
-    public Date getAdDate() {
+    public int getAdDate() {
         return adDate;
     }
 
-    public void setAdDate(Date adDate) {
+    public void setAdDate(int adDate) {
         this.adDate = adDate;
     }
 
@@ -147,7 +149,7 @@ public class Property {
         this.operationType = operationType;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(long price) {
         this.price = price;
     }
     
@@ -155,19 +157,19 @@ public class Property {
     	this.publisherUser = u;
     }
 
-    public void setCoveredArea(Integer coveredArea) {
+    public void setCoveredArea(int coveredArea) {
         this.coveredArea = coveredArea;
     }
 
-    public void setTotalArea(Integer totalArea) {
+    public void setTotalArea(int totalArea) {
         this.totalArea = totalArea;
     }
 
-    public void setRooms(Integer rooms) {
+    public void setRooms(int rooms) {
         this.rooms = rooms;
     }
 
-    public void setBaths(Integer baths) {
+    public void setBaths(int baths) {
         this.baths = baths;
     }
 
@@ -175,7 +177,7 @@ public class Property {
         this.garage = garage;
     }
 
-    public void setTaxPrice(Integer taxPrice) {
+    public void setTaxPrice(int taxPrice) {
         this.taxPrice = taxPrice;
     }
     
@@ -183,7 +185,7 @@ public class Property {
         this.images.add(image);
     }
 
-    public Integer getId() {
+    public int getId() {
 
         return id;
     }
@@ -192,11 +194,11 @@ public class Property {
         return street;
     }
 
-    public Integer getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public Integer getFloor() {
+    public int getFloor() {
         return floor;
     }
 
@@ -208,23 +210,23 @@ public class Property {
         return publisherUser;
     }
 
-    public Long getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public Integer getCoveredArea() {
+    public int getCoveredArea() {
         return coveredArea;
     }
 
-    public Integer getTotalArea() {
+    public int getTotalArea() {
         return totalArea;
     }
 
-    public Integer getRooms() {
+    public int getRooms() {
         return rooms;
     }
 
-    public Integer getBaths() {
+    public int getBaths() {
         return baths;
     }
 
@@ -232,7 +234,7 @@ public class Property {
         return garage;
     }
 
-    public Integer getTaxPrice() {
+    public int getTaxPrice() {
         return taxPrice;
     }
 
@@ -246,30 +248,30 @@ public class Property {
     
     public static class PropertyBuilder{
     	
-    	private Integer nestedId;
+    	private int nestedId;
         private String nestedStreet;
-        private Integer nestedNumber;
-        private Integer nestedFloor;
+        private int nestedNumber;
+        private int nestedFloor;
         private String nestedApartment;
         private String nestedNeighborhood;
         private PropertyType nestedType;
         private OperationType nestedOperationType;
         private User nestedPublisherUser;
-        private Long nestedPrice;
-        private Integer nestedCoveredArea;    //In quarter meters
-        private Integer nestedTotalArea;    //In quarter meters
-        private Integer nestedRooms;
-        private Integer nestedBaths;
+        private long nestedPrice;
+        private int nestedCoveredArea;    //In quarter meters
+        private int nestedTotalArea;    //In quarter meters
+        private int nestedRooms;
+        private int nestedBaths;
         private Boolean nestedGarage;
-        private Integer nestedTaxPrice;
+        private int nestedTaxPrice;
         private String nestedAdMessage;
         private String nestedAdDescription;
-        private Date nestedAdDate;
+        private int nestedAdDate;
         private Boolean nestedInmediateDelivery;
         private List<Property> nestedWishes;
         private List<String> nestedImages;
         
-        public PropertyBuilder(final User newUser, final String newStreet, final Integer newNumber, final Long newPrice, final OperationType newOperationType) {
+        public PropertyBuilder(final User newUser, final String newStreet, final int newNumber, final long newPrice, final OperationType newOperationType) {
         	this.nestedPublisherUser = newUser;
         	this.nestedStreet = newStreet;
             this.nestedNumber = newNumber;
@@ -277,12 +279,12 @@ public class Property {
             this.nestedOperationType = newOperationType;
         }
         
-        public PropertyBuilder id(Integer newId){
+        public PropertyBuilder id(int newId){
            this.nestedId = newId;
            return this;
         }
         
-        public PropertyBuilder floor(Integer newFloor){
+        public PropertyBuilder floor(int newFloor){
             this.nestedFloor = newFloor;
             return this;
          }
@@ -297,22 +299,22 @@ public class Property {
             return this;
          }
         
-        public PropertyBuilder coveredArea(Integer newCA){
+        public PropertyBuilder coveredArea(int newCA){
             this.nestedCoveredArea = newCA;
             return this;
          }
         
-        public PropertyBuilder totalArea(Integer newTA){
+        public PropertyBuilder totalArea(int newTA){
             this.nestedTotalArea = newTA;
             return this;
          }
         
-        public PropertyBuilder rooms(Integer newRooms){
+        public PropertyBuilder rooms(int newRooms){
             this.nestedRooms = newRooms;
             return this;
          }
         
-        public PropertyBuilder baths(Integer newBaths){
+        public PropertyBuilder baths(int newBaths){
             this.nestedBaths = newBaths;
             return this;
          }
@@ -322,7 +324,7 @@ public class Property {
             return this;
          }
         
-        public PropertyBuilder taxPrice(Integer newTaxPrice){
+        public PropertyBuilder taxPrice(int newTaxPrice){
             this.nestedTaxPrice = newTaxPrice;
             return this;
          }
@@ -332,27 +334,27 @@ public class Property {
             return this;
          }
 
-        public PropertyBuilder Neighborhood(String newNeighborhood){
+        public PropertyBuilder neighborhood(String newNeighborhood){
             this.nestedNeighborhood = newNeighborhood;
             return this;
         }
 
-        public PropertyBuilder AdMessage(String newAdMessage){
+        public PropertyBuilder adMessage(String newAdMessage){
             this.nestedAdMessage = newAdMessage;
             return this;
         }
 
-        public PropertyBuilder AdDescription(String newAdDescription){
+        public PropertyBuilder adDescription(String newAdDescription){
             this.nestedAdDescription = newAdDescription;
             return this;
         }
 
-        public PropertyBuilder AdDate(Date newAdDate){
+        public PropertyBuilder adDate(int newAdDate){
             this.nestedAdDate = newAdDate;
             return this;
         }
 
-        public PropertyBuilder InmediateDelivery(Boolean newInmediateDelivery){
+        public PropertyBuilder immediateDelivery(Boolean newInmediateDelivery){
             this.nestedInmediateDelivery = newInmediateDelivery;
             return this;
         }
@@ -369,5 +371,17 @@ public class Property {
         }
     	
     }
+
+	@Override
+	public String toString() {
+		return "Property [id=" + id + ", street=" + street + ", number=" + number + ", floor=" + floor + ", apartment="
+				+ apartment + ", neighborhood=" + neighborhood + ", operationType=" + operationType + ", type=" + type
+				+ ", publisherUser=" + publisherUser + ", price=" + price + ", coveredArea=" + coveredArea
+				+ ", totalArea=" + totalArea + ", rooms=" + rooms + ", baths=" + baths + ", garage=" + garage
+				+ ", taxPrice=" + taxPrice + ", images=" + images + ", adMessage=" + adMessage + ", adDescription="
+				+ adDescription + ", adDate=" + adDate + ", inmediateDelivery=" + inmediateDelivery + "]";
+	}
+    
+    
 
 }

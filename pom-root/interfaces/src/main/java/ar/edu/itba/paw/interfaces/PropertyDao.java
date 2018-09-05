@@ -8,12 +8,17 @@ import ar.edu.itba.paw.models.User;
 import java.util.List;
 
 public interface PropertyDao {
-    public Property findById(final long id);
+	
     public List<Property> getAll();
+    public List<Property> getFavorites(Long userId);
+
+
+    public Property findById(final long id);
+    
     public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
     public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood,
                                OperationType operationType, PropertyType type, User publisherUser, Long price,
                                Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                                Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
-    public List<Property> getFavorites(Long userId);
+    
 }
