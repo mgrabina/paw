@@ -22,5 +22,7 @@ public interface PropertyService {
                     Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                     Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
     public List<Property> getFiltered(Map<String,String> filters);
-        //    public List<Property> getFavorites(Long userId);
+    public List<Property> getFavourites(Long userId);
+    public void setFavourite(Long userId, Long propertyId);
+
 }

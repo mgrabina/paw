@@ -104,11 +104,12 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-	public List<Property> getFavorites(Long userId){
+	public List<Property> getFavourites(Long userId){
 		final List<Property> list = jdbcTemplate.query(
-				"SELECT * " +
-						"FROM wish " +
-						"INNER JOIN property WHERE wish.user_id = ?",
+				"SELECT p.*, u.* FROM favourites " +
+						" JOIN property p ON favourites.id_property = p.id " +
+						" JOIN users u ON favourites.id_user = u.id" +
+						" WHERE favourites.id_user = ? ;",
 				ROW_MAPPER, userId);
 		if (list.isEmpty()) {
 			return Collections.emptyList();
@@ -124,6 +125,14 @@ public class PropertyDaoImpl implements PropertyDao {
 			return Collections.emptyList();
 		}
 		return list;
+	}
+
+	public void setFavourite(Long userId, Long propertyId){
+		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("favourites");
+		final Map<String, Object> args = new HashMap<String, Object>();
+		args.put("id_user", userId);
+		args.put("id_property", propertyId);
+		jdbcInsert.execute(args);
 	}
 
 }

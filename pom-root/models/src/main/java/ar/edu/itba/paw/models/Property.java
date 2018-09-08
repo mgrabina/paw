@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Property {
 	    
-    private int id;
+    private Long id;
     private String street;
     private int number;
     private int floor;
@@ -30,7 +30,7 @@ public class Property {
     private int adDate;
     private Boolean inmediateDelivery;
 
-    public Property(int id, String street, int number, int floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, long price, int coveredArea, int totalArea, int rooms, int baths, Boolean garage, int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
+    public Property(Long id, String street, int number, int floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, long price, int coveredArea, int totalArea, int rooms, int baths, Boolean garage, int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -54,7 +54,7 @@ public class Property {
         this.images = new ArrayList<String>();
     }
 
-    public Property(int id, String street, int number, int floor, String apartment,
+    public Property(Long id, String street, int number, int floor, String apartment,
                     PropertyType type, OperationType operationType, User userId, long price,
                     int coveredArea, int totalArea, int rooms, int baths,
                     Boolean garage, int taxPrice) {
@@ -185,7 +185,7 @@ public class Property {
         this.images.add(image);
     }
 
-    public int getId() {
+    public Long getId() {
 
         return id;
     }
@@ -248,7 +248,7 @@ public class Property {
     
     public static class PropertyBuilder{
     	
-    	private int nestedId;
+    	private Long nestedId;
         private String nestedStreet;
         private int nestedNumber;
         private int nestedFloor;
@@ -279,7 +279,7 @@ public class Property {
             this.nestedOperationType = newOperationType;
         }
         
-        public PropertyBuilder id(int newId){
+        public PropertyBuilder id(Long newId){
            this.nestedId = newId;
            return this;
         }

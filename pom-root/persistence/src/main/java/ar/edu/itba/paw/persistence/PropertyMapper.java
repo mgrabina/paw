@@ -43,7 +43,7 @@ final class PropertyMapper implements ResultSetExtractor<List<Property>> {
             	LocalDate dateAfter = LocalDate.now();
             	int publishDateDif = Math.toIntExact(ChronoUnit.DAYS.between(dateBefore, dateAfter));
            	
-            	p = pb.id(rs.getInt("id"))
+            	p = pb.id(rs.getLong("id"))
                   .floor(rs.getInt("floor"))
                   .apartment(rs.getString("apartment"))
                   .neighborhood(rs.getString("neighborhood"))
@@ -60,7 +60,7 @@ final class PropertyMapper implements ResultSetExtractor<List<Property>> {
                   .immediateDelivery(rs.getBoolean("inmediate_delivery"))
                   .build();
                 
-            	String pImage = rs.getString("image_src");
+            	String pImage = rs.getString("imagesrc");
             	if (pImage != null) p.addImage(pImage);
             	
             	propertyList.add(p);
