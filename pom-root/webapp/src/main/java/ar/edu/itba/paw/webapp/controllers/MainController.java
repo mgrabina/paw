@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.User;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,12 @@ public class MainController {
 				return new ModelAndView("redirect:/getProperties");
 			}
 		}
-		
+		Map<String,String> map= new HashMap<>();
+		map.put("type","apartment");
+		map.put("minPrice","99999");
+		map.put("garage","true");
+		List<Property> aux=ps.getFiltered(map);
+
 		//Usar un getFiltered y pasarle el queryMap
 		final List<Property> propertiesList = ps.getAll();
 		final int propertiesCount = propertiesList.size();

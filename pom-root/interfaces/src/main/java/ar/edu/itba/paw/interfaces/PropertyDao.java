@@ -5,6 +5,7 @@ import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PropertyDao {
@@ -20,5 +21,5 @@ public interface PropertyDao {
                                OperationType operationType, PropertyType type, User publisherUser, Long price,
                                Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                                Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
-    
-}
+    public List<Property> getFiltered(String filters, ArrayList params);
+    }

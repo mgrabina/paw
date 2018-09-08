@@ -14,10 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class PropertyDaoImpl implements PropertyDao {
@@ -114,7 +111,17 @@ public class PropertyDaoImpl implements PropertyDao {
 						"INNER JOIN property WHERE wish.user_id = ?",
 				ROW_MAPPER, userId);
 		if (list.isEmpty()) {
-			return null;
+			return Collections.emptyList();
+		}
+		return list;
+	}
+
+	public List<Property> getFiltered(String filters, ArrayList params){
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id " +
+															"FULL OUTER JOIN property_images i on property.id = i.property_id "+
+															"WHERE "+ filters, params.toArray(), ROW_MAPPER);
+		if (list.isEmpty()) {
+			return Collections.emptyList();
 		}
 		return list;
 	}
