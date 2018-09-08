@@ -10,9 +10,8 @@ import java.util.List;
 public interface PropertyDao {
 	
     public List<Property> getAll();
-    public List<Property> getFavorites(Long userId);
-
-
+    public List<Property> getFavourites(Long userId);
+    public void setFavourite(Long userId, Long propertyId);
     public Property findById(final long id);
     
     public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
@@ -20,5 +19,4 @@ public interface PropertyDao {
                                OperationType operationType, PropertyType type, User publisherUser, Long price,
                                Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                                Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
-    
 }
