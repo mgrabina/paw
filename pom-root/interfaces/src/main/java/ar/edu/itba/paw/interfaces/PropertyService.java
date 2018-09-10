@@ -24,5 +24,7 @@ public interface PropertyService {
     public List<Property> getFiltered(Map<String,String> filters);
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
+    public void deleteFavourite(Long userId, Long propertyId);
 
-}
+
+    }

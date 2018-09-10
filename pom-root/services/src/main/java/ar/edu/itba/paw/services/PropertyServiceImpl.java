@@ -78,6 +78,11 @@ public class PropertyServiceImpl implements PropertyService {
 		propertyDao.setFavourite(userId, propertyId);
 	}
 
+	@Override
+	public void deleteFavourite(Long userId, Long propertyId) {
+		propertyDao.deleteFavourite(userId, propertyId);
+	}
+
 	public Property findById(final long id){
 		return propertyDao.findById(id);
 	}

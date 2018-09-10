@@ -13,7 +13,9 @@ public interface PropertyDao {
     public List<Property> getAll();
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
-    public Property findById(final long id);
+    public void deleteFavourite(Long userId, Long propertyId);
+
+        public Property findById(final long id);
     
     public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
     public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood,
