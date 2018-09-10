@@ -22,7 +22,7 @@
     <body>
         <form:form modelAttribute="loginForm" action='<%= response.encodeURL(request.getContextPath() + "/user/login") %>' method="post" enctype="application/x-www-form-urlencoded">
             <div class="login">
-                <h1><a href="index.jsp">Minimal </a></h1>
+                <h1><a href="index.jsp">Chozapp </a></h1>
                 <div class="login-bottom">
                     <h2>Login</h2>
                     <form>
