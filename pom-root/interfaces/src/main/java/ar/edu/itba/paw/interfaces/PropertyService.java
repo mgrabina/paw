@@ -6,6 +6,7 @@ import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.models.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PropertyService {
     public Property findById(final long id);
@@ -20,7 +21,7 @@ public interface PropertyService {
                     OperationType operationType, PropertyType type, User publisherUser, Long price,
                     Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                     Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
-
+    public List<Property> getFiltered(Map<String,String> filters);
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
 
