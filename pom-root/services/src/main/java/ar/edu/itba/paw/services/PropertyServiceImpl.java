@@ -166,4 +166,8 @@ public class PropertyServiceImpl implements PropertyService {
 	public List<Property> getPropertysByTagsSearch(List<String> tags){
 		return propertyDao.getByTags(tags);
 	}
+
+	public List<String> getAllTags(){
+		return propertyDao.getAllTags();
+	}
 }
