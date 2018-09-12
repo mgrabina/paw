@@ -25,6 +25,6 @@ public interface PropertyService {
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
     public void deleteFavourite(Long userId, Long propertyId);
-
-
+    public List<Property> getPropertysByTagsSearch(String search);
+    public List<Property> getPropertysByTagsSearch(List<String> tags);
     }

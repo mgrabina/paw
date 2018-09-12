@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -57,7 +59,7 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 	
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
-		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
+	    return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
 	}
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price) {
@@ -65,7 +67,18 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
-		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery);
+	    List<String> tags = new LinkedList<String>();
+	    tags.addAll(Arrays.asList(
+	    		street.trim().toLowerCase(),
+	            neighborhood.trim().toLowerCase(),
+                operationType.toString(),
+                type.toString(),
+                rooms.toString() + "_rooms",
+                baths.toString() + "_baths",
+                garage?"garage":null,
+                inmediateDelivery?"imediate_delivery":null
+        ));
+		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
 	@Override
@@ -139,7 +152,18 @@ public class PropertyServiceImpl implements PropertyService {
 		}
 		return propertyDao.getFiltered(query.toString(), params);
 	}
+	/*
+		Get property's that matches tags (such as property type, neighborhood, etc.)
+	 */
+	public List<Property> getPropertysByTagsSearch(String search){
+		return propertyDao.getByTags(
+				Arrays.asList(search.split("\\s+"))
+				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
+				.collect(Collectors.toList())
+		);
+	}
 
-
-
+	public List<Property> getPropertysByTagsSearch(List<String> tags){
+		return propertyDao.getByTags(tags);
+	}
 }

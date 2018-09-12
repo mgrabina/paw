@@ -105,6 +105,44 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
+    @Override
+    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, List<String> tags) {
+
+        jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
+
+        final Map<String, Object> args = new HashMap<String, Object>();
+        args.put("street", street);
+        args.put("number", number);
+        args.put("floor", floor);
+        args.put("apartment", apartment);
+        args.put("neighborhood", neighborhood.toLowerCase().trim());
+        args.put("operation_type", operationType);
+        args.put("type", type);
+        args.put("user_id", publisherUser.getId());
+        args.put("price", price);
+        args.put("covered_area", coveredArea);
+        args.put("total_area", totalArea);
+        args.put("rooms", rooms);
+        args.put("baths", baths);
+        args.put("garage", garage);
+        args.put("tax_price", taxPrice);
+        args.put("ad_message", adMessage);
+        args.put("ad_description", adDescription);
+        args.put("ad_date", new Timestamp(System.currentTimeMillis()));
+        args.put("inmediate_delivery", inmediateDelivery);
+
+        final long propertyId = jdbcInsert.executeAndReturnKey(args).longValue();
+
+        //Tags Insertion
+        final Map<String, Object> auxMap = new HashMap<String, Object>();
+		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tags");
+		auxMap.put("id_property", propertyId);
+		tags.stream().filter(tag -> tag != null).forEach(tag -> {
+			auxMap.put("name", tag);
+			jdbcInsert.execute(auxMap);
+		});
+        return propertyId;
+    }
 	public List<Property> getFavourites(Long userId){
 		final List<Property> list = jdbcTemplate.query(
 				"SELECT p.*, u.* FROM favourites " +
@@ -138,6 +176,47 @@ public class PropertyDaoImpl implements PropertyDao {
 
 	public void deleteFavourite(Long userId, Long propertyId){
 		jdbcTemplate.update("DELETE FROM favourites WHERE id_user = ? and id_property = ?;", userId, propertyId);
+	}
+
+	public List<Property> getByTag(String tag){
+		final List<Property> list = jdbcTemplate.query(
+				"SELECT property.*, users.* FROM property " +
+						"JOIN users ON property.user_id = users.id " +
+						"JOIN tags ON property.id = tags.id_property",
+				ROW_MAPPER);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
+
+	public List<Property> getByTags(List<String> tags){
+		if(tags.isEmpty())return null;
+		final List<Property> list = jdbcTemplate.query(
+				"SELECT * FROM property " +
+						"JOIN users ON property.user_id = users.id " +
+						"FULL OUTER JOIN property_images i on property.id = i.property_id " +
+						"where property.id in( " +
+						"  select tags.id_property " +
+						"  from tags " +
+						"  where tags.name in ("+"'"+String.join("' , '", tags)+"'"+") " +
+						"  group by tags.id_property " +
+						"  having count(distinct tags.name) = "+tags.stream().distinct().count()+
+						");",
+				ROW_MAPPER);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
+
+	public List<String> getAllTags(){
+		final List<String> list = jdbcTemplate.queryForList(
+				"select distinct name from tags;", String.class);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 
 }
