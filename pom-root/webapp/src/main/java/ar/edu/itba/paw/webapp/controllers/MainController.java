@@ -26,7 +26,6 @@ public class MainController {
 
 	@RequestMapping("/")
 	public ModelAndView index() {
-		
 		return new ModelAndView("redirect:/getProperties");
 	}
 	

@@ -8,6 +8,8 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +26,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import javax.sql.DataSource;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Properties;
 
 @EnableWebMvc
 @ComponentScan({ "ar.edu.itba.paw.webapp.controllers", "ar.edu.itba.paw.services", "ar.edu.itba.paw.persistence"})
@@ -85,23 +88,23 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return localeChangeInterceptor;
 	}
 
-//	@Bean
-//	public JavaMailSender getMailSender(){
-//		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//
-//		//Using gmail
-//		mailSender.setHost("smtp.gmail.com");
-//		mailSender.setPort(587);
-//		mailSender.setUsername("itbr.notifications@gmail.com");
-//		mailSender.setPassword("pawitba2018");
-//
-//		Properties javaMailProperties = new Properties();
-//		javaMailProperties.put("mail.smtp.starttls.enable", "true");
-//		javaMailProperties.put("mail.smtp.auth", "true");
-//		javaMailProperties.put("mail.transport.protocol", "smtp");
-//		//	javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
-//
-//		mailSender.setJavaMailProperties(javaMailProperties);
-//		return mailSender;
-//	}
+	@Bean
+	public JavaMailSender getMailSender(){
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+
+		//Using gmail
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		mailSender.setUsername("info.chozapp@gmail.com");
+		mailSender.setPassword("pawitba2018");
+
+		Properties javaMailProperties = new Properties();
+		javaMailProperties.put("mail.smtp.starttls.enable", "true");
+		javaMailProperties.put("mail.smtp.auth", "true");
+		javaMailProperties.put("mail.transport.protocol", "smtp");
+		//	javaMailProperties.put("mail.debug", "true");//Prints out everything on screen
+
+		mailSender.setJavaMailProperties(javaMailProperties);
+		return mailSender;
+	}
 }
