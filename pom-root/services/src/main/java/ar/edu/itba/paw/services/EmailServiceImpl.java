@@ -6,7 +6,7 @@ import org.springframework.mail.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import sun.nio.ch.sctp.SendFailed;
+//import sun.nio.ch.sctp.SendFailed;
 
 import javax.mail.SendFailedException;
 import javax.mail.internet.MimeMessage;

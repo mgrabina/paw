@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,5 +70,34 @@ public class PropertyController {
         );
                 
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View
+    }
+
+    @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
+    public ModelAndView getPropertyDetailview(@PathVariable("id") int id) {
+        final ModelAndView mav = new ModelAndView("detailview");
+
+        //final Property property = ps.findById(id);
+
+        mav.addObject("name", "My building");
+        mav.addObject("rating", "3,5");
+        mav.addObject("description", "Lorem ipsum ...");
+        mav.addObject("street", "Street info");
+        mav.addObject("number", "Number info");
+        mav.addObject("floor", "Floor info");
+        mav.addObject("type", "Type info");
+        mav.addObject("price", "Price info");
+        mav.addObject("area", "Area info");
+
+        /*mav.addObject("name", property.getAdDescription());
+        mav.addObject("rating", "3,5");
+        mav.addObject("description", property.getAdMessage());
+        mav.addObject("street", property.getStreet());
+        mav.addObject("number", property.getNumber());
+        mav.addObject("floor", property.getFloor());
+        mav.addObject("type", property.getType());
+        mav.addObject("price", property.getPrice());
+        mav.addObject("area", property.getTotalArea());*/
+
+        return mav;
     }
 }

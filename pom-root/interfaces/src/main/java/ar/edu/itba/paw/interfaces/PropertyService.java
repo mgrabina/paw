@@ -11,6 +11,7 @@ import java.util.Map;
 public interface PropertyService {
     public Property findById(final long id);
     public List<Property> getAll();
+    public List<Property> getAllByUserId(final long id);
     public List<Property> getPage(final List<Property> propertiesList, final int pageNumber);
     public List<Property> getPage(final List<Property> propertiesList);
 	public int getPageCount(List<Property> propertiesList);

@@ -28,6 +28,10 @@ public class PropertyServiceImpl implements PropertyService {
 	public List<Property> getAll(){
 		return propertyDao.getAll();
 	}
+
+	public List<Property> getAllByUserId(final long id){
+		return propertyDao.getAllByUserId(id);
+	}
 	
 	public List<Property> getPage(List<Property> propertiesList, int pageNumber) throws IllegalArgumentException{
 		

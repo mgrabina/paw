@@ -30,7 +30,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public Property findById(final long id) {
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE id = ?",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE id = ?;",
 		ROW_MAPPER, id);
 		if (list.isEmpty()) {
 			return null;
@@ -41,6 +41,17 @@ public class PropertyDaoImpl implements PropertyDao {
 	public List<Property> getAll(){
 		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id FULL OUTER JOIN property_images i on property.id = i.property_id",
 				ROW_MAPPER);
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
+
+	public List<Property> getAllByUserId(final long id){
+		//final List<Property> list = jdbcTemplate.query("SELECT * FROM property FULL OUTER JOIN property_images i on property.id = i.property_id where property.user_id = ?",
+				//ROW_MAPPER, id);
+        final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id FULL OUTER JOIN property_images i on property.id = i.property_id where property.user_id = ?;",
+                ROW_MAPPER, id);
 		if (list.isEmpty()) {
 			return null;
 		}
