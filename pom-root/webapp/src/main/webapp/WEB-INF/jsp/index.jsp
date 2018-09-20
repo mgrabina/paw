@@ -42,7 +42,9 @@
 		  		<div class="labels">
 		  			<a href=""><spring:message code="index/register" /></a>
 		  			<a href=""><spring:message code="index/login"/></a>
-		  			<a href=""><spring:message code="index/publish"/></a>
+		  			<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+					<a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
+					<a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded-->
 		  		</div>
 
 		  		<div class="extras">
@@ -51,8 +53,8 @@
 					    <li><a href="#!">A</a></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 					  </ul>
 		  		</div>
 		  	</div>
