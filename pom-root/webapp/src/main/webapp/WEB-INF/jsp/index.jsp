@@ -309,7 +309,18 @@
 											<img src="<c:url value="/resources/images/no-image.png"/>">
 										</c:when>
 										<c:otherwise>
-											<div class="carousel carousel-slider">
+											<div id="carousel-${loop.index}" class="carousel carousel-slider" data-indicators="true">
+
+												<div class="carousel-fixed-item center middle-indicator">
+											    	<div class="left">
+											     		<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+											    	</div>
+     
+											    	<div class="right">
+												    	<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+												    </div>
+
+												 </div>
 												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
 													<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
 												</c:forEach>

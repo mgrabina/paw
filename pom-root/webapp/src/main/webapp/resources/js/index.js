@@ -18,12 +18,26 @@ $(document).ready(function(){
 
 function setUpControllers(){
 
-	$(".property-card").hover( function() {
+  $(".property-card").hover( function() {
     		$( this ).addClass( "selected-card" );
   		}, function() {
     		$( this ).removeClass( "selected-card" );
   		}
 	);
+
+  $('.moveNextCarousel').click(function(e){
+      var id = $(this).data("id");
+      e.preventDefault();
+      e.stopPropagation();
+      $('#carousel-' + id).carousel('next');
+  });
+
+  $('.movePrevCarousel').click(function(e){
+    var id = $(this).data("id");
+    e.preventDefault();
+    e.stopPropagation();
+    $('#carousel-' + id).carousel('next');
+  });
 	
 
 }

@@ -145,3 +145,11 @@ nav .input-field label.active i{
 .breadcrumb:before{
 	color: rgba(90,90,90,0.7) !important;
 }
+
+.middle-indicator-text{
+   font-size: 4rem;
+}
+
+a.middle-indicator-text{
+	color:white !important;
+}
