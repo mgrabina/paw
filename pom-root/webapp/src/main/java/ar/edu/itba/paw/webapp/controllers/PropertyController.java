@@ -32,7 +32,7 @@ public class PropertyController {
 
     @RequestMapping(value = "/property/register", method = RequestMethod.GET)
     public ModelAndView getRegister(@ModelAttribute("newPropertyForm") final NewPropertyForm form) {
-        return new ModelAndView("registerproperty");
+        return new ModelAndView("register_property");
     }
 
     @RequestMapping(value = "/property/register", method = RequestMethod.POST)

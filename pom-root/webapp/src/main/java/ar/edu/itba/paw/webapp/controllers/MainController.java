@@ -24,13 +24,9 @@ public class MainController {
 	@Autowired
 	private PropertyService ps;
 
+		
 	@RequestMapping("/")
-	public ModelAndView index() {
-		return new ModelAndView("redirect:/getProperties");
-	}
-	
-	@RequestMapping("/getProperties")
-	public ModelAndView getFilteredProperties(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
+	public ModelAndView index(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
 		
 		final ModelAndView mav = new ModelAndView("index");
 		
@@ -41,9 +37,9 @@ public class MainController {
 				int auxPageNumber = Integer.parseInt(pageNumberParam);
 				pageNumber = auxPageNumber;
 				
-				if (pageNumber <= 0) return new ModelAndView("redirect:/getProperties");
+				if (pageNumber <= 0) return new ModelAndView("redirect:/");
 			} catch (NumberFormatException e) {
-				return new ModelAndView("redirect:/getProperties");
+				return new ModelAndView("redirect:/");
 			}
 		}
 		Map<String,String> map= new HashMap<>();
