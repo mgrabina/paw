@@ -46,9 +46,9 @@ public class UserController {
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
     public ModelAndView postRegister(@Valid @ModelAttribute("registerForm") final RegisterForm form, final BindingResult result) throws IOException {
 
-//        if(result.hasErrors()){
-//            return  new ModelAndView("singup");
-//        }
+        if(result.hasErrors()){
+            return getRegister(form);
+        }
 
 //        if(us.userExist(form.getMail())){
 //            ModelAndView m =new ModelAndView("register");
@@ -66,6 +66,21 @@ public class UserController {
         final ModelAndView mav = new ModelAndView("viewMyProperties");
 
         final List<Property> propertiesList = ps.getAllByUserId(id);
+        /*final int propertiesCount = propertiesList.size();
+        final int pagesCount = ps.getPageCount(propertiesList);*/
+
+        mav.addObject("propertiesList", propertiesList);
+        /*mav.addObject("propertiesCount", propertiesCount);
+        mav.addObject("pagesCount", pagesCount);*/
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/user/{id}/myfavourites", method = RequestMethod.GET)
+    public ModelAndView getFavourites(@PathVariable("id")final long id) {
+        final ModelAndView mav = new ModelAndView("viewMyFavourites");
+
+        final List<Property> propertiesList = ps.getFavourites(id);
         /*final int propertiesCount = propertiesList.size();
         final int pagesCount = ps.getPageCount(propertiesList);*/
 

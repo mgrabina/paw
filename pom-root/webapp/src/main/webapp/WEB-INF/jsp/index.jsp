@@ -40,10 +40,12 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<a href=""><spring:message code="index/register" /></a>
-		  			<a href=""><spring:message code="index/login"/></a>
-		  			<a href=""><spring:message code="index/publish"/></a>
-		  		</div>
+		  			<a href='<%= response.encodeURL(request.getContextPath() + "/user/register") %>'><spring:message code="index/register" /></a>
+		  			<a href='<%= response.encodeURL(request.getContextPath() + "/user/login") %>'><spring:message code="index/login"/></a>
+		  			<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+					<a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--Ahi en vez de 1 deberia ir el userId-->
+					<a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--idem arriba-->
+				</div>
 
 		  		<div class="extras">
 		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
@@ -51,12 +53,12 @@
 					    <li><a href="#!">A</a></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 					  </ul>
 		  		</div>
 		  	</div>
-		
+
 		</nav>
 
 		<div class="main-row-container">
@@ -301,70 +303,72 @@
 
 					<c:forEach items="${propertiesList}" var="property" varStatus="loop">
 
-						<div class="shadow-box property-card" id="property-${loop.index}">
-							<div class="left">
-								<div class="image-container">
-									<c:choose>
-										<c:when test="${fn:length(property.images) == 0}">
-											<img src="<c:url value="/resources/images/no-image.png"/>">
-										</c:when>
-										<c:otherwise>
-											<div class="carousel carousel-slider">
-												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
-													<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
-												</c:forEach>
-											</div>
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div class="price-text">
-									<span>
-         								US$ <fmt:formatNumber value ="${property.price}" type = "number"/>
-     								</span>
-								</div>
-							</div>
-							<div class="right">
-								<div class="header">
-									<div class="left">
-										<a href="" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
-										<a href="" class="card-text-wrap subtitle"><c:out value="${property.street}"/> <c:out value="${property.number}"/> - <c:out value="${property.neighborhood}"/></a>
-									</div>
-									<div class="right">
-										<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
-									</div>
-								</div>
-
-								<div class="description">
-									<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
-									<div class="pDesc">
-										<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
-											<c:out value="${property.adDescription}"/> 
-										</span> 
-									</div>
-								</div>
-
-								<div class="footer">
-
-									<div class="bold extra-info">
+						<a href="<c:url value="/property/${property.id}"></c:url>">
+							<div class="shadow-box property-card" id="property-${loop.index}">
+								<div class="left">
+									<div class="image-container">
 										<c:choose>
-											<c:when test="${property.inmediateDelivery}">
-												<span><spring:message code="index/card/immediate"/></span>
+											<c:when test="${fn:length(property.images) == 0}">
+												<img src="<c:url value="/resources/images/no-image.png"/>">
 											</c:when>
 											<c:otherwise>
-												<span><spring:message code="index/card/immediate"/></span>
+												<div class="carousel carousel-slider">
+													<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
+														<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
+													</c:forEach>
+												</div>
 											</c:otherwise>
 										</c:choose>
-										<span>&#183;</span>
-										<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
 									</div>
-
-									<div class="action">
-										<a href=""><spring:message code="index/card/contact"/></a>
+									<div class="price-text">
+										<span>
+											US$ <fmt:formatNumber value ="${property.price}" type = "number"/>
+										</span>
 									</div>
 								</div>
+								<div class="right">
+									<div class="header">
+										<div class="left">
+											<a href="" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
+											<a href="" class="card-text-wrap subtitle"><c:out value="${property.street}"/> <c:out value="${property.number}"/> - <c:out value="${property.neighborhood}"/></a>
+										</div>
+										<div class="right">
+											<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
+										</div>
+									</div>
 
+									<div class="description">
+										<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
+										<div class="pDesc">
+											<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
+												<c:out value="${property.adDescription}"/>
+											</span>
+										</div>
+									</div>
+
+									<div class="footer">
+
+										<div class="bold extra-info">
+											<c:choose>
+												<c:when test="${property.inmediateDelivery}">
+													<span><spring:message code="index/card/immediate"/></span>
+												</c:when>
+												<c:otherwise>
+													<span><spring:message code="index/card/immediate"/></span>
+												</c:otherwise>
+											</c:choose>
+											<span>&#183;</span>
+											<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
+										</div>
+
+										<div class="action">
+											<a href=""><spring:message code="index/card/contact"/></a>
+										</div>
+									</div>
+
+								</div>
 							</div>
-						</div>
+						</a>
 
 					</c:forEach>
 

@@ -78,6 +78,8 @@ public class PropertyController {
 
         //final Property property = ps.findById(id);
 
+        mav.addObject("id", id);
+        mav.addObject("addedToFavourites", "false"); //hardcodeado, despues sacarlo del back
         mav.addObject("name", "My building");
         mav.addObject("rating", "3,5");
         mav.addObject("description", "Lorem ipsum ...");

@@ -2,9 +2,12 @@ package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,10 +59,12 @@ public class MainController {
 		final List<Property> propertiesList = ps.getAll();
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = ps.getPageCount(propertiesList);
+		String userId = "1"; //esta hardcodeado, despues ver como meterlo o si no esta logueado no deberia estar esa var
 		
 		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
+		mav.addObject("userId", userId);
 
 //		List<Property> busqueda = ps.getPropertysByTagsSearch("palermo apartment");
 //		List<Property> busqueda2 = ps.getPropertysByTagsSearch("almagro");
