@@ -1,0 +1,138 @@
+var colorForOpType = ["#589017", "#f4b342", "#f4eb41"]; //Should use toggleclass
+
+$(document).ready(function(){
+
+	var title, description, opType, delType, price, street, number, floor, apartment, neighborhood, propType, cArea, tArea, tPrice, rooms, baths, garage;
+
+	setUpVariables();
+	setUpFormSelectors();
+	setUpButtons();
+	setUpChangeHooks();
+
+});
+
+function setUpVariables(){
+
+	title = $('#p-title');
+	description = $('#p-desc');
+	opType = $('#operationSelector');
+	delType = $('#delSelector');
+	price = $('#p-price');
+	street = $('#p-street');
+	number = $('#p-number');
+	floor = $('#p-floor');
+	apartment = $('#p-ap');
+	neighborhood = $('#p-neigh');
+	propType = $('#typeSelector');
+	cArea = $('#p-cArea');
+	tArea = $('#p-tArea');
+	tPrice = $('#p-tPrice');
+	rooms = $('#p-rooms');
+	baths = $('#p-baths');
+	garage = $('#garageSelector');
+
+
+}
+
+function setUpFormSelectors(){
+	opType.formSelect();
+	delType.formSelect();
+	propType.formSelect();
+	garage.formSelect();
+}
+
+function moveTo(div, offset) {
+	$('.builder-inner-box').animate({
+	        scrollTop: div * offset
+	}, 1000);
+}
+
+function breadcrumbActive(div){
+	$('#bread-wrapper-col').find('.active').removeClass('active');
+	$(div).addClass("active");
+}
+
+function setUpButtons(){
+
+	$("#bread-publi").click(function() {
+		 moveTo(0, 600);
+		 breadcrumbActive($(this));
+	});
+
+	$("#bread-info").click(function() {
+		moveTo(1, 600);
+		breadcrumbActive($(this));
+	});
+
+	$("#bread-img").click(function() {
+		 moveTo(2, 600);
+		 breadcrumbActive($(this));
+	});
+}
+
+function setUpChangeHooks(){
+
+	title.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#title-preview').text(input);
+	});
+
+	description.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#description-preview').text(input);
+	});
+
+	opType.change(function() {
+		$(".property-card").css("border-color", colorForOpType[$(this).val()]);
+	});
+
+	delType.change(function() {
+		$("#delType-preview").text($("#delSelector option:selected").text());
+	});
+
+	price.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#price-preview').text("US$ " + formatCurrency(input));
+	});
+
+	street.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#street-preview').text(input + " ");
+	});
+
+	number.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#number-preview').text(input + " - ");
+	});
+
+	neighborhood.on("input", function(e) {
+ 		var input = $(this).val();
+ 		$('#neighborhood-preview').text(input);
+	});
+
+	cArea.on("input", function(e) {
+ 		var input = $(this).val();
+
+ 		if (input != ""){
+ 			$('#meters-post').removeClass("invisible");
+ 		} else {
+ 			$('#meters-post').addClass("invisible");
+ 		}
+
+ 		$('#cArea-preview').text(input);
+	});
+
+
+
+}
+
+function formatCurrency(n, c, d, t) {
+  var c = isNaN(c = Math.abs(c)) ? 0 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "." : t,
+    s = n < 0 ? "-" : "",
+    i = String(parseInt(n = Math.abs(Number(n) || 0))),
+    j = (j = i.length) > 3 ? j % 3 : 0;
+
+  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};

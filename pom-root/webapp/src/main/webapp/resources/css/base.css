@@ -7,6 +7,10 @@ body {
 a { color: #8BC34A !important;}
 a:hover { color: #CDDC39 !important;}
 
+.breadcrumb.active {
+	color: #CDDC39 !important;
+}
+
 .bold {
 	font-weight: bold;
 }
@@ -43,6 +47,7 @@ i:focus {outline:0;}
 
 }
 
+
 .buttons-box{
 	display: flex;
 	flex: 3;
@@ -75,6 +80,15 @@ i:focus {outline:0;}
 
 .top-margin{
 	margin-top: 10px;
+}
+
+.labels.invisible {
+	visibility: hidden;
+}
+
+.main-row-container{
+	display: flex;
+	margin-top: 30px;
 }
 
 
@@ -126,4 +140,16 @@ nav .input-field label.active i{
 
 .collapsible-body{
 	padding: 1rem !important;
+}
+
+.breadcrumb:before{
+	color: rgba(90,90,90,0.7) !important;
+}
+
+.middle-indicator-text{
+   font-size: 4rem;
+}
+
+a.middle-indicator-text{
+	color:white !important;
 }

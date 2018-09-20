@@ -60,7 +60,7 @@ final class PropertyMapper implements ResultSetExtractor<List<Property>> {
                   .immediateDelivery(rs.getBoolean("inmediate_delivery"))
                   .build();
                 
-            	String pImage = rs.getString("imagesrc");
+            	String pImage = rs.getString("image_src");
             	if (pImage != null) p.addImage(pImage);
             	
             	propertyList.add(p);
