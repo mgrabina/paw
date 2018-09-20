@@ -312,17 +312,18 @@
 										</c:when>
 										<c:otherwise>
 											<div id="carousel-${loop.index}" class="carousel carousel-slider" data-indicators="true">
+												<c:if test="${fn:length(property.images) > 1}">
+													<div class="carousel-fixed-item center middle-indicator">
+												    	<div class="left">
+												     		<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+												    	</div>
+	     
+												    	<div class="right">
+													    	<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+													    </div>
 
-												<div class="carousel-fixed-item center middle-indicator">
-											    	<div class="left">
-											     		<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
-											    	</div>
-     
-											    	<div class="right">
-												    	<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
-												    </div>
-
-												 </div>
+													 </div>
+												</c:if>
 												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
 													<a class="carousel-item" href="">
 														<div class="image-cont">
