@@ -17,7 +17,7 @@
 
 .builder-inner-box {
 	height: 600px;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .col {
@@ -120,6 +120,11 @@
 	padding: 15px;
 }
 
+.area-preview{
+	display: flex;
+	flex-direction: row;
+}
+
 .pDesc {
 	margin-top: -10px;
 	overflow: hidden;
@@ -148,6 +153,7 @@
 .subtitle {
 	font-size: 1em;
 	color: gray !important;
+	margin-left: 3px;
 	text-transform: capitalize;
 }
 
@@ -175,6 +181,14 @@
 	margin-right: 30px;
 	margin-bottom: 10px;
 	text-transform: uppercase;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+#meters-post{
+	margin-left: 5px;
 }
 
 .publication-div {

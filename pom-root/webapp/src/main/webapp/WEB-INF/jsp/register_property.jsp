@@ -66,16 +66,16 @@
 				<div class="shadow-box builder-box">
 					<nav>
 						<div class="nav-wrapper">
-					    	<div class="col">
-					        	<a href="#!" class="active breadcrumb">Publicación</a>
-					        	<a href="#!" class="breadcrumb">Información de la propiedad</a>
-					        	<a href="#!" class="breadcrumb">Imágenes</a>
+					    	<div  id="bread-wrapper-col" class="col">
+					        	<a id="bread-publi" href="#!" class="active breadcrumb"><spring:message code="register_property/builder/publication"/></a>
+					        	<a id="bread-info" href="#!" class="breadcrumb"><spring:message code="register_property/builder/information"/></a>
+					        	<a id="bread-img" href="#!" class="breadcrumb"><spring:message code="register_property/builder/pictures"/></a>
 					      	</div>
 					    </div>
 					</nav>
 
 
-					<div id="" class="builder-inner-box">
+					<div class="builder-inner-box">
 						<form:form modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post" >
 							
 							<div class="publication-div">
@@ -83,7 +83,7 @@
 								<div class="row padding">
 							    	<div class="input-field">
 							        	<form:input id="p-title" path="adMessage" type="text" class="validate"/>
-							        	<label for="p-title">Título</label>
+							        	<label for="p-title"><spring:message code="register_property/builder/title"/></label>
 							        </div>
 						    	</div>
 
@@ -92,7 +92,7 @@
 										<div class="row">
 											<div class="input-field">
 												<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea"/>
-												<label for="textarea1">Descripción</label>
+												<label for="textarea1"><spring:message code="register_property/builder/description"/></label>
 											</div>
 										</div>
 									</form>
@@ -102,26 +102,26 @@
 
 									 <div class="input-field col">
 										<form:select name="typeSelector" id="operationSelector" path="operationType">
-											<form:option value="0">Venta</form:option>
-											<form:option value="1">Alquiler</form:option>
-											<form:option value="2">Alquiler temporal</form:option>
-											
+											<form:option value="0"><spring:message code="index/sell"/></form:option>
+											<form:option value="1"><spring:message code="index/rent"/></form:option>
+											<form:option value="2"><spring:message code="index/temp-rent"/></form:option>
+										
 										</form:select>
-								    	<label>Tipo de operación</label>
+								    	<label><spring:message code="register_property/builder/op-type"/></label>
 									</div>
 
 									 <div class="input-field col">
 										<form:select name="typeSelector" id="delSelector" path="operationType">
-											<form:option value="true">Entrega inmediata</form:option>
-											<form:option value="false">En pozo</form:option>
+											<form:option value="true"><spring:message code="index/card/immediate"/></form:option>
+											<form:option value="false"><spring:message code="index/card/no-immediate"/></form:option>
 											
 										</form:select>
-								    	<label>Entrega</label>
+								    	<label><spring:message code="register_property/builder/del-type"/></label>
 									</div>
 
 							    	<div class="input-field col">
 							        	<form:input id="p-price" path="price" type="number" class="validate"/>
-							        	<label for="p-price">Precio (US$)</label>
+							        	<label for="p-price"><spring:message code="register_property/builder/price"/></label>
 							        </div>
 							    </div>
 
@@ -132,80 +132,76 @@
 								<div class="row">
 							    	<div class="input-field col">
 							        	<form:input id="p-street" path="street" type="text" class="validate"/>
-							        	<label for="p-street">Street</label>
+							        	<label for="p-street"><spring:message code="register_property/builder/street"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-number" path="number" type="number" class="validate"/>
-							        	<label for="p-number">Number</label>
+							        	<label for="p-number"><spring:message code="register_property/builder/number"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-floor" path="floor" type="number" class="validate"/>
-							        	<label for="p-floor">Floor</label>
+							        	<label for="p-floor"><spring:message code="register_property/builder/floor"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-ap" path="apartment" type="text" class="validate"/>
-							        	<label for="p-ap">Apartment</label>
+							        	<label for="p-ap"><spring:message code="register_property/builder/apartment"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-neigh" path="neighborhood" type="text" class="validate"/>
-							        	<label for="p-neigh">Neighborhood</label>
+							        	<label for="p-neigh"><spring:message code="register_property/builder/neighborhood"/></label>
 							        </div>
 
 							        <div class="input-field col">
 										<form:select name="typeSelector" id="typeSelector" path="type">
-											<form:option value="house">House</form:option>
-											<form:option value="apartment">Apartment</form:option>
-											<form:option value="duplex">Duplex</form:option>
-											<form:option value="office">Office</form:option>
-											<form:option value="land">Land</form:option>
+											<form:option value="house"><spring:message code="index/filters/type/house"/></form:option>
+											<form:option value="apartment"><spring:message code="index/filters/type/apartment"/></form:option>
+											<form:option value="ph"><spring:message code="index/filters/type/ph"/></form:option>
+											<form:option value="office"><spring:message code="index/filters/type/office"/></form:option>
+											<form:option value="land"><spring:message code="index/filters/type/land"/></form:option>
 										</form:select>
-								    	<label>Tipo de propiedad</label>
+								    	<label><spring:message code="register_property/builder/type"/></label>
 									</div>
 
 									<div class="input-field col">
 							        	<form:input id="p-cArea" path="coveredArea" type="text" class="validate"/>
-							        	<label for="p-cArea">Covered area</label>
+							        	<label for="p-cArea"><spring:message code="register_property/builder/covered-area"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-tArea" path="totalArea" type="text" class="validate"/>
-							        	<label for="p-tArea">Total area</label>
+							        	<label for="p-tArea"><spring:message code="register_property/builder/total-area"/></label>
 							        </div>
 
 							         <div class="input-field col">
 							        	<form:input id="p-tPrice" path="taxPrice" type="number" class="validate"/>
-							        	<label for="p-tPrice">Tax price</label>
+							        	<label for="p-tPrice"><spring:message code="register_property/builder/tax-price"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-rooms" path="rooms" type="number" class="validate"/>
-							        	<label for="p-rooms">Rooms</label>
+							        	<label for="p-rooms"><spring:message code="register_property/builder/rooms"/></label>
 							        </div>
 
 							        <div class="input-field col">
 							        	<form:input id="p-baths" path="baths" type="number" class="validate"/>
-							        	<label for="p-baths">Baths</label>
+							        	<label for="p-baths"><spring:message code="register_property/builder/baths"/></label>
 							        </div>
-
 							        
 							        <div class="input-field col">
 										<form:select name="typeSelector" id="garageSelector" path="garage">
-											<form:option value="true">1 o más</form:option>
-											<form:option value="false">Ninguno</form:option>
+											<form:option value="true"><spring:message code="index/filters/general/garage-one-or-more"/></form:option>
+											<form:option value="false"><spring:message code="index/filters/general/no-garage"/></form:option>
 										</form:select>
-								    	<label>Cocheras</label>
+								    	<label><spring:message code="register_property/builder/garages"/></label>
 									</div>
 							        
 						    	</div>
 						    	
 							</div>
-
-							
-
 
 
 							<div class="pictures-div">
@@ -244,19 +240,29 @@
 							<div class="right">
 								<div class="header">
 									<div class="left">
-										<a id="title-preview" href="" class="card-text-wrap title">Título</a>
-										<a href="" class="card-text-wrap subtitle"><span id="street-preview"></span><span id="number-preview"></span><span id="neighborhood-preview"></span></a>
+										<a id="title-preview" href="" class="card-text-wrap title"><spring:message code="register_property/preview/title"/></a>
+										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span><span id="number-preview"></span><span id="neighborhood-preview"></span></a>
 									</div>
 									<div class="right">
-										<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
+										<c:choose>
+											<c:when test="${not empty property.publisherUser.imageSrc}">
+												<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
+											</c:when>
+											<c:otherwise>
+												<img src="<c:url value="/resources/images/anon-user.png"/>">
+											</c:otherwise>
+										</c:choose>
+										
 									</div>
 								</div>
 
 								<div class="description">
-									<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
+									<div class="area-preview">
+										<span id="cArea-preview" class="bold"></span> <span id="meters-post" class="invisible"><spring:message code="index/card/meters"/></span></br>
+									</div>
 									<div class="pDesc">
 										<span id="description-preview" style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
-											Descripción
+											<spring:message code="register_property/preview/description"/>
 										</span> 
 									</div>
 								</div>
@@ -264,7 +270,7 @@
 								<div class="footer">
 
 									<div class="bold extra-info">
-										<span id="delType-preview">Delivery type</span>
+										<span id="delType-preview"><spring:message code="register_property/preview/del-type"/></span>
 										<span>&#183;</span>
 										<span><spring:message code="index/card/published-time-pre"/> 0 <spring:message code="index/card/published-time-post"/></span>
 									</div>

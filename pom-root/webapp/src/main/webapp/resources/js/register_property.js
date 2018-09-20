@@ -6,10 +6,9 @@ $(document).ready(function(){
 
 	setUpVariables();
 	setUpFormSelectors();
-	
-
-
+	setUpButtons();
 	setUpChangeHooks();
+
 });
 
 function setUpVariables(){
@@ -40,6 +39,35 @@ function setUpFormSelectors(){
 	delType.formSelect();
 	propType.formSelect();
 	garage.formSelect();
+}
+
+function moveTo(div, offset) {
+	$('.builder-inner-box').animate({
+	        scrollTop: div * offset
+	}, 1000);
+}
+
+function breadcrumbActive(div){
+	$('#bread-wrapper-col').find('.active').removeClass('active');
+	$(div).addClass("active");
+}
+
+function setUpButtons(){
+
+	$("#bread-publi").click(function() {
+		 moveTo(0, 600);
+		 breadcrumbActive($(this));
+	});
+
+	$("#bread-info").click(function() {
+		moveTo(1, 600);
+		breadcrumbActive($(this));
+	});
+
+	$("#bread-img").click(function() {
+		 moveTo(2, 600);
+		 breadcrumbActive($(this));
+	});
 }
 
 function setUpChangeHooks(){
@@ -80,6 +108,18 @@ function setUpChangeHooks(){
 	neighborhood.on("input", function(e) {
  		var input = $(this).val();
  		$('#neighborhood-preview').text(input);
+	});
+
+	cArea.on("input", function(e) {
+ 		var input = $(this).val();
+
+ 		if (input != ""){
+ 			$('#meters-post').removeClass("invisible");
+ 		} else {
+ 			$('#meters-post').addClass("invisible");
+ 		}
+
+ 		$('#cArea-preview').text(input);
 	});
 
 
