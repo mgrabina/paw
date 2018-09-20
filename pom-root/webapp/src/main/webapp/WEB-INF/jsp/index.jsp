@@ -324,7 +324,11 @@
 
 												 </div>
 												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
-													<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
+													<a class="carousel-item" href="">
+														<div class="image-cont">
+															<img src="<c:out value="${imageSrc}"/>">
+														</div>
+													</a>
 												</c:forEach>
 											</div>
 										</c:otherwise>

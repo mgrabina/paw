@@ -127,7 +127,12 @@ nav .input-field label.active i{
 }
 .carousel .carousel-item {
 	width: 100%;
-	height: 100%;
+	height: inherit;
+}
+
+.carousel.carousel-slider .carousel-item {
+	height: inherit !important;
+	min-height: 0px !important;
 }
 
 .carousel .indicators .indicator-item{
