@@ -7,6 +7,7 @@ import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.OperationType;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
+import ar.edu.itba.paw.models.User;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 import ar.edu.itba.paw.webapp.forms.NewPropertyForm;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
@@ -45,7 +46,11 @@ public class PropertyController {
 
     @RequestMapping(value = "/property/register", method = RequestMethod.GET)
     public ModelAndView getRegister(@ModelAttribute("newPropertyForm") final NewPropertyForm form) {
-        return new ModelAndView("register_property");
+        
+    	final ModelAndView mav = new ModelAndView("register_property");
+        mav.addObject("publisherImage", us.getCurrentUser().getImageSrc());
+    	
+        return mav;
     }
 
     @RequestMapping(value = "/property/register", method = RequestMethod.POST)

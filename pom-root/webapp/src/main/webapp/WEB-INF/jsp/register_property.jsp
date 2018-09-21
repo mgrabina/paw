@@ -244,7 +244,7 @@
 							    </div>
 
 							    <div class="row center">
-							    	<button type="submit" form="mainForm" class="waves-effect waves-light btn top-margin" id="submitBtn"><spring:message code="register_property/submit-button"/></button>
+							    	<button type="button" class="waves-effect waves-light btn top-margin" id="submitBtn"><spring:message code="register_property/submit-button"/></button>
 							   	</div>
 
 							</div>
@@ -294,8 +294,8 @@
 									</div>
 									<div class="right">
 										<c:choose>
-											<c:when test="${not empty property.publisherUser.imageSrc}">
-												<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
+											<c:when test="${not empty publisherImage}">
+												<img src="<c:out value="${publisherImage}"/>">
 											</c:when>
 											<c:otherwise>
 												<img src="<c:url value="/resources/images/anon-user.png"/>">

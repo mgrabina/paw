@@ -200,8 +200,9 @@ function setUpButtons(){
 
 	$("#submitBtn").click(function() {
 
-		//
-
+		if (stepTwo[0]) {
+			$("#mainForm").submit(); 
+		}
 		
 	});
 
