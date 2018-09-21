@@ -229,11 +229,11 @@
 
 								<div class="file-field input-field">
 							    	<div class="btn">
-							       		<span>File</span>
+							       		<span><spring:message code="register_property/upload-button"/></span>
 							        	<form:input id="imagesFiles" type="file" path="images" multiple="multiple"/>
 							      	</div>
 							      	<div class="file-path-wrapper">
-							        	<input class="file-path validate" type="text" placeholder="Upload one or more files"/>
+							        	<input class="file-path validate" type="text" placeholder="<spring:message code="register_property/upload-message"/>"/>
 							      	</div>
 							    </div>
 
