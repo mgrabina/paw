@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 	$('input#p-title, textarea#p-desc').characterCounter();
 
+	moveTo(2, 800);
 	//poner los max lengths y hacer que cuadre con la data del server del form todo los validates.
 
 });
@@ -194,7 +195,7 @@ function setUpButtons(){
 
 	$("#submitBtn").click(function() {
 
-		//submit aca adentro despeus de chequear las fotos
+		alert($("#mainForm").serialize());
 
 		
 	});

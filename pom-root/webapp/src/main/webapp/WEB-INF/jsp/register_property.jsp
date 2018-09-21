@@ -76,7 +76,7 @@
 
 
 					<div class="builder-inner-box">
-						<form:form id="mainForm" modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post">
+						<form:form id="mainForm" modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post" enctype="multipart/form-data">
 							
 							<div class="publication-div form-group">
 								
@@ -230,10 +230,10 @@
 								<div class="file-field input-field">
 							    	<div class="btn">
 							       		<span>File</span>
-							        	<input id="imagesFiles" type="file" multiple>
+							        	<form:input id="imagesFiles" type="file" path="images" multiple="multiple"/>
 							      	</div>
 							      	<div class="file-path-wrapper">
-							        	<input class="file-path validate" type="text" placeholder="Upload one or more files">
+							        	<input class="file-path validate" type="text" placeholder="Upload one or more files"/>
 							      	</div>
 							    </div>
 

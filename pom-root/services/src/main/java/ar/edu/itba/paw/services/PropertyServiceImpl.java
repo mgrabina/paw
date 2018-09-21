@@ -85,17 +85,14 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
-	@Override
 	public List<Property> getFavourites(Long userId) {
 		return propertyDao.getFavourites(userId);
 	}
 
-	@Override
 	public void setFavourite(Long userId, Long propertyId) {
 		propertyDao.setFavourite(userId, propertyId);
 	}
 
-    @Override
 	public void deleteFavourite(Long userId, Long propertyId) {
 		propertyDao.deleteFavourite(userId, propertyId);
 	}
@@ -160,12 +157,17 @@ public class PropertyServiceImpl implements PropertyService {
 		Get property's that matches tags (such as property type, neighborhood, etc.)
 	 */
 	public List<Property> getPropertysByTagsSearch(String search){
-		return propertyDao.getByTags(
-				Arrays.asList(search.split("\\s+"))
-				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
-				.collect(Collectors.toList())
-		);
+//		return propertyDao.getByTags(
+//				Arrays.asList(search.split("\\s+"))
+//				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
+//				.collect(Collectors.toList())
+//		);
+		return Collections.emptyList();
 	}
+	
+    public void linkImage(String imageSrc, long propertyId) {
+    	propertyDao.addImage(imageSrc, propertyId);
+    }
 
 	public List<Property> getPropertysByTagsSearch(List<String> tags){
 		return propertyDao.getByTags(tags);

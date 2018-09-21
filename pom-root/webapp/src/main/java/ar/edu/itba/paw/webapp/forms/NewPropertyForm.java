@@ -6,6 +6,8 @@ import ar.edu.itba.paw.models.PropertyType;
 
 import javax.validation.constraints.*;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 public class NewPropertyForm {
     
@@ -85,6 +87,8 @@ public class NewPropertyForm {
 
 	@NotNull
 	private Boolean inmediateDelivery;
+	
+	private MultipartFile[] images;
 
 	public String getStreet() {
 		return street;
@@ -220,6 +224,14 @@ public class NewPropertyForm {
 
 	public void setInmediateDelivery(Boolean inmediateDelivery) {
 		this.inmediateDelivery = inmediateDelivery;
+	}
+	
+	public MultipartFile[] getImages() {
+		return images;
+	}
+
+	public void setImages(MultipartFile[] images) {
+		this.images = images;
 	}
 
 	@Override

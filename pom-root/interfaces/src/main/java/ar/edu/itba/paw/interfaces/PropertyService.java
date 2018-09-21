@@ -22,6 +22,7 @@ public interface PropertyService {
                     OperationType operationType, PropertyType type, User publisherUser, Long price,
                     Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                     Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
+    public void linkImage(String imageSrc, long propertyId);
     public List<Property> getFiltered(Map<String,String> filters);
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
@@ -29,4 +30,5 @@ public interface PropertyService {
     public List<Property> getPropertysByTagsSearch(String search);
     public List<Property> getPropertysByTagsSearch(List<String> tags);
     public List<String> getAllTags();
+    
 }

@@ -41,9 +41,11 @@ public class PropertyDaoImpl implements PropertyDao {
 	public List<Property> getAll(){
 		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id FULL OUTER JOIN property_images i on property.id = i.property_id",
 				ROW_MAPPER);
+		
 		if (list.isEmpty()) {
 			return null;
 		}
+		
 		return list;
 	}
 
@@ -85,7 +87,6 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-	@Override
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
 
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
@@ -116,7 +117,6 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-    @Override
     public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, List<String> tags) {
 
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
@@ -166,6 +166,17 @@ public class PropertyDaoImpl implements PropertyDao {
 		}
 		return list;
 	}
+	
+    public void addImage(String imageSrc, long propertyId) { 
+    	
+    	jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property_images").usingGeneratedKeyColumns("id");
+
+        final Map<String, Object> args = new HashMap<String, Object>();
+        args.put("image_src", imageSrc);
+        args.put("property_id", propertyId);
+       
+        jdbcInsert.execute(args);
+    }
 
 	public List<Property> getFiltered(String filters, ArrayList params){
 		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id " +
