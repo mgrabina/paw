@@ -82,7 +82,7 @@
 								
 								<div class="row padding">
 							    	<div class="input-field">
-							        	<form:input id="p-title" path="adMessage" type="text" class="validate"/>
+							        	<form:input id="p-title" path="adMessage" type="text" class="validate" data-length="30"/>
 							        	<label for="p-title"><spring:message code="register_property/builder/title"/></label>
 							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 							        </div>
@@ -92,8 +92,8 @@
 									<form class="">
 										<div class="row">
 											<div class="input-field">
-												<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea validate"/>
-												<label for="textarea1"><spring:message code="register_property/builder/description"/></label>
+												<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea validate" data-length="300"/>
+												<label for="p-desc"><spring:message code="register_property/builder/description"/></label>
 												<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 											</div>
 										</div>

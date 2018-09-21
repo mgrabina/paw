@@ -11,7 +11,9 @@ $(document).ready(function(){
 	setUpButtons();
 	setUpChangeHooks();
 
-	moveTo(1, 600);
+	$('input#p-title, textarea#p-desc').characterCounter();
+
+	//moveTo(2, 600);
 
 });
 
@@ -120,7 +122,7 @@ function setUpChangeHooks(){
  		$('#description-preview').text(input);
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [6, 200] ]];
+ 					[RulesEnum.LIMITED_SIZE, [6, 300] ]];
 
  		stepZero[1] = checkField($(this), input, rules);
 	});
