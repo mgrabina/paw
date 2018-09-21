@@ -2,6 +2,7 @@ var colorForOpType = ["#589017", "#f4b342", "#f4eb41"]; //Should use toggleclass
 var actualStep = 0;
 var stepZero = [false, false, false];
 var stepOne = [false, false, false, false, false, false, false, false, false, false];
+var stepTwo = [false];
 var imageCarousel;
 
 $(document).ready(function(){
@@ -16,6 +17,8 @@ $(document).ready(function(){
 	checkImages();
 
 	$('input#p-title, textarea#p-desc').characterCounter();
+
+	moveTo(2,800);
 
 });
 
@@ -60,7 +63,14 @@ function checkImages(){
            	$("#noPicture").remove();
 	    	$('#imageCarousel').find('.carousel-item').remove();
 
+	    	var imageCheck = true;
             for (var i = 0; i < files.length; i++) {
+
+            	var rules = [[RulesEnum.NOT_NULL, null],
+ 					[RulesEnum.IMAGE, null]];
+ 				
+ 				imageCheck = imageCheck && checkField($("#file-upload-line"), files[i], rules);
+
             	var fr = new FileReader();
 
             	fr.onload = function (e) {
@@ -79,7 +89,6 @@ function checkImages(){
 		            	$("#carouselArrows").addClass('invisible');
 		            }
 		            
-
 		            if (imageCarousel.hasClass('initialized')){
 	    				imageCarousel.removeClass('initialized')
 					}
@@ -92,6 +101,8 @@ function checkImages(){
 
   				fr.readAsDataURL(files[i]);	
             }
+
+            stepTwo[0] = imageCheck;
 	      
 
 	    } else {
@@ -191,7 +202,7 @@ function setUpButtons(){
 
 	$("#submitBtn").click(function() {
 
-		alert($("#mainForm").serialize());
+		//
 
 		
 	});

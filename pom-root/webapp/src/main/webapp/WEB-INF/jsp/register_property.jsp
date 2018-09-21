@@ -233,7 +233,8 @@
 							        	<form:input id="imagesFiles" type="file" path="images" multiple="multiple"/>
 							      	</div>
 							      	<div class="file-path-wrapper">
-							        	<input class="file-path validate" type="text" placeholder="<spring:message code="register_property/upload-message"/>"/>
+							        	<input id="file-upload-line" class="file-path validate" type="text" placeholder="<spring:message code="register_property/upload-message"/>"/>
+							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 							      	</div>
 							    </div>
 

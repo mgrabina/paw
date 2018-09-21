@@ -1,6 +1,8 @@
 
-var RulesEnum = Object.freeze({"NOT_NULL": 0, "LIMITED_SIZE": 1, "LIMITED_NUMBER": 2});
-var validatorRules = [fieldNotNull, fieldLimitSize, fieldLimitNumber];
+var RulesEnum = Object.freeze({"NOT_NULL": 0, "LIMITED_SIZE": 1, "LIMITED_NUMBER": 2, "IMAGE":3});
+var validatorRules = [fieldNotNull, fieldLimitSize, fieldLimitNumber, fieldIsValidImage];
+const MAX_IMAGE_SIZE = 10485760;
+
 
 function fieldNotNull(data, params) {
     return data != null;
@@ -12,6 +14,10 @@ function fieldLimitSize(data, params) {
 
 function fieldLimitNumber(data, params) {
     return data >= params[0] && data <= params[1];
+}
+
+function fieldIsValidImage(data, params){
+    return data.size <= MAX_IMAGE_SIZE && ["image/png", "image/bmp", "image/jpg", "image/jpeg"].includes(data.type);
 }
 
 function validateField(inputData, rules) {
