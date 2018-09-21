@@ -18,8 +18,6 @@ $(document).ready(function(){
 
 	$('input#p-title, textarea#p-desc').characterCounter();
 
-	moveTo(2,800);
-
 });
 
 function initImagesCarousel() {
