@@ -3,7 +3,6 @@ var actualStep = 0;
 var stepZero = [false, false, false];
 var stepOne = [false, false, false, false, false, false, false, false, false, false];
 var imageCarousel;
-//hacer step1
 
 $(document).ready(function(){
 
@@ -17,9 +16,6 @@ $(document).ready(function(){
 	checkImages();
 
 	$('input#p-title, textarea#p-desc').characterCounter();
-
-	moveTo(2, 800);
-	//poner los max lengths y hacer que cuadre con la data del server del form todo los validates.
 
 });
 
