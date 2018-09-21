@@ -47,27 +47,29 @@ public class PropertyController {
 //            m.addObject("errorMessage", "Existing user");
 //            return m;
 //        }
+    		
+    	System.out.println(form.toString());
     	
-        ps.createProperty(
-                form.getStreet(),
-                form.getNumber(),
-                form.getFloor(),
-                form.getApartment(),
-                form.getNeighborhood(),
-                form.getOperationType(),
-                form.getType(),
-                us.getCurrentUser(),
-                form.getPrice(),
-                form.getCoveredArea(),
-                form.getTotalArea(),
-                form.getRooms(),
-                form.getBaths(),
-                Boolean.valueOf(form.getGarage()),
-                form.getTaxPrice(),
-                form.getAdMessage(),
-                form.getAdDescription(),
-                form.getInmediateDelivery()
-        );
+//        ps.createProperty(
+//                form.getStreet(),
+//                form.getNumber(),
+//                form.getFloor(),
+//                form.getApartment(),
+//                form.getNeighborhood(),
+//                form.getOperationType(),
+//                form.getType(),
+//                us.getCurrentUser(),
+//                form.getPrice(),
+//                form.getCoveredArea(),
+//                form.getTotalArea(),
+//                form.getRooms(),
+//                form.getBaths(),
+//                Boolean.valueOf(form.getGarage()),
+//                form.getTaxPrice(),
+//                form.getAdMessage(),
+//                form.getAdDescription(),
+//                form.getInmediateDelivery()
+//        );
                 
         return new ModelAndView("index");   //TODO: Redirect to Property Detail View
     }

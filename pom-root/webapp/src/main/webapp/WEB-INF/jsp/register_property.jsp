@@ -76,44 +76,42 @@
 
 
 					<div class="builder-inner-box">
-						<form:form modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post" >
+						<form:form id="mainForm" modelAttribute="newPropertyForm" action ='<%= response.encodeURL(request.getContextPath() + "/property/register") %>' method="post">
 							
-							<div class="publication-div">
+							<div class="publication-div form-group">
 								
 								<div class="row padding">
 							    	<div class="input-field">
-							        	<form:input id="p-title" path="adMessage" type="text" class="validate" data-length="30"/>
+							        	<form:input id="p-title" path="adMessage" type="text" class="validate" maxlength="30" data-length="30"/>
 							        	<label for="p-title"><spring:message code="register_property/builder/title"/></label>
 							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 							        </div>
 						    	</div>
 
 						    	<div class="row padding">
-									<form class="">
-										<div class="row">
-											<div class="input-field">
-												<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea validate" data-length="300"/>
-												<label for="p-desc"><spring:message code="register_property/builder/description"/></label>
-												<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-											</div>
+									<div class="row">
+										<div class="input-field">
+											<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea validate" data-length="300"/>
+											<label for="p-desc"><spring:message code="register_property/builder/description"/></label>
+											<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 										</div>
-									</form>
+									</div>
 								</div>
 
 								<div class="row">
 
 									 <div class="input-field col">
-										<form:select name="typeSelector" id="operationSelector" path="operationType">
-											<form:option value="0"><spring:message code="index/sell"/></form:option>
-											<form:option value="1"><spring:message code="index/rent"/></form:option>
-											<form:option value="2"><spring:message code="index/temp-rent"/></form:option>
+										<form:select id="operationSelector" path="operationType">
+											<form:option value="sell"><spring:message code="index/sell"/></form:option>
+											<form:option value="rent"><spring:message code="index/rent"/></form:option>
+											<form:option value="temporal_rent"><spring:message code="index/temp-rent"/></form:option>
 										
 										</form:select>
 								    	<label><spring:message code="register_property/builder/op-type"/></label>
 									</div>
 
 									 <div class="input-field col">
-										<form:select name="typeSelector" id="delSelector" path="operationType">
+										<form:select id="delSelector" path="inmediateDelivery">
 											<form:option value="true"><spring:message code="index/card/immediate"/></form:option>
 											<form:option value="false"><spring:message code="index/card/no-immediate"/></form:option>
 											
@@ -134,7 +132,7 @@
 
 							</div>
 
-							<div class="information-div">
+							<div class="information-div form-group">
 
 								<div class="row">
 
@@ -227,7 +225,27 @@
 							</div>
 
 
-							<div class="pictures-div">
+							<div class="pictures-div form-group">
+
+								<div class="file-field input-field">
+							    	<div class="btn">
+							       		<span>File</span>
+							        	<input id="imagesFiles" type="file" multiple>
+							      	</div>
+							      	<div class="file-path-wrapper">
+							        	<input class="file-path validate" type="text" placeholder="Upload one or more files">
+							      	</div>
+							    </div>
+
+							    <div class="row">
+							    	<ul id="imagesList" class="collection">
+								    </ul>
+							    </div>
+
+							    <div class="row center">
+							    	<button type="submit" form="mainForm" class="waves-effect waves-light btn top-margin" id="submitBtn"><spring:message code="register_property/submit-button"/></button>
+							   	</div>
+
 							</div>
 
 						</form:form>
@@ -241,18 +259,25 @@
 					<div class="shadow-box property-card">
 							<div class="left">
 								<div class="image-container">
-									<c:choose>
-										<c:when test="${fn:length(property.images) == 0}">
-											<img src="<c:url value="/resources/images/no-image.png"/>">
-										</c:when>
-										<c:otherwise>
-											<div class="carousel carousel-slider">
-												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
-													<a class="carousel-item" href=""><img src="<c:out value="${imageSrc}"/>"></a>
-												</c:forEach>
+									<div id="imageCarousel" class="carousel carousel-slider">
+
+										<div id="carouselArrows" class="carousel-fixed-item center middle-indicator with-indicators invisible">
+									    	<div class="left">
+									     		<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+									    	</div>
+
+									    	<div class="right">
+										    	<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+										    </div>
+
+										</div>
+
+										<a id="noPicture" class="carousel-item" href="">
+											<div class="image-cont">
+												<img src="<c:url value="/resources/images/no-image.png"/>">
 											</div>
-										</c:otherwise>
-									</c:choose>
+										</a>
+									</div>
 								</div>
 								<div class="price-text">
 									<span id="price-preview">
@@ -280,8 +305,8 @@
 								</div>
 
 								<div class="description">
-									<div class="area-preview">
-										<span id="cArea-preview" class="bold"></span> <span id="meters-post" class="invisible"><spring:message code="index/card/meters"/></span></br>
+									<div class="area-preview bold">
+										<span id="cArea-preview"></span> <span id="meters-post" class="invisible"><spring:message code="index/card/meters"/></span></br>
 									</div>
 									<div class="pDesc">
 										<span id="description-preview" style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
@@ -293,7 +318,7 @@
 								<div class="footer">
 
 									<div class="bold extra-info">
-										<span id="delType-preview"><spring:message code="register_property/preview/del-type"/></span>
+										<span id="delType-preview"><spring:message code="index/card/immediate"/></span>
 										<span>&#183;</span>
 										<span><spring:message code="index/card/published-time-pre"/> 0 <spring:message code="index/card/published-time-post"/></span>
 									</div>

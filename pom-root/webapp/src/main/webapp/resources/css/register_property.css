@@ -72,6 +72,10 @@
 	object-fit: cover;
 }
 
+.area-preview {
+	margin-bottom: 20px;
+}
+
 .price-text{
 	color: rgb(90,90,90);
 	padding: 5%;
@@ -192,14 +196,15 @@
 }
 
 .publication-div {
-	height: 600px;
+	height: 800px;
 }
 
 .information-div{
-	height: 600px;
+	height: 800px;
 }
 
 .pictures-div{
-	height: 600px;
+	height: 800px;
+	padding: 20px;
 }
 

@@ -1,6 +1,9 @@
 var colorForOpType = ["#589017", "#f4b342", "#f4eb41"]; //Should use toggleclass
 var actualStep = 0;
 var stepZero = [false, false, false];
+var stepOne = [false, false, false, false, false, false, false, false, false, false];
+var imageCarousel;
+//hacer step1
 
 $(document).ready(function(){
 
@@ -10,12 +13,98 @@ $(document).ready(function(){
 	setUpFormSelectors();
 	setUpButtons();
 	setUpChangeHooks();
+	imagesCarouselInstances = initImagesCarousel();
+	checkImages();
 
 	$('input#p-title, textarea#p-desc').characterCounter();
 
-	//moveTo(2, 600);
+	//poner los max lengths y hacer que cuadre con la data del server del form todo los validates.
 
 });
+
+function initImagesCarousel() {
+
+	imageCarousel = $('.carousel.carousel-slider');
+
+	imageCarousel.carousel({
+    	fullWidth: true,
+    	indicators: false
+  	});
+
+  	$('.moveNextCarousel').click(function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      $('#imageCarousel').carousel('next');
+  });
+
+  $('.movePrevCarousel').click(function(e){
+    var id = $(this).data("id");
+    e.preventDefault();
+    e.stopPropagation();
+    $('#imageCarousel').carousel('next');
+  });
+
+}
+
+function checkImages(){
+
+
+	$("#imagesFiles").change( function(evt) {
+
+
+	    var tgt = evt.target || window.event.srcElement,
+	        files = tgt.files;
+
+	    // FileReader support
+	    if (FileReader && files && files.length) {
+
+	    	//check image
+			
+           	$("#noPicture").remove();
+	    	$('#imageCarousel').find('.carousel-item').remove();
+
+            for (var i = 0; i < files.length; i++) {
+            	var fr = new FileReader();
+
+            	fr.onload = function (e) {
+		           	var carouselItem = '<a class="carousel-item" href="">' +
+		    					'<div class="image-cont">' + 
+		    						'<img src="' + e.target.result + '"/>' +
+		    					'</div>' +
+		    				  '</a>'; 
+
+		            $('#imageCarousel').append(carouselItem);
+		            var childs = $('#imageCarousel').children().size();
+
+		            if ((childs - 1) > 1) {
+		            	$("#carouselArrows").removeClass('invisible');
+		            } else {
+		            	$("#carouselArrows").addClass('invisible');
+		            }
+		            
+
+		            if (imageCarousel.hasClass('initialized')){
+	    				imageCarousel.removeClass('initialized')
+					}
+
+					imageCarousel.carousel({
+				    	fullWidth: true,
+				    	indicators: false
+				  	});
+	        	}
+
+  				fr.readAsDataURL(files[i]);	
+            }
+	      
+
+	    } else {
+	        // fallback -- perhaps submit the input to an iframe and temporarily store
+	        // them on the server until the user's session ends.
+	    }
+
+	});
+
+}
 
 function setUpVariables(){
 
@@ -76,32 +165,41 @@ function breadcrumbActive(div){
 function setUpButtons(){
 
 	$("#bread-publi").click(function() {
-		moveTo(0, 600);
+		moveTo(0, 800);
 	});
 
 	$("#bread-info").click(function() {
 		if (actualStep < 1) return;
-		moveTo(1, 600);
+		moveTo(1, 800);
 	});
 
 	$("#bread-img").click(function() {
 		if (actualStep < 2) return;
-		 moveTo(2, 600);
+		 moveTo(2, 800);
 	});
 
 	$("#nextZero").click(function() {
 
 		if (checkStep(stepZero)) {
-			moveTo(1, 600);	
+			moveTo(1, 800);	
 		}
 	});
 
 	$("#nextOne").click(function() {
 
 		if (checkStep(stepOne)) {
-			moveTo(2, 600);	
+			moveTo(2, 800);	
 		}
 	});
+
+	$("#submitBtn").click(function() {
+
+		//submit aca adentro despeus de chequear las fotos
+
+		
+	});
+
+
 
 }
 
@@ -151,9 +249,9 @@ function setUpChangeHooks(){
  		$('#street-preview').text(input + " ");
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [3, 20] ]];
+ 					[RulesEnum.LIMITED_SIZE, [3, 30] ]];
 
- 		checkField($(this), input, rules);
+ 		stepOne[0] = checkField($(this), input, rules);
 	});
 
 	number.on("input", function(e) {
@@ -162,7 +260,7 @@ function setUpChangeHooks(){
 
  		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_SIZE, [3, 5] ]];
- 		checkField($(this), input, rules);
+ 		stepOne[1] = checkField($(this), input, rules);
 
 	});
 
@@ -171,8 +269,8 @@ function setUpChangeHooks(){
  		$('#neighborhood-preview').text(input);
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [5, 20] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_SIZE, [5, 30] ]];
+ 		stepOne[4] = checkField($(this), input, rules);
 	});
 
 	cArea.on("input", function(e) {
@@ -187,8 +285,8 @@ function setUpChangeHooks(){
  		$('#cArea-preview').text(input);
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [1, 100000000] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_NUMBER, [1, 9999999] ]];
+ 		stepOne[5] = checkField($(this), input, rules);
 	});
 
 	//Not in card
@@ -197,8 +295,8 @@ function setUpChangeHooks(){
 		var input = $(this).val();
 
 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [0, 100] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_NUMBER, [0, 200] ]];
+ 		stepOne[2] = checkField($(this), input, rules);
 	});
 
 	apartment.on("input", function(e) {
@@ -206,15 +304,15 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_SIZE, [1, 10] ]];
- 		checkField($(this), input, rules);
+ 		stepOne[3] = checkField($(this), input, rules);
 	});
 
 	tArea.on("input", function(e) {
 		var input = $(this).val();
 
 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [1, 100000000] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_NUMBER, [1, 9999999] ]];
+ 		stepOne[6] = checkField($(this), input, rules);
 	});
 
 	tPrice.on("input", function(e) {
@@ -222,23 +320,23 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 100000] ]];
- 		checkField($(this), input, rules);
+ 		stepOne[7] = checkField($(this), input, rules);
 	});
 
 	rooms.on("input", function(e) {
 		var input = $(this).val();
 
 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [1, 1000] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_NUMBER, [1, 99] ]];
+ 		stepOne[8] = checkField($(this), input, rules);
 	});
 
 	baths.on("input", function(e) {
 		var input = $(this).val();
 
 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [1, 1000] ]];
- 		checkField($(this), input, rules);
+ 					[RulesEnum.LIMITED_NUMBER, [1, 99] ]];
+ 		stepOne[9] = checkField($(this), input, rules);
 	});
 
 

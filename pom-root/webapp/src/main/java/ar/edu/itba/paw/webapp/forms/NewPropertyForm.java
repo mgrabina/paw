@@ -11,7 +11,7 @@ public class NewPropertyForm {
     
     //TODO: IMAGES
 
-    @Size(min = 1, max = 30)
+    @Size(min = 3, max = 30)
     @Pattern(regexp = "[a-zA-Z]+")
     @NotNull
     private String street;
@@ -26,12 +26,12 @@ public class NewPropertyForm {
 	@NotNull
     private Integer floor;
 
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 10)
     @Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
     private String apartment;
 
-	@Size(min = 1, max = 30)
+	@Size(min = 5, max = 30)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
     private String neighborhood;
@@ -42,7 +42,7 @@ public class NewPropertyForm {
 	@NotNull
     private PropertyType type;
 
-	@Min(0)
+	@Min(1)
     @NotNull
     private Long price;
 
@@ -73,12 +73,12 @@ public class NewPropertyForm {
 	@NotNull
     private Integer taxPrice;
 
-	@Size(min = 1, max = 30)
+	@Size(min = 6, max = 30)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
 	private String adMessage;
 
-	@Size(min = 1, max = 150)
+	@Size(min = 6, max = 300)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
 	private String adDescription;
@@ -221,4 +221,15 @@ public class NewPropertyForm {
 	public void setInmediateDelivery(Boolean inmediateDelivery) {
 		this.inmediateDelivery = inmediateDelivery;
 	}
+
+	@Override
+	public String toString() {
+		return "NewPropertyForm [street=" + street + ", number=" + number + ", floor=" + floor + ", apartment="
+				+ apartment + ", neighborhood=" + neighborhood + ", operationType=" + operationType + ", type=" + type
+				+ ", price=" + price + ", coveredArea=" + coveredArea + ", totalArea=" + totalArea + ", rooms=" + rooms
+				+ ", baths=" + baths + ", garage=" + garage + ", taxPrice=" + taxPrice + ", adMessage=" + adMessage
+				+ ", adDescription=" + adDescription + ", inmediateDelivery=" + inmediateDelivery + "]";
+	}
+	
+	
 }
