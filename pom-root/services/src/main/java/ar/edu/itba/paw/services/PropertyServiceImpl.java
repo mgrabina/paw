@@ -81,7 +81,6 @@ public class PropertyServiceImpl implements PropertyService {
 		Map<String,String> tmpMap4 = new HashMap<String,String>();
 
 		tmpMap.put("type", "type=");
-		tmpMap.put("operation", "operation_type=");
 		tmpMap.put("neighborhood", "neighborhood=");
 
 		tmpMap2.put("maxArea", "total_area<=");
@@ -106,8 +105,6 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	public List<Property> getFiltered(Map<String,String> filters){
-		if(filters.isEmpty())
-			return getAll();
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
@@ -117,6 +114,15 @@ public class PropertyServiceImpl implements PropertyService {
 			date = Integer.parseInt(filters.get("date"));
 			filters.remove("date");
 		}
+		query.append("operation_type=?");
+		if(!filters.containsKey("operation")) {
+			params.add("sell");
+		}else {
+			params.add(filters.get("operation"));
+			filters.remove("operation");
+		}
+		if(!filters.isEmpty())
+			query.append(" AND ");
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
@@ -147,6 +153,7 @@ public class PropertyServiceImpl implements PropertyService {
 		}
 		if (order==null)
 			order="property.id ASC";
+
 		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
 		if(date>0){
 			List<Property> aux =new LinkedList<>();
