@@ -10,20 +10,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-final class FilterMapper implements ResultSetExtractor<Map<Integer, Map<Integer, String>>> {
+final class FilterMapper implements ResultSetExtractor<Map<Integer, TreeSet<Map.Entry<String, Integer>>>>{
 
-	public Map<Integer, Map<Integer, String>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-        Map<Integer, Map<Integer, String>> map = new HashMap<Integer, Map<Integer, String>>();
+	public Map<Integer, TreeSet<Map.Entry<String, Integer>>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+        Map<Integer, TreeSet<Map.Entry<String, Integer>>> map = new HashMap<Integer, TreeSet<Map.Entry<String, Integer>>>();
         for (int i = 0; i < FilterType.values().length ; i++){
-            map.put(i, new TreeMap<Integer, String>(new Comparator<Integer>() {
+            map.put(i, new TreeSet<Map.Entry<String, Integer>>(new Comparator<Map.Entry<String, Integer>>() {
                 @Override
-                public int compare(Integer o1, Integer o2) {
-                    return o2 - o1;
+                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                    return o2.getValue() - o1.getValue();
                 }
             }));
         }
         while (resultSet.next()) {
-            map.get(resultSet.getInt("type")).put(resultSet.getInt("count"), resultSet.getString("name"));
+            map.get(resultSet.getInt("type")).add(new TreeMap.SimpleEntry<String, Integer>(resultSet.getString("name"), resultSet.getInt("count")));
         }
         return map;
     }

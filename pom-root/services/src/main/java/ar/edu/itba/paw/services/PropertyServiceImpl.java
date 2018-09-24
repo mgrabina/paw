@@ -166,17 +166,16 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public Map<Integer, Map<Integer, String>> getPotentialFilters() {
+	public Map<Integer, TreeSet<Map.Entry<String, Integer>>>  getPotentialFilters() {
 		return propertyDao.getPotentialFilters();
 	}
 
 	public Map<String, Long> getPropertiesDateBreakdown(List<Property> list){
 		Map<String, Long> map = new HashMap<String, Long>();
-		map.put("Today", list.stream().filter(property -> property.getAdDate() == 0).count());
-		map.put("Last Week", list.stream().filter(property -> property.getAdDate() <= 7  && property.getAdDate() > 0).count());
-		map.put("Last Two Weeks", list.stream().filter(property -> property.getAdDate() <= 14  && property.getAdDate() > 0).count());
-		map.put("Last Month", list.stream().filter(property -> property.getAdDate() <= 30  && property.getAdDate() > 0).count());
-		map.put("Past", list.stream().filter(property -> property.getAdDate() > 30).count());
+		map.put("index/filters/published/today", list.stream().filter(property -> property.getAdDate() == 0).count());
+		map.put("index/filters/published/last-week", list.stream().filter(property -> property.getAdDate() <= 7  && property.getAdDate() > 0).count());
+		map.put("index/filters/published/last-two-weeks", list.stream().filter(property -> property.getAdDate() <= 14  && property.getAdDate() > 0).count());
+		map.put("index/filters/published/last-month", list.stream().filter(property -> property.getAdDate() <= 30  && property.getAdDate() > 0).count());
 		return map;
 	}
 }

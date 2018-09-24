@@ -5,10 +5,10 @@ import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.models.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeSet;
 
 public interface PropertyService {
     public Property findById(final long id);
@@ -27,7 +27,7 @@ public interface PropertyService {
     public List<Property> getPropertiesByTagsSearch(String search);
     public List<Property> getPropertiesByTagsSearch(List<String> tags);
     public List<String> getAllTags();
-    public Map<Integer, Map<Integer, String>> getPotentialFilters();
+    public Map<Integer, TreeSet<Map.Entry<String, Integer>>> getPotentialFilters();
     public Optional<Property> getPropertyById(long id);
     public Boolean propertyExists(long id);
     public Map<String, Long> getPropertiesDateBreakdown(List<Property> list);
