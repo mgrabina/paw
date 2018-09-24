@@ -48,6 +48,7 @@ public class MainController {
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
 		mav.addObject("myUser", us.getCurrentUser());
+		mav.addObject("filters", ps.getPotentialFilters());
 
 //		List<Property> busqueda = ps.getPropertysByTagsSearch("palermo apartment");
 //		List<Property> busqueda2 = ps.getPropertysByTagsSearch("almagro");

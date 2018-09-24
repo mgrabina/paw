@@ -5,7 +5,6 @@ import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.interfaces.UserDao;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.*;
-import com.sun.prism.shader.FillEllipse_Color_AlphaTest_Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
