@@ -48,7 +48,7 @@ public class MainController {
 		mav.addObject("myUser", us.getCurrentUser());
 		mav.addObject("filters", ps.getPotentialFilters());
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
-
+		mav.addObject("filterNames", queryMap);
 
 		return mav;
 	

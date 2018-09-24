@@ -161,6 +161,7 @@ nav .input-field label.active i{
 
 .collapsible-body{
 	padding: 1rem !important;
+	cursor: pointer;
 }
 
 .breadcrumb:before{

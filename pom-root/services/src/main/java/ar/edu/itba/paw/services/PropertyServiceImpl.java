@@ -82,6 +82,7 @@ public class PropertyServiceImpl implements PropertyService {
 
 		tmpMap.put("type", "type=");
 		tmpMap.put("operation", "operation_type=");
+		tmpMap.put("neighborhood", "neighborhood=");
 
 		tmpMap2.put("maxArea", "total_area<=");
 		tmpMap2.put("minArea", "total_area>=");
