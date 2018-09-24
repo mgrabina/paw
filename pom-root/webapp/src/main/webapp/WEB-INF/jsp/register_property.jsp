@@ -311,7 +311,7 @@
 								<div class="header">
 									<div class="left">
 										<a id="title-preview" href="" class="card-text-wrap title"><spring:message code="register_property/preview/title"/></a>
-										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span><span id="number-preview"></span><span id="neighborhood-preview"></span></a>
+										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span></span><span id="neighborhood-preview"></span></a>
 									</div>
 									<div class="right">
 										<c:choose>
