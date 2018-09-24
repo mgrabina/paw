@@ -28,9 +28,9 @@
 
 		  	<div class="search-box">
 			  	<div class="nav-wrapper">
-	      			<form>
+	      			<form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
 				        <div class="input-field">
-				          <input id="search" type="search" placeholder="Buscar" required>
+				          <input id="search" type="search" name="query" placeholder="Buscar" required>
 				          <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
 				          <i class="material-icons">close</i>
 				        </div>
@@ -43,14 +43,14 @@
 		  			<a href=""><spring:message code="index/register" /></a>
 		  			<a href=""><spring:message code="index/login"/></a>
 		  			<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
-					<a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
+					<a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
 					
 		  		</div>
 
 		  		<div class="extras">
 		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 		  			  <ul id='dropdown1' class='dropdown-content'>
-					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/user/1/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
 					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>

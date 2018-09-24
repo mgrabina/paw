@@ -124,6 +124,10 @@ public class PropertyServiceImpl implements PropertyService {
 		tmpMap3.put("garage", "garage=");
 
 		tmpMap4.put("price_asd","property.price asc");
+		tmpMap4.put("price_desc","property.price desc");
+		tmpMap4.put("date_asd","property.ad_date asc");
+		tmpMap4.put("date_desc","property.ad_date desc");
+
 
 
 
@@ -158,14 +162,14 @@ public class PropertyServiceImpl implements PropertyService {
 						params.add(Boolean.parseBoolean(entry.getValue()));
 					}else {
 						if(entry.getKey()=="order_by"){
-							if(filterStringMap.containsKey(entry.getValue()) && filterIntMap.containsKey(entry.getValue()))
+							if(orderMap.containsKey(entry.getValue()))
 								order=orderMap.get(entry.getValue());
 						} else return Collections.emptyList();
 					}
 				}
 			}
 			if (order==null)
-				order="property.price ASC";
+				order="property.id ASC";
 			i--;
 			if(i>0)
 				query.append(" AND ");
@@ -176,12 +180,11 @@ public class PropertyServiceImpl implements PropertyService {
 		Get property's that matches tags (such as property type, neighborhood, etc.)
 	 */
 	public List<Property> getPropertysByTagsSearch(String search){
-//		return propertyDao.getByTags(
-//				Arrays.asList(search.split("\\s+"))
-//				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
-//				.collect(Collectors.toList())
-//		);
-		return Collections.emptyList();
+		return propertyDao.getByTags(
+				Arrays.asList(search.split("\\s+"))
+				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
+				.collect(Collectors.toList())
+		);
 	}
 	
     public void linkImage(String imageSrc, long propertyId) {

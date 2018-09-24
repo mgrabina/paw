@@ -156,9 +156,10 @@ public class PropertyDaoImpl implements PropertyDao {
     }
 	public List<Property> getFavourites(Long userId){
 		final List<Property> list = jdbcTemplate.query(
-				"SELECT p.*, u.* FROM favourites " +
+				"SELECT p.*, u.*, i.image_src FROM favourites " +
 						" JOIN property p ON favourites.id_property = p.id " +
-						" JOIN users u ON favourites.id_user = u.id" +
+						" JOIN users u ON favourites.id_user = u.id " +
+                        " FULL OUTER JOIN property_images i on p.id = i.property_id "+
 						" WHERE favourites.id_user = ? ;",
 				ROW_MAPPER, userId);
 		if (list.isEmpty()) {
@@ -179,11 +180,10 @@ public class PropertyDaoImpl implements PropertyDao {
     }
 
 	public List<Property> getFiltered(String filters, ArrayList params, String order){
-		params.add(order);
 		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id " +
 															"LEFT OUTER JOIN property_images i on property.id = i.property_id "+
 															"WHERE "+ filters +
-															"ORDER BY ?", params.toArray(), ROW_MAPPER);
+															"ORDER BY "+ order, params.toArray(), ROW_MAPPER);
 		if (list.isEmpty()) {
 			return Collections.emptyList();
 		}
