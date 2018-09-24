@@ -61,21 +61,10 @@ public class UserController {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/user/addFavourite", method = RequestMethod.POST, produces="application/json")
-    @ResponseBody
-    public void postFav(@RequestParam("propertyId") long propertyId) {
-
-        User myUser = us.getCurrentUser();
-        if(myUser==null)
-            return;
-        ps.setFavourite(myUser.getId(),propertyId);
-
-    }
-
 
     @RequestMapping("/myfavourites")
     public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return paginate.basicPaginatedListMAV("property_list", ps.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
+        return paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
     }
 
     @RequestMapping("/myproperties")

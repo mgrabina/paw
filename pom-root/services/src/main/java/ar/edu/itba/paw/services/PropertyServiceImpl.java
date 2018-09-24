@@ -93,18 +93,7 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
-	public List<Property> getFavourites(Long userId) {
-		return propertyDao.getFavourites(userId);
-	}
 
-	public void setFavourite(Long userId, Long propertyId) {
-		if(propertyExists(propertyId))
-			propertyDao.setFavourite(userId, propertyId);
-	}
-
-	public void deleteFavourite(Long userId, Long propertyId) {
-		propertyDao.deleteFavourite(userId, propertyId);
-	}
 
 	public Property findById(final long id){
 		return propertyDao.findById(id);

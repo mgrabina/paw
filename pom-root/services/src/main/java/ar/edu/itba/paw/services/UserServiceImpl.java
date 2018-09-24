@@ -1,5 +1,7 @@
 package ar.edu.itba.paw.services;
 
+import ar.edu.itba.paw.interfaces.PropertyDao;
+import ar.edu.itba.paw.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +19,10 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private PropertyDao propertyDao;
+
 
 	public User GetUser() {
 		// TODO Auto-generated method stub
@@ -52,5 +58,17 @@ public class UserServiceImpl implements UserService{
 			return null;
 		}
 		return null; // TODO: Use Optionals
+	}
+
+	public List<Property> getFavourites(Long userId) {
+		return userDao.getFavourites(userId);
+	}
+
+	public void setFavourite(Long userId, Long propertyId) {
+		userDao.setFavourite(userId, propertyId);
+	}
+
+	public void deleteFavourite(Long userId, Long propertyId) {
+		userDao.deleteFavourite(userId, propertyId);
 	}
 }

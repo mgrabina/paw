@@ -26,9 +26,7 @@ public interface PropertyService {
                     Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
     public void linkImage(String imageSrc, long propertyId);
     public List<Property> getFiltered(Map<String,String> filters);
-    public List<Property> getFavourites(Long userId);
-    public void setFavourite(Long userId, Long propertyId);
-    public void deleteFavourite(Long userId, Long propertyId);
+
     public List<Property> getPropertiesByTagsSearch(String search);
     public List<Property> getPropertiesByTagsSearch(List<String> tags);
     public List<String> getAllTags();
