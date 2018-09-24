@@ -22,29 +22,26 @@
     <body>
         <form:form modelAttribute="loginForm" action='<%= response.encodeURL(request.getContextPath() + "/user/login") %>' method="post" enctype="application/x-www-form-urlencoded">
             <div class="login">
-                <h1><a href="index.jsp">Chozapp </a></h1>
+                <h1><a href="index.jsp"><spring:message code="app_name"/></a></h1>
                 <div class="login-bottom">
-                    <h2>Login</h2>
+                    <h2><spring:message code="login/login"/></h2>
                     <form>
                         <div class="col-md-6">
                             <div class="login-mail">
-                                <form:input type="text" placeholder="Email" required="" id="mail" path="mail" name="mail"/>
+                                <form:input type="text" placeholder='<spring:message code="login/email"/>' required="" id="mail" path="mail" name="mail"/>
                                 <i class="fa fa-envelope"></i>
                             </div>
                             <div class="login-mail">
-                                <form:input type="password" placeholder="Password" required="" id="password" path="password" name="password"/>
+                                <form:input type="password" placeholder='<spring:message code="login/password"/>' required="" id="password" path="password" name="password"/>
                                 <i class="fa fa-lock"></i>
                             </div>
-                            <a class="news-letter " href="#">
-                                <label class="checkbox1"><input type="checkbox" name="checkbox" ><i> </i>Forget Password</label>
-                            </a>
                         </div>
                         <div class="col-md-6 login-do">
                             <label class="hvr-shutter-in-horizontal login-sub">
-                                <input type="submit" class="btn btn-outline-secondary" value="login"/>
+                                <input type="submit" class="btn btn-outline-secondary" value='<spring:message code="login/login"/>'/>
                             </label>
-                            <p>Do not have an account?</p>
-                            <a href='<%= response.encodeURL(request.getContextPath() + "/user/register") %>' class="hvr-shutter-in-horizontal">Signup</a>
+                            <p><spring:message code="login/dont-have-user"/></p>
+                            <a href='<%= response.encodeURL(request.getContextPath() + "/user/register") %>' class="hvr-shutter-in-horizontal"><spring:message code="login/singup"/></a>
                         </div>
                         <div class="clearfix"> </div>
                     </form>
