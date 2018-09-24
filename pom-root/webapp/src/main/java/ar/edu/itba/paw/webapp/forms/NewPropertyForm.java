@@ -17,11 +17,6 @@ public class NewPropertyForm {
     @Pattern(regexp = "[a-zA-Z]+")
     @NotNull
     private String street;
-    
-	@Min(1)
-	@Max(999999)
-    @NotNull
-    private Integer number;
 
 	@Min(1)
 	@Max(200)
@@ -96,14 +91,6 @@ public class NewPropertyForm {
 
 	public void setStreet(String street) {
 		this.street = street;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
 	}
 
 	public Integer getFloor() {
@@ -236,7 +223,7 @@ public class NewPropertyForm {
 
 	@Override
 	public String toString() {
-		return "NewPropertyForm [street=" + street + ", number=" + number + ", floor=" + floor + ", apartment="
+		return "NewPropertyForm [street=" + street + ", floor=" + floor + ", apartment="
 				+ apartment + ", neighborhood=" + neighborhood + ", operationType=" + operationType + ", type=" + type
 				+ ", price=" + price + ", coveredArea=" + coveredArea + ", totalArea=" + totalArea + ", rooms=" + rooms
 				+ ", baths=" + baths + ", garage=" + garage + ", taxPrice=" + taxPrice + ", adMessage=" + adMessage

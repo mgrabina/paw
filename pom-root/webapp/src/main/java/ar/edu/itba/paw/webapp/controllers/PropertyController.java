@@ -63,7 +63,6 @@ public class PropertyController {
        	
         final Long pId = ps.createProperty(
                 form.getStreet(),
-                form.getNumber(),
                 form.getFloor(),
                 form.getApartment(),
                 form.getNeighborhood(),
@@ -106,7 +105,6 @@ public class PropertyController {
         mav.addObject("rating", "3,5");
         mav.addObject("description", "Lorem ipsum ...");
         mav.addObject("street", "Street info");
-        mav.addObject("number", "Number info");
         mav.addObject("floor", "Floor info");
         mav.addObject("type", "Type info");
         mav.addObject("price", "Price info");
