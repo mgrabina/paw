@@ -283,7 +283,7 @@ function setUpChangeHooks(){
 
  		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_SIZE, [5, 30] ]];
- 		stepOne[4] = checkField($(this), input, rules);
+ 		stepOne[4] = true;
 	});
 
 	cArea.on("input", function(e) {
