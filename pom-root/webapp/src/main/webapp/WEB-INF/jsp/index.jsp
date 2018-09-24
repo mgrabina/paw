@@ -112,11 +112,15 @@
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/location"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
-					      			<c:forEach items="${filters[1]}" var="filterEntry" varStatus="loop">
-					      				<div class="link-box">
-					      					<a href="">${filterEntry.key}</a>
-					      					<span>${filterEntry.value}</span>
-					      				</div>
+						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
+						      			<c:if test="${filter.key eq 1}">
+							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+							      				<div class="link-box capit">
+							      					<a href="">${filterEntry.key}</a>
+							      					<span>(${filterEntry.value})</span>
+							      				</div>
+							      			</c:forEach>
+						      			</c:if>
 					      			</c:forEach>
 						      	</div>
 
@@ -142,27 +146,16 @@
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/type"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
-
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/type/apartment"/></a>
-						      			<span>(289)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/type/house"/></a>
-						      			<span>(211)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/type/ph"/></a>
-						      			<span>(88)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/type/land"/></a>
-						      			<span>(111)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/type/office"/></a>
-						      			<span>(10)</span>
-						      		</div>
+						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
+						      			<c:if test="${filter.key eq 3}">
+							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+							      				<div class="link-box capit">
+							      					<a href="">${filterEntry.key}</a>
+							      					<span>(${filterEntry.value})</span>
+							      				</div>
+							      			</c:forEach>
+						      			</c:if>
+					      			</c:forEach>
 						      	</div>
 						      </div>
 						    </li>
@@ -198,7 +191,7 @@
 							    <a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 						      </div>
 						    </li>
-						    <li>
+						    <li style="display: none;">
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/amenities"/></div>
 						      <div class="collapsible-body">
 						      	
@@ -250,6 +243,44 @@
 						      </div>
 						    </li>
 						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/baths"/></div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/none"/></a>
+						      			<span>(289)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/1more"/></a>
+						      			<span>(211)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/2more"/></a>
+						      			<span>(88)</span>
+						      		</div>
+						      	</div>
+						      </div>
+						    </li>
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/rooms"/></div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/none"/></a>
+						      			<span>(289)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/1more"/></a>
+						      			<span>(211)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/2more"/></a>
+						      			<span>(88)</span>
+						      		</div>
+						      	</div>
+						      </div>
+						    </li>
+						    <li>
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/published-time"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
@@ -264,6 +295,10 @@
 						      		<div class="link-box">
 						      			<a href=""><spring:message code="index/filters/published/last-two-weeks"/></a>
 						      			<span>(88)</span>
+						      		</div>
+						      		<div class="link-box">
+						      			<a href=""><spring:message code="index/filters/published/last-month"/></a>
+						      			<span>(81)</span>
 						      		</div>
 						      	</div>
 						      </div>
@@ -389,7 +424,7 @@
 						<ul class="pagination">
 						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
 						    <c:forEach begin="0" end="${pagesCount}" varStatus="loop">
-						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a href="">${loop.index + 1}</a></li>
+						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})" href="">${loop.index + 1}</a></li>
 						    </c:forEach>
 						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
 					  	</ul>
