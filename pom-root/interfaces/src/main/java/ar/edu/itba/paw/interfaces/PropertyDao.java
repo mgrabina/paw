@@ -26,4 +26,5 @@ public interface PropertyDao {
     public List<Property> getByTags(List<String> tags);
     public List<String> getAllTags();
     public Map<Integer, Map<String, Integer>> getPotentialFilters();
+    public Optional<Property> getById(long id);
 }
