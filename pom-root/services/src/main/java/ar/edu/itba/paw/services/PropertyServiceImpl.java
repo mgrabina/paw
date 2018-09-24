@@ -169,4 +169,14 @@ public class PropertyServiceImpl implements PropertyService {
 	public Map<Integer, Map<Integer, String>> getPotentialFilters() {
 		return propertyDao.getPotentialFilters();
 	}
+
+	public Map<String, Long> getPropertiesDateBreakdown(List<Property> list){
+		Map<String, Long> map = new HashMap<String, Long>();
+		map.put("Today", list.stream().filter(property -> property.getAdDate() == 0).count());
+		map.put("Last Week", list.stream().filter(property -> property.getAdDate() <= 7  && property.getAdDate() > 0).count());
+		map.put("Last Two Weeks", list.stream().filter(property -> property.getAdDate() <= 14  && property.getAdDate() > 0).count());
+		map.put("Last Month", list.stream().filter(property -> property.getAdDate() <= 30  && property.getAdDate() > 0).count());
+		map.put("Past", list.stream().filter(property -> property.getAdDate() > 30).count());
+		return map;
+	}
 }
