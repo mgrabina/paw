@@ -201,4 +201,10 @@ public class PropertyServiceImpl implements PropertyService {
 		map.put("index/filters/published/last-month", list.stream().filter(property -> property.getAdDate() <= 30  && property.getAdDate() > 0).count());
 		return map;
 	}
+	
+	public Map<String, String> getShowableFilters(Map<String,String> m){
+		return m.entrySet().stream()
+				.filter(entry -> !"operation".equals(entry.getKey()))
+				.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+	}
 }
