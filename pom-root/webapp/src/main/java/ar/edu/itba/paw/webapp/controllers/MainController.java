@@ -46,9 +46,7 @@ public class MainController {
 			}
 		}
 		Map<String,String> map= new HashMap<>();
-		map.put("type","apartment");
-		map.put("minPrice","99999");
-		map.put("garage","true");
+		map.put("type","office");
 		List<Property> aux=ps.getFiltered(map);
 
 		//Usar un getFiltered y pasarle el queryMap
