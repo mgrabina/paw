@@ -14,11 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.User;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.Option;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Controller
@@ -92,10 +90,26 @@ public class MainController {
     }
 
 	@RequestMapping("/not-found")
-	public ModelAndView error() {
+	public ModelAndView notFound() {
 		final ModelAndView mav = new ModelAndView("404");
 		return mav;
 	}
+
+    @RequestMapping(value = "/errors")
+    public static ModelAndView renderErrorPage(HttpServletRequest request, Locale locale, Integer error) {
+
+        ModelAndView errorPage = new ModelAndView("errorPage");
+
+        if(request != null) {
+            Integer statusCode = (Integer) request
+                    .getAttribute("javax.servlet.error.status_code");
+            errorPage.addObject("statusCode", statusCode);
+        }else{
+            errorPage.addObject("statusCode", error.intValue());
+        }
+
+        return errorPage;
+    }
     private int formatPageNumber(String pageNumberParam){
 	    int pageNumber = 1;
         if ( pageNumberParam != null) {
