@@ -31,6 +31,8 @@ public class UserController {
     @Autowired
     private PropertyService ps;
 
+    private Paginate paginate = new Paginate();
+
     @RequestMapping(value = "/user/login")
     public ModelAndView getLogin(@ModelAttribute("loginForm") final LoginForm form) {
         return new ModelAndView("login");
@@ -70,33 +72,15 @@ public class UserController {
 
     }
 
-        @RequestMapping(value = "/user/{id}/myproperties", method = RequestMethod.GET)
-    public ModelAndView getPropertyDetailview(@PathVariable("id")final long id) {
-        final ModelAndView mav = new ModelAndView("viewMyProperties");
 
-        final List<Property> propertiesList = ps.getAllByUserId(id);
-        /*final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);*/
-
-        mav.addObject("propertiesList", propertiesList);
-        /*mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);*/
-
-        return mav;
+    @RequestMapping("/myfavourites")
+    public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        return paginate.basicPaginatedListMAV("property_list", ps.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
     }
 
-    @RequestMapping(value = "/user/{id}/myfavourites", method = RequestMethod.GET)
-    public ModelAndView getFavourites(@PathVariable("id")final long id) {
-        final ModelAndView mav = new ModelAndView("viewMyFavourites");
-
-        final List<Property> propertiesList = ps.getFavourites(id);
-        /*final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);*/
-
-        mav.addObject("propertiesList", propertiesList);
-        /*mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);*/
-
-        return mav;
+    @RequestMapping("/myproperties")
+    public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        return paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam);
     }
+
 }

@@ -28,14 +28,16 @@ public class MainController {
 	@Autowired
 	private PropertyService ps;
 
-		
+	private Paginate paginate = new Paginate();
+
+
 	@RequestMapping("/")
 	public ModelAndView index(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
 		
 		final ModelAndView mav = new ModelAndView("index");
 		
 
-		int pageNumber = formatPageNumber(pageNumberParam);
+		int pageNumber = paginate.formatPageNumber(pageNumberParam);
 
 		Map<String,String> map= new HashMap<>();
 		List<Property> propertiesList=ps.getFiltered(map);
@@ -58,36 +60,9 @@ public class MainController {
 	
 	}
 
-	@RequestMapping("/myfavourites")
-    public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return basicPaginatedListMAV("property_list", ps.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
-    }
-
-    @RequestMapping("/myproperties")
-    public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam);
-    }
-
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
-        return basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam);
-    }
-
-    private ModelAndView basicPaginatedListMAV(String name, List<Property> list, String pageNumberParam ){
-        final ModelAndView mav = new ModelAndView(name);
-        final User user = us.getCurrentUser();
-        List<Property> propertiesList;
-        if(list != null)
-            propertiesList = list;
-        else
-            propertiesList = new LinkedList<Property>();
-        final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);
-        mav.addObject("propertiesList", ps.getPage(propertiesList, formatPageNumber(pageNumberParam)));
-        mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);
-        mav.addObject("userId", user.getId());
-        return mav;
+        return paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam);
     }
 
 	@RequestMapping("/not-found")
@@ -111,18 +86,5 @@ public class MainController {
 
         return errorPage;
     }
-    private int formatPageNumber(String pageNumberParam){
-	    int pageNumber = 1;
-        if ( pageNumberParam != null) {
-            try {
-                int auxPageNumber = Integer.parseInt(pageNumberParam);
-                if (auxPageNumber > 0)
-                    pageNumber = auxPageNumber;
 
-            }catch (Exception e){
-                // Couldnt parse param, using default.
-            }
-        }
-        return pageNumber;
-    }
 }
