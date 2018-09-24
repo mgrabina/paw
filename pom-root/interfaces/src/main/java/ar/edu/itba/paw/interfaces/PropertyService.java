@@ -31,4 +31,5 @@ public interface PropertyService {
     public Optional<Property> getPropertyById(long id);
     public Boolean propertyExists(long id);
     public Map<String, Long> getPropertiesDateBreakdown(List<Property> list);
+	public Map<String, String> getShowableFilters(Map<String,String> m);
 }
