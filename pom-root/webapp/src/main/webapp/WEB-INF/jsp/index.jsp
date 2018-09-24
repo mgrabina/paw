@@ -285,10 +285,10 @@
 						      <div class="collapsible-body">
 						      	<div class="link-list">
 						      		<c:forEach items="${timeFilter}" var="filterEntry" varStatus="loop">
-						      			<spring:message code="filterEntry.key" var="filterName"/> 
+						      			<spring:message code="${filterEntry.key}" var="filterName"/> 
 					      				<div class="link-box">
 				      						<a href="">${filterName}</a>
-				      						<span>(${filterEntry.key})</span>
+				      						<span>(${filterEntry.value})</span>
 				      					</div>
 					      			</c:forEach>
 						      	</div>
