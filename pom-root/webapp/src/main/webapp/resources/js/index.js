@@ -63,3 +63,30 @@ function deleteFavorite(propertyId) {
         }
     });
 }
+
+/*
+	Adds a query param (key-value) and redirects the window to the new URL.
+ */
+function addQueryParam(fieldName, value) {
+    if(location.search.search(fieldName) == 1){
+        var newURL = location.origin + "?";
+        var params = location.search.split("?")[1].split("&");
+        for(var queryParam in params){
+            if (queryParam.search(fieldName)){
+				newURL += fieldName + "=" + value;                         
+            }else{
+            	newURL += queryParam;
+			}
+        }
+        window.location.replace(newURL);
+    }else{
+    	if (location.search == ""){
+            window.location.replace(window.location.origin + "?" + fieldName + "=" + value);
+		}else{
+    		window.location.replace(window.location.href + "&" + fieldName + "=" + value);
+		}
+	}
+}
+function getPage(number) {
+	addQueryParam("page", number);
+}
