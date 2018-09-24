@@ -11,9 +11,7 @@ public interface PropertyDao {
 	
     public List<Property> getAll();
     public List<Property> getAllByUserId(final long id);
-    public List<Property> getFavourites(Long userId);
-    public void setFavourite(Long userId, Long propertyId);
-    public void deleteFavourite(Long userId, Long propertyId);
+
 
     public Property findById(final long id);
     

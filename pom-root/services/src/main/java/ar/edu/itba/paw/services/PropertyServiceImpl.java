@@ -25,6 +25,14 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.getAll();
 	}
 
+	public Optional<Property> getPropertyById(long id){
+		return propertyDao.getById(id);
+	}
+
+	public Boolean propertyExists(long id){
+		return getPropertyById(id).isPresent();
+	}
+
 	public List<Property> getAllByUserId(final long id){
 		return propertyDao.getAllByUserId(id);
 	}
@@ -85,17 +93,7 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
-	public List<Property> getFavourites(Long userId) {
-		return propertyDao.getFavourites(userId);
-	}
 
-	public void setFavourite(Long userId, Long propertyId) {
-		propertyDao.setFavourite(userId, propertyId);
-	}
-
-	public void deleteFavourite(Long userId, Long propertyId) {
-		propertyDao.deleteFavourite(userId, propertyId);
-	}
 
 	public Property findById(final long id){
 		return propertyDao.findById(id);
@@ -127,9 +125,6 @@ public class PropertyServiceImpl implements PropertyService {
 		tmpMap4.put("price_desc","property.price desc");
 		tmpMap4.put("date_asd","property.ad_date asc");
 		tmpMap4.put("date_desc","property.ad_date desc");
-
-
-
 
 		filterIntMap = Collections.unmodifiableMap(tmpMap2);
 		filterStringMap = Collections.unmodifiableMap(tmpMap);
@@ -179,7 +174,7 @@ public class PropertyServiceImpl implements PropertyService {
 	/*
 		Get property's that matches tags (such as property type, neighborhood, etc.)
 	 */
-	public List<Property> getPropertysByTagsSearch(String search){
+	public List<Property> getPropertiesByTagsSearch(String search){
 		return propertyDao.getByTags(
 				Arrays.asList(search.split("\\s+"))
 				.stream().filter(tag -> propertyDao.getAllTags().contains(tag))
@@ -191,7 +186,7 @@ public class PropertyServiceImpl implements PropertyService {
     	propertyDao.addImage(imageSrc, propertyId);
     }
 
-	public List<Property> getPropertysByTagsSearch(List<String> tags){
+	public List<Property> getPropertiesByTagsSearch(List<String> tags){
 		return propertyDao.getByTags(tags);
 	}
 

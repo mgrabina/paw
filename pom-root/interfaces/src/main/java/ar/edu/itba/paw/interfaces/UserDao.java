@@ -1,5 +1,6 @@
 package ar.edu.itba.paw.interfaces;
 
+import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.User;
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface UserDao {
 	public User findByMail(final long mail);
 
 	public List<User> getAll();
+
+	public List<Property> getFavourites(Long userId);
+	public void setFavourite(Long userId, Long propertyId);
+	public void deleteFavourite(Long userId, Long propertyId);
 }

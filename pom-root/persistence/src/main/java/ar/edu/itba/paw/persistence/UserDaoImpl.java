@@ -1,5 +1,6 @@
 package ar.edu.itba.paw.persistence;
 
+import ar.edu.itba.paw.models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -13,10 +14,7 @@ import javax.sql.DataSource;
 import java.io.*;
 import java.net.URISyntaxException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -33,7 +31,9 @@ public class UserDaoImpl implements UserDao {
             rs.getString("mail"),
             rs.getString("imagesrc")
             );
-	
+
+	private final static PropertyMapper PROPERTY_MAPPER = new PropertyMapper();
+
 	@Autowired
 	public UserDaoImpl(final DataSource ds) throws IOException, URISyntaxException {
 
@@ -130,6 +130,30 @@ public class UserDaoImpl implements UserDao {
 		return list;
 	}
 
+	public void setFavourite(Long userId, Long propertyId){
+		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("favourites");
+		final Map<String, Object> args = new HashMap<String, Object>();
+		args.put("id_user", userId);
+		args.put("id_property", propertyId);
+		jdbcInsert.execute(args);
+	}
 
+	public void deleteFavourite(Long userId, Long propertyId){
+		jdbcTemplate.update("DELETE FROM favourites WHERE id_user = ? and id_property = ?;", userId, propertyId);
+	}
+
+	public List<Property> getFavourites(Long userId){
+		final List<Property> list = jdbcTemplate.query(
+				"SELECT p.*, u.*, i.image_src FROM favourites " +
+						" JOIN property p ON favourites.id_property = p.id " +
+						" JOIN users u ON favourites.id_user = u.id " +
+						" FULL OUTER JOIN property_images i on p.id = i.property_id "+
+						" WHERE favourites.id_user = ? ;",
+				PROPERTY_MAPPER, userId);
+		if (list.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return list;
+	}
 
 }

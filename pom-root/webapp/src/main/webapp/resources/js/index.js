@@ -41,3 +41,25 @@ function setUpControllers(){
 	
 
 }
+
+function addFavorite(propertyId) {
+    $.ajax({
+        type: "POST",
+        url: ""+getContextPath()+"/api/addFavourite",
+	    data: {"propertyId": propertyId},
+    	success: function(res) {
+			//add favourite
+        }
+	});
+}
+
+function deleteFavorite(propertyId) {
+    $.ajax({
+        type: "POST",
+        url: ""+getContextPath()+"/api/deleteFavourite",
+        data: {"propertyId": propertyId},
+        success: function(res) {
+            //add favourite
+        }
+    });
+}

@@ -24,18 +24,26 @@ public class ApiController {
     @Autowired
     private PropertyService ps;
 
-    @RequestMapping(value = "/api/setFavourite", method = RequestMethod.POST, produces="application/json")
-    @ResponseBody
-    public void postSetFavourite(@RequestParam("toPropertyId") long toProperty) {
-        User myUser = us.getCurrentUser();
-        ps.setFavourite(myUser.getId(), toProperty);
-    }
 
     @RequestMapping(value = "/api/deleteFavourite", method = RequestMethod.POST, produces="application/json")
     @ResponseBody
-    public void postDiscardFavourite(@RequestParam("toPropertyId") long toProperty) {
+    public Boolean postDiscardFavourite(@RequestParam("PropertyId") long propertyId) {
         User myUser = us.getCurrentUser();
-        ps.deleteFavourite(myUser.getId(), toProperty);
+        if(myUser==null || !ps.propertyExists(propertyId))
+            return false;
+        us.deleteFavourite(myUser.getId(),propertyId);
+        return true;
+    }
+
+    @RequestMapping(value = "/api/addFavourite", method = RequestMethod.POST, produces="application/json")
+    @ResponseBody
+    public Boolean postFav(@RequestParam("propertyId") long propertyId) {
+
+        User myUser = us.getCurrentUser();
+        if(myUser==null || !ps.propertyExists(propertyId))
+            return false;
+        us.setFavourite(myUser.getId(),propertyId);
+        return true;
     }
 
 }

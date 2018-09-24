@@ -2,6 +2,7 @@ package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.User;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.itba.paw.interfaces.UserService;
@@ -32,6 +30,8 @@ public class UserController {
     private PasswordEncoder pw;
     @Autowired
     private PropertyService ps;
+
+    private Paginate paginate = new Paginate();
 
     @RequestMapping(value = "/user/login")
     public ModelAndView getLogin(@ModelAttribute("loginForm") final LoginForm form) {
@@ -61,33 +61,15 @@ public class UserController {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/user/{id}/myproperties", method = RequestMethod.GET)
-    public ModelAndView getPropertyDetailview(@PathVariable("id")final long id) {
-        final ModelAndView mav = new ModelAndView("viewMyProperties");
 
-        final List<Property> propertiesList = ps.getAllByUserId(id);
-        /*final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);*/
-
-        mav.addObject("propertiesList", propertiesList);
-        /*mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);*/
-
-        return mav;
+    @RequestMapping("/myfavourites")
+    public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        return paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
     }
 
-    @RequestMapping(value = "/user/{id}/myfavourites", method = RequestMethod.GET)
-    public ModelAndView getFavourites(@PathVariable("id")final long id) {
-        final ModelAndView mav = new ModelAndView("viewMyFavourites");
-
-        final List<Property> propertiesList = ps.getFavourites(id);
-        /*final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);*/
-
-        mav.addObject("propertiesList", propertiesList);
-        /*mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);*/
-
-        return mav;
+    @RequestMapping("/myproperties")
+    public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        return paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam);
     }
+
 }
