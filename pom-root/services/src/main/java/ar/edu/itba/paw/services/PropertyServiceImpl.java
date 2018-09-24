@@ -115,9 +115,8 @@ public class PropertyServiceImpl implements PropertyService {
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
-		int i = filters.size();
-
 		int date=removeFilters(filters,query,params);
+		int i = filters.size();
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
