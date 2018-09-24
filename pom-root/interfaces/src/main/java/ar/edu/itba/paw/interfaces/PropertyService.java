@@ -33,4 +33,5 @@ public interface PropertyService {
     public Map<Integer, Map<Integer, String>> getPotentialFilters();
     public Optional<Property> getPropertyById(long id);
     public Boolean propertyExists(long id);
+    public Map<String, Long> getPropertiesDateBreakdown(List<Property> list);
 }
