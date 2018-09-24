@@ -26,7 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="four">
 		<img src="<c:url value="/resources/images/404.png"></c:url>"  alt="" />
 		<p>Roto.</p>
-		<a href="index.jsp" class="hvr-shutter-in-horizontal">Go To Home</a>
+		<a href="<%= response.encodeURL(request.getContextPath()) %>" class="hvr-shutter-in-horizontal">Go To Home</a>
 	</div>
 		<!---->
 <div class="copy-right">
