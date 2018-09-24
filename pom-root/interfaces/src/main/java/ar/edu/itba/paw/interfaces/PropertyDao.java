@@ -27,5 +27,5 @@ public interface PropertyDao {
     public List<Property> getFiltered(String filters, ArrayList params, String order);
     public List<Property> getByTags(List<String> tags);
     public List<String> getAllTags();
-    public Map<Integer, Map<String, Integer>> getPotentialFilters();
+    public ArrayList<Map<String, Integer>> getPotentialFilters();
 }

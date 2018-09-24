@@ -201,7 +201,7 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public Map<Integer, Map<String, Integer>> getPotentialFilters() {
+	public ArrayList<Map<String, Integer>> getPotentialFilters() {
 		return propertyDao.getPotentialFilters();
 	}
 }
