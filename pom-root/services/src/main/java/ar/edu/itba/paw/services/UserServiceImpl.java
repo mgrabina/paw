@@ -43,12 +43,14 @@ public class UserServiceImpl implements UserService{
 	public User getCurrentUser() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			User user = userDao.findByMail(authentication.getName()).get();
-			return user;
+		try {
+			if (!(authentication instanceof AnonymousAuthenticationToken)) {
+				User user = userDao.findByMail(authentication.getName()).get();
+				return user;
+			}
+		}catch (Exception e){
+			return null;
 		}
-
 		return null; // TODO: Use Optionals
 	}
 }
