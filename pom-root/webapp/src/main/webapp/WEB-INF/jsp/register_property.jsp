@@ -41,28 +41,35 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<div class="nav-item">
-		  				<a href=""><spring:message code="index/register" /></a>
-		  			</div>
-		  			<div class="nav-item">
-		  				<a href=""><spring:message code="index/login"/></a>
-		  			</div>
+		  			<c:if test="${empty myUser}">
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/register" /></a>
+			  			</div>
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/login"/></a>
+			  			</div>
+			  		</c:if>
 		  			<div class="nav-item">
 		  				<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
 		  			</div>
-		  		
+		  			
+		  			<c:if test="${not empty myUser}">
+			  			<div class="nav-item">
+			  				<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
+			  			</div>
+			  		</c:if>
+		  			
 		  		</div>
 
 		  		<div class="extras">
 		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 		  			  <ul id='dropdown1' class='dropdown-content'>
-					    <li><a href="#!">A</a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
-					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
-						</li>
+					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -313,8 +320,8 @@
 									</div>
 									<div class="right">
 										<c:choose>
-											<c:when test="${not empty publisherImage}">
-												<img src="<c:out value="${publisherImage}"/>">
+											<c:when test="${not empty myUser.imageSrc}">
+												<img src="<c:out value="${myUser.imageSrc}"/>">
 											</c:when>
 											<c:otherwise>
 												<img src="<c:url value="/resources/images/anon-user.png"/>">

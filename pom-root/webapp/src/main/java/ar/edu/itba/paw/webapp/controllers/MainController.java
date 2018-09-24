@@ -45,12 +45,11 @@ public class MainController {
 		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = ps.getPageCount(propertiesList);
-		String userId = "1"; //esta hardcodeado, despues ver como meterlo o si no esta logueado no deberia estar esa var
 
 		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
-		mav.addObject("userId", userId);
+		mav.addObject("myUser", us.getCurrentUser());
 
 //		List<Property> busqueda = ps.getPropertysByTagsSearch("palermo apartment");
 //		List<Property> busqueda2 = ps.getPropertysByTagsSearch("almagro");
