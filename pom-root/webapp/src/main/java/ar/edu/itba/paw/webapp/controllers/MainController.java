@@ -17,6 +17,7 @@ import ar.edu.itba.paw.models.User;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 public class MainController {
@@ -33,18 +34,9 @@ public class MainController {
 		
 		final ModelAndView mav = new ModelAndView("index");
 		
-		int pageNumber = 1;
-		
-		if ( pageNumberParam != null) {
-			try {
-				int auxPageNumber = Integer.parseInt(pageNumberParam);
-				pageNumber = auxPageNumber;
-				
-				if (pageNumber <= 0) return new ModelAndView("redirect:/");
-			} catch (NumberFormatException e) {
-				return new ModelAndView("redirect:/");
-			}
-		}
+
+		int pageNumber = formatPageNumber(pageNumberParam);
+
 		Map<String,String> map= new HashMap<>();
 		map.put("type","apartment");
 		map.put("minPrice","99999");
@@ -56,7 +48,7 @@ public class MainController {
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = ps.getPageCount(propertiesList);
 		String userId = "1"; //esta hardcodeado, despues ver como meterlo o si no esta logueado no deberia estar esa var
-		
+
 		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
@@ -70,10 +62,55 @@ public class MainController {
 	
 	}
 
+	@RequestMapping("/myfavourites")
+    public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        final ModelAndView mav = new ModelAndView("property_list");
+        final User user = us.getCurrentUser();
+        final List<Property> propertiesList = ps.getFavourites(user.getId());
+        final int propertiesCount = propertiesList.size();
+        final int pagesCount = ps.getPageCount(propertiesList);
+
+        mav.addObject("propertiesList", ps.getPage(propertiesList, formatPageNumber(pageNumberParam)));
+        mav.addObject("propertiesCount", propertiesCount);
+        mav.addObject("pagesCount", pagesCount);
+        mav.addObject("userId", user.getId());
+
+        return mav;
+    }
+
+    @RequestMapping("/myproperties")
+    public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
+        final ModelAndView mav = new ModelAndView("property_list");
+        final User user = us.getCurrentUser();
+        final List<Property> propertiesList = ps.getAllByUserId(user.getId());
+        final int propertiesCount = propertiesList.size();
+        final int pagesCount = ps.getPageCount(propertiesList);
+
+        mav.addObject("propertiesList", ps.getPage(propertiesList, formatPageNumber(pageNumberParam)));
+        mav.addObject("propertiesCount", propertiesCount);
+        mav.addObject("pagesCount", pagesCount);
+        mav.addObject("userId", user.getId());
+
+        return mav;
+    }
+
 	@RequestMapping("/not-found")
 	public ModelAndView error() {
 		final ModelAndView mav = new ModelAndView("404");
 		return mav;
 	}
+    private int formatPageNumber(String pageNumberParam){
+	    int pageNumber = 1;
+        if ( pageNumberParam != null) {
+            try {
+                int auxPageNumber = Integer.parseInt(pageNumberParam);
+                if (auxPageNumber > 0)
+                    pageNumber = auxPageNumber;
 
+            }catch (Exception e){
+                // Couldnt parse param, using default.
+            }
+        }
+        return pageNumber;
+    }
 }
