@@ -161,7 +161,7 @@ public class PropertyDaoImpl implements PropertyDao {
                 "select type, name, count(name) as count " +
                         " from tags " +
                         " group by type, name " +
-                        " order by type; ",
+                        " order by type, count(name) desc; ",
                 FILTER_MAPPER);
         if (map.isEmpty()) {
             return Collections.emptyMap();
