@@ -15,6 +15,7 @@ $(document).ready(function(){
 	setUpChangeHooks();
 	imagesCarouselInstances = initImagesCarousel();
 	checkImages();
+	checkTabIndexing();
 
 	$('input#p-title, textarea#p-desc').characterCounter();
 
@@ -154,8 +155,10 @@ function moveTo(div, offset) {
 
 	if (div == 0) {
 		bc = $("#bread-publi");
+		title.focus();
 	} else if (div == 1) {
 		bc =  $("#bread-info");
+		street.focus();
 	} else {
 		$("#bread-img");
 	}
@@ -347,6 +350,29 @@ function setUpChangeHooks(){
 	});
 
 
+}
+
+function checkTabIndexing() {
+
+	$('body').keydown(function(e) {
+    	
+    	var code = e.keyCode || e.which;
+    	var $focused = $(':focus');
+    	var objId = $focused[0].id;
+
+    	if (code == '9') {
+    		if (objId == 'nextZero'){
+    			e.preventDefault();
+    			title.focus();
+    		}
+
+    		if (objId == 'nextOne'){
+    			e.preventDefault();
+    			street.focus();
+    		}    		
+
+    	}
+ 	});
 }
 
 function checkStep(state) {

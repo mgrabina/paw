@@ -208,7 +208,7 @@
 							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 							        </div>
 							        
-							        <div class="input-field col">
+							        <div class="input-field col" id="garageSelectorDiv">
 										<form:select name="typeSelector" id="garageSelector" path="garage">
 											<form:option value="true"><spring:message code="index/filters/general/garage-one-or-more"/></form:option>
 											<form:option value="false"><spring:message code="index/filters/general/no-garage"/></form:option>
