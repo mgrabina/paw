@@ -8,22 +8,21 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-final class FilterMapper implements ResultSetExtractor<ArrayList<Map<String, Integer>>> {
+final class FilterMapper implements ResultSetExtractor<Map<Integer, Map<String, Integer>>> {
 
-	public ArrayList<Map<String, Integer>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-        ArrayList<Map<String, Integer>> list = new ArrayList<Map<String, Integer>>();
+	public Map<Integer, Map<String, Integer>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+        Map<Integer, Map<String, Integer>> map = new HashMap<Integer, Map<String, Integer>>();
         for (int i = 0; i < FilterType.values().length ; i++){
-            list.add(i, new HashMap<String, Integer>());
+            map.put(i, new HashMap<String, Integer>());
         }
         while (resultSet.next()) {
-            list.get(resultSet.getInt("type")).put(resultSet.getString("name"), resultSet.getInt("count"));
+            map.get(resultSet.getInt("type")).put(resultSet.getString("name"), resultSet.getInt("count"));
         }
-        return list;
+        return map;
     }
 //
 //    public List<User> extractData(ResultSet rs) throws SQLException {
