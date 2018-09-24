@@ -212,22 +212,43 @@ public class PropertyServiceImpl implements PropertyService {
 		Map<String,Long> neighborhoods = list.stream().
 				map(Property::getNeighborhood).
 				filter(s -> s != null).
-				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+				map(s -> s.toLowerCase()).
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(
+						Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		Map<String,Long> type = list.stream().
 				map(Property::getType).
 				map(propertyType -> propertyType.name()).
 				filter(s -> s != null).
-				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(
+						Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		Map<String,Long> baths = list.stream().
 				map(Property::getBaths).
 				map(bath -> bath.toString()).
 				filter(s -> s != null).
-				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(
+						Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		Map<String,Long> rooms = list.stream().
 				map(Property::getRooms).
 				map(room -> room.toString()).
 				filter(s -> s != null).
-				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+				.entrySet().stream()
+				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+				.collect(Collectors.toMap(
+						Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		map.put(1,neighborhoods);
 		map.put(3,type);
 		map.put(4,baths);
