@@ -27,15 +27,17 @@ public class MainController {
 	
 	@Autowired
 	private PropertyService ps;
-
+	
+	private final String PAGE_QUERY_KEY = "page";
 
 
 	@RequestMapping("/")
-	public ModelAndView index(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
+	public ModelAndView index(@RequestParam(value = PAGE_QUERY_KEY, required = false) String pageNumberParam, @RequestParam Map<String, String> queryMap) {
 		
 		final ModelAndView mav = new ModelAndView("index");
 		
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
+		queryMap.remove(PAGE_QUERY_KEY);
 		List<Property> propertiesList=ps.getFiltered(queryMap);
 		Map<Integer, Map<String, Long>> potFilters = ps.getPotentialFilters(propertiesList);
 
@@ -56,7 +58,7 @@ public class MainController {
 	}
 
     @RequestMapping("/search")
-    public ModelAndView search(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
+    public ModelAndView search(@RequestParam(value = PAGE_QUERY_KEY, required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
         return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser());
     }
 

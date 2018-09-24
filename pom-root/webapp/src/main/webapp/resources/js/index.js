@@ -21,18 +21,19 @@ function setUpFilters(){
 
    $(".filter-click").each(function(index) {
     $(this).on("click", function(){
-        addQueryParam($(this).data("field"), $(this).text());
-
+        var field = $(this).data("field");
+        var json = {};
+        json[field] = $(this).text();
+        addManyQueryParamsAndRedirect(json);
     });
   });
 
    $(".chip-click").each(function(index) {
     $(this).on("click", function(){
-        removeQueryParam($(this).data("field"));
+        removeManyQueryParamsAndRedirect([$(this).data("field")]);
 
     });
   });
-
    
 
 
