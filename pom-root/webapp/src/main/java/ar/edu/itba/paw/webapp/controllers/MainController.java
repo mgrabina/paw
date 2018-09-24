@@ -40,21 +40,16 @@ public class MainController {
 		int pageNumber = formatPageNumber(pageNumberParam);
 
 		Map<String,String> map= new HashMap<>();
-		map.put("type","apartment");
-		map.put("minPrice","99999");
-		map.put("garage","true");
-		List<Property> aux=ps.getFiltered(map);
+		List<Property> propertiesList=ps.getFiltered(map);
 
 		//Usar un getFiltered y pasarle el queryMap
-		final List<Property> propertiesList = ps.getAll();
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = ps.getPageCount(propertiesList);
-		String userId = "1"; //esta hardcodeado, despues ver como meterlo o si no esta logueado no deberia estar esa var
 
 		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
-		mav.addObject("userId", userId);
+		mav.addObject("myUser", us.getCurrentUser());
 
 //		List<Property> busqueda = ps.getPropertysByTagsSearch("palermo apartment");
 //		List<Property> busqueda2 = ps.getPropertysByTagsSearch("almagro");

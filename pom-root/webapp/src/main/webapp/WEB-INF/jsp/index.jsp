@@ -40,11 +40,24 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<a href=""><spring:message code="index/register" /></a>
-		  			<a href=""><spring:message code="index/login"/></a>
-		  			<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
-					<a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
-					
+		  			<c:if test="${empty myUser}">
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/register" /></a>
+			  			</div>
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/login"/></a>
+			  			</div>
+			  		</c:if>
+		  			<div class="nav-item">
+		  				<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+		  			</div>
+		  			
+		  			<c:if test="${not empty myUser}">
+			  			<div class="nav-item">
+			  				<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
+			  			</div>
+			  		</c:if>
+		  			
 		  		</div>
 
 		  		<div class="extras">
@@ -55,6 +68,7 @@
 					    <li class="divider" tabindex="-1"></li>
 					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
 					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -290,7 +304,7 @@
 
 				<div class="order-box">
 					<span class="order-by-text"><spring:message code="index/sort-by"/></span>
-					<a class='dropdown-trigger' data-target='dropdown2'><i class="material-icons right">keyboard_arrow_down</i>Relevantes</a>
+					<a class='dropdown-trigger' data-target='dropdown2'><i class="material-icons right">keyboard_arrow_down</i><spring:message code="index/sort/relevant"/></a>
 		  			  <ul id='dropdown2' class='dropdown-content'>
 		  			  	<li><a href="#!"><spring:message code="index/sort/relevant"/></a></li>
 					    <li><a href="#!"><spring:message code="index/sort/cheap"/></a></li>

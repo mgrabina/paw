@@ -43,7 +43,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/resources/**",
+                "/resources/**","/",
                 "/403");
 
     }

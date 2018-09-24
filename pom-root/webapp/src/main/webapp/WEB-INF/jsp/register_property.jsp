@@ -40,20 +40,36 @@
 			</div>
 
 		  	<div class="buttons-box">
-		  		<div class="labels invisible">
-		  			<a href=""><spring:message code="index/register" /></a>
-		  			<a href=""><spring:message code="index/login"/></a>
-		  			<a href=""><spring:message code="index/publish"/></a>
+		  		<div class="labels">
+		  			<c:if test="${empty myUser}">
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/register" /></a>
+			  			</div>
+			  			<div class="nav-item">
+			  				<a href=""><spring:message code="index/login"/></a>
+			  			</div>
+			  		</c:if>
+		  			<div class="nav-item">
+		  				<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+		  			</div>
+		  			
+		  			<c:if test="${not empty myUser}">
+			  			<div class="nav-item">
+			  				<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
+			  			</div>
+			  		</c:if>
+		  			
 		  		</div>
 
 		  		<div class="extras">
 		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 		  			  <ul id='dropdown1' class='dropdown-content'>
-					    <li><a href="#!">A</a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="#!"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -134,99 +150,103 @@
 
 							<div class="information-div form-group">
 
-								<div class="row-container">
-							    	<div class="input-field">
-							        	<form:input id="p-street" path="street" type="text" class="validate"/>
-							        	<label for="p-street"><spring:message code="register_property/builder/street"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+								<div class="column-container">
 
-							        <div class="input-field">
-							        	<form:input id="p-number" path="number" type="number" class="validate"/>
-							        	<label for="p-number"><spring:message code="register_property/builder/number"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+									<div class="row-container">
+								    	<div class="input-field">
+								        	<form:input id="p-street" path="street" type="text" class="validate"/>
+								        	<label for="p-street"><spring:message code="register_property/builder/street"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							        <div class="input-field">
-							        	<form:input id="p-floor" path="floor" type="number" class="validate"/>
-							        	<label for="p-floor"><spring:message code="register_property/builder/floor"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
-							    </div>
+								        <div class="input-field">
+								        	<form:input id="p-number" path="number" type="number" class="validate"/>
+								        	<label for="p-number"><spring:message code="register_property/builder/number"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							   	<div class="row-container">
-							        <div class="input-field">
-							        	<form:input id="p-ap" path="apartment" type="text" class="validate"/>
-							        	<label for="p-ap"><spring:message code="register_property/builder/apartment"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+								        <div class="input-field">
+								        	<form:input id="p-floor" path="floor" type="text" class="validate"/>
+								        	<label for="p-floor"><spring:message code="register_property/builder/floor"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
+								    </div>
 
-							        <div class="input-field">
-							        	<form:input id="p-neigh" path="neighborhood" type="text" class="validate"/>
-							        	<label for="p-neigh"><spring:message code="register_property/builder/neighborhood"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+								   	<div class="row-container">
+								        <div class="input-field">
+								        	<form:input id="p-ap" path="apartment" type="text" class="validate"/>
+								        	<label for="p-ap"><spring:message code="register_property/builder/apartment"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							        <div class="input-field">
-										<form:select name="typeSelector" id="typeSelector" path="type">
-											<form:option value="house"><spring:message code="index/filters/type/house"/></form:option>
-											<form:option value="apartment"><spring:message code="index/filters/type/apartment"/></form:option>
-											<form:option value="ph"><spring:message code="index/filters/type/ph"/></form:option>
-											<form:option value="office"><spring:message code="index/filters/type/office"/></form:option>
-											<form:option value="land"><spring:message code="index/filters/type/land"/></form:option>
-										</form:select>
-								    	<label><spring:message code="register_property/builder/type"/></label>
-								    	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        <div class="input-field">
+								        	<form:input id="p-neigh" path="neighborhood" type="text" class="validate"/>
+								        	<label for="p-neigh"><spring:message code="register_property/builder/neighborhood"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
+
+								        <div class="input-field">
+											<form:select name="typeSelector" id="typeSelector" path="type">
+												<form:option value="house"><spring:message code="index/filters/type/house"/></form:option>
+												<form:option value="apartment"><spring:message code="index/filters/type/apartment"/></form:option>
+												<form:option value="ph"><spring:message code="index/filters/type/ph"/></form:option>
+												<form:option value="office"><spring:message code="index/filters/type/office"/></form:option>
+												<form:option value="land"><spring:message code="index/filters/type/land"/></form:option>
+											</form:select>
+									    	<label><spring:message code="register_property/builder/type"/></label>
+									    	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+										</div>
 									</div>
-								</div>
 
-								<div class="row-container">
-									
-									<div class="input-field">
-							        	<form:input id="p-cArea" path="coveredArea" type="number" class="validate"/>
-							        	<label for="p-cArea"><spring:message code="register_property/builder/covered-area"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+									<div class="row-container">
+										
+										<div class="input-field">
+								        	<form:input id="p-cArea" path="coveredArea" type="number" class="validate"/>
+								        	<label for="p-cArea"><spring:message code="register_property/builder/covered-area"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							        <div class="input-field">
-							        	<form:input id="p-tArea" path="totalArea" type="number" class="validate"/>
-							        	<label for="p-tArea"><spring:message code="register_property/builder/total-area"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+								        <div class="input-field">
+								        	<form:input id="p-tArea" path="totalArea" type="number" class="validate"/>
+								        	<label for="p-tArea"><spring:message code="register_property/builder/total-area"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							         <div class="input-field">
-							        	<form:input id="p-tPrice" path="taxPrice" type="number" class="validate"/>
-							        	<label for="p-tPrice"><spring:message code="register_property/builder/tax-price"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
-							    </div>
+								         <div class="input-field">
+								        	<form:input id="p-tPrice" path="taxPrice" type="number" class="validate"/>
+								        	<label for="p-tPrice"><spring:message code="register_property/builder/tax-price"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
+								    </div>
 
-							    <div class="row-container">
-							        
-							        <div class="input-field">
-							        	<form:input id="p-rooms" path="rooms" type="number" class="validate"/>
-							        	<label for="p-rooms"><spring:message code="register_property/builder/rooms"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
+								    <div class="row-container">
+								        
+								        <div class="input-field">
+								        	<form:input id="p-rooms" path="rooms" type="number" class="validate"/>
+								        	<label for="p-rooms"><spring:message code="register_property/builder/rooms"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
 
-							        <div class="input-field">
-							        	<form:input id="p-baths" path="baths" type="number" class="validate"/>
-							        	<label for="p-baths"><spring:message code="register_property/builder/baths"/></label>
-							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-							        </div>
-							        
-							        <div class="input-field" id="garageSelectorDiv">
-										<form:select name="typeSelector" id="garageSelector" path="garage">
-											<form:option value="true"><spring:message code="index/filters/general/garage-one-or-more"/></form:option>
-											<form:option value="false"><spring:message code="index/filters/general/no-garage"/></form:option>
-										</form:select>
-								    	<label><spring:message code="register_property/builder/garages"/></label>
+								        <div class="input-field">
+								        	<form:input id="p-baths" path="baths" type="number" class="validate"/>
+								        	<label for="p-baths"><spring:message code="register_property/builder/baths"/></label>
+								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
+								        </div>
+								        
+								        <div class="input-field" id="garageSelectorDiv">
+											<form:select name="typeSelector" id="garageSelector" path="garage">
+												<form:option value="true"><spring:message code="index/filters/general/garage-one-or-more"/></form:option>
+												<form:option value="false"><spring:message code="index/filters/general/no-garage"/></form:option>
+											</form:select>
+									    	<label><spring:message code="register_property/builder/garages"/></label>
+										</div>
 									</div>
+								        
+							    	<div class="row center">
+								    	<button type="button" class="waves-effect waves-light btn top-margin" id="nextOne"><spring:message code="register_property/next-button"/></button>
+								   	</div>
+								   	
 								</div>
-							        
-						    	<div class="row center">
-							    	<button type="button" class="waves-effect waves-light btn top-margin" id="nextOne"><spring:message code="register_property/next-button"/></button>
-							   	</div>
 						    	
 							</div>
 
@@ -300,8 +320,8 @@
 									</div>
 									<div class="right">
 										<c:choose>
-											<c:when test="${not empty publisherImage}">
-												<img src="<c:out value="${publisherImage}"/>">
+											<c:when test="${not empty myUser.imageSrc}">
+												<img src="<c:out value="${myUser.imageSrc}"/>">
 											</c:when>
 											<c:otherwise>
 												<img src="<c:url value="/resources/images/anon-user.png"/>">

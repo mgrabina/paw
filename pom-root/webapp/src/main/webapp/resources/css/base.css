@@ -50,20 +50,26 @@ i:focus {outline:0;}
 
 .buttons-box{
 	display: flex;
-	flex: 3;
 	justify-content: space-around;
+	margin-right: 20px;
 }
 
 .buttons-box > .labels {
+	display: flex;
+	justify-content: space-around;
+	margin-right: 20px;
 }
 
-.labels > a {
+.nav-item {
 	text-transform: uppercase;
 	font-weight: bold;
 	color: #8BC34A;
-	font-size: 1.1em;
 	margin-right: 15px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+  	overflow: hidden;
 }
+
 
 .buttons-box > .extras {
 	display: flex;

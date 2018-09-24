@@ -30,6 +30,18 @@
 	justify-content: space-around;
 }
 
+.row-container-full{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.column-container{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
 .row.padding{
 	padding: 20px;
 	margin-bottom: -20px;

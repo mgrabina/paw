@@ -101,23 +101,38 @@ public class PropertyServiceImpl implements PropertyService {
 	private static final Map<String,String> filterStringMap;
 	private static final Map<String,String> filterIntMap;
 	private static final Map<String,String> filterBoolMap;
+	private static final Map<String,String> orderMap;
 	static {
 		Map<String,String> tmpMap = new HashMap<String,String>();
 		Map<String,String> tmpMap2 = new HashMap<String,String>();
 		Map<String,String> tmpMap3 = new HashMap<String,String>();
+		Map<String,String> tmpMap4 = new HashMap<String,String>();
+
 		tmpMap.put("type", "type=");
-		tmpMap2.put("maxPrice", "price<=");
-		tmpMap2.put("minPrice", "price>=");
 		tmpMap.put("operation", "operation_type=");
+
 		tmpMap2.put("maxArea", "total_area<=");
 		tmpMap2.put("minArea", "total_area>=");
 		tmpMap2.put("rooms", "rooms=");
 		tmpMap2.put("bath", "baths=");
+		tmpMap2.put("maxPrice", "price<=");
+		tmpMap2.put("minPrice", "price>=");
+
 		tmpMap3.put("garage", "garage=");
+
+		tmpMap4.put("price_asd","property.price asc");
+		tmpMap4.put("price_desc","property.price desc");
+		tmpMap4.put("date_asd","property.ad_date asc");
+		tmpMap4.put("date_desc","property.ad_date desc");
+
+
+
 
 		filterIntMap = Collections.unmodifiableMap(tmpMap2);
 		filterStringMap = Collections.unmodifiableMap(tmpMap);
 		filterBoolMap = Collections.unmodifiableMap(tmpMap3);
+		orderMap = Collections.unmodifiableMap(tmpMap4);
+
 	}
 
 	public List<Property> getFiltered(Map<String,String> filters){
@@ -125,6 +140,7 @@ public class PropertyServiceImpl implements PropertyService {
 			return getAll();
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
+		String order=null;
 		int i = filters.size();
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
@@ -141,14 +157,21 @@ public class PropertyServiceImpl implements PropertyService {
 						query.append(filterBoolMap.get(entry.getKey()));
 						query.append("?");
 						params.add(Boolean.parseBoolean(entry.getValue()));
-					}else return Collections.emptyList();
+					}else {
+						if(entry.getKey()=="order_by"){
+							if(orderMap.containsKey(entry.getValue()))
+								order=orderMap.get(entry.getValue());
+						} else return Collections.emptyList();
+					}
 				}
 			}
+			if (order==null)
+				order="property.id ASC";
 			i--;
 			if(i>0)
 				query.append(" AND ");
 		}
-		return propertyDao.getFiltered(query.toString(), params);
+		return propertyDao.getFiltered(query.toString(), params, order);
 	}
 	/*
 		Get property's that matches tags (such as property type, neighborhood, etc.)

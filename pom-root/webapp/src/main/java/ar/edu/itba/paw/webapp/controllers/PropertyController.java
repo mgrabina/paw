@@ -48,7 +48,8 @@ public class PropertyController {
     public ModelAndView getRegister(@ModelAttribute("newPropertyForm") final NewPropertyForm form) {
         
     	final ModelAndView mav = new ModelAndView("register_property");
-        mav.addObject("publisherImage", us.getCurrentUser().getImageSrc());
+        mav.addObject("myUser", us.getCurrentUser());
+
     	
         return mav;
     }
