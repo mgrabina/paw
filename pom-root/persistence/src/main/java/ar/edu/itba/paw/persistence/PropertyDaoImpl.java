@@ -23,7 +23,8 @@ public class PropertyDaoImpl implements PropertyDao {
 	private SimpleJdbcInsert jdbcInsert;
 
 	private final static PropertyMapper ROW_MAPPER = new PropertyMapper();
-			
+	private final static FilterMapper FILTER_MAPPER = new FilterMapper();
+
 	@Autowired
 	public PropertyDaoImpl(final DataSource ds) {
 		jdbcTemplate = new JdbcTemplate(ds);
@@ -117,7 +118,7 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, List<String> tags) {
+    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, Map<String, Integer> tags) {
 
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
 
@@ -148,12 +149,26 @@ public class PropertyDaoImpl implements PropertyDao {
         final Map<String, Object> auxMap = new HashMap<String, Object>();
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tags");
 		auxMap.put("id_property", propertyId);
-		tags.stream().filter(tag -> tag != null).forEach(tag -> {
-			auxMap.put("name", tag);
+		tags.entrySet().stream().filter(entry -> entry.getKey() != null).forEach(tag -> {
+			auxMap.put("name", tag.getKey());
+			auxMap.put("type", tag.getValue());
 			jdbcInsert.execute(auxMap);
 		});
         return propertyId;
     }
+    public Map<Integer, Map<String, Integer>> getPotentialFilters(){
+        final Map<Integer, Map<String, Integer>> map = jdbcTemplate.query(
+                "select type, name, count(name) as count " +
+                        " from tags " +
+                        " group by type, name " +
+                        " order by type; ",
+                FILTER_MAPPER);
+        if (map.isEmpty()) {
+            return Collections.emptyMap();
+        }
+        return map;
+    }
+
 	public List<Property> getFavourites(Long userId){
 		final List<Property> list = jdbcTemplate.query(
 				"SELECT p.*, u.*, i.image_src FROM favourites " +

@@ -30,5 +30,5 @@ public interface PropertyService {
     public List<Property> getPropertysByTagsSearch(String search);
     public List<Property> getPropertysByTagsSearch(List<String> tags);
     public List<String> getAllTags();
-    
+    public Map<Integer, Map<String, Integer>> getPotentialFilters();
 }
