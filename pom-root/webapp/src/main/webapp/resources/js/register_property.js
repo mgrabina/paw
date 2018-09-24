@@ -1,7 +1,7 @@
 var colorForOpType = ["#589017", "#f4b342", "#f4eb41"]; //Should use toggleclass
 var actualStep = 0;
 var stepZero = [false, false, false];
-var stepOne = [false, false, false, false, false, false, false, false, false, false];
+var stepOne = [false, false, false, false, false, false, false, false];
 var stepTwo = [false];
 var imageCarousel;
 
@@ -267,24 +267,16 @@ function setUpChangeHooks(){
  		stepOne[0] = checkField($(this), input, rules);
 	});
 
-	number.on("input", function(e) {
- 		var input = $(this).val();
- 		$('#number-preview').text(input + " - ");
 
- 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [1, 5] ]];
- 		stepOne[1] = checkField($(this), input, rules);
+	// neighborhood.on("change", function(e) {
+ // 		var input = $(this).val();
+	// 	console.log("ACA: " + input);
+ // 		$('#neighborhood-preview').text(input);
 
-	});
-
-	neighborhood.on("input", function(e) {
- 		var input = $(this).val();
- 		$('#neighborhood-preview').text(input);
-
- 		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [5, 30] ]];
- 		stepOne[4] = true;
-	});
+ // 		var rules = [[RulesEnum.NOT_NULL, null],
+ // 					[RulesEnum.LIMITED_SIZE, [5, 30] ]];
+ // 		stepOne[4] = checkField($(this), input, rules);
+	// });
 
 	cArea.on("input", function(e) {
  		var input = $(this).val();
@@ -299,7 +291,7 @@ function setUpChangeHooks(){
 
  		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 9999999] ]];
- 		stepOne[5] = checkField($(this), input, rules);
+ 		stepOne[4] = checkField($(this), input, rules);
 	});
 
 	//Not in card
@@ -309,7 +301,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [0, 200] ]];
- 		stepOne[2] = checkField($(this), input, rules);
+ 		stepOne[1] = checkField($(this), input, rules);
 	});
 
 	apartment.on("input", function(e) {
@@ -317,7 +309,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_SIZE, [1, 10] ]];
- 		stepOne[3] = checkField($(this), input, rules);
+ 		stepOne[2] = checkField($(this), input, rules);
 	});
 
 	tArea.on("input", function(e) {
@@ -325,7 +317,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 9999999] ]];
- 		stepOne[6] = checkField($(this), input, rules);
+ 		stepOne[4] = checkField($(this), input, rules);
 	});
 
 	tPrice.on("input", function(e) {
@@ -333,7 +325,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 100000] ]];
- 		stepOne[7] = checkField($(this), input, rules);
+ 		stepOne[5] = checkField($(this), input, rules);
 	});
 
 	rooms.on("input", function(e) {
@@ -341,7 +333,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 99] ]];
- 		stepOne[8] = checkField($(this), input, rules);
+ 		stepOne[6] = checkField($(this), input, rules);
 	});
 
 	baths.on("input", function(e) {
@@ -349,7 +341,7 @@ function setUpChangeHooks(){
 
 		var rules = [[RulesEnum.NOT_NULL, null],
  					[RulesEnum.LIMITED_NUMBER, [1, 99] ]];
- 		stepOne[9] = checkField($(this), input, rules);
+ 		stepOne[7] = checkField($(this), input, rules);
 	});
 
 
@@ -401,6 +393,8 @@ function formatCurrency(n, c, d, t) {
 
 function checkField(field, inputData, rules) {
 
+	if (field == neighborhood) return true;
+
 	var valid = validateField(inputData, rules);
 
 	if (!valid) {
@@ -438,6 +432,8 @@ function fillInAddress() {
 
 	var n = place.address_components[2].short_name;
 	neighborhood.val(n);
+	$('#neighborhood-preview').text(n);
+	stepOne[3] = n.length >= 3;
 
 }
 
