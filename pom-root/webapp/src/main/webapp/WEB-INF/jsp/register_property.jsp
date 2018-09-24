@@ -176,7 +176,7 @@
 								        </div>
 
 								        <div class="input-field">
-								        	<form:input id="p-neigh" path="neighborhood" placeholder="-" type="text" class="validate" readonly="true"/>
+								        	<form:input id="p-neigh" path="neighborhood" placeholder="-" type="text" class="" readonly="true"/>
 								        	<label for="p-neigh"><spring:message code="register_property/builder/neighborhood"/></label>
 								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 								        </div>
@@ -312,7 +312,7 @@
 								<div class="header">
 									<div class="left">
 										<a id="title-preview" href="" class="card-text-wrap title"><spring:message code="register_property/preview/title"/></a>
-										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span></span><span id="neighborhood-preview"></span></a>
+										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span></span> - <span id="neighborhood-preview"></span></a>
 									</div>
 									<div class="right">
 										<c:choose>

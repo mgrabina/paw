@@ -111,6 +111,12 @@ public class PropertyServiceImpl implements PropertyService {
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
 		int i = filters.size();
+		int date=-1;
+		if(filters.containsKey("date")) {
+			date = Integer.parseInt(filters.get("date"));
+			filters.remove("date");
+		}
+
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
 				query.append(filterStringMap.get(entry.getKey()));
@@ -134,13 +140,22 @@ public class PropertyServiceImpl implements PropertyService {
 					}
 				}
 			}
-			if (order==null)
-				order="property.id ASC";
 			i--;
 			if(i>0)
 				query.append(" AND ");
 		}
-		return propertyDao.getFiltered(query.toString(), params, order);
+		if (order==null)
+			order="property.id ASC";
+		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
+		if(date>0){
+			List<Property> aux =new LinkedList<>();
+			for (Property property: propertiesList){
+				if(property.getAdDate()<=date)
+					aux.add(property);
+			}
+			propertiesList=aux;
+		}
+		return propertiesList;
 	}
 	/*
 		Get property's that matches tags (such as property type, neighborhood, etc.)
