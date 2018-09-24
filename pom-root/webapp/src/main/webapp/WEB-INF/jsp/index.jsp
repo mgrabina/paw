@@ -28,9 +28,9 @@
 
 		  	<div class="search-box">
 			  	<div class="nav-wrapper">
-	      			<form>
+	      			<form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
 				        <div class="input-field">
-				          <input id="search" type="search" placeholder="Buscar" required>
+				          <input id="search" type="search" name="query" placeholder="Buscar" required>
 				          <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
 				          <i class="material-icons">close</i>
 				        </div>

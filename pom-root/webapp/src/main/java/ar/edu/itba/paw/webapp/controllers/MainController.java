@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.User;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -64,33 +66,33 @@ public class MainController {
 
 	@RequestMapping("/myfavourites")
     public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        final ModelAndView mav = new ModelAndView("property_list");
-        final User user = us.getCurrentUser();
-        final List<Property> propertiesList = ps.getFavourites(user.getId());
-        final int propertiesCount = propertiesList.size();
-        final int pagesCount = ps.getPageCount(propertiesList);
-
-        mav.addObject("propertiesList", ps.getPage(propertiesList, formatPageNumber(pageNumberParam)));
-        mav.addObject("propertiesCount", propertiesCount);
-        mav.addObject("pagesCount", pagesCount);
-        mav.addObject("userId", user.getId());
-
-        return mav;
+        return basicPaginatedListMAV("property_list", ps.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
     }
 
     @RequestMapping("/myproperties")
     public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        final ModelAndView mav = new ModelAndView("property_list");
+        return basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam);
+    }
+
+    @RequestMapping("/search")
+    public ModelAndView search(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
+        return basicPaginatedListMAV("property_list", ps.getPropertysByTagsSearch(query), pageNumberParam);
+    }
+
+    private ModelAndView basicPaginatedListMAV(String name, List<Property> list, String pageNumberParam ){
+        final ModelAndView mav = new ModelAndView(name);
         final User user = us.getCurrentUser();
-        final List<Property> propertiesList = ps.getAllByUserId(user.getId());
+        List<Property> propertiesList;
+        if(list != null)
+            propertiesList = list;
+        else
+            propertiesList = new LinkedList<Property>();
         final int propertiesCount = propertiesList.size();
         final int pagesCount = ps.getPageCount(propertiesList);
-
         mav.addObject("propertiesList", ps.getPage(propertiesList, formatPageNumber(pageNumberParam)));
         mav.addObject("propertiesCount", propertiesCount);
         mav.addObject("pagesCount", pagesCount);
         mav.addObject("userId", user.getId());
-
         return mav;
     }
 

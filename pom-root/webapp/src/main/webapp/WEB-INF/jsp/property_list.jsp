@@ -28,13 +28,13 @@
 
 		  	<div class="search-box">
 			  	<div class="nav-wrapper">
-	      			<form>
-				        <div class="input-field">
-				          <input id="search" type="search" placeholder="Buscar" required>
-				          <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
-				          <i class="material-icons">close</i>
-				        </div>
-			      </form>
+                    <form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
+                        <div class="input-field">
+                            <input id="search" type="search" name="query" placeholder="Buscar" required>
+                            <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
 			    </div>
 			</div>
 
@@ -60,7 +60,9 @@
 				<span class="properties-count"><span id="pCount" class="bold">${propertiesCount}</span> <spring:message code="property_list/properties"/></span>
 
 				<div class="properties-list">
-
+                    <c:if test="${propertiesCount <= 0}">
+                        <span><spring:message code="property_list/no_properties"/></span>
+                    </c:if>
 					<c:forEach items="${propertiesList}" var="property" varStatus="loop">
 
 						<div class="shadow-box property-card" id="property-${loop.index}">
