@@ -310,8 +310,9 @@
 										<span id="cArea-preview"></span> <span id="meters-post" class="invisible"><spring:message code="index/card/meters"/></span></br>
 									</div>
 									<div class="pDesc">
-										<span id="description-preview" style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
-											<spring:message code="register_property/preview/description"/>
+										<span id="description-preview" style="width:450px; overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
+											ASDJAKSDJAKSDJKASJDKASJDKASJDKASJDKASJDLAJSDLKJASDLKJASLDJASLKDJLAKSJDLAKSASDJKASJDLASJDKLAJSDLKJASDLKJASLKDJSA
+											
 										</span> 
 									</div>
 								</div>
