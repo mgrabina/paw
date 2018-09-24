@@ -66,15 +66,15 @@ public class PropertyServiceImpl implements PropertyService {
 		 return Math.round(propertiesList.size() / PAGE_SIZE);
 	}
 	
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
-	    return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
+	public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
+	    return propertyDao.createProperty(street, floor, apartment, type, userId, price, coveredArea, totalArea, rooms, baths, garage, taxPrice);
 	}
 
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price) {
-		return propertyDao.createProperty(street, number, floor, apartment, type, userId, price, null, null, null, null, null, null);
+	public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price) {
+		return propertyDao.createProperty(street, floor, apartment, type, userId, price, null, null, null, null, null, null);
 	}
 
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
+	public Long createProperty(String street, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
 	    Map<String, Integer> tags = new HashMap<String, Integer>();
 		Arrays.stream(street.trim().toLowerCase().split("\\s+")).forEach(
 				word -> tags.put( word, FilterType.street.ordinal())
@@ -90,7 +90,7 @@ public class PropertyServiceImpl implements PropertyService {
 		    tags.put("garage", FilterType.garage.ordinal());
 	    if (inmediateDelivery)
 		    tags.put("imediate_delivery", FilterType.inmediateDelivery.ordinal());
-		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
+		return propertyDao.createProperty(street, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
 

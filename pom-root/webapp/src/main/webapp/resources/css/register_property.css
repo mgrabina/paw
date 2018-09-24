@@ -36,6 +36,24 @@
 	width: 100%;
 }
 
+.row-container-basic{
+	display: flex;
+	flex-direction: row;
+	padding: 20px;
+}
+
+.f-2 {
+	flex: 2;
+}
+
+.f-1{
+	flex: 1;
+}
+
+.mr-20{
+	margin-right: 20px;
+}
+
 .column-container{
 	display: flex;
 	flex-direction: column;

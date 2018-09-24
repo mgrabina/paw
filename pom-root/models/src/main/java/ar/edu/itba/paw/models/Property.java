@@ -10,7 +10,6 @@ public class Property {
 	    
     private Long id;
     private String street;
-    private int number;
     private int floor;
     private String apartment;
     private String neighborhood;
@@ -30,10 +29,9 @@ public class Property {
     private int adDate;
     private Boolean inmediateDelivery;
 
-    public Property(Long id, String street, int number, int floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, long price, int coveredArea, int totalArea, int rooms, int baths, Boolean garage, int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
+    public Property(Long id, String street, int floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, long price, int coveredArea, int totalArea, int rooms, int baths, Boolean garage, int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
         this.id = id;
         this.street = street;
-        this.number = number;
         this.floor = floor;
         this.apartment = apartment;
         this.neighborhood = neighborhood;
@@ -54,13 +52,12 @@ public class Property {
         this.images = new ArrayList<String>();
     }
 
-    public Property(Long id, String street, int number, int floor, String apartment,
+    public Property(Long id, String street, int floor, String apartment,
                     PropertyType type, OperationType operationType, User userId, long price,
                     int coveredArea, int totalArea, int rooms, int baths,
                     Boolean garage, int taxPrice) {
         this.id = id;
         this.street = street;
-        this.number = number;
         this.floor = floor;
         this.apartment = apartment;
         this.type = type;
@@ -75,12 +72,11 @@ public class Property {
         this.taxPrice = taxPrice;
     }
 
-    public Property(String street, int number, int floor, String apartment, String neighborhood,
+    public Property(String street, int floor, String apartment, String neighborhood,
                     OperationType operationType, PropertyType type, User publisherUser, long price,
                     int coveredArea, int totalArea, int rooms, int baths, Boolean garage,
                     int taxPrice, String adMessage, String adDescription, int adDate, Boolean inmediateDelivery) {
         this.street = street;
-        this.number = number;
         this.floor = floor;
         this.apartment = apartment;
         this.neighborhood = neighborhood;
@@ -194,10 +190,6 @@ public class Property {
         return street;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public int getFloor() {
         return floor;
     }
@@ -271,10 +263,9 @@ public class Property {
         private List<Property> nestedWishes;
         private List<String> nestedImages;
         
-        public PropertyBuilder(final User newUser, final String newStreet, final int newNumber, final long newPrice, final OperationType newOperationType) {
+        public PropertyBuilder(final User newUser, final String newStreet, final long newPrice, final OperationType newOperationType) {
         	this.nestedPublisherUser = newUser;
         	this.nestedStreet = newStreet;
-            this.nestedNumber = newNumber;
             this.nestedPrice = newPrice;
             this.nestedOperationType = newOperationType;
         }
@@ -362,7 +353,7 @@ public class Property {
         public Property build(){
         	
            return new Property(
-              nestedId, nestedStreet, nestedNumber,
+              nestedId, nestedStreet,
               nestedFloor, nestedApartment, nestedNeighborhood,
                    nestedOperationType, nestedType, nestedPublisherUser, nestedPrice,
               nestedCoveredArea, nestedTotalArea, nestedRooms,
@@ -374,7 +365,7 @@ public class Property {
 
 	@Override
 	public String toString() {
-		return "Property [id=" + id + ", street=" + street + ", number=" + number + ", floor=" + floor + ", apartment="
+		return "Property [id=" + id + ", street=" + street + ", floor=" + floor + ", apartment="
 				+ apartment + ", neighborhood=" + neighborhood + ", operationType=" + operationType + ", type=" + type
 				+ ", publisherUser=" + publisherUser + ", price=" + price + ", coveredArea=" + coveredArea
 				+ ", totalArea=" + totalArea + ", rooms=" + rooms + ", baths=" + baths + ", garage=" + garage

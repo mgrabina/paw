@@ -18,9 +18,9 @@ public interface PropertyService {
     public List<Property> getPage(final List<Property> propertiesList);
 	public int getPageCount(List<Property> propertiesList);
 
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, PropertyType type, Long userId, Long price);
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood,
+    public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
+    public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price);
+    public Long createProperty(String street, Integer floor, String apartment, String neighborhood,
                     OperationType operationType, PropertyType type, User publisherUser, Long price,
                     Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                     Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);

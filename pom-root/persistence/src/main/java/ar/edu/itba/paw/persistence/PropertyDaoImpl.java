@@ -62,7 +62,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	
-	public Long createProperty(String street, Integer number, Integer floor, String apartment,
+	public Long createProperty(String street, Integer floor, String apartment,
 			PropertyType type, Long userId, Long price, Integer coveredArea,
 							   Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {
 
@@ -70,7 +70,6 @@ public class PropertyDaoImpl implements PropertyDao {
 
 		final Map<String, Object> args = new HashMap<String, Object>();
 		args.put("street", street);
-		args.put("number", number);
 		args.put("floor", floor);
 		args.put("apartment", apartment);
 		args.put("type", type);
@@ -88,13 +87,12 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
+	public Long createProperty(String street, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
 
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
 
 		final Map<String, Object> args = new HashMap<String, Object>();
 		args.put("street", street);
-		args.put("number", number);
 		args.put("floor", floor);
 		args.put("apartment", apartment);
 		args.put("neighborhood", neighborhood.toLowerCase().trim());
@@ -118,13 +116,12 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyId;
 	}
 
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, Map<String, Integer> tags) {
+    public Long createProperty(String street, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, Map<String, Integer> tags) {
 
         jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("property").usingGeneratedKeyColumns("id");
 
         final Map<String, Object> args = new HashMap<String, Object>();
         args.put("street", street);
-        args.put("number", number);
         args.put("floor", floor);
         args.put("apartment", apartment);
         args.put("neighborhood", neighborhood.toLowerCase().trim());

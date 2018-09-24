@@ -34,7 +34,6 @@ final class PropertyMapper implements ResultSetExtractor<List<Property>> {
             	
             	PropertyBuilder pb = new PropertyBuilder(publisher,
 						rs.getString("street"),
-						rs.getInt("number"),
 						rs.getLong("price"),
 						OperationType.valueOf(rs.getString("operation_type"))
 				);

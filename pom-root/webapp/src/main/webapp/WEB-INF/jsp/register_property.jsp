@@ -152,20 +152,15 @@
 
 								<div class="column-container">
 
-									<div class="row-container">
-								    	<div class="input-field">
+									<div class="row-container-basic">
+								    	<div class="input-field f-2 mr-20">
 								        	<form:input id="p-street" path="street" type="text" class="validate"/>
 								        	<label for="p-street"><spring:message code="register_property/builder/street"/></label>
 								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 								        </div>
 
-								        <div class="input-field">
-								        	<form:input id="p-number" path="number" type="number" class="validate"/>
-								        	<label for="p-number"><spring:message code="register_property/builder/number"/></label>
-								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
-								        </div>
-
-								        <div class="input-field">
+								       
+								        <div class="input-field f-1">
 								        	<form:input id="p-floor" path="floor" type="text" class="validate"/>
 								        	<label for="p-floor"><spring:message code="register_property/builder/floor"/></label>
 								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
@@ -316,7 +311,7 @@
 								<div class="header">
 									<div class="left">
 										<a id="title-preview" href="" class="card-text-wrap title"><spring:message code="register_property/preview/title"/></a>
-										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span><span id="number-preview"></span><span id="neighborhood-preview"></span></a>
+										<a href="" class="card-text-wrap subtitle"><span id="street-preview"><spring:message code="register_property/preview/address"/></span></span><span id="neighborhood-preview"></span></a>
 									</div>
 									<div class="right">
 										<c:choose>
