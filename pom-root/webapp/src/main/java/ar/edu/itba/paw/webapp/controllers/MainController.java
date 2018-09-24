@@ -37,7 +37,7 @@ public class MainController {
 		
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
 		List<Property> propertiesList=ps.getFiltered(queryMap);
-		Map<Integer, Map<String,Integer>> potFilters = ps.getPotentialFilters();
+		Map<Integer, Map<String, Long>> potFilters = ps.getPotentialFilters(propertiesList);
 
 		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
