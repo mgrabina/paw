@@ -124,7 +124,7 @@
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 
 							      				<div class="link-box capit">
-							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood">${filterEntry.key}</a>
+							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood"><c:out value="${filterEntry.key}"/></a>
 							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>
@@ -158,7 +158,7 @@
 						      			<c:if test="${filter.key eq 3}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href=""><c:out value="${filterEntry.key}"/></a>
+							      					<a class="filter-click" data-field="type"><c:out value="${filterEntry.key}"/></a>
 							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>

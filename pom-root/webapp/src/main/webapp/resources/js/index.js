@@ -88,8 +88,11 @@ function deleteFavorite(propertyId) {
 
 /*
 	Adds a query param (key-value) and redirects the window to the new URL.
+
  */
 function addQueryParam(fieldName, value) {
+
+    //fails with 2+ filters
     
     if(location.search.search(fieldName) == 1){
         var newURL = location.origin + "?";
@@ -113,29 +116,7 @@ function addQueryParam(fieldName, value) {
 
 function removeQueryParam(fieldName) {
 
-    if(location.search.search(fieldName) == 1){
-        
-        var newURL = location.origin;
-        var params = location.search.split("?")[1].split("&");
-
-        if (params.length > 1){
-           newUrl+= "?";
-        }
-
-        for(var queryParam in params){
-
-            if (queryParam.search(fieldName)){
-              //newURL += fieldName + "=" + value;      
-            }else{
-              newURL += queryParam;
-            }
-        }
-
-
-
-    }
-    
-    window.location.replace(newURL);
+    //IMPLEEMENT
 
 }
 
