@@ -154,7 +154,8 @@
 
 									<div class="row-container-basic">
 								    	<div class="input-field f-2 mr-20">
-								        	<form:input id="p-street" path="street" type="text" class="validate"/>
+								    		<spring:message code="register_property/builder/autocomplete-placeholder" var="nPlace" />
+								        	<form:input id="p-street" path="street" type="text" class="validate" placeholder="${nPlace}" onFocus="geolocate()"/>
 								        	<label for="p-street"><spring:message code="register_property/builder/street"/></label>
 								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 								        </div>
@@ -175,7 +176,7 @@
 								        </div>
 
 								        <div class="input-field">
-								        	<form:input id="p-neigh" path="neighborhood" type="text" class="validate"/>
+								        	<form:input id="p-neigh" path="neighborhood" placeholder="-" type="text" class="validate" readonly="true"/>
 								        	<label for="p-neigh"><spring:message code="register_property/builder/neighborhood"/></label>
 								        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 								        </div>
@@ -360,6 +361,8 @@
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Y4tkFGWovxIdXWcR_GyZLVIHeMzW9cQ&libraries=places&callback=initGoogleMapsAutocomplete"
+        async defer></script>
 	    <script type="text/javascript" src="<c:url value="/resources/js/inputValidator.js"></c:url>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/register_property.js"></c:url>"></script>
 		
