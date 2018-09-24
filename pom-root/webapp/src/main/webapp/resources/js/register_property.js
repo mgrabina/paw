@@ -220,7 +220,7 @@ function setUpChangeHooks(){
  		$('#title-preview').text(input);
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [6, 30] ]];
+ 					[RulesEnum.LIMITED_SIZE, [6, 80] ]];
 
  		stepZero[0] = checkField($(this), input, rules);
 	});
@@ -269,7 +269,7 @@ function setUpChangeHooks(){
  		$('#number-preview').text(input + " - ");
 
  		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [3, 5] ]];
+ 					[RulesEnum.LIMITED_SIZE, [1, 5] ]];
  		stepOne[1] = checkField($(this), input, rules);
 
 	});
