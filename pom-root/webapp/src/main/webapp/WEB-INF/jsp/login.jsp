@@ -28,11 +28,13 @@
                     <form>
                         <div class="col-md-6">
                             <div class="login-mail">
-                                <form:input type="text" placeholder='<spring:message code="login/email"/>' required="" id="mail" path="mail" name="mail"/>
+                                <spring:message code='login/email' var="auxEmail"/>
+                                <form:input type="text" placeholder="${auxEmail}" required="" id="mail" path="mail" name="mail"/>
                                 <i class="fa fa-envelope"></i>
                             </div>
                             <div class="login-mail">
-                                <form:input type="password" placeholder='<spring:message code="login/password"/>' required="" id="password" path="password" name="password"/>
+                                <spring:message code="login/password" var="auxPassword"/>
+                                <form:input type="password" placeholder='auxPassword' required="" id="password" path="password" name="password"/>
                                 <i class="fa fa-lock"></i>
                             </div>
                         </div>
