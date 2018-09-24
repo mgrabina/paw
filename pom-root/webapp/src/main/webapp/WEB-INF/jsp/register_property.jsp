@@ -82,7 +82,7 @@
 								
 								<div class="row padding">
 							    	<div class="input-field">
-							        	<form:input id="p-title" path="adMessage" type="text" class="validate" maxlength="30" data-length="30"/>
+							        	<form:input id="p-title" path="adMessage" type="text" class="validate" maxlength="80" data-length="80"/>
 							        	<label for="p-title"><spring:message code="register_property/builder/title"/></label>
 							        	<span class="helper-text" data-error="<spring:message code="register_property/error/general"/>" data-success="OK"></span>
 							        </div>
@@ -311,8 +311,7 @@
 									</div>
 									<div class="pDesc">
 										<span id="description-preview" style="width:450px; overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
-											ASDJAKSDJAKSDJKASJDKASJDKASJDKASJDKASJDLAJSDLKJASDLKJASLDJASLKDJLAKSJDLAKSASDJKASJDLASJDKLAJSDLKJASDLKJASLKDJSA
-											
+											<spring:message code="register_property/preview/description"/>
 										</span> 
 									</div>
 								</div>

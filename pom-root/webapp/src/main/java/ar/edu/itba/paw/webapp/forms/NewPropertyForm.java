@@ -75,7 +75,7 @@ public class NewPropertyForm {
 	@NotNull
     private Integer taxPrice;
 
-	@Size(min = 6, max = 30)
+	@Size(min = 6, max = 80)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
 	private String adMessage;
