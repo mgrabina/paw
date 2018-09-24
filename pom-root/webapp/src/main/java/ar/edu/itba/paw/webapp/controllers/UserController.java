@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private PropertyService ps;
 
-    private Paginate paginate = new Paginate();
+
 
     @RequestMapping(value = "/user/login")
     public ModelAndView getLogin(@ModelAttribute("loginForm") final LoginForm form) {
@@ -64,12 +64,12 @@ public class UserController {
 
     @RequestMapping("/myfavourites")
     public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam);
+        return Paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser());
     }
 
     @RequestMapping("/myproperties")
     public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam);
+        return Paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser());
     }
 
 }

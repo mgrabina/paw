@@ -14,9 +14,6 @@ public interface PropertyService {
     public Property findById(final long id);
     public List<Property> getAll();
     public List<Property> getAllByUserId(final long id);
-    public List<Property> getPage(final List<Property> propertiesList, final int pageNumber);
-    public List<Property> getPage(final List<Property> propertiesList);
-	public int getPageCount(List<Property> propertiesList);
 
     public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice);
     public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price);

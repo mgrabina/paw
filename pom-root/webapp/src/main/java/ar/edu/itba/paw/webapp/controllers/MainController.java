@@ -28,7 +28,6 @@ public class MainController {
 	@Autowired
 	private PropertyService ps;
 
-	private Paginate paginate = new Paginate();
 
 
 	@RequestMapping("/")
@@ -37,16 +36,16 @@ public class MainController {
 		final ModelAndView mav = new ModelAndView("index");
 		
 
-		int pageNumber = paginate.formatPageNumber(pageNumberParam);
+		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
 
 		Map<String,String> map= new HashMap<>();
 		List<Property> propertiesList=ps.getFiltered(map);
 
 		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
-		final int pagesCount = ps.getPageCount(propertiesList);
+		final int pagesCount = Paginate.getPageCount(propertiesList);
 
-		mav.addObject("propertiesList", ps.getPage(propertiesList, pageNumber));
+		mav.addObject("propertiesList", Paginate.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
 		mav.addObject("myUser", us.getCurrentUser());
@@ -62,7 +61,7 @@ public class MainController {
 
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
-        return paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam);
+        return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser());
     }
 
 	@RequestMapping("/not-found")

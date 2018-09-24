@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
-	
+
 	private final int PAGE_SIZE = 10;
 	private final int FIRST_PAGE = 1;
 
@@ -35,35 +35,6 @@ public class PropertyServiceImpl implements PropertyService {
 
 	public List<Property> getAllByUserId(final long id){
 		return propertyDao.getAllByUserId(id);
-	}
-	
-	public List<Property> getPage(List<Property> propertiesList, int pageNumber) throws IllegalArgumentException{
-		
-		if(pageNumber <= 0) {
-	        throw new IllegalArgumentException("Invalid page number: " + pageNumber);
-	    }
-
-	    int from = (pageNumber - 1) * PAGE_SIZE;
-	    
-	    if(propertiesList == null || propertiesList.size() < from){
-	        return Collections.emptyList();
-	    }
-
-	    // toIndex exclusive
-	    return propertiesList.subList(from, Math.min(from + PAGE_SIZE, propertiesList.size()));
-		
-	}
-	
-    public List<Property> getPage(final List<Property> propertiesList){
-    	return getPage(propertiesList, FIRST_PAGE);
-    }
-	
-	public int getPageCount(List<Property> propertiesList) {
-		
-		 if(propertiesList == null)
-			 return 0;
-		 
-		 return Math.round(propertiesList.size() / PAGE_SIZE);
 	}
 	
 	public Long createProperty(String street, Integer floor, String apartment, PropertyType type, Long userId, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice) {

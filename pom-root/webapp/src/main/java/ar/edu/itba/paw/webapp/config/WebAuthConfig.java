@@ -29,7 +29,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/register").anonymous()
                 //.antMatchers("/").anonymous()
                 // .antMatchers("/admin/**").hasRole("ADMIN")
-                //.antMatchers("/**").authenticated()
+                .antMatchers("/**").authenticated()
                 .antMatchers("/property/register").authenticated()
                 .and().formLogin().usernameParameter("mail").passwordParameter("password").defaultSuccessUrl("/", false).loginPage("/user/login")
                 .failureUrl("/user/login?error=true")
@@ -43,7 +43,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/resources/**","/",
+                "/resources/**","/","/search","/not-found","/errors","/property/{id}",
                 "/403");
 
     }
