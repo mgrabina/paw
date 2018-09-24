@@ -5,10 +5,7 @@ import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.models.User;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public interface PropertyDao {
 	
@@ -25,9 +22,10 @@ public interface PropertyDao {
                                OperationType operationType, PropertyType type, User publisherUser, Long price,
                                Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage,
                                Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery);
-    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, List<String> tags);
+    public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery, Map<String, Integer> tags);
     public void addImage(String imageSrc, long propertyId);
     public List<Property> getFiltered(String filters, ArrayList params);
     public List<Property> getByTags(List<String> tags);
     public List<String> getAllTags();
+    public Map<Integer, Map<String, Integer>> getPotentialFilters();
 }

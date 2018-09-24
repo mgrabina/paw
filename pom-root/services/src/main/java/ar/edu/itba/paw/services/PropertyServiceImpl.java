@@ -4,10 +4,8 @@ import ar.edu.itba.paw.interfaces.PropertyDao;
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.interfaces.UserDao;
 import ar.edu.itba.paw.interfaces.UserService;
-import ar.edu.itba.paw.models.OperationType;
-import ar.edu.itba.paw.models.Property;
-import ar.edu.itba.paw.models.PropertyType;
-import ar.edu.itba.paw.models.User;
+import ar.edu.itba.paw.models.*;
+import com.sun.prism.shader.FillEllipse_Color_AlphaTest_Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,6 @@ public class PropertyServiceImpl implements PropertyService {
 	private final int PAGE_SIZE = 10;
 	private final int FIRST_PAGE = 1;
 
-	
 	@Autowired
 	private PropertyDao propertyDao;
 
@@ -71,17 +68,15 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
-	    List<String> tags = new LinkedList<String>();
-	    tags.addAll(Arrays.asList(
-	    		street.trim().toLowerCase(),
-	            neighborhood.trim().toLowerCase(),
-                operationType.toString(),
-                type.toString(),
-                rooms.toString() + "_rooms",
-                baths.toString() + "_baths",
-                garage?"garage":null,
-                inmediateDelivery?"imediate_delivery":null
-        ));
+	    Map<String, Integer> tags = new HashMap<String, Integer>();
+	    tags.put(street.trim().toLowerCase(), FilterType.street.ordinal());
+	    tags.put(neighborhood.trim().toLowerCase(), FilterType.neighborhood.ordinal());
+	    tags.put(operationType.toString(), FilterType.operationType.ordinal());
+	    tags.put(type.toString(), FilterType.type.ordinal());
+	    tags.put(rooms.toString() + "_rooms", FilterType.rooms.ordinal());
+	    tags.put(baths.toString() + "_baths", FilterType.baths.ordinal());
+	    tags.put(garage?"garage":null, FilterType.garage.ordinal());
+	    tags.put(inmediateDelivery?"imediate_delivery":null, FilterType.inmediateDelivery.ordinal());
 		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 
@@ -174,5 +169,10 @@ public class PropertyServiceImpl implements PropertyService {
 
 	public List<String> getAllTags(){
 		return propertyDao.getAllTags();
+	}
+
+	@Override
+	public Map<Integer, Map<String, Integer>> getPotentialFilters() {
+		return propertyDao.getPotentialFilters();
 	}
 }
