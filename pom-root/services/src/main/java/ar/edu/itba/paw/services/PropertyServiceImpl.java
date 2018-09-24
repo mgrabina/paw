@@ -75,8 +75,10 @@ public class PropertyServiceImpl implements PropertyService {
 	    tags.put(type.toString(), FilterType.type.ordinal());
 	    tags.put(rooms.toString() + "_rooms", FilterType.rooms.ordinal());
 	    tags.put(baths.toString() + "_baths", FilterType.baths.ordinal());
-	    tags.put(garage?"garage":null, FilterType.garage.ordinal());
-	    tags.put(inmediateDelivery?"imediate_delivery":null, FilterType.inmediateDelivery.ordinal());
+	    if (garage)
+		    tags.put("garage", FilterType.garage.ordinal());
+	    if (inmediateDelivery)
+		    tags.put("imediate_delivery", FilterType.inmediateDelivery.ordinal());
 		return propertyDao.createProperty(street, number, floor, apartment, neighborhood, operationType, type, publisherUser, price, coveredArea, totalArea, rooms, baths, garage, taxPrice, adMessage, adDescription, inmediateDelivery, tags);
 	}
 

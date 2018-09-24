@@ -149,7 +149,7 @@ public class PropertyDaoImpl implements PropertyDao {
         final Map<String, Object> auxMap = new HashMap<String, Object>();
 		jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("tags");
 		auxMap.put("id_property", propertyId);
-		tags.entrySet().stream().filter(entry -> entry != null).forEach(tag -> {
+		tags.entrySet().stream().filter(entry -> entry.getKey() != null).forEach(tag -> {
 			auxMap.put("name", tag.getKey());
 			auxMap.put("type", tag.getValue());
 			jdbcInsert.execute(auxMap);
