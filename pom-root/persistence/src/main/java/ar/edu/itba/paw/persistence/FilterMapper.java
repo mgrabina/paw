@@ -8,19 +8,22 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-final class FilterMapper implements ResultSetExtractor<Map<Integer, Map<String, Integer>>> {
+final class FilterMapper implements ResultSetExtractor<Map<Integer, Map<Integer, String>>> {
 
-	public Map<Integer, Map<String, Integer>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-        Map<Integer, Map<String, Integer>> map = new HashMap<Integer, Map<String, Integer>>();
+	public Map<Integer, Map<Integer, String>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+        Map<Integer, Map<Integer, String>> map = new HashMap<Integer, Map<Integer, String>>();
         for (int i = 0; i < FilterType.values().length ; i++){
-            map.put(i, new HashMap<String, Integer>());
+            map.put(i, new TreeMap<Integer, String>(new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return o2 - o1;
+                }
+            }));
         }
         while (resultSet.next()) {
-            map.get(resultSet.getInt("type")).put(resultSet.getString("name"), resultSet.getInt("count"));
+            map.get(resultSet.getInt("type")).put(resultSet.getInt("count"), resultSet.getString("name"));
         }
         return map;
     }

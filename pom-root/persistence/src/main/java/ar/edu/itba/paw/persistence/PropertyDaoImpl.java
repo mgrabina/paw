@@ -156,8 +156,8 @@ public class PropertyDaoImpl implements PropertyDao {
 		});
         return propertyId;
     }
-    public Map<Integer, Map<String, Integer>> getPotentialFilters(){
-        final Map<Integer, Map<String, Integer>> map = jdbcTemplate.query(
+    public Map<Integer, Map<Integer, String>> getPotentialFilters(){
+        final Map<Integer, Map<Integer, String>> map = jdbcTemplate.query(
                 "select type, name, count(name) as count " +
                         " from tags " +
                         " group by type, name " +
