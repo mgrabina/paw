@@ -152,7 +152,7 @@
 						<ul class="pagination">
 						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
 						    <c:forEach begin="0" end="${pagesCount}" varStatus="loop">
-						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a href="">${loop.index + 1}</a></li>
+						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
 						    </c:forEach>
 						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
 					  	</ul>
