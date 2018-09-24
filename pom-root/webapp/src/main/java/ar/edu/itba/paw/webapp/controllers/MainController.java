@@ -37,6 +37,7 @@ public class MainController {
 		
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
 		List<Property> propertiesList=ps.getFiltered(queryMap);
+		Map<Integer, Map<String,Integer>> potFilters = ps.getPotentialFilters();
 
 		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
@@ -46,7 +47,7 @@ public class MainController {
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
 		mav.addObject("myUser", us.getCurrentUser());
-		mav.addObject("filters", ps.getPotentialFilters());
+		mav.addObject("filters", potFilters);
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
 		mav.addObject("filterNames", queryMap);
 
