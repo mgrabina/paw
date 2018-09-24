@@ -88,7 +88,7 @@
 
 						<c:forEach items="${filterNames}" var="filterEntry" varStatus="loop">
 		      				<div class="link-box capit">
-		      					<div class="chip">${filterEntry.key}<i class="close material-icons">close</i></div>
+		      					<div class="chip">${filterEntry.value}<i data-field="${filterEntry.key}" class="chip-click close material-icons">close</i></div>
 		      				</div>
 		      			</c:forEach>
 						
@@ -122,9 +122,10 @@
 						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
 						      			<c:if test="${filter.key eq 1}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+
 							      				<div class="link-box capit">
-							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood">${filterEntry.key}</a>
-							      					<span>(${filterEntry.value})</span>
+							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood"><c:out value="${filterEntry.key}"/></a>
+							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -157,8 +158,8 @@
 						      			<c:if test="${filter.key eq 3}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href="">${filterEntry.key}</a>
-							      					<span>(${filterEntry.value})</span>
+							      					<a class="filter-click" data-field="type"><c:out value="${filterEntry.key}"/></a>
+							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -293,10 +294,12 @@
 						      	<div class="link-list">
 						      		<c:forEach items="${timeFilter}" var="filterEntry" varStatus="loop">
 						      			<spring:message code="${filterEntry.key}" var="filterName"/> 
-					      				<div class="link-box">
-				      						<a href="">${filterName}</a>
-				      						<span>(${filterEntry.value})</span>
-				      					</div>
+						      			<c:if test="${filterEntry.value gt 0}">
+						      				<div class="link-box">
+					      						<a href="">${filterName}</a>
+					      						<span>(${filterEntry.value})</span>
+					      					</div>
+					      				</c:if>
 					      			</c:forEach>
 						      	</div>
 						      </div>

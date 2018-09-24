@@ -26,6 +26,15 @@ function setUpFilters(){
     });
   });
 
+   $(".chip-click").each(function(index) {
+    $(this).on("click", function(){
+        removeQueryParam($(this).data("field"));
+
+    });
+  });
+
+   
+
 
 }
 
@@ -79,8 +88,12 @@ function deleteFavorite(propertyId) {
 
 /*
 	Adds a query param (key-value) and redirects the window to the new URL.
+
  */
 function addQueryParam(fieldName, value) {
+
+    //fails with 2+ filters
+    
     if(location.search.search(fieldName) == 1){
         var newURL = location.origin + "?";
         var params = location.search.split("?")[1].split("&");
@@ -99,6 +112,12 @@ function addQueryParam(fieldName, value) {
     		window.location.replace(window.location.href + "&" + fieldName + "=" + value);
 		}
 	}
+}
+
+function removeQueryParam(fieldName) {
+
+    //IMPLEEMENT
+
 }
 
 function getPage(number) {

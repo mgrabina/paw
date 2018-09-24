@@ -87,7 +87,6 @@ public class PropertyServiceImpl implements PropertyService {
 		Map<String,String> tmpMap4 = new HashMap<String,String>();
 
 		tmpMap.put("type", "type=");
-		tmpMap.put("operation", "operation_type=");
 		tmpMap.put("neighborhood", "neighborhood=");
 
 		tmpMap2.put("maxArea", "total_area<=");
@@ -112,17 +111,13 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	public List<Property> getFiltered(Map<String,String> filters){
-		if(filters.isEmpty())
-			return getAll();
+
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
 		int i = filters.size();
-		int date=-1;
-		if(filters.containsKey("date")) {
-			date = Integer.parseInt(filters.get("date"));
-			filters.remove("date");
-		}
+
+		int date=removeFilters(filters,query,params);
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
@@ -153,17 +148,42 @@ public class PropertyServiceImpl implements PropertyService {
 		}
 		if (order==null)
 			order="property.id ASC";
+
 		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
 		if(date>0){
-			List<Property> aux =new LinkedList<>();
-			for (Property property: propertiesList){
-				if(property.getAdDate()<=date)
-					aux.add(property);
-			}
-			propertiesList=aux;
+			propertiesList=removeOld(propertiesList,date);
 		}
 		return propertiesList;
 	}
+
+	private int removeFilters(Map<String,String> filters, StringBuilder query,ArrayList<Object> params ){
+		query.append("operation_type=?");
+		if(!filters.containsKey("operation")) {
+			params.add("sell");
+		}else {
+			params.add(filters.get("operation"));
+			filters.remove("operation");
+		}
+		if(!filters.isEmpty())
+			query.append(" AND ");
+
+		int date=-1;
+		if(filters.containsKey("date")) {
+			date = Integer.parseInt(filters.get("date"));
+			filters.remove("date");
+		}
+		return date;
+	}
+
+	private List<Property> removeOld(List<Property> propertiesList, int date){
+		List<Property> aux =new LinkedList<>();
+		for (Property property: propertiesList){
+			if(property.getAdDate()<=date)
+				aux.add(property);
+		}
+		return aux;
+	}
+
 	/*
 		Get property's that matches tags (such as property type, neighborhood, etc.)
 	 */
@@ -211,5 +231,11 @@ public class PropertyServiceImpl implements PropertyService {
 		map.put("index/filters/published/last-two-weeks", list.stream().filter(property -> property.getAdDate() <= 14  && property.getAdDate() > 0).count());
 		map.put("index/filters/published/last-month", list.stream().filter(property -> property.getAdDate() <= 30  && property.getAdDate() > 0).count());
 		return map;
+	}
+	
+	public Map<String, String> getShowableFilters(Map<String,String> m){
+		return m.entrySet().stream()
+				.filter(entry -> !"operation".equals(entry.getKey()))
+				.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 	}
 }
