@@ -84,6 +84,8 @@
 					</div>
 					<div class="filters-list">
 						<div class="chip">Argentina</div>
+						<div class="chip">Buenos Aires</div>
+
 						<%--<%@
 						<div class="chip">Filter name 2<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 3<i class="close material-icons">close</i></div>
@@ -110,22 +112,12 @@
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/location"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
-						      		<div class="link-box">
-						      			<a href="">Capital federal</a>
-						      			<span>(28)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href="">San isidro</a>
-						      			<span>(21)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href="">Quilmes</a>
-						      			<span>(8)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href="">Tigre</a>
-						      			<span>(11)</span>
-						      		</div>
+					      			<c:forEach items="${filters[1]}" var="filterEntry" varStatus="loop">
+					      				<div class="link-box">
+					      					<a href="">${filterEntry.key}</a>
+					      					<span>${filterEntry.value}</span>
+					      				</div>
+					      			</c:forEach>
 						      	</div>
 
 						      	<div class="link-list" style="display: none;">
@@ -145,19 +137,12 @@
 
 						      </div>
 						    </li>
-						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/address"/></div>
-						      <div class="collapsible-body">
-						      	<div class="input-field">
-						          <input placeholder="Ej: Av. del Libertador" id="address" type="text" class="validate">
-						          <label for="address"><spring:message code="index/filters/address"/></label>
-						        </div>
-						      </div>
-						    </li>
+						    
 						    <li>
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/type"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
+
 						      		<div class="link-box">
 						      			<a href=""><spring:message code="index/filters/type/apartment"/></a>
 						      			<span>(289)</span>
