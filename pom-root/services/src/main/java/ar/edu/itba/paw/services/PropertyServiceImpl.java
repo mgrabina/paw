@@ -105,24 +105,13 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	public List<Property> getFiltered(Map<String,String> filters){
+
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
 		int i = filters.size();
-		int date=-1;
-		if(filters.containsKey("date")) {
-			date = Integer.parseInt(filters.get("date"));
-			filters.remove("date");
-		}
-		query.append("operation_type=?");
-		if(!filters.containsKey("operation")) {
-			params.add("sell");
-		}else {
-			params.add(filters.get("operation"));
-			filters.remove("operation");
-		}
-		if(!filters.isEmpty())
-			query.append(" AND ");
+
+		int date=removeFilters(filters,query,params);
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
@@ -156,15 +145,39 @@ public class PropertyServiceImpl implements PropertyService {
 
 		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
 		if(date>0){
-			List<Property> aux =new LinkedList<>();
-			for (Property property: propertiesList){
-				if(property.getAdDate()<=date)
-					aux.add(property);
-			}
-			propertiesList=aux;
+			propertiesList=removeOld(propertiesList,date);
 		}
 		return propertiesList;
 	}
+
+	private int removeFilters(Map<String,String> filters, StringBuilder query,ArrayList<Object> params ){
+		query.append("operation_type=?");
+		if(!filters.containsKey("operation")) {
+			params.add("sell");
+		}else {
+			params.add(filters.get("operation"));
+			filters.remove("operation");
+		}
+		if(!filters.isEmpty())
+			query.append(" AND ");
+
+		int date=-1;
+		if(filters.containsKey("date")) {
+			date = Integer.parseInt(filters.get("date"));
+			filters.remove("date");
+		}
+		return date;
+	}
+
+	private List<Property> removeOld(List<Property> propertiesList, int date){
+		List<Property> aux =new LinkedList<>();
+		for (Property property: propertiesList){
+			if(property.getAdDate()<=date)
+				aux.add(property);
+		}
+		return aux;
+	}
+
 	/*
 		Get property's that matches tags (such as property type, neighborhood, etc.)
 	 */
