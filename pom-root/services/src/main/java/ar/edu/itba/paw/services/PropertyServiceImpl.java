@@ -219,8 +219,20 @@ public class PropertyServiceImpl implements PropertyService {
 				map(propertyType -> propertyType.name()).
 				filter(s -> s != null).
 				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<String,Long> baths = list.stream().
+				map(Property::getBaths).
+				map(bath -> bath.toString()).
+				filter(s -> s != null).
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<String,Long> rooms = list.stream().
+				map(Property::getRooms).
+				map(room -> room.toString()).
+				filter(s -> s != null).
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		map.put(1,neighborhoods);
 		map.put(3,type);
+		map.put(4,baths);
+		map.put(5,rooms);
 		return map;
 	}
 
