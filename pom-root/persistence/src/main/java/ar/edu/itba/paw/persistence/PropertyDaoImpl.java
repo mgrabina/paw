@@ -190,13 +190,22 @@ public class PropertyDaoImpl implements PropertyDao {
     }
 
 	public List<Property> getFiltered(String filters, ArrayList params, String order){
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id " +
-															"LEFT OUTER JOIN property_images i on property.id = i.property_id "+
-															"WHERE "+ filters +
-															"ORDER BY "+ order, params.toArray(), ROW_MAPPER);
+		List<Property> list=null;
+
+		String sql="SELECT * FROM property JOIN users ON property.user_id = users.id " +
+					"LEFT OUTER JOIN property_images i on property.id = i.property_id ";
+		if(filters.isEmpty()) {
+			list = jdbcTemplate.query(sql+
+										"ORDER BY " + order, params.toArray(), ROW_MAPPER);
+		}else{
+			list = jdbcTemplate.query(sql+
+										"WHERE " + filters +
+										"ORDER BY " + order, params.toArray(), ROW_MAPPER);
+		}
 		if (list.isEmpty()) {
 			return Collections.emptyList();
 		}
+
 		return list;
 	}
 

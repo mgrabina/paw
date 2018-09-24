@@ -37,9 +37,10 @@ public class MainController {
 		
 
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
-
+        int date=-1;
 		Map<String,String> map= new HashMap<>();
-		List<Property> propertiesList=ps.getFiltered(map);
+
+		List<Property> propertiesList=ps.getFiltered(queryMap);
 
 		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
