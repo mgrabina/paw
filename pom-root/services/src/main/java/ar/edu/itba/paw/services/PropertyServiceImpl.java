@@ -55,8 +55,8 @@ public class PropertyServiceImpl implements PropertyService {
 		);
 	    tags.put(operationType.toString(), FilterType.operationType.ordinal());
 	    tags.put(type.toString(), FilterType.type.ordinal());
-	    tags.put(rooms.toString() + "_rooms", FilterType.rooms.ordinal());
-	    tags.put(baths.toString() + "_baths", FilterType.baths.ordinal());
+	    tags.put(rooms.toString(), FilterType.rooms.ordinal());
+	    tags.put(baths.toString(), FilterType.baths.ordinal());
 	    if (garage)
 		    tags.put("garage", FilterType.garage.ordinal());
 	    if (inmediateDelivery)
