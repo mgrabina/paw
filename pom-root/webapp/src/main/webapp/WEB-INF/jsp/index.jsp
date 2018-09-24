@@ -116,8 +116,8 @@
 						      			<c:if test="${filter.key eq 1}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href="">${filterEntry.key}</a>
-							      					<span>(${filterEntry.value})</span>
+							      					<a href="">${filterEntry.value}</a>
+							      					<span>(${filterEntry.key})</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -150,8 +150,8 @@
 						      			<c:if test="${filter.key eq 3}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href="">${filterEntry.key}</a>
-							      					<span>(${filterEntry.value})</span>
+							      					<a href="">${filterEntry.value}</a>
+							      					<span>(${filterEntry.key})</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -284,22 +284,13 @@
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/published-time"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/published/today"/></a>
-						      			<span>(289)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/published/last-week"/></a>
-						      			<span>(211)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/published/last-two-weeks"/></a>
-						      			<span>(88)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/published/last-month"/></a>
-						      			<span>(81)</span>
-						      		</div>
+						      		<c:forEach items="${timeFilter}" var="filterEntry" varStatus="loop">
+						      			<spring:message code="filterEntry.key" var="filterName"/> 
+					      				<div class="link-box">
+				      						<a href="">${filterName}</a>
+				      						<span>(${filterEntry.key})</span>
+				      					</div>
+					      			</c:forEach>
 						      	</div>
 						      </div>
 						    </li>
