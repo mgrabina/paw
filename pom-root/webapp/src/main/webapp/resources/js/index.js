@@ -87,39 +87,55 @@ function deleteFavorite(propertyId) {
 }
 
 /*
-	Adds a query param (key-value) and redirects the window to the new URL.
-
+    Adds many query params
+    Format JSON
+    {
+        query1 : value1,
+        query2 : value2
+    }
  */
-function addQueryParam(fieldName, value) {
-
-    //fails with 2+ filters
-    
-    if(location.search.search(fieldName) == 1){
-        var newURL = location.origin + "?";
-        var params = location.search.split("?")[1].split("&");
-        for(var queryParam in params){
-            if (queryParam.search(fieldName)){
-				newURL += fieldName + "=" + value;                         
-            }else{
-            	newURL += queryParam;
-			}
-        }
-        window.location.replace(newURL);
-    }else{
-    	if (location.search == ""){
-            window.location.replace(window.location.origin + "?" + fieldName + "=" + value);
-		}else{
-    		window.location.replace(window.location.href + "&" + fieldName + "=" + value);
-		}
-	}
+function addManyQueryParamsAndRedirect(json){
+    var currentParams = urlParamsToJson(location.search);
+    for (var item in json){
+        currentParams[item] = json[item];
+    }
+    var newSearchQuery = Object.keys(currentParams).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(currentParams[k])
+    }).join('&');
+    window.location.replace(location.origin  + '?' + newSearchQuery);
 }
 
-function removeQueryParam(fieldName) {
-
-    //IMPLEEMENT
-
+/*
+    Removes many query params and redirect
+    Format array
+    [ 'query1', 'query2']
+ */
+function removeManyQueryParamsAndRedirect(array) {
+    var currentParams = urlParamsToJson(location.search);
+    array.forEach(function (item) {
+        delete currentParams[item];
+    });
+    var newSearchQuery = Object.keys(currentParams).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(currentParams[k])
+    }).join('&');
+    window.location.replace(location.origin  + '?' + newSearchQuery);
+}
+//Helper Function
+function urlParamsToJson(url) {
+    var hash;
+    var myJson = {};
+    if (url == "" || url == "?")
+        return myJson;
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        myJson[hash[0]] = hash[1];
+    }
+    return myJson;
 }
 
 function getPage(number) {
-	addQueryParam("page", number);
+	addManyQueryParamsAndRedirect({
+        "page" : number
+    });
 }
