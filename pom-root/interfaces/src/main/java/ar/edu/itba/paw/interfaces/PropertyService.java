@@ -7,6 +7,7 @@ import ar.edu.itba.paw.models.User;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface PropertyService {
     public Property findById(final long id);
@@ -27,8 +28,10 @@ public interface PropertyService {
     public List<Property> getFavourites(Long userId);
     public void setFavourite(Long userId, Long propertyId);
     public void deleteFavourite(Long userId, Long propertyId);
-    public List<Property> getPropertysByTagsSearch(String search);
-    public List<Property> getPropertysByTagsSearch(List<String> tags);
+    public List<Property> getPropertiesByTagsSearch(String search);
+    public List<Property> getPropertiesByTagsSearch(List<String> tags);
     public List<String> getAllTags();
     public Map<Integer, Map<String, Integer>> getPotentialFilters();
-}
+    public Optional<Property> getPropertyById(long id);
+    public Boolean propertyExists(long id);
+    }

@@ -41,3 +41,14 @@ function setUpControllers(){
 	
 
 }
+
+function favorite(propertyId) {
+    $.ajax({
+        type: "POST",
+        url: ""+getContextPath()+"/user/addFavourite",
+	    data: {"propertyId": propertyId},
+    	success: function(res) {
+			//add favourite
+        }
+	});
+}

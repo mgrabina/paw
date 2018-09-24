@@ -51,9 +51,9 @@ public class MainController {
 		mav.addObject("pagesCount", pagesCount);
 		mav.addObject("myUser", us.getCurrentUser());
 
-//		List<Property> busqueda = ps.getPropertysByTagsSearch("palermo apartment");
-//		List<Property> busqueda2 = ps.getPropertysByTagsSearch("almagro");
-//		List<Property> busqueda3 = ps.getPropertysByTagsSearch("office boedo tagnodisponible otrotrucho");
+//		List<Property> busqueda = ps.getPropertiesByTagsSearch("palermo apartment");
+//		List<Property> busqueda2 = ps.getPropertiesByTagsSearch("almagro");
+//		List<Property> busqueda3 = ps.getPropertiesByTagsSearch("office boedo tagnodisponible otrotrucho");
 
 		return mav;
 	
@@ -71,7 +71,7 @@ public class MainController {
 
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(value = "page", required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
-        return basicPaginatedListMAV("property_list", ps.getPropertysByTagsSearch(query), pageNumberParam);
+        return basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam);
     }
 
     private ModelAndView basicPaginatedListMAV(String name, List<Property> list, String pageNumberParam ){

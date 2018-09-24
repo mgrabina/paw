@@ -2,6 +2,7 @@ package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.User;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.itba.paw.interfaces.UserService;
@@ -61,7 +59,18 @@ public class UserController {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/user/{id}/myproperties", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/addFavourite", method = RequestMethod.POST, produces="application/json")
+    @ResponseBody
+    public void postFav(@RequestParam("propertyId") long propertyId) {
+
+        User myUser = us.getCurrentUser();
+        if(myUser==null)
+            return;
+        ps.setFavourite(myUser.getId(),propertyId);
+
+    }
+
+        @RequestMapping(value = "/user/{id}/myproperties", method = RequestMethod.GET)
     public ModelAndView getPropertyDetailview(@PathVariable("id")final long id) {
         final ModelAndView mav = new ModelAndView("viewMyProperties");
 

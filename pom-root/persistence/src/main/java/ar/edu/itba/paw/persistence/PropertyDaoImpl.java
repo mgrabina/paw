@@ -169,6 +169,16 @@ public class PropertyDaoImpl implements PropertyDao {
         return map;
     }
 
+	@Override
+	public Optional<Property> getById(long id) {
+		final List<Property> propertyList = jdbcTemplate.query("SELECT * FROM property WHERE id = ?" , ROW_MAPPER, id);
+
+		if (propertyList.isEmpty())
+			return Optional.empty();
+		else
+			return Optional.of(propertyList.get(0));
+	}
+
 	public List<Property> getFavourites(Long userId){
 		final List<Property> list = jdbcTemplate.query(
 				"SELECT p.*, u.*, i.image_src FROM favourites " +
