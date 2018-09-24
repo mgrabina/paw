@@ -11,7 +11,7 @@
 .builder-box {
 	width: 100%;
 	background-color: white;
-	height: 600px;
+	height: 80vh;
 	overflow: hidden;
 }
 
@@ -24,6 +24,11 @@
 	margin-left: 20px;
 }
 
+.row-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
 
 .row.padding{
 	padding: 20px;
