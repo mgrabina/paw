@@ -35,11 +35,7 @@ public class MainController {
 		
 		final ModelAndView mav = new ModelAndView("index");
 		
-
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
-        int date=-1;
-		Map<String,String> map= new HashMap<>();
-
 		List<Property> propertiesList=ps.getFiltered(queryMap);
 
 		//Usar un getFiltered y pasarle el queryMap
@@ -52,11 +48,7 @@ public class MainController {
 		mav.addObject("myUser", us.getCurrentUser());
 		mav.addObject("filters", ps.getPotentialFilters());
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
-
-
-//		List<Property> busqueda = ps.getPropertiesByTagsSearch("palermo apartment");
-//		List<Property> busqueda2 = ps.getPropertiesByTagsSearch("almagro");
-//		List<Property> busqueda3 = ps.getPropertiesByTagsSearch("office boedo tagnodisponible otrotrucho");
+		mav.addObject("filterNames", queryMap);
 
 		return mav;
 	

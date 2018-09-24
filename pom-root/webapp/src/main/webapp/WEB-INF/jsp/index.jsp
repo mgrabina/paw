@@ -86,6 +86,13 @@
 						<div class="chip">Argentina</div>
 						<div class="chip">Buenos Aires</div>
 
+						<c:forEach items="${filterNames}" var="filterEntry" varStatus="loop">
+		      				<div class="link-box capit">
+		      					<div class="chip">${filterEntry.key}<i class="close material-icons">close</i></div>
+		      				</div>
+		      			</c:forEach>
+						
+
 						<%--<%@
 						<div class="chip">Filter name 2<i class="close material-icons">close</i></div>
 						<div class="chip">Filter name 3<i class="close material-icons">close</i></div>
@@ -116,8 +123,8 @@
 						      			<c:if test="${filter.key eq 1}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href="">${filterEntry.value}</a>
-							      					<span>(${filterEntry.key})</span>
+							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood">${filterEntry.key}</a>
+							      					<span>(${filterEntry.value})</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -150,8 +157,8 @@
 						      			<c:if test="${filter.key eq 3}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<div class="link-box capit">
-							      					<a href="">${filterEntry.value}</a>
-							      					<span>(${filterEntry.key})</span>
+							      					<a href="">${filterEntry.key}</a>
+							      					<span>(${filterEntry.value})</span>
 							      				</div>
 							      			</c:forEach>
 						      			</c:if>
@@ -285,10 +292,10 @@
 						      <div class="collapsible-body">
 						      	<div class="link-list">
 						      		<c:forEach items="${timeFilter}" var="filterEntry" varStatus="loop">
-						      			<spring:message code="filterEntry.key" var="filterName"/> 
+						      			<spring:message code="${filterEntry.key}" var="filterName"/> 
 					      				<div class="link-box">
 				      						<a href="">${filterName}</a>
-				      						<span>(${filterEntry.key})</span>
+				      						<span>(${filterEntry.value})</span>
 				      					</div>
 					      			</c:forEach>
 						      	</div>

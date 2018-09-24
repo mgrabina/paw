@@ -13,8 +13,21 @@ $(document).ready(function(){
 	});
 
 	setUpControllers();
+  setUpFilters();
 
 });
+
+function setUpFilters(){
+
+   $(".filter-click").each(function(index) {
+    $(this).on("click", function(){
+        addQueryParam($(this).data("field"), $(this).text());
+
+    });
+  });
+
+
+}
 
 function setUpControllers(){
 
@@ -87,6 +100,7 @@ function addQueryParam(fieldName, value) {
 		}
 	}
 }
+
 function getPage(number) {
 	addQueryParam("page", number);
 }
