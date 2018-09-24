@@ -40,11 +40,16 @@
 
 		  	<div class="buttons-box">
 		  		<div class="labels">
-		  			<a href=""><spring:message code="index/register" /></a>
-		  			<a href=""><spring:message code="index/login"/></a>
-		  			<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
-					<a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded-->
-					
+		  			<div class="nav-item">
+		  				<a href=""><spring:message code="index/register" /></a>
+		  			</div>
+		  			<div class="nav-item">
+		  				<a href=""><spring:message code="index/login"/></a>
+		  			</div>
+		  			<div class="nav-item">
+		  				<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+		  			</div>
+		  			
 		  		</div>
 
 		  		<div class="extras">
@@ -55,6 +60,7 @@
 					    <li class="divider" tabindex="-1"></li>
 					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
 					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
 					  </ul>
 		  		</div>
 		  	</div>
