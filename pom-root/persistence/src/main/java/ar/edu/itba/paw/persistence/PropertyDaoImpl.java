@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.Array;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -156,17 +157,14 @@ public class PropertyDaoImpl implements PropertyDao {
 		});
         return propertyId;
     }
-    public Map<Integer, Map<String, Integer>> getPotentialFilters(){
-        final Map<Integer, Map<String, Integer>> map = jdbcTemplate.query(
+    public ArrayList<Map<String, Integer>> getPotentialFilters(){
+        final ArrayList<Map<String, Integer>> list = jdbcTemplate.query(
                 "select type, name, count(name) as count " +
                         " from tags " +
                         " group by type, name " +
-                        " order by type; ",
+                        " order by type, count(name) desc; ",
                 FILTER_MAPPER);
-        if (map.isEmpty()) {
-            return Collections.emptyMap();
-        }
-        return map;
+        return list;
     }
 
 	@Override

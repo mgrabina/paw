@@ -5,7 +5,6 @@ import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.interfaces.UserDao;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.*;
-import com.sun.prism.shader.FillEllipse_Color_AlphaTest_Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,8 +76,12 @@ public class PropertyServiceImpl implements PropertyService {
 
 	public Long createProperty(String street, Integer number, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
 	    Map<String, Integer> tags = new HashMap<String, Integer>();
-	    tags.put(street.trim().toLowerCase(), FilterType.street.ordinal());
-	    tags.put(neighborhood.trim().toLowerCase(), FilterType.neighborhood.ordinal());
+		Arrays.stream(street.trim().toLowerCase().split("\\s+")).forEach(
+				word -> tags.put( word, FilterType.street.ordinal())
+		);
+		Arrays.stream(neighborhood.trim().toLowerCase().split("\\s+")).forEach(
+				word -> tags.put( word, FilterType.neighborhood.ordinal())
+		);
 	    tags.put(operationType.toString(), FilterType.operationType.ordinal());
 	    tags.put(type.toString(), FilterType.type.ordinal());
 	    tags.put(rooms.toString() + "_rooms", FilterType.rooms.ordinal());
@@ -203,7 +206,7 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public Map<Integer, Map<String, Integer>> getPotentialFilters() {
+	public ArrayList<Map<String, Integer>> getPotentialFilters() {
 		return propertyDao.getPotentialFilters();
 	}
 }

@@ -1,0 +1,18 @@
+body {
+    background: #E91E63;
+    font-family: 'Lato', serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.page-wrap {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

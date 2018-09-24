@@ -5,6 +5,7 @@ import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public interface PropertyService {
     public List<Property> getPropertiesByTagsSearch(String search);
     public List<Property> getPropertiesByTagsSearch(List<String> tags);
     public List<String> getAllTags();
-    public Map<Integer, Map<String, Integer>> getPotentialFilters();
     public Optional<Property> getPropertyById(long id);
     public Boolean propertyExists(long id);
-    }
+    public ArrayList<Map<String, Integer>> getPotentialFilters();
+}
