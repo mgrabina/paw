@@ -46,7 +46,7 @@ public class MainController {
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
 		mav.addObject("myUser", us.getCurrentUser());
-		mav.addObject("filters", ps.getPotentialFilters());
+		mav.addObject("filters", ps.getPotentialFilters(propertiesList));
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
 		mav.addObject("filterNames", queryMap);
 

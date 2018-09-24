@@ -5,12 +5,18 @@ import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.interfaces.UserDao;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.*;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -182,8 +188,20 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public Map<Integer, Map<String, Integer>>  getPotentialFilters() {
-		return propertyDao.getPotentialFilters();
+	public Map<Integer, Map<String, Long>>  getPotentialFilters(List<Property> list) {
+		Map<Integer, Map<String,Long>> map = new HashMap<Integer, Map<String, Long>>();
+		Map<String,Long> neighborhoods = list.stream().
+				map(Property::getNeighborhood).
+				filter(s -> s != null).
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<String,Long> type = list.stream().
+				map(Property::getType).
+				map(propertyType -> propertyType.name()).
+				filter(s -> s != null).
+				collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		map.put(1,neighborhoods);
+		map.put(3,type);
+		return map;
 	}
 
 	public Map<String, Long> getPropertiesDateBreakdown(List<Property> list){
