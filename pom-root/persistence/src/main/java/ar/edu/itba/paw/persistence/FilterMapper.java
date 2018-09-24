@@ -10,21 +10,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-final class FilterMapper implements ResultSetExtractor<Map<Integer, TreeSet<Map.Entry<String, Integer>>>>{
+import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.toMap;
 
-	public Map<Integer, TreeSet<Map.Entry<String, Integer>>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-        Map<Integer, TreeSet<Map.Entry<String, Integer>>> map = new HashMap<Integer, TreeSet<Map.Entry<String, Integer>>>();
+final class FilterMapper implements ResultSetExtractor<Map<Integer, Map<String, Integer>>>{
+
+	public Map<Integer, Map<String, Integer>> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+        Map<Integer, Map<String, Integer>> map = new HashMap<Integer, Map<String, Integer>>();
         for (int i = 0; i < FilterType.values().length ; i++){
-            map.put(i, new TreeSet<Map.Entry<String, Integer>>(new Comparator<Map.Entry<String, Integer>>() {
-                @Override
-                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                    return o2.getValue() - o1.getValue();
-                }
-            }));
+            map.put(i, new HashMap<String, Integer>());
         }
         while (resultSet.next()) {
-            map.get(resultSet.getInt("type")).add(new TreeMap.SimpleEntry<String, Integer>(resultSet.getString("name"), resultSet.getInt("count")));
+            map.get(resultSet.getInt("type")).put(resultSet.getString("name"), resultSet.getInt("count"));
         }
+        map.entrySet().stream().forEach(integerMapEntry -> integerMapEntry.setValue(
+                integerMapEntry.getValue().entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).
+                        collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (integer, integer2) -> integer2,
+                        LinkedHashMap::new))
+        ));
         return map;
     }
 //
