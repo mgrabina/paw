@@ -168,7 +168,11 @@ public class PropertyDaoImpl implements PropertyDao {
 
 	@Override
 	public Optional<Property> getById(long id) {
-		final List<Property> propertyList = jdbcTemplate.query("SELECT * FROM property WHERE id = ?" , ROW_MAPPER, id);
+		final List<Property> propertyList = jdbcTemplate.query(
+				"SELECT * FROM property " +
+				"JOIN users ON property.user_id = users.id " +
+				"LEFT OUTER JOIN property_images i on property.id = i.property_id  " +
+						"WHERE property.id = ?" , ROW_MAPPER, id);
 
 		if (propertyList.isEmpty())
 			return Optional.empty();

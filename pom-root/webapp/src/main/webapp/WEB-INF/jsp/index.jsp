@@ -411,7 +411,7 @@
 									</div>
 
 									<div class="action">
-										<a href=""><spring:message code="index/card/contact"/></a>
+										<a class="waves-effect waves-light btn modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
 									</div>
 								</div>
 
@@ -436,6 +436,32 @@
 			</div>
 
 		</div>
+
+        <div id="contact-modal" class="modal modal-fixed-footer">
+            <form class="col s12" method="post" action="<%= response.encodeURL(request.getContextPath() + "/contact") %>">
+            <div class="modal-content">
+                        <h4><spring:message code="index/card/contact/modal/title"/></h4>
+                        <h5 id="property-name-input-modal"></h5>
+
+                <div class="row" style="display: none">
+                    <div class="input-field col s12">
+                        <textarea id="property-id-input-modal" name="propertyId" class="materialize-textarea"></textarea>
+                        <label for="property-id-input-modal"><spring:message code="index/card/contact/modal/property-id"/></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="message-input-modal" name="message" class="materialize-textarea"></textarea>
+                        <label for="message-input-modal"><spring:message code="index/card/contact/message"/></label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="waves-effect waves-light btn">
+            </div>
+            </form>
+        </div>
 
 		<%--<%@
 

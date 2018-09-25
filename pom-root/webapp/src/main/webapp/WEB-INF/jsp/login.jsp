@@ -34,7 +34,7 @@
                             </div>
                             <div class="login-mail">
                                 <spring:message code="login/password" var="auxPassword"/>
-                                <form:input type="password" placeholder='auxPassword' required="" id="password" path="password" name="password"/>
+                                <form:input type="password" placeholder='${auxPassword}' required="" id="password" path="password" name="password"/>
                                 <i class="fa fa-lock"></i>
                             </div>
                         </div>

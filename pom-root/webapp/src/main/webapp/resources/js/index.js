@@ -61,7 +61,14 @@ function setUpControllers(){
     e.stopPropagation();
     $('#carousel-' + id).carousel('next');
   });
-	
+
+  $('.contact-modal-link').click(function(e){
+    $("#contact-modal").modal();
+    $("#property-id-input-modal").val($(this).data("id"));
+    $("#property-name-input-modal").html($(this).data("name"));
+  });
+
+
 
 }
 
