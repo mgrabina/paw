@@ -71,6 +71,27 @@ function setUpFilters(){
 
   });
 
+  $('#remove-filters').click(function(e){
+    window.location =  window.location.origin;
+  });
+
+  $('#general-filter').click(function(e){
+    
+    var gValue = $("#garage-input").is(":checked") * 1;
+    var json = {}; 
+
+    json["garage"] = gValue;
+
+    if (gValue == 1) {
+      addManyQueryParamsAndRedirect(json);
+    } else {
+      removeManyQueryParamsAndRedirect(['garage']);
+    }
+
+
+  });
+
+   
    
 
 }
@@ -155,6 +176,10 @@ function checkChipNames(){
           $(this).text(">= " + fullText + "m2");
         else if (params.maxArea == fullText)
           $(this).text("<= " + fullText + "m2");
+        else if (params.date == fullText)
+          $(this).text("<= " + fullText + "d");
+        else if (params.garage == fullText)
+          $(this).text("Garage");
 
       }
       

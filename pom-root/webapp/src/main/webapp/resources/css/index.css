@@ -288,6 +288,10 @@
 	text-transform: capitalize;
 }
 
+#remove-filters{
+	cursor: pointer;
+}
+
 .btn {
 	color: white !important;
 }

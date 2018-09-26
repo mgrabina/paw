@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <html>
@@ -94,9 +95,9 @@
 						
 					</div>
 					<div class="footer">
-						<%--<%@
-						<a href=""><i class="material-icons left">delete</i><spring:message code="index/filters/delete-filters"/></a>
-						%>--%>
+						
+						<a id="remove-filters"><i class="material-icons left">delete</i><spring:message code="index/filters/delete-filters"/></a>
+						
 					</div>
 				</div>
 
@@ -275,11 +276,18 @@
 						      	
 						      	<div class="link-list">
 						      		<label>
-								        <input type="checkbox" class="filled-in" />
+						      			<c:choose>
+						      				<c:when test="${not empty filterNames['garage']}">
+						      					<input id="garage-input" type="checkbox" class="filled-in" checked="true" />
+						      				</c:when>
+						      				<c:otherwise>
+						      					<input id="garage-input" type="checkbox" class="filled-in" />
+						      				</c:otherwise>
+						      			</c:choose>
 								        <span><spring:message code="index/filters/general/garage"/></span>
 								    </label>
 						      	</div>
-						      	<a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
+						      	<a class="waves-effect waves-light btn top-margin" id="general-filter"><spring:message code="index/filters/apply-filters"/></a>
 
 						      </div>
 						    </li>
@@ -291,7 +299,7 @@
 						      			<spring:message code="${filterEntry.key}" var="filterName"/> 
 						      			<c:if test="${filterEntry.value gt 0}">
 						      				<div class="link-box">
-					      						<a href="">${filterName}</a>
+					      						<a class="filter-click" id="f-time-${loop.index}" data-field="date">${filterName}</a>
 					      						<span>(${filterEntry.value})</span>
 					      					</div>
 					      				</c:if>
