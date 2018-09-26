@@ -183,3 +183,7 @@ a.middle-indicator-text{
 .helper-text {
 	color: red !important;
 }
+
+.far, .fa {
+	font-size: 2em;
+}

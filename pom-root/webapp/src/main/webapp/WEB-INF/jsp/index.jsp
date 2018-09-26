@@ -12,8 +12,8 @@
 		<title><spring:message code="page-title" /></title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700'>
-<!-- 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
- -->		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
+	    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/base.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"></c:url>">
 		<link rel="shortcut icon" type="image/png" href="<c:url value="/resources/images/logo2.png"></c:url>"/>
@@ -383,6 +383,7 @@
 
 													 </div>
 												</c:if>
+
 												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
 													<a class="carousel-item" href="">
 														<div class="image-cont">
@@ -433,6 +434,17 @@
 										</c:choose>
 										<span>&#183;</span>
 										<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
+
+										<c:if test="${not empty myUser}">
+											<c:choose>
+												<c:when test="${not empty favList[property.id]}">
+													<i id="fav-${property.id}" data-id="${property.id}" data-action="0" class="fav-btn fa fa-heart"></i>
+												</c:when>
+												<c:otherwise>
+													<i id="fav-${property.id}" data-id="${property.id}" data-action="1" class="fav-btn far fa-heart"></i>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
 									</div>
 
 									<div class="action">

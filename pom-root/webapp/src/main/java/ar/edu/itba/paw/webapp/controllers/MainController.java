@@ -55,6 +55,7 @@ public class MainController {
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
 		mav.addObject("filterNames", ps.getShowableFilters(queryMap));
 		mav.addObject("orderBy", queryMap.get("order_by"));
+		mav.addObject("favList", us.getFavouritesMap(us.getCurrentUser()));
 
 		return mav;
 	

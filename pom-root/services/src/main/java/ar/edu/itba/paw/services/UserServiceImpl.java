@@ -12,7 +12,10 @@ import ar.edu.itba.paw.interfaces.UserDao;
 import ar.edu.itba.paw.interfaces.UserService;
 import ar.edu.itba.paw.models.User;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -59,9 +62,22 @@ public class UserServiceImpl implements UserService{
 		}
 		return null; // TODO: Use Optionals
 	}
-
+	
+	
 	public List<Property> getFavourites(Long userId) {
 		return userDao.getFavourites(userId);
+	}
+	
+	public Map<Long, Property> getFavouritesMap(User u) {
+		
+		if (u == null) {
+			return Collections.emptyMap();
+		}
+		
+		List<Property> pList = userDao.getFavourites(u.getId());		
+				
+		return pList.stream().collect(Collectors.toMap(Property::getId, p -> p));
+		
 	}
 
 	public void setFavourite(Long userId, Long propertyId) {

@@ -4,6 +4,7 @@ import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -15,6 +16,7 @@ public interface UserService {
 	public User findByMail(final long mail);
 	public User getCurrentUser();
 	public List<Property> getFavourites(Long userId);
+	public Map<Long, Property> getFavouritesMap(User u);
 	public void setFavourite(Long userId, Long propertyId);
 	public void deleteFavourite(Long userId, Long propertyId);
 }

@@ -107,6 +107,25 @@ function setUpFilters(){
       });
   });
 
+  $('.fav-btn').each(function(index) {
+      $(this).on("click", function(){
+        
+        var id = $(this).data("id");
+        var action = $(this).data("action");
+        
+        if (action == 1){
+          addFavorite(id);
+          $(this).removeClass('far');
+          $(this).addClass('fa');
+        } else {
+          deleteFavorite(id);
+          $(this).removeClass('fa');
+          $(this).addClass('far');
+        }
+        
+      });
+  });
+
    
    
 
@@ -277,3 +296,8 @@ function getPage(number) {
         "page" : number
     });
 }
+
+function getContextPath() {
+   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+}
+
