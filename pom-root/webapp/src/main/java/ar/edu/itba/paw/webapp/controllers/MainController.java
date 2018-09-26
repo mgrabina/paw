@@ -46,7 +46,7 @@ public class MainController {
 
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = Paginate.getPageCount(propertiesList);
-
+		
 		mav.addObject("propertiesList", Paginate.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
@@ -54,6 +54,7 @@ public class MainController {
 		mav.addObject("filters", potFilters);
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
 		mav.addObject("filterNames", ps.getShowableFilters(queryMap));
+		mav.addObject("orderBy", queryMap.get("order_by"));
 
 		return mav;
 	

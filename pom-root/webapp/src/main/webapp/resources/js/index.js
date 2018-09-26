@@ -91,6 +91,22 @@ function setUpFilters(){
 
   });
 
+  $('.order-btn').each(function(index) {
+      $(this).on("click", function(){
+        
+        var id = $(this).data("id");
+        var json = {}; 
+        
+        json['order_by'] = id;
+
+        if (id == " ") {
+          removeManyQueryParamsAndRedirect(['order_by']);
+        } else {
+          addManyQueryParamsAndRedirect(json);
+        }
+      });
+  });
+
    
    
 

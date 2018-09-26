@@ -328,12 +328,33 @@
 
 				<div class="order-box">
 					<span class="order-by-text"><spring:message code="index/sort-by"/></span>
-					<a class='dropdown-trigger' data-target='dropdown2'><i class="material-icons right">keyboard_arrow_down</i><spring:message code="index/sort/relevant"/></a>
+					<a id="order-button" class='dropdown-trigger' data-target='dropdown2'>
+						<i class="material-icons right">keyboard_arrow_down</i>
+						<c:choose>
+							<c:when test="${orderBy eq 'price_asc'}">
+								<spring:message code="index/sort/cheap"/>
+							</c:when>
+							<c:when test="${orderBy eq 'price_desc'}">
+								<spring:message code="index/sort/expensive"/>
+							</c:when>
+							<c:when test="${orderBy eq 'date_asc'}">
+								<spring:message code="index/sort/new"/>
+							</c:when>
+							<c:when test="${orderBy eq 'date_desc'}">
+								<spring:message code="index/sort/old"/>
+							</c:when>
+							<c:otherwise>
+								<spring:message code="index/sort/relevant"/>
+							</c:otherwise>
+						</c:choose>
+					</a>
 		  			  <ul id='dropdown2' class='dropdown-content'>
-		  			  	<li><a href="#!"><spring:message code="index/sort/relevant"/></a></li>
-					    <li><a href="#!"><spring:message code="index/sort/cheap"/></a></li>
-					    <li><a href="#!"><spring:message code="index/sort/expensive"/></a></li>
-					    <li><a href="#!"><spring:message code="index/sort/new"/></a></li>
+		  			  	<li><a class="order-btn" data-id=" "><spring:message code="index/sort/relevant"/></a></li>
+					    <li><a class="order-btn" data-id="price_asc"><spring:message code="index/sort/cheap"/></a></li>
+					    <li><a class="order-btn" data-id="price_desc"><spring:message code="index/sort/expensive"/></a></li>
+					    <li><a class="order-btn" data-id="date_asc"><spring:message code="index/sort/new"/></a></li>
+					    <li><a class="order-btn" data-id="date_desc"><spring:message code="index/sort/old"/></a></li>
+
 					  </ul>
 				</div>
 
