@@ -99,10 +99,10 @@ public class PropertyServiceImpl implements PropertyService {
 		tmpMap3.put("garage", "garage=");
 		
 		//deberia separar tipo de forma (asc, desc)
-		tmpMap4.put("price_asc","property.price asc");
-		tmpMap4.put("price_desc","property.price desc");
-		tmpMap4.put("date_asc","property.ad_date asc");
-		tmpMap4.put("date_desc","property.ad_date desc");
+		tmpMap4.put("price_asc","p.price asc");
+		tmpMap4.put("price_desc","p.price desc");
+		tmpMap4.put("date_asc","p.ad_date asc");
+		tmpMap4.put("date_desc","p.ad_date desc");
 
 		filterIntMap = Collections.unmodifiableMap(tmpMap2);
 		filterStringMap = Collections.unmodifiableMap(tmpMap);
@@ -116,7 +116,16 @@ public class PropertyServiceImpl implements PropertyService {
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
+
+		if(filters.containsKey("order_by")) {
+			if (orderMap.containsKey(filters.get("order_by")))
+				order = orderMap.get(filters.get("order_by"));
+			else return Collections.emptyList();
+			filters.remove("order_by");
+		}else order="p.ad_date ASC";
+
 		int date=removeFilters(filters,query,params);
+
 		int i = filters.size();
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
@@ -134,20 +143,14 @@ public class PropertyServiceImpl implements PropertyService {
 						query.append(filterBoolMap.get(entry.getKey()));
 						query.append("?");
 						params.add(Boolean.parseBoolean(entry.getValue()));
-					}else {
-						if(entry.getKey()=="order_by"){
-							if(orderMap.containsKey(entry.getValue()))
-								order=orderMap.get(entry.getValue());
-						} else return Collections.emptyList();
-					}
+					}else  return Collections.emptyList();
 				}
 			}
+
 			i--;
 			if(i>0)
 				query.append(" AND ");
 		}
-		if (order==null)
-			order="property.id ASC";
 
 		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
 		if(date>0){
