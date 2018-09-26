@@ -273,6 +273,9 @@
 
 }
 
+#operationTypeContainer > li > a {
+	cursor: pointer;
+}
 
 .link-list > .link-box {
 	width: 100%;
@@ -299,4 +302,7 @@
 	width: 100%;
 }
 
+.pagination {
+	cursor: pointer;
+}
 

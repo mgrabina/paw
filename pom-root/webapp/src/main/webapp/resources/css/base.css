@@ -172,6 +172,10 @@ nav .input-field label.active i{
    font-size: 4rem;
 }
 
+.value {
+	color: black !important;
+}
+
 a.middle-indicator-text{
 	color:white !important;
 }

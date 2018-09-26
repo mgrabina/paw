@@ -11,8 +11,8 @@
 		<title><spring:message code="page-title" /></title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	    <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700'>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
+<!-- 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">
+ -->		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/base.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"></c:url>">
 		<link rel="shortcut icon" type="image/png" href="<c:url value="/resources/images/logo2.png"></c:url>"/>
@@ -52,10 +52,10 @@
 			  			<div class="nav-item">
 			  				<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
 			  			</div>
-                        <div class="nav-item">
-                            <a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
-                        </div>
                     </c:if>
+                    <div class="nav-item">
+                        <a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+                    </div>
 		  		</div>
 
 		  		<div class="extras">
@@ -87,18 +87,11 @@
 
 						<c:forEach items="${filterNames}" var="filterEntry" varStatus="loop">
 		      				<div class="link-box capit">
-		      					<div class="chip">${filterEntry.value}<i data-field="${filterEntry.key}" class="chip-click close material-icons">close</i></div>
+		      					<div class="chip"><span class="chip-text">${filterEntry.value}</span><i data-field="${filterEntry.key}" class="chip-click close material-icons">close</i></div>
 		      				</div>
 		      			</c:forEach>
 						
-
-						<%--<%@
-						<div class="chip">Filter name 2<i class="close material-icons">close</i></div>
-						<div class="chip">Filter name 3<i class="close material-icons">close</i></div>
-						<div class="chip">Filter name 4<i class="close material-icons">close</i></div>
-						<div class="chip">Filter name 5<i class="close material-icons">close</i></div>
-						<div class="chip">Filter name 6<i class="close material-icons">close</i></div>
-						%>--%>
+						
 					</div>
 					<div class="footer">
 						<%--<%@
@@ -172,13 +165,13 @@
 
 						      	<p class="range-field">
 						      		<spring:message code="index/filters/min"/> 
-							      <input type="range" id="min-price" min="1" max="1000000" />
+							      <input type="range" id="min-price" min="0" max="999999" step="10000"/>
 							    </p>
 							    <p class="range-field">
 							    	<spring:message code="index/filters/max"/>
-							      <input type="range" id="max-price" min="0" max="1000000" />
+							      <input type="range" id="max-price" min="0" max="999999" step="10000"/>
 							    </p>
-							    <a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
+							    <a class="waves-effect waves-light btn top-margin" id="price-filter"><spring:message code="index/filters/apply-filters"/></a>
 
 						      </div>
 						    </li>
@@ -314,10 +307,10 @@
 
 				<div class="tabs-container">
 				    <div class="col">
-				      <ul class="tabs">
-				        <li class="tab col"><a class="active" href="#test1"><spring:message code="index/sell"/></a></li>
-				        <li class="tab col"><a href="#test2"><spring:message code="index/rent"/></a></li>
-				        <li class="tab col"><a href="#test3"><spring:message code="index/temp-rent"/></a></li>
+				      <ul id="operationTypeContainer" class="tabs">
+				        <li id="sell-button-c" class="tab col"><a id="sell-button" class='active filter-click' data-value="sell" data-field="operation"><spring:message code="index/sell"/></a></li>
+				        <li id="rent-button-c" class="tab col"><a id="rent-button" class='filter-click' data-value="rent" data-field="operation"><spring:message code="index/rent"/></a></li>
+				        <li class="tab col"><a href="#temporal-rent" id="temporal-rent-button" class='filter-click' data-value="temporal_rent" data-field="operation"><spring:message code="index/temp-rent"/></a></li>
 				      </ul>
 				    </div>
 				</div>
@@ -411,7 +404,7 @@
 									</div>
 
 									<div class="action">
-										<a class="waves-effect waves-light btn modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
+										<a class="modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
 									</div>
 								</div>
 

@@ -1,7 +1,9 @@
 package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.PropertyService;
+import ar.edu.itba.paw.models.OperationType;
 import ar.edu.itba.paw.models.Property;
+import ar.edu.itba.paw.models.PropertyType;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,11 +39,11 @@ public class MainController {
 		final ModelAndView mav = new ModelAndView("index");
 		
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
-		queryMap.remove(PAGE_QUERY_KEY);
-		List<Property> propertiesList=ps.getFiltered(queryMap);
+		
+
+		List<Property> propertiesList=ps.getFiltered(ps.getFiltrableFields(queryMap));
 		Map<Integer, Map<String, Long>> potFilters = ps.getPotentialFilters(propertiesList);
 
-		//Usar un getFiltered y pasarle el queryMap
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = Paginate.getPageCount(propertiesList);
 

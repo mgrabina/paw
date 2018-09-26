@@ -97,10 +97,11 @@ public class PropertyServiceImpl implements PropertyService {
 		tmpMap2.put("minPrice", "price>=");
 
 		tmpMap3.put("garage", "garage=");
-
-		tmpMap4.put("price_asd","property.price asc");
+		
+		//deberia separar tipo de forma (asc, desc)
+		tmpMap4.put("price_asc","property.price asc");
 		tmpMap4.put("price_desc","property.price desc");
-		tmpMap4.put("date_asd","property.ad_date asc");
+		tmpMap4.put("date_asc","property.ad_date asc");
 		tmpMap4.put("date_desc","property.ad_date desc");
 
 		filterIntMap = Collections.unmodifiableMap(tmpMap2);
@@ -266,8 +267,20 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 	
 	public Map<String, String> getShowableFilters(Map<String,String> m){
+		
+		List<String> hiddenFilters = Arrays.asList("operation", "page");
+		
 		return m.entrySet().stream()
-				.filter(entry -> !"operation".equals(entry.getKey()))
+				.filter(entry -> !hiddenFilters.contains(entry.getKey()))
+				.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+	}
+	
+	public Map<String, String> getFiltrableFields(Map<String,String> m){
+		
+		List<String> unfiltrableFields = Arrays.asList("page");
+		
+		return m.entrySet().stream()
+				.filter(entry -> !unfiltrableFields.contains(entry.getKey()))
 				.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 	}
 }

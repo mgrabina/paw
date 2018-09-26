@@ -14,6 +14,8 @@ $(document).ready(function(){
 
 	setUpControllers();
   setUpFilters();
+  checkOperationType();
+  checkChipNames();
 
 });
 
@@ -23,7 +25,13 @@ function setUpFilters(){
     $(this).on("click", function(){
         var field = $(this).data("field");
         var json = {};
-        json[field] = $(this).text();
+
+        if ($(this).data("value")){
+          json[field] = $(this).data("value");
+        } else {
+          json[field] = $(this).text();
+        }
+        
         addManyQueryParamsAndRedirect(json);
     });
   });
@@ -31,12 +39,55 @@ function setUpFilters(){
    $(".chip-click").each(function(index) {
     $(this).on("click", function(){
         removeManyQueryParamsAndRedirect([$(this).data("field")]);
-
     });
   });
-   
 
 
+   $('#price-filter').click(function(e){
+      
+      var min = $("#min-price").val();
+      var max = $("#max-price").val();
+      var json = {};
+
+      console.log(min + '=' + max);
+
+      if (max >= min){
+        json["minPrice"] = min;
+        json["maxPrice"] = max;
+        addManyQueryParamsAndRedirect(json);
+      } 
+
+
+  });
+
+}
+
+function checkOperationType(){
+
+  var params = urlParamsToJson(location.search);
+  var sell = $("#sell-button");
+  var rent = $("#rent-button");
+  var temporal_rent = $("#temporal-rent-button");
+
+  console.log(params);
+  if (params.operation != null) {
+
+    $('#operationTypeContainer').find('.active').removeClass('active');
+
+    if (params.operation == "rent") {
+      rent.addClass('active');
+    } else if (params.operation == "temporal_rent"){
+      temporal_rent.addClass('active');
+    } else {
+      sell.addClass('active');
+    }
+  } else {
+    sell.addClass('active');
+  }
+
+  $('.tabs').tabs();
+  var active = $('.tabs .active').attr('href');
+  $('.tabs-content ' + active).show();
 }
 
 function setUpControllers(){
@@ -69,7 +120,27 @@ function setUpControllers(){
   });
 
 
+}
 
+function checkChipNames(){
+  
+    $(".chip-text").each(function( index ) {
+
+      var fullText = $(this).text();
+
+      if (!isNaN(fullText)){
+
+        var params = urlParamsToJson(location.search);
+        
+        if (params.minPrice == fullText)
+          $(this).text(">= " + fullText);
+        else {
+          $(this).text("<= " + fullText);
+        }
+
+      }
+      
+    });
 }
 
 function addFavorite(propertyId) {

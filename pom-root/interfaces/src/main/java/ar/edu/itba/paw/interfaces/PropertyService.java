@@ -32,4 +32,6 @@ public interface PropertyService {
     public Boolean propertyExists(long id);
     public Map<String, Long> getPropertiesDateBreakdown(List<Property> list);
 	public Map<String, String> getShowableFilters(Map<String,String> m);
+	public Map<String, String> getFiltrableFields(Map<String,String> m);
+
 }
