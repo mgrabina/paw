@@ -49,16 +49,29 @@ function setUpFilters(){
       var max = $("#max-price").val();
       var json = {};
 
-      console.log(min + '=' + max);
-
       if (max >= min){
         json["minPrice"] = min;
         json["maxPrice"] = max;
         addManyQueryParamsAndRedirect(json);
       } 
 
+  });
+
+   $('#area-filter').click(function(e){
+      
+      var min = $("#min-s").val();
+      var max = $("#max-s").val();
+      var json = {};
+
+      if (max >= min){
+        json["minArea"] = min;
+        json["maxArea"] = max;
+        addManyQueryParamsAndRedirect(json);
+      } 
 
   });
+
+   
 
 }
 
@@ -134,9 +147,14 @@ function checkChipNames(){
         
         if (params.minPrice == fullText)
           $(this).text(">= " + fullText);
-        else {
+        else if (params.maxPrice == fullText)
           $(this).text("<= " + fullText);
-        }
+        else if (params.rooms == fullText)
+          $(this).text(fullText + "r");
+        else if( params.minArea == fullText)
+          $(this).text(">= " + fullText + "m2");
+        else if (params.maxArea == fullText)
+          $(this).text("<= " + fullText + "m2");
 
       }
       

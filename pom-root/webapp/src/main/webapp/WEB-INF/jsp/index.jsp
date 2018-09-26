@@ -149,8 +149,9 @@
 						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
 						      			<c:if test="${filter.key eq 3}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+							      				<spring:message code="${filterEntry.key}" var="typeName"/>
 							      				<div class="link-box capit">
-							      					<a class="filter-click" data-field="type"><c:out value="${filterEntry.key}"/></a>
+							      					<a class="filter-click" data-field="type"><c:out value="${typeName}"/></a>
 							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>
@@ -175,7 +176,7 @@
 
 						      </div>
 						    </li>
-						    <li>
+						    <!-- <li>
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/tax"/> (US$)</div>
 						      <div class="collapsible-body">
 
@@ -190,7 +191,7 @@
 
 							    <a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 						      </div>
-						    </li>
+						    </li> -->
 						    <li style="display: none;">
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/amenities"/></div>
 						      <div class="collapsible-body">
@@ -213,6 +214,61 @@
 
 						      </div>
 						    </li>
+						
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/meters"/></div>
+						      <div class="collapsible-body">
+						      	<p class="range-field">
+						      		<spring:message code="index/filters/min"/> 
+							      <input type="range" id="min-s" min="0" max="1000" step="10"/>
+							    </p>
+							    <p class="range-field">
+							    	<spring:message code="index/filters/max"/>
+							      <input type="range" id="max-s" min="0" max="1000" step="10"/>
+							    </p>
+
+							    <a class="waves-effect waves-light btn" id="area-filter"><spring:message code="index/filters/apply-filters"/></a>
+						      </div>
+						    </li>
+						  <!--   <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/baths"/></div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
+						      			<c:if test="${filter.key eq 4}">
+							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+
+							      				<div class="link-box capit">
+							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="baths"><c:out value="${filterEntry.key}"/></a>
+							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
+							      				</div>
+							      			</c:forEach>
+						      			</c:if>
+					      			</c:forEach>
+						      	</div>
+						      </div>
+						    </li> -->
+						    <li>
+						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/rooms"/></div>
+						      <div class="collapsible-body">
+						      	<div class="link-list">
+						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
+						      			<c:if test="${filter.key eq 5}">
+							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
+
+							      				<div class="link-box capit">
+							      					<spring:message code="index/filters/rooms" var="roomsStatic"/>
+							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="rooms" data-value="${filterEntry.key}">
+							      						<c:out value="${filterEntry.key} ${roomsStatic}"/>
+							      					</a>
+							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
+							      				</div>
+							      			</c:forEach>
+						      			</c:if>
+					      			</c:forEach>
+						      	</div>
+						      </div>
+						    </li>
 						    <li>
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/general"/></div>
 						      <div class="collapsible-body">
@@ -225,59 +281,6 @@
 						      	</div>
 						      	<a class="waves-effect waves-light btn top-margin" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
 
-						      </div>
-						    </li>
-						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/meters"/></div>
-						      <div class="collapsible-body">
-						      	<p class="range-field">
-						      		<spring:message code="index/filters/min"/> 
-							      <input type="range" id="min-s" min="1" max="10000" />
-							    </p>
-							    <p class="range-field">
-							    	<spring:message code="index/filters/max"/>
-							      <input type="range" id="max-s" min="0" max="10000" />
-							    </p>
-
-							    <a class="waves-effect waves-light btn" id="" href=""><spring:message code="index/filters/apply-filters"/></a>
-						      </div>
-						    </li>
-						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/baths"/></div>
-						      <div class="collapsible-body">
-						      	<div class="link-list">
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/none"/></a>
-						      			<span>(289)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/1more"/></a>
-						      			<span>(211)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/2more"/></a>
-						      			<span>(88)</span>
-						      		</div>
-						      	</div>
-						      </div>
-						    </li>
-						    <li>
-						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/rooms"/></div>
-						      <div class="collapsible-body">
-						      	<div class="link-list">
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/none"/></a>
-						      			<span>(289)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/1more"/></a>
-						      			<span>(211)</span>
-						      		</div>
-						      		<div class="link-box">
-						      			<a href=""><spring:message code="index/filters/2more"/></a>
-						      			<span>(88)</span>
-						      		</div>
-						      	</div>
 						      </div>
 						    </li>
 						    <li>
@@ -455,202 +458,6 @@
             </div>
             </form>
         </div>
-
-		<%--<%@
-
-		<div class="full-container">
-
-			<div class="group-container animated slideInLeft">
-				<ul class="collection with-header">
-					
-					<li class="collection-header"><h4><spring:message code="groups-header" /></h4></li>
-					<c:if test="${recommendedGroup != null}">
-						<li class="collection-item avatar recommendedGroup">
-							<i class="material-icons circle">error_outline</i>
-							<a class="group-info wr-250">
-								<i class="material-icons">whatshot</i>
-								<span class="title"><c:out value="${recommendedGroup.name}"/></span>
-								<p><c:out value="${recommendedGroup.description}"/><br>
-								</p>
-							</a>
-							<i class="material-icons join-recommended-group-button" data-groupname="${recommendedGroup.name}">group_add</i>
-						</li>
-					</c:if>
-					<c:forEach items="${groups}" var="group" varStatus="loop">
-						<li data-id="${group.id}" class="collection-item avatar <c:if test="${currentGroup.id == group.id}">active</c:if> ">
-							<i class="material-icons circle">grade</i>
-							<a class="group-info" href="${pageContext.servletContext.contextPath}/${group.id}">
-								<span class="title"><c:out value="${group.name}"/></span>
-								<p><c:out value="${group.description}"/><br>
-								</p>
-							</a>
-							<c:if test="${group.id != 1}">
-								<i class="material-icons exit-group-button" data-groupname="${group.name}">exit_to_app</i>
-							</c:if>
-						</li>
-					</c:forEach>
-  				</ul>
-			</div>
-
-			<div class="main-container">
-
-				<!-- <div id="map"></div> -->
-
-				<div class="groupSearch animated slideInUp">
-					<div class="input-field">
-						<i class="material-icons prefix">search</i>
-						<input id="inputSearchBar" type="text" class="autocomplete" data-target="autocomplete_options" />
-						<label for="inputSearchBar"><spring:message code="search" /></label>
-					</div>
-				</div>
-
-
-                <div class="no-people-available <c:if test="${fn:length(usersList) > 0}">invisible</c:if>">
-                	<span><spring:message code="no-people-available"/> </span>
-                	<div class="searchingImgContainer">
-                		<img src="<c:url value="/resources/images/searching.gif"></c:url>">
-                	</div>
-                	<a id="refreshBtn" class="waves-effect waves-light btn"><spring:message code="refresh" /></a>
-                </div>
-
-				<div class="carousel carousel-slider animated slideInUp <c:if test="${fn:length(usersList) == 0}">invisible</c:if>">
-					
-					<c:forEach items="${usersList}" var="user" varStatus="loop">
-
-		                <div class="carousel-item " id="person-${loop.index}" data-uid="${user.uId}">
-		                	<div class="personContainer">
-
-		                		<div class="dislikeBtn" data-uid="${user.uId}">
-				  					<a><img class="actionBtn" src="<c:url value="/resources/images/cross.svg"></c:url>"></a>
-								</div>
-
-
-								<div class="personCard" id="card-${loop.index}" data-uid="${user.uId}">
-									<a href="${pageContext.servletContext.contextPath}/user/${user.uId}">
-										<div class="card ">
-											
-											<div class="card-image">
-												<div class="profileImageContainer">
-													<img class="" src="<c:url value="${user.mainImage}"></c:url>">
-												</div>
-											</div>
-
-											<div class="card-content wr">
-												<span class="card-title"><c:out value="${user.name}"/></span>
-												<c:out value="${user.info}"/>
-											</div>
-										</div>
-									</a>
-
-
-								</div>
-								
-								<div class="likeBtn" data-uid="${user.uId}">
-						  			<a><img class="actionBtn" src="<c:url value="/resources/images/heart.svg"></c:url>"></a>
-								</div>
-
-							</div>
-		                </div>
-	            	</c:forEach>
-				  
-		  		</div>
-		  	</div>
-
-
-		  	<div class="matches-container animated slideInRight">
-		  		<ul class="collection with-header">
-		  			<li class="collection-header matchTitle-header">
-		  				
-		  				<div class="column">
-			  				<h4><spring:message code="matches-header" /><b class="matchs-quantity">(${fn:length(matchesList)})</b></h4>
-			  				<c:if test="${fn:length(notifications) > 0}">
-								  <span class="new badge" data-badge-caption=" <spring:message code="new-matches"/>">${fn:length(notifications)}</span>
-							</c:if>
-						</div>
-
-		  				<a id="discoverBtn" href="${pageContext.servletContext.contextPath}/discover" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">map</i></a>
-		  			</li>
-  
-		  			<c:if test="${fn:length(matchesList) > 0}">
-		  				<c:forEach items="${matchesList}" var="userM">
-						    <li class="collection-item avatar matchElement" data-uid="${userM.uId}">
-                                <div class="blackT wr-250">
-								<img src="${userM.mainImage}" alt="" class="circle">
-						      	<span class="title"><c:out value="${userM.name}"/></span>
-							  </div>
-							   <p class="wr-250"><c:out value="${userM.mail}"/></p>
-
-								<c:choose>
-						       		<c:when test='${fn:contains(notifications, userM.uId)}'>
-						       			<a target="_blank" class="newNotification secondary-content"><i class="material-icons">fiber_new</i></a>
-						         	</c:when>
-							        <c:otherwise>
-							        	<a target="_blank" href="mailto:${userM.mail}" class="secondary-content"><i class="material-icons">send</i></a>
-							        </c:otherwise>
-						    	</c:choose>
-
-						    </li>
-					    </c:forEach>
-					</c:if>   
-				    
-  				</ul>
-		  	</div>
-			
-		</div>
-
-		
-
-
-
-  		<div id="matchModal" class="modal">
-		    <div class="modal-content">
-		      <h4><spring:message code="congratulations-modal-title" /><b id="matchmodal-name"></b></h4>
-		      <div class="caca">
-		      	<div class="heart">&#x2665;</div>
-		      </div>
-		    </div>
-		    <div class="modal-footer">
-		      <a class="modal-close waves-effect waves-green btn-flat"><spring:message code="congratulations-modal-button" /></a>
-		    </div>
-	  	</div>
-
-		<div id="newGroupModal" class="modal">
-			<div class="modal-content">
-				<h5><spring:message code="newgroup-modal-title" /><b id="newgroup-name"></b>?</h5>
-				<h5><spring:message code="newgroup-modal-description-input-title" /></h5>
-				<input id="new-group-description" type="text">
-			</div>
-			<div class="modal-footer">
-				<a class="modal-close waves-effect btn-flat"><spring:message code="newgroup-modal-cancel-button"/></a>
-				<a id="new-group-confirm-button" class="modal-close waves-effect waves-green btn-flat"><spring:message code="newgroup-modal-confirm-button"/></a>
-			</div>
-		</div>
-
-		<div id="joinGroupModal" class="modal">
-			<div class="modal-content">
-				<h5><spring:message code="joingroup-modal-title" /><b id="joingroup-name">?</b></h5>
-			</div>
-			<div class="modal-footer">
-				<a class="modal-close waves-effect btn-flat"><spring:message code="newgroup-modal-cancel-button"/></a>
-				<a id="join-group-confirm-button" class="modal-close waves-effect waves-green btn-flat"><spring:message code="joingroup-modal-confirm-button"/></a>
-			</div>
-		</div>
-
-		<div id="exitGroupModal" class="modal">
-			<div class="modal-content">
-				<h5><spring:message code="exitgroup-modal-title" /><b id="exitgroup-name"></b>?</h5>
-			</div>
-			<div class="modal-footer">
-				<a class="modal-close waves-effect btn-flat"><spring:message code="newgroup-modal-cancel-button"/></a>
-				<a id="exit-group-confirm-button" class="modal-close waves-effect waves-green btn-flat"><spring:message code="exitgroup-modal-confirm-button"/></a>
-			</div>
-		</div>
-
-		<footer>
-		</footer>
-
-		<div class="loading-modal"></div>
-		%>--%>
 
 		
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
