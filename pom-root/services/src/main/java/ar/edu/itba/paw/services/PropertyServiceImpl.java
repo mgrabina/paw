@@ -123,6 +123,8 @@ public class PropertyServiceImpl implements PropertyService {
 			else return Collections.emptyList();
 			filters.remove("order_by");
 		}else order="p.ad_date ASC";
+		if(filters.containsKey("language"))
+			filters.remove("language");
 
 		int date=removeFilters(filters,query,params);
 

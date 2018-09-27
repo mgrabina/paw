@@ -448,7 +448,9 @@
 									</div>
 
 									<div class="action">
-										<a class="modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
+										<c:if test="${not empty myUser}">
+											<a class="modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
+										</c:if>
 									</div>
 								</div>
 

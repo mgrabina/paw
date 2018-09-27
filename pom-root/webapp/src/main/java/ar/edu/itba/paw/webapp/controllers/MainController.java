@@ -39,18 +39,18 @@ public class MainController {
 		final ModelAndView mav = new ModelAndView("index");
 		
 		int pageNumber = Paginate.formatPageNumber(pageNumberParam);
-		
+
 
 		List<Property> propertiesList=ps.getFiltered(ps.getFiltrableFields(queryMap));
 		Map<Integer, Map<String, Long>> potFilters = ps.getPotentialFilters(propertiesList);
 
 		final int propertiesCount = propertiesList.size();
 		final int pagesCount = Paginate.getPageCount(propertiesList);
-		
+		User u = us.getCurrentUser();
 		mav.addObject("propertiesList", Paginate.getPage(propertiesList, pageNumber));
 		mav.addObject("propertiesCount", propertiesCount);
 		mav.addObject("pagesCount", pagesCount);
-		mav.addObject("myUser", us.getCurrentUser());
+		mav.addObject("myUser", u );
 		mav.addObject("filters", potFilters);
 		mav.addObject("timeFilter", ps.getPropertiesDateBreakdown(propertiesList));
 		mav.addObject("filterNames", ps.getShowableFilters(queryMap));
