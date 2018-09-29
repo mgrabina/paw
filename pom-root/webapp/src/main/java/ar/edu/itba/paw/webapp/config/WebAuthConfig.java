@@ -24,27 +24,26 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
     private PawUserDetailsService userDetailsService;
 
     protected void configure(final HttpSecurity http)throws Exception {
-        http.userDetailsService(userDetailsService).sessionManagement().invalidSessionUrl("/user/login").and().authorizeRequests()
+        http.userDetailsService(userDetailsService).sessionManagement()
+                .and().authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/user/login").anonymous()
                 .antMatchers("/user/register").anonymous()
-                .antMatchers("/contact").anonymous()
-                //.antMatchers("/").anonymous()
                 // .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").authenticated()
                 .antMatchers("/property/register").authenticated()
                 .and().formLogin().usernameParameter("mail").passwordParameter("password").defaultSuccessUrl("/", false).loginPage("/user/login")
                 .failureUrl("/user/login?error=true")
                 .and().rememberMe().rememberMeParameter("j_rememberme")
                 .userDetailsService(userDetailsService).key("pawkey2018secretatr")
                 .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30))
-                .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/user/login")
+                .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/")
                 // .and().exceptionHandling().accessDeniedPage("/")
                 .and().csrf().disable();
     }
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/resources/**","/","/search","/not-found","/errors","/property/{id}",
+                "/resources/**","/search","/not-found","/errors",
                 "/403");
 
     }

@@ -14,6 +14,8 @@ $(document).ready(function(){
 
 	setUpControllers();
   setUpFilters();
+  checkOperationType();
+  checkChipNames();
 
 });
 
@@ -23,7 +25,13 @@ function setUpFilters(){
     $(this).on("click", function(){
         var field = $(this).data("field");
         var json = {};
-        json[field] = $(this).text();
+
+        if ($(this).data("value")){
+          json[field] = $(this).data("value");
+        } else {
+          json[field] = $(this).text();
+        }
+        
         addManyQueryParamsAndRedirect(json);
     });
   });
@@ -31,12 +39,124 @@ function setUpFilters(){
    $(".chip-click").each(function(index) {
     $(this).on("click", function(){
         removeManyQueryParamsAndRedirect([$(this).data("field")]);
-
     });
   });
+
+
+   $('#price-filter').click(function(e){
+      
+      var min = $("#min-price").val();
+      var max = $("#max-price").val();
+      var json = {};
+
+      if (max >= min){
+        json["minPrice"] = min;
+        json["maxPrice"] = max;
+        addManyQueryParamsAndRedirect(json);
+      } 
+
+  });
+
+   $('#area-filter').click(function(e){
+      
+      var min = $("#min-s").val();
+      var max = $("#max-s").val();
+      var json = {};
+
+      if (max >= min){
+        json["minArea"] = min;
+        json["maxArea"] = max;
+        addManyQueryParamsAndRedirect(json);
+      } 
+
+  });
+
+  $('#remove-filters').click(function(e){
+    window.location =  window.location.origin;
+  });
+
+  $('#general-filter').click(function(e){
+    
+    var gValue = $("#garage-input").is(":checked") * 1;
+    var json = {}; 
+
+    json["garage"] = gValue;
+
+    if (gValue == 1) {
+      addManyQueryParamsAndRedirect(json);
+    } else {
+      removeManyQueryParamsAndRedirect(['garage']);
+    }
+
+
+  });
+
+  $('.order-btn').each(function(index) {
+      $(this).on("click", function(){
+        
+        var id = $(this).data("id");
+        var json = {}; 
+        
+        json['order_by'] = id;
+
+        if (id == " ") {
+          removeManyQueryParamsAndRedirect(['order_by']);
+        } else {
+          addManyQueryParamsAndRedirect(json);
+        }
+      });
+  });
+
+  $('.fav-btn').each(function(index) {
+      $(this).on("click", function(){
+        
+        var id = $(this).data("id");
+        var action = $(this).data("action");
+        
+        if (action == 1){
+          addFavorite(id);
+          $(this).removeClass('far');
+          $(this).addClass('fa');
+        } else {
+          deleteFavorite(id);
+          $(this).removeClass('fa');
+          $(this).addClass('far');
+        }
+        
+      });
+  });
+
+   
    
 
+}
 
+function checkOperationType(){
+
+  var params = urlParamsToJson(location.search);
+  var sell = $("#sell-button");
+  var rent = $("#rent-button");
+  var temporal_rent = $("#temporal-rent-button");
+
+  console.log(params);
+  if (params.operation != null) {
+
+    $('#operationTypeContainer').find('.active').removeClass('active');
+
+    if (params.operation == "rent") {
+      rent.addClass('active');
+    } else if (params.operation == "temporal_rent"){
+      temporal_rent.addClass('active');
+    } else {
+      sell.addClass('active');
+    }
+  } else {
+    sell.addClass('active');
+  }
+
+  $('.tabs').tabs();
+  var active = $('.tabs .active').attr('href');
+  $('.tabs-content ' + active).show();
 }
 
 function setUpControllers(){
@@ -69,7 +189,36 @@ function setUpControllers(){
   });
 
 
+}
 
+function checkChipNames(){
+  
+    $(".chip-text").each(function( index ) {
+
+      var fullText = $(this).text();
+
+      if (!isNaN(fullText)){
+
+        var params = urlParamsToJson(location.search);
+        
+        if (params.minPrice == fullText)
+          $(this).text(">= " + fullText);
+        else if (params.maxPrice == fullText)
+          $(this).text("<= " + fullText);
+        else if (params.rooms == fullText)
+          $(this).text(fullText + "r");
+        else if( params.minArea == fullText)
+          $(this).text(">= " + fullText + "m2");
+        else if (params.maxArea == fullText)
+          $(this).text("<= " + fullText + "m2");
+        else if (params.date == fullText)
+          $(this).text("<= " + fullText + "d");
+        else if (params.garage == fullText)
+          $(this).text("Garage");
+
+      }
+      
+    });
 }
 
 function addFavorite(propertyId) {
@@ -147,3 +296,8 @@ function getPage(number) {
         "page" : number
     });
 }
+
+function getContextPath() {
+   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+}
+

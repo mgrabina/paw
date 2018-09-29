@@ -1,0 +1,244 @@
+body {
+	padding: 100px;
+}
+
+/*Building image*/
+.image-container {
+	grid-area: image;
+	height: 300px;
+	position: relative;
+	width: 100%;
+}
+
+.image {
+	 width: 100%; 
+	 height: 500px;
+}
+
+/*About*/
+.about-container {
+	grid-area: about;
+	margin-bottom: 20px;
+}
+
+.about-title-container {
+	display: flex;
+}
+
+.about {
+	font-weight: bold;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+
+.about-content-container {
+	display: grid;
+	grid-template-columns:150px 300px;
+	grid-template-rows: auto;
+	grid-template-areas:
+		"street street-info"
+		"number number-info"
+		"floor floor-info"
+		"type type-info"
+		"price price-info"
+		"area area-info";
+	padding-top: 30px;
+}
+
+.street {
+	grid-area: street;
+}
+
+.street-info {
+	grid-area: street-info;
+}
+
+.number {
+	grid-area: number;
+}
+
+.number-info {
+	grid-area: number-info;
+}
+
+.floor {
+	grid-area: floor;
+}
+
+.floor-info {
+	grid-area: floor-info;
+}
+
+.type {
+	grid-area: type;
+}
+
+.type-info {
+	grid-area: type-info;
+}
+
+.price {
+	grid-area: price;
+}
+
+.price-info {
+	grid-area: price-info;
+}
+
+.area {
+	grid-area: area;
+}
+
+.area-info {
+	grid-area: area-info;
+}
+
+/*Title*/
+.building-title-container {
+	grid-area: title;
+}
+
+.building-title {
+	display: inline;
+}
+
+.edit-building-info {
+	margin-left: 10px;
+	margin-top: -20px;
+}
+
+/*Rating*/
+.rating { 
+  border: none;
+  float: left;
+  padding-left: 0;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 2em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+.rating > label.fill {
+  color: #4286f4; 
+}
+
+.rating-container {
+	display: flex;
+	grid-area: rating;
+}
+
+.rating-text {
+	margin: 0;
+	padding-top: 15px;
+}
+
+/*Building content*/
+.building-content {
+	display: grid;
+	grid-area: content;
+	grid-template-areas:
+		"title"
+		"rating"
+		"description"
+		"about"
+		"location"
+		"contact";
+}
+
+.detail-view-container {
+	display: grid;
+	grid-template-rows: 500px 30px auto;
+	grid-template-areas:
+		"image"
+		"."
+		"content";
+}
+
+/*Description*/
+.description-container {
+	grid-area: description;
+	margin-bottom: 20px;
+}
+
+.description-title-container {
+	display: flex;
+}
+
+.description {
+	font-weight: bold;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+
+/*Contact*/
+.contact-container {
+	grid-area: contact;
+	margin-bottom: 20px;
+}
+
+.contact-title-container {
+	display: flex;
+}
+
+.contact {
+	font-weight: bold;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+
+/*Location*/
+.location-container {
+	grid-area: location;
+	margin-bottom: 20px;
+}
+
+.location-title-container {
+	display: flex;
+}
+
+.location {
+	font-weight: bold;
+	padding-left: 2px;
+	padding-top: 2px;
+}
+
+.location-content-container {
+	padding-top: 30px;
+}
+
+/*Heart*/
+.heart:before { 
+  margin: 5px;
+  font-size: 5em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f004";
+}
+
+.heart { 
+  color: #ddd; 
+  float: right;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all .2s ease;
+}
+
+.heart.fill { 
+  color: #DC3232; 
+  float: right;
+}

@@ -273,6 +273,9 @@
 
 }
 
+#operationTypeContainer > li > a {
+	cursor: pointer;
+}
 
 .link-list > .link-box {
 	width: 100%;
@@ -283,6 +286,10 @@
 
 .capit {
 	text-transform: capitalize;
+}
+
+#remove-filters{
+	cursor: pointer;
 }
 
 .btn {
@@ -299,4 +306,11 @@
 	width: 100%;
 }
 
+.pagination {
+	cursor: pointer;
+}
+
+.fav-btn {
+	margin-left: 10px;
+}
 
