@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,7 +14,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -24,6 +31,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
     private PawUserDetailsService userDetailsService;
 
     protected void configure(final HttpSecurity http)throws Exception {
+        File file = ResourceUtils.getFile("classpath:key/master.key");
         http.userDetailsService(userDetailsService).sessionManagement()
                 .and().authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -34,7 +42,7 @@ public class WebAuthConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin().usernameParameter("mail").passwordParameter("password").defaultSuccessUrl("/", false).loginPage("/user/login")
                 .failureUrl("/user/login?error=true")
                 .and().rememberMe().rememberMeParameter("j_rememberme")
-                .userDetailsService(userDetailsService).key("pawkey2018secretatr")
+                .userDetailsService(userDetailsService).key(Files.readAllBytes(file.toPath()).toString())
                 .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30))
                 .and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/")
                 // .and().exceptionHandling().accessDeniedPage("/")
