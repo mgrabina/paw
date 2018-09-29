@@ -117,6 +117,7 @@ public class PropertyServiceImpl implements PropertyService {
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
 
+
 		if(filters.containsKey("order_by")) {
 			if (orderMap.containsKey(filters.get("order_by")))
 				order = orderMap.get(filters.get("order_by"));
@@ -129,6 +130,8 @@ public class PropertyServiceImpl implements PropertyService {
 		int date=removeFilters(filters,query,params);
 
 		int i = filters.size();
+		if(i>filterIntMap.size()+filterStringMap.size()+filterBoolMap.size()) return Collections.emptyList();
+
 
 		for (Map.Entry<String, String> entry : filters.entrySet()) {
 			if(filterStringMap.containsKey(entry.getKey())) {
@@ -169,14 +172,16 @@ public class PropertyServiceImpl implements PropertyService {
 			params.add(filters.get("operation"));
 			filters.remove("operation");
 		}
-		if(!filters.isEmpty())
-			query.append(" AND ");
 
 		int date=-1;
 		if(filters.containsKey("date")) {
 			date = Integer.parseInt(filters.get("date"));
 			filters.remove("date");
 		}
+
+		if(!filters.isEmpty())
+			query.append(" AND ");
+
 		return date;
 	}
 
