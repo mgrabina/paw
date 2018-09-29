@@ -19,4 +19,5 @@ public interface UserService {
 	public Map<Long, Property> getFavouritesMap(User u);
 	public void setFavourite(Long userId, Long propertyId);
 	public void deleteFavourite(Long userId, Long propertyId);
-}
+	public boolean userExist(String mail);
+	}
