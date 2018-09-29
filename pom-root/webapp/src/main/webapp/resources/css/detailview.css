@@ -1,7 +1,3 @@
-body {
-	padding: 100px;
-}
-
 /*Building image*/
 .image-container {
 	grid-area: image;
@@ -37,11 +33,12 @@ body {
 	grid-template-rows: auto;
 	grid-template-areas:
 		"street street-info"
-		"number number-info"
+		"neighborhood neighborhood-info"
 		"floor floor-info"
 		"type type-info"
 		"price price-info"
-		"area area-info";
+		"coveredArea coveredArea-info"
+		"totalArea totalArea-info";
 	padding-top: 30px;
 }
 
@@ -56,11 +53,15 @@ body {
 .number {
 	grid-area: number;
 }
-
 .number-info {
 	grid-area: number-info;
 }
-
+.neighborhood{
+	grid-area: neighborhood;
+}
+.neighborhood-info{
+	grid-area: neighborhood-info;
+}
 .floor {
 	grid-area: floor;
 }
@@ -85,12 +86,20 @@ body {
 	grid-area: price-info;
 }
 
-.area {
-	grid-area: area;
+.coveredArea {
+	grid-area: coveredArea;
 }
 
-.area-info {
-	grid-area: area-info;
+.coveredArea-info {
+	grid-area: coveredArea-info;
+}
+
+.totalArea {
+	grid-area: totalArea;
+}
+
+.totalArea-info {
+	grid-area: totalArea-info;
 }
 
 /*Title*/
@@ -108,14 +117,14 @@ body {
 }
 
 /*Rating*/
-.rating { 
+.rating {
   border: none;
   float: left;
   padding-left: 0;
 }
 
-.rating > input { display: none; } 
-.rating > label:before { 
+.rating > input { display: none; }
+.rating > label:before {
   margin: 5px;
   font-size: 2em;
   font-family: FontAwesome;
@@ -123,18 +132,18 @@ body {
   content: "\f005";
 }
 
-.rating > .half:before { 
+.rating > .half:before {
   content: "\f089";
   position: absolute;
 }
 
-.rating > label { 
-  color: #ddd; 
- float: right; 
+.rating > label {
+  color: #ddd;
+ float: right;
 }
 
 .rating > label.fill {
-  color: #4286f4; 
+  color: #4286f4;
 }
 
 .rating-container {
@@ -149,7 +158,6 @@ body {
 
 /*Building content*/
 .building-content {
-	display: grid;
 	grid-area: content;
 	grid-template-areas:
 		"title"
@@ -161,7 +169,9 @@ body {
 }
 
 .detail-view-container {
-	display: grid;
+	background-color: white;
+	padding: 3em;
+	margin: 1em 10em !important;
 	grid-template-rows: 500px 30px auto;
 	grid-template-areas:
 		"image"
@@ -219,8 +229,14 @@ body {
 
 .location-content-container {
 	padding-top: 30px;
+	height: 30em;
 }
-
+#map{
+	width: 50% !important;
+}
+#pano{
+	width: 50% !important;
+}
 /*Heart*/
 .heart:before { 
   margin: 5px;
@@ -241,4 +257,23 @@ body {
 .heart.fill { 
   color: #DC3232; 
   float: right;
+}
+
+.submit-btn{
+	float: right;
+
+}
+.property-card{
+	margin: auto 2em !important;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#map, #pano {
+	float: left;
+	height: 100%;
+	width: 45%;
 }

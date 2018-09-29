@@ -11,7 +11,6 @@ import ar.edu.itba.paw.models.User;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 import ar.edu.itba.paw.webapp.forms.NewPropertyForm;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +29,7 @@ import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 public class PropertyController {
@@ -96,29 +96,17 @@ public class PropertyController {
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)
     public ModelAndView getPropertyDetailview(@PathVariable("id") int id) {
         final ModelAndView mav = new ModelAndView("detailview");
-
-        //final Property property = ps.findById(id);
-
-        mav.addObject("id", id);
-        mav.addObject("addedToFavourites", "false"); //hardcodeado, despues sacarlo del back
-        mav.addObject("name", "My building");
-        mav.addObject("rating", "3,5");
-        mav.addObject("description", "Lorem ipsum ...");
-        mav.addObject("street", "Street info");
-        mav.addObject("floor", "Floor info");
-        mav.addObject("type", "Type info");
-        mav.addObject("price", "Price info");
-        mav.addObject("area", "Area info");
-
-        /*mav.addObject("name", property.getAdDescription());
-        mav.addObject("rating", "3,5");
-        mav.addObject("description", property.getAdMessage());
-        mav.addObject("street", property.getStreet());
-        mav.addObject("number", property.getNumber());
-        mav.addObject("floor", property.getFloor());
-        mav.addObject("type", property.getType());
-        mav.addObject("price", property.getPrice());
-        mav.addObject("area", property.getTotalArea());*/
+        Optional<Property> property = ps.getPropertyById(id);
+        if(property.isPresent()){
+            try{
+                mav.addObject("property", property.get());
+//                mav.addObject("addedToFavourites", us.getFavourites()); //hardcodeado, despues sacarlo del back
+            }catch (Exception e){
+                return new ModelAndView("error");
+            }
+        }else {
+            return new ModelAndView("404");
+        }
 
         return mav;
     }

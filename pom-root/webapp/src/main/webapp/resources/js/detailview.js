@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
     if($('.heart').attr('addedToFavourites') === "true") {
         $('.heart').addClass('fill');
     }

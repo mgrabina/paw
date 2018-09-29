@@ -6,132 +6,275 @@
 
 <html>
 <head>
-<title>Detail View</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<c:url value="/resources/css/materialize.min.css"></c:url>" rel='stylesheet' type='text/css' />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="<c:url value="/resources/css/detailview.css"></c:url>" rel='stylesheet' type='text/css' />
-
-<script src="<c:url value="/resources/js/materialize.min.js"></c:url>"> </script>
-<script src="<c:url value="/resources/js/jquery.min.js"></c:url>"> </script>
-<script src="<c:url value="/resources/js/detailview.js"></c:url>" type="text/javascript"> </script>
-
+	<title>Detail View</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="<c:url value="/resources/css/materialize.min.css"></c:url>" rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="<c:url value="/resources/css/detailview.css"></c:url>" rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700'>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/base.css"></c:url>">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"></c:url>">
 </head>
 <body>
-	<div class="detail-view-container">
-		<div class="image-container">
-			<img src="<c:url value="/resources/images/b5.jpg"></c:url>" class="image"/>
+<nav class="navbar nav-header">
+
+	<div class="navbar-logo">
+		<a href="${pageContext.servletContext.contextPath}/" ><img class="logo" src="<c:url value="/resources/images/logo.png"></c:url>"></a>
+	</div>
+
+	<div class="search-box">
+		<div class="nav-wrapper">
+			<form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
+				<div class="input-field">
+					<input id="search" type="search" name="query" placeholder="Buscar" required>
+					<label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
+					<i class="material-icons">close</i>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="buttons-box">
+		<div class="labels">
+			<c:if test="${empty myUser}">
+				<div class="nav-item">
+					<a href="<%= response.encodeURL(request.getContextPath() + "/user/register") %>"><spring:message code="index/register" /></a>
+				</div>
+				<div class="nav-item">
+					<a href="<%= response.encodeURL(request.getContextPath() + "/user/login") %>"><spring:message code="index/login"/></a>
+				</div>
+			</c:if>
+			<c:if test="${not empty myUser}">
+				<div class="nav-item">
+					<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
+				</div>
+			</c:if>
+			<div class="nav-item">
+				<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+			</div>
 		</div>
 
-		<label title="Add to my favourites" class="heart right-align" idProperty="${id}" addedToFavourites="${addedToFavourites}"></label>
+		<div class="extras">
+			<a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
+			<ul id='dropdown1' class='dropdown-content'>
+				<c:if test="${not empty myUser}">
+					<li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a></li>
+					<li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
+				</c:if>
+				<li class="divider" tabindex="-1"></li>
+				<li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+				<li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+			</ul>
+		</div>
+	</div>
 
-		<div class="building-content">
-			<div class="building-title-container">
-				<h3 class="building-title">${name}</h3>
-				<a class="waves-effect waves-light btn-small black edit-building-info"><i class="material-icons">edit</i></a>
+</nav>
+<br>
+<div class="shadow-box property-card" id="property-${loop.index}">
+	<div class="left">
+		<div class="image-container">
+			<c:choose>
+				<c:when test="${fn:length(property.images) == 0}">
+					<img src="<c:url value="/resources/images/no-image.png"/>">
+				</c:when>
+				<c:otherwise>
+					<div id="carousel-${loop.index}" class="carousel carousel-slider" data-indicators="true">
+						<c:if test="${fn:length(property.images) > 1}">
+							<div class="carousel-fixed-item center middle-indicator">
+								<div class="left">
+									<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
+								</div>
+
+								<div class="right">
+									<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
+								</div>
+
+							</div>
+						</c:if>
+						<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
+							<a class="carousel-item" href="">
+								<div class="image-cont">
+									<img src="<c:out value="${imageSrc}"/>">
+								</div>
+							</a>
+						</c:forEach>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div class="price-text">
+									<span>
+         								US$ <fmt:formatNumber value ="${property.price}" type = "number"/>
+     								</span>
+		</div>
+	</div>
+	<div class="right">
+		<div class="header">
+			<div class="left">
+				<a class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
+				<a class="card-text-wrap subtitle"><c:out value="${property.street}"/> - <c:out value="${property.neighborhood}"/></a>
 			</div>
-
-			<div class="rating-container">
-                <fieldset class="rating">
-                    <label class = "full"></label>
-                    <label class="half"></label>
-                    <label class = "full"></label>
-                    <label class="half fill"></label>
-                    <label class = "full fill"></label>
-                    <label class="half fill"></label>
-                    <label class = "full fill"></label>
-                    <label class="half fill"></label>
-                    <label class = "full fill"></label>
-                    <label class="half fill"></label>
-                </fieldset>
-				<h5 class="rating-text"><spring:message code="detailview/rating" /> ${rating}</h5>
+			<div class="right">
+				<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
 			</div>
+		</div>
 
-			<div class="description-container">
-				<div class="description-title-container">
-					<i class="material-icons">description</i>
-					<span class="description"><spring:message code="detailview/description" /></span>
-				</div>
-				<div class="divider"></div>
-				<div class="description-content-container">
-					<p>${description}</p>
-				</div>
+		<div class="description">
+			<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
+			<div class="pDesc">
+										<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
+											<c:out value="${property.adDescription}"/>
+										</span>
 			</div>
+		</div>
 
-			<div class="about-container">
-				<div class="about-title-container">
-					<i class="material-icons">home</i>
-					<span class="about"><spring:message code="detailview/about" /></span>
-				</div>
-				<div class="divider"></div>
-				<div class="divider"></div>
-				<div class="about-content-container">
-					<p class="street"><spring:message code="detailview/street" /></p>
-					<p class="street-info">${street}</p>
-					<p class="number"><spring:message code="detailview/number" /></p>
-					<p class="number-info">${number}</p>
-					<p class="floor"><spring:message code="detailview/floor" /></p>
-					<p class="floor-info">${floor}</p>
-					<p class="type"><spring:message code="detailview/type" /></p>
-					<p class="type-info">${type}</p>
-					<p class="price"><spring:message code="detailview/price" /></p>
-					<p class="price-info">${price}</p>
-					<p class="area"><spring:message code="detailview/area" /></p>
-					<p class="area-info">${area}</p>
-				</div>
+		<div class="footer">
+
+			<div class="bold extra-info">
+				<c:choose>
+					<c:when test="${property.inmediateDelivery}">
+						<span><spring:message code="index/card/immediate"/></span>
+					</c:when>
+					<c:otherwise>
+						<span><spring:message code="index/card/immediate"/></span>
+					</c:otherwise>
+				</c:choose>
+				<span>&#183;</span>
+				<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
 			</div>
+		</div>
 
-			<div class="contact-container">
-				<div class="contact-title-container">
-					<i class="material-icons">contact_mail</i>
-					<span class="contact"><spring:message code="detailview/contact_us" /></span>
-				</div>
-				<div class="divider"></div>
-				<div class="row">
-				    <form>
-				      <div class="row">
-				        <div class="input-field">
-				          <textarea id="message" class="materialize-textarea"></textarea>
-				          <label for="message"><spring:message code="detailview/message" /></label>
-				        </div>
-				      </div>
-				      <div class="row">
-				        <div class="input-field">
-				          <input id="email" type="email" class="validate">
-				          <label for="email"><spring:message code="detailview/email" /></label>
-				        </div>
-				      </div>
-				      <div class="row">
-				        <div class="input-field">
-				          <input id="name" type="text" class="validate">
-				          <label for="name"><spring:message code="detailview/name" /></label>
-				        </div>
-				      </div>
-				      <div class="row">
-				        <div class="input-field">
-				          <input id="phone" type="tel" class="validate">
-				          <label for="phone"><spring:message code="detailview/phone_number" /></label>
-				        </div>
-				      </div>
-				      <a class="waves-effect waves-light btn black"><spring:message code="detailview/send_message" /></a>
-				    </form>
-			  	</div>
-		    </div>
+	</div>
+</div>
 
-			<div class="location-container">
-				<div class="location-title-container">
-					<i class="material-icons">location_on</i>
-					<span class="location"><spring:message code="detailview/location" /></span>
-				</div>
-				<div class="divider"></div>
-				<div class="location-content-container">
-					<iframe src="https://www.google.com/maps/embed?pb" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
-				</div>
-				
+<div class="building-content">
+	<div class="detail-view-container card">
+		<div class="about-container">
+			<div class="about-title-container">
+				<i class="material-icons">home</i>
+				<span class="about"><spring:message code="detailview/about" /></span>
+			</div>
+			<div class="divider"></div>
+			<div class="divider"></div>
+			<div class="about-content-container">
+				<p class="street bold" ><spring:message code="detailview/street" /></p>
+				<p class="street-info" id="street">${property.street}</p>
+				<p class="floor bold"><spring:message code="detailview/floor" /></p>
+				<p class="floor-info">${property.floor}</p>
+				<p class="neighborhood bold"><spring:message code="detailview/street" /></p>
+				<p class="neighborhood-info"  id="neighborhood">${property.neighborhood}</p>
+				<p class="type bold"><spring:message code="detailview/type" /></p>
+				<p class="type-info">${property.type}</p>
+				<p class="price bold"><spring:message code="detailview/price" /></p>
+				<p class="price-info">${property.price}</p>
+				<p class="coveredArea bold"><spring:message code="detailview/coveredArea" /></p>
+				<p class="coveredArea-info">${property.coveredArea}</p>
+				<p class="totalArea bold"><spring:message code="detailview/totalArea" /></p>
+				<p class="totalArea-info">${property.totalArea}</p>
+			</div>
+		</div>
+		<div class="location-container">
+			<div class="location-title-container">
+				<i class="material-icons">location_on</i>
+				<span class="location"><spring:message code="detailview/location" /></span>
+			</div>
+			<div class="divider"></div>
+			<%--Key: AIzaSyA8Y4tkFGWovxIdXWcR_GyZLVIHeMzW9cQ--%>
+			<div class="location-content-container">
+				<div id="map"></div>
+				<div id="pano"></div>
+				<script>
+                    function initialize() {
+                        var address = $("#street").html() + ", " + $("#neighborhood").html() + ", Argentina" ;
+                        var geocoder = new google.maps.Geocoder();
+                        var lat, long, location;
+
+                        if (geocoder) {
+                            geocoder.geocode( { 'address': address}, function(results, status) {
+                                console.log(results);
+                                if (status == google.maps.GeocoderStatus.OK) {
+                                    if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                                        lat = results[0].geometry.location.lat();
+                                        long = results[0].geometry.location.lng();
+                                        console.log(lat);
+                                        console.log(long);
+                                        console.log(location);
+                                        var property = {lat: lat, lng: long};
+                                        console.log(property);
+
+                                        var map = new google.maps.Map(document.getElementById('map'), {
+                                            center: property,
+                                            zoom: 14
+                                        });
+                                        var panorama = new google.maps.StreetViewPanorama(
+                                            document.getElementById('pano'), {
+                                                position: property,
+                                                pov: {
+                                                    heading: 34,
+                                                    pitch: 10
+                                                }
+                                            });
+                                        map.setStreetView(panorama);
+                                    } else {
+                                        // alert("No results found");
+                                    }
+                                } else {
+                                    // alert("Geocode was not successful for the following reason: " + status);
+                                }
+                            });
+                        }
+                    }
+				</script>
+				<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8Y4tkFGWovxIdXWcR_GyZLVIHeMzW9cQ&callback=initialize">
+				</script>
+			</div>
+		</div>
+		<br>
+		<div class="contact-container">
+			<div class="contact-title-container">
+				<i class="material-icons">contact_mail</i>
+				<span class="contact"><spring:message code="detailview/contact_us" /></span>
+			</div>
+			<div class="divider"></div>
+			<div class="row">
+				<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/contact") %>">
+					<div class="row">
+						<div class="input-field">
+							<textarea id="message" class="materialize-textarea"></textarea>
+							<label for="message"><spring:message code="detailview/message" /></label>
+						</div>
+					</div>
+					<div class="row" style="display: none;">
+						<%-- Hide Data for form --%>
+						<div class="input-field">
+							<textarea id="propertyId" class="materialize-textarea" value="${property.id}"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field">
+							<input id="email" type="email" class="validate">
+							<label for="email"><spring:message code="detailview/email" /></label>
+						</div>
+					</div>
+					<input type="submit" class="waves-effect waves-light btn submit-btn bold">
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
+<script src="<c:url value="/resources/js/materialize.min.js"></c:url>"> </script>
+<script src="<c:url value="/resources/js/jquery.min.js"></c:url>"> </script>
+<script src="<c:url value="/resources/js/detailview.js"></c:url>" type="text/javascript"> </script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/index.js"></c:url>"></script>
+
 </body>
 </html>

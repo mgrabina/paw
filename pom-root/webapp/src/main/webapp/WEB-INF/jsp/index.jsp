@@ -404,8 +404,8 @@
 							<div class="right">
 								<div class="header">
 									<div class="left">
-										<a href="" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
-										<a href="" class="card-text-wrap subtitle"><c:out value="${property.street}"/> - <c:out value="${property.neighborhood}"/></a>
+										<a href="<%= response.encodeURL(request.getContextPath() + "/property/")%>${property.id}" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
+										<a href="<%= response.encodeURL(request.getContextPath() + "/property/")%>${property.id}" class="card-text-wrap subtitle"><c:out value="${property.street}"/> - <c:out value="${property.neighborhood}"/></a>
 									</div>
 									<div class="right">
 										<img src="<c:out value="${property.publisherUser.imageSrc}"/>">

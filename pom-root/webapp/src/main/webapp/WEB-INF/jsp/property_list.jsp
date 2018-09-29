@@ -79,7 +79,7 @@
 												    	<div class="left">
 												     		<a data-id="${loop.index}" class="movePrevCarousel middle-indicator-text content-indicator"><i class="material-icons left  middle-indicator-text">chevron_left</i></a>
 												    	</div>
-	     
+
 												    	<div class="right">
 													    	<a data-id="${loop.index}" class="moveNextCarousel middle-indicator-text content-indicator"><i class="material-icons right middle-indicator-text">chevron_right</i></a>
 													    </div>
@@ -106,8 +106,8 @@
 							<div class="right">
 								<div class="header">
 									<div class="left">
-										<a href="" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
-										<a href="" class="card-text-wrap subtitle"><c:out value="${property.street}"/> - <c:out value="${property.neighborhood}"/></a>
+										<a href="<%= response.encodeURL(request.getContextPath() + "/property/")%>${property.id}" class="card-text-wrap title"><c:out value="${property.adMessage}"/></a>
+										<a href="<%= response.encodeURL(request.getContextPath() + "/property/")%>${property.id}" class="card-text-wrap subtitle"><c:out value="${property.street}"/> - <c:out value="${property.neighborhood}"/></a>
 									</div>
 									<div class="right">
 										<img src="<c:out value="${property.publisherUser.imageSrc}"/>">
@@ -118,8 +118,8 @@
 									<span class="bold"><c:out value="${property.coveredArea}"/> <spring:message code="index/card/meters"/></span> </br>
 									<div class="pDesc">
 										<span style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;">
-											<c:out value="${property.adDescription}"/> 
-										</span> 
+											<c:out value="${property.adDescription}"/>
+										</span>
 									</div>
 								</div>
 

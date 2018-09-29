@@ -50,10 +50,11 @@ public class UserController {
 
     @RequestMapping(value = "/contact", method = RequestMethod.POST)
     public ModelAndView postContact(@ModelAttribute("message") final String message,
-                                    @ModelAttribute("propertyId") final String propertyId) throws IOException {
+                                    @ModelAttribute("propertyId") final String propertyId,
+                                    @ModelAttribute("mail") final String dest) throws IOException {
         try{
             String destMail = ps.getPropertyById(Integer.parseInt(propertyId)).get().getPublisherUser().getMail();
-            es.sendMessage(destMail, DEFAULT_CONTACT_SUBJECT, message);
+            es.sendMessage(destMail, DEFAULT_CONTACT_SUBJECT + " - " + ((dest != null)?dest:""), message);
             ModelAndView mav = new ModelAndView("alert");
             mav.addObject("title", "Message Sent"); //TODO: Language support
             return mav;
