@@ -69,13 +69,13 @@ public class UserController {
             return getRegister(form);
         }
 
-//        if(us.userExist(form.getMail())){
-//            ModelAndView m =new ModelAndView("register");
-//            m.addObject("errorMessage", "Existing user");
-//            return m;
-//        }
+        if(us.userExist(form.getMail())){
+            ModelAndView m =new ModelAndView("register");
+            m.addObject("errorMessage", "Existing user");
+            return m;
+        }
 
-        us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), "implementImage");
+        us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), " ");
 
         return new ModelAndView("redirect:/");
     }

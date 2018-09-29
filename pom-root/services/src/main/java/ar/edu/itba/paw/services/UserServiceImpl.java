@@ -23,9 +23,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	private PropertyDao propertyDao;
-
 
 	public User GetUser() {
 		// TODO Auto-generated method stub
@@ -62,7 +59,10 @@ public class UserServiceImpl implements UserService{
 		}
 		return null; // TODO: Use Optionals
 	}
-	
+
+	public boolean userExist(String mail){
+		return userDao.findByMail(mail).isPresent();
+	}
 	
 	public List<Property> getFavourites(Long userId) {
 		return userDao.getFavourites(userId);
