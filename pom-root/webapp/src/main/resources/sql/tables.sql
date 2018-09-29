@@ -1,4 +1,3 @@
--- we don't know how to generate database dev-paw-db (class Database) :(
 create table operation
 (
 	buyer integer not null,
@@ -36,7 +35,6 @@ create table property
 		constraint property_pkey
 			primary key,
 	street varchar(50) not null,
-	number varchar(50) not null,
 	floor integer,
 	apartment varchar(10),
 	type varchar(50) not null,
@@ -108,16 +106,13 @@ create unique index users_id_uindex
 
 create table tags
 (
-	name varchar(50) not null
-		constraint tags_pkey
-			primary key,
-	id_property integer
+	name varchar(50) not null,
+	id_property integer not null
 		constraint tags_property___fk
-			references property
+			references property,
+	type integer,
+	constraint tags_name_id_property_type_pk
+		unique (name, id_property, type)
 )
-;
-
-create unique index tags_name_uindex
-	on tags (name)
 ;
 

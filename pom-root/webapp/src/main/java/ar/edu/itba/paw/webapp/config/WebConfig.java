@@ -51,7 +51,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		ds.setUsername("dev");
 		ds.setPassword("paw2018");
 		//TODO mover
-//		Resource resource = new ClassPathResource("/resources/table.sql");
+//		Resource resource = new ClassPathResource("/resources/tables.sql");
 //		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
 //		databasePopulator.execute(ds);
 		return ds;
@@ -65,7 +65,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
     public MessageSource messageSource() {
 			final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-			messageSource.setBasename("/resources/i18n/language");
+			messageSource.setBasename("classpath:i18n/language");
 			messageSource.setDefaultEncoding(StandardCharsets.UTF_8.displayName());
 			messageSource.setCacheSeconds(5);
 			return messageSource;
