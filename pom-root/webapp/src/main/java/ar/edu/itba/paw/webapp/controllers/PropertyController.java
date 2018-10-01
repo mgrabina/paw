@@ -100,7 +100,6 @@ public class PropertyController {
         if(property.isPresent()){
             try{
                 mav.addObject("property", property.get());
-//                mav.addObject("addedToFavourites", us.getFavourites()); //hardcodeado, despues sacarlo del back
             }catch (Exception e){
                 return new ModelAndView("error");
             }
@@ -110,4 +109,57 @@ public class PropertyController {
 
         return mav;
     }
+
+    @RequestMapping(value = "/property/delete", method = RequestMethod.POST)
+    public ModelAndView postRegister(@ModelAttribute("id") final String idProperty) throws IOException {
+
+        if (!checkMyProperty(idProperty))
+            return new ModelAndView("404");
+        long longId;
+        try {
+            longId = Long.getLong(idProperty);
+        } catch (Exception e){
+            return new ModelAndView("404");
+        }
+        if(ps.deleteProperty(longId))
+           return new ModelAndView("redirect:/myproperties"); //agregar que vaya al detail
+        return new ModelAndView("404");
+    }
+
+
+    @RequestMapping(value = "/property/update", method = RequestMethod.POST)
+    public ModelAndView postRegister(@ModelAttribute("id") final String idProperty, @ModelAttribute("desc") final String description,
+                                     @ModelAttribute("message") final String message,
+                                     @ModelAttribute("price") final String price) throws IOException {
+        if (!checkMyProperty(idProperty))
+            return new ModelAndView("404");
+        long longPrice;
+        long longId;
+        try {
+            longPrice=Long.getLong(price);
+            longId = Long.getLong(idProperty);
+        } catch (Exception e){
+            return new ModelAndView("404");
+        }
+        if( ps.updateProperty(longId,description,longPrice,message)){
+            return new ModelAndView("redirect:/property/"+idProperty);
+        }
+        return new ModelAndView("404");
+    }
+
+    private boolean checkMyProperty(final String idProperty){
+        Optional<Property> myP;
+        try {
+            myP = ps.getPropertyById(Long.getLong(idProperty));
+        }catch (Exception e){
+            return false;
+        }
+        if(!myP.isPresent())
+            return false;
+        User me = us.getCurrentUser();
+        if(myP.get().getPublisherUser().getId()!=me.getId())
+            return false;
+        return true;
+    }
+
 }

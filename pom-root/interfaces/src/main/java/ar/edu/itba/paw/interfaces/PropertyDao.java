@@ -27,4 +27,6 @@ public interface PropertyDao {
     public List<String> getAllTags();
     public Map<Integer, Map<String, Integer>> getPotentialFilters();
     public Optional<Property> getById(long id);
-}
+    public void delete(final long id);
+    public void update(final long id, final String desc, final long price,final String message);
+    }
