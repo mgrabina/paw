@@ -75,7 +75,7 @@ public class Paginate {
 
         if(propertiesList == null)
             return 0;
-
-        return Math.round(propertiesList.size() / PAGE_SIZE);
+        
+        return (int) Math.ceil(propertiesList.size() / (float) PAGE_SIZE);
     }
 }

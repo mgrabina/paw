@@ -278,7 +278,7 @@ public class PropertyServiceImpl implements PropertyService {
 	
 	public Map<String, String> getShowableFilters(Map<String,String> m){
 		
-		List<String> hiddenFilters = Arrays.asList("operation", "page", "order_by");
+		List<String> hiddenFilters = Arrays.asList("operation", "page", "order_by", "language");
 		
 		return m.entrySet().stream()
 				.filter(entry -> !hiddenFilters.contains(entry.getKey()))
@@ -287,7 +287,7 @@ public class PropertyServiceImpl implements PropertyService {
 	
 	public Map<String, String> getFiltrableFields(Map<String,String> m){
 		
-		List<String> unfiltrableFields = Arrays.asList("page");
+		List<String> unfiltrableFields = Arrays.asList("page", "language");
 		
 		return m.entrySet().stream()
 				.filter(entry -> !unfiltrableFields.contains(entry.getKey()))

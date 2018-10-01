@@ -83,8 +83,6 @@
 						<span class="filters-title"><spring:message code="index/applied-filters"/></span>
 					</div>
 					<div class="filters-list">
-						<div class="chip">Argentina</div>
-						<div class="chip">Buenos Aires</div>
 
 						<c:forEach items="${filterNames}" var="filterEntry" varStatus="loop">
 		      				<div class="link-box capit">
@@ -115,7 +113,6 @@
 						      		<c:forEach items="${filters}" var="filter" varStatus="loop">
 						      			<c:if test="${filter.key eq 1}">
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
-
 							      				<div class="link-box capit">
 							      					<a class="filter-click" id="f-loc-${loop.index}" data-field="neighborhood"><c:out value="${filterEntry.key}"/></a>
 							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
@@ -152,7 +149,7 @@
 							      			<c:forEach items="${filter.value}" var="filterEntry" varStatus="loop">
 							      				<spring:message code="${filterEntry.key}" var="typeName"/>
 							      				<div class="link-box capit">
-							      					<a class="filter-click" data-field="type"><c:out value="${typeName}"/></a>
+							      					<a class="filter-click" data-value="${filterEntry.key}" data-field="type"><c:out value="${typeName}"/></a>
 							      					<span>(<c:out value="${filterEntry.value}"/>)</span>
 							      				</div>
 							      			</c:forEach>
@@ -295,11 +292,28 @@
 						      <div class="collapsible-header"><i class="material-icons right">keyboard_arrow_right</i><spring:message code="index/filters/published-time"/></div>
 						      <div class="collapsible-body">
 						      	<div class="link-list">
+						      		
 						      		<c:forEach items="${timeFilter}" var="filterEntry" varStatus="loop">
 						      			<spring:message code="${filterEntry.key}" var="filterName"/> 
+						      			<c:choose>
+						      				<c:when test="${filterEntry.key eq 'index/filters/published/last-month'}">
+						      						<c:set var = "dValue" scope = "session" value = "30"/>
+						      				</c:when>
+						      				<c:when test="${filterEntry.key eq 'index/filters/published/last-two-weeks'}">
+						      						<c:set var = "dValue" scope = "session" value = "15"/>
+						      				</c:when>
+						      				<c:when test="${filterEntry.key eq 'index/filters/published/last-week'}">
+						      						<c:set var = "dValue" scope = "session" value = "7"/>
+						      				</c:when>
+						      				<c:otherwise>
+						      						<c:set var = "dValue" scope = "session" value = "0"/>
+						      				</c:otherwise>
+						      			</c:choose>
+
 						      			<c:if test="${filterEntry.value gt 0}">
 						      				<div class="link-box">
-					      						<a class="filter-click" id="f-time-${loop.index}" data-field="date">${filterName}</a>
+
+					      						<a class="filter-click" id="f-time-${loop.index}" data-value="${dValue}" data-field="date">${filterName}</a>
 					      						<span>(${filterEntry.value})</span>
 					      					</div>
 					      				</c:if>
@@ -462,8 +476,8 @@
 					<div class="pagination-container">
 						<ul class="pagination">
 						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-						    <c:forEach begin="0" end="${pagesCount}" varStatus="loop">
-						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
+						    <c:forEach begin="0" end="${pagesCount - 1}" var="i">
+						    	<li class="<c:if test="${i} == 0">active</c:if>"><a onclick="getPage(${i + 1})">${i + 1}</a></li>
 						    </c:forEach>
 						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
 					  	</ul>
