@@ -29,6 +29,7 @@ public class Paginate {
         mav.addObject("propertiesList", getPage(propertiesList, formatPageNumber(pageNumberParam)));
         mav.addObject("propertiesCount", propertiesCount);
         mav.addObject("pagesCount", pagesCount);
+        mav.addObject("myUser", user);
         if(user!=null)
             mav.addObject("userId", user.getId());
         return mav;
