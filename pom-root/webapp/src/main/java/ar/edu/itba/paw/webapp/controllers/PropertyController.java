@@ -117,7 +117,7 @@ public class PropertyController {
             return new ModelAndView("404");
         long longId;
         try {
-            longId = Long.getLong(idProperty);
+            longId = Long.valueOf(idProperty);
         } catch (Exception e){
             return new ModelAndView("404");
         }
@@ -136,8 +136,8 @@ public class PropertyController {
         long longPrice;
         long longId;
         try {
-            longPrice=Long.getLong(price);
-            longId = Long.getLong(idProperty);
+            longPrice=Long.valueOf(price);
+            longId = Long.valueOf(idProperty);
         } catch (Exception e){
             return new ModelAndView("404");
         }
@@ -150,7 +150,7 @@ public class PropertyController {
     private boolean checkMyProperty(final String idProperty){
         Optional<Property> myP;
         try {
-            myP = ps.getPropertyById(Long.getLong(idProperty));
+            myP = ps.getPropertyById(Long.valueOf(idProperty));
         }catch (Exception e){
             return false;
         }

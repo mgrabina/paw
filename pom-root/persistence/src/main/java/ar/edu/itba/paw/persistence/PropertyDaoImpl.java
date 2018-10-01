@@ -253,13 +253,12 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public void delete(final long id) {
-		jdbcTemplate.query("DELETE FROM property WHERE id = ?;",
-				ROW_MAPPER, id);
+		jdbcTemplate.update("DELETE FROM property WHERE id = ?;", id);
 	}
 
 	public void update(final long id, final String desc, final long price, final String message) {
-		jdbcTemplate.query("UPDATE property SET ad_description = ?, price = ?, ad_message = ?, ad_date = ? WHERE id = ?;",
-				ROW_MAPPER, desc, price, message, new Timestamp(System.currentTimeMillis()), id);
+		jdbcTemplate.update("UPDATE property SET ad_description = ?, price = ?, ad_message = ?, ad_date = ? WHERE id = ?;",
+				desc, price, message, new Timestamp(System.currentTimeMillis()), id);
 	}
 
 

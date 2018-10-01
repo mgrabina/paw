@@ -449,6 +449,10 @@
 										<span>&#183;</span>
 										<span><spring:message code="index/card/published-time-pre"/> <c:out value="${property.adDate}"/> <spring:message code="index/card/published-time-post"/></span>
 
+                                        <c:if test="${not empty myUser && property.publisherUser.id == myUser.id}">
+                                            <i data-id="${property.id}" data-action="0" class="fa fa-trash delete-property-link modal-trigger " href="#deleteModal"></i>
+                                        </c:if>
+
 										<c:if test="${not empty myUser}">
 											<c:choose>
 												<c:when test="${not empty favList[property.id]}">
@@ -489,6 +493,17 @@
 			</div>
 
 		</div>
+
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <h4><spring:message code="index/delete_modal/title"/></h4>
+                <p><spring:message code="index/delete_modal/message"/></p>
+                <span id="property-id-to-delete" style="display: none"></span>
+            </div>
+            <div class="modal-footer">
+                <a id="delete-property-button" class="modal-close waves-effect waves-green btn-flat"><spring:message code="index/delete_modal/confirm"/></a>
+            </div>
+        </div>
 
         <div id="contact-modal" class="modal modal-fixed-footer">
             <form class="col s12" method="post" action="<%= response.encodeURL(request.getContextPath() + "/contact") %>">

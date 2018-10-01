@@ -188,6 +188,22 @@ function setUpControllers(){
     $("#property-name-input-modal").html($(this).data("name"));
   });
 
+    $('.delete-property-link').click(function(e){
+        $("#deleteModal").modal();
+        $("#property-id-to-delete").html($(this).data("id"));
+    });
+
+    $('#delete-property-button').click(function(e) {
+        $.ajax({
+            type: "POST",
+            url: ""+getContextPath()+"/property/delete",
+            data: {"id": $('#property-id-to-delete').html()},
+            success: function(res) {
+                window.location.reload();
+            }
+        });
+
+    });
 
 }
 
