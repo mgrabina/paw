@@ -270,7 +270,7 @@ function setUpChangeHooks(){
 
 	// neighborhood.on("change", function(e) {
  // 		var input = $(this).val();
-	// 	console.log("ACA: " + input);
+	// 	
  // 		$('#neighborhood-preview').text(input);
 
  // 		var rules = [[RulesEnum.NOT_NULL, null],
@@ -438,9 +438,9 @@ function fillInAddress() {
 }
 
 function geolocate() {
-	console.log("asd");
+	
 	  navigator.geolocation.getCurrentPosition(function(position) {
-	  	console.log("recibi");
+	  	
 	    var geolocation = {
 	      lat: position.coords.latitude,
 	      lng: position.coords.longitude

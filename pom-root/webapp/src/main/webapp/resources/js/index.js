@@ -138,7 +138,6 @@ function checkOperationType(){
   var rent = $("#rent-button");
   var temporal_rent = $("#temporal-rent-button");
 
-  console.log(params);
   if (params.operation != null) {
 
     $('#operationTypeContainer').find('.active').removeClass('active');

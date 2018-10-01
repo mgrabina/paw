@@ -100,6 +100,7 @@ public class PropertyController {
         if(property.isPresent()){
             try{
                 mav.addObject("property", property.get());
+                mav.addObject("myUser", us.getCurrentUser());
             }catch (Exception e){
                 return new ModelAndView("error");
             }
@@ -128,7 +129,8 @@ public class PropertyController {
 
 
     @RequestMapping(value = "/property/update", method = RequestMethod.POST)
-    public ModelAndView postRegister(@ModelAttribute("id") final String idProperty, @ModelAttribute("desc") final String description,
+    public ModelAndView postRegister(@ModelAttribute("id") final String idProperty,
+                                     @ModelAttribute("desc") final String description,
                                      @ModelAttribute("message") final String message,
                                      @ModelAttribute("price") final String price) throws IOException {
         if (!checkMyProperty(idProperty))

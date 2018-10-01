@@ -159,12 +159,14 @@
 				<i class="material-icons">home</i>
 				<span class="about"><spring:message code="detailview/about" /></span>
 			</div>
-			<div class="right-align">
-				<div class="about-title-container">
-					<i class="material-icons">edit</i>
-					<span class="about"><spring:message code="detailview/edit" /></span>
+			<c:if test="${not empty myUser && property.publisherUser.id == myUser.id}">
+				<div class="right-align edit-property-link-container">
+					<a class="modal-trigger" href="#edit-property-modal"><div class="about-title-container">
+						<i class="material-icons">edit</i>
+						<span class="about"><spring:message code="detailview/edit" /></span>
+					</div></a>
 				</div>
-			</div>
+			</c:if>
 			<div class="divider"></div>
 			<div class="divider"></div>
 			<div class="about-content-container">
@@ -202,17 +204,11 @@
 
                         if (geocoder) {
                             geocoder.geocode( { 'address': address}, function(results, status) {
-                                console.log(results);
                                 if (status == google.maps.GeocoderStatus.OK) {
                                     if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
                                         lat = results[0].geometry.location.lat();
                                         long = results[0].geometry.location.lng();
-                                        console.log(lat);
-                                        console.log(long);
-                                        console.log(location);
                                         var property = {lat: lat, lng: long};
-                                        console.log(property);
-
                                         var map = new google.maps.Map(document.getElementById('map'), {
                                             center: property,
                                             zoom: 14
@@ -274,6 +270,46 @@
 		</div>
 	</div>
 </div>
+
+<c:if test="${not empty myUser && property.publisherUser.id == myUser.id}">
+<div id="edit-property-modal" class="modal modal-fixed-footer">
+	<form class="col s12" method="post" action="<%= response.encodeURL(request.getContextPath() + "/property/update") %>">
+		<div class="modal-content">
+			<h4><spring:message code="property/edit/title"/></h4>
+			<h5 id="property-name-input-modal"></h5>
+
+			<div class="row" style="display: none">
+				<div class="input-field col s12">
+					<input id="property-id-input-modal" name="id" value="${property.id}" class="materialize-textarea"></input>
+					<label for="property-id-input-modal"><spring:message code="property/edit/property-id"/></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="message-input-modal" name="message" class="materialize-textarea">${property.adMessage}</textarea>
+					<label for="message-input-modal"><spring:message code="property/edit/message"/></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="desc-input-modal" name="desc" class="materialize-textarea">${property.adDescription}</textarea>
+					<label for="desc-input-modal"><spring:message code="property/edit/desc"/></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input  type="number" id="price-input-modal"  value="${property.price}" name="price" class="materialize-textarea"></input>
+					<label for="price-input-modal"><spring:message code="property/edit/price"/></label>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<input type="submit" class="waves-effect waves-light btn">
+		</div>
+	</form>
+</div>
+</c:if>
 <script src="<c:url value="/resources/js/materialize.min.js"></c:url>"> </script>
 <script src="<c:url value="/resources/js/jquery.min.js"></c:url>"> </script>
 <script src="<c:url value="/resources/js/detailview.js"></c:url>" type="text/javascript"> </script>

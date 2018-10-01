@@ -40,4 +40,8 @@ $(document).ready(function(){
             }
         });
     }
+
+    $(".edit-property-link-container").click(function () {
+        $("#edit-property-modal").modal();
+    })
 });
