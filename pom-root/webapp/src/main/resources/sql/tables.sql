@@ -8,7 +8,7 @@ create table operation
 	is_rental boolean not null,
 	id serial not null
 		constraint operation_pkey
-			primary key
+		primary key
 )
 ;
 
@@ -24,7 +24,7 @@ create table users
 	mail varchar(200) not null,
 	id serial not null
 		constraint users_pkey
-			primary key,
+		primary key,
 	imagesrc varchar(200) default NULL::character varying
 )
 ;
@@ -33,14 +33,15 @@ create table property
 (
 	id serial not null
 		constraint property_pkey
-			primary key,
+		primary key,
 	street varchar(50) not null,
 	floor integer,
 	apartment varchar(10),
 	type varchar(50) not null,
 	user_id integer not null
 		constraint user_id
-			references users,
+		references users
+		on delete cascade,
 	price bigint,
 	covered_area integer not null,
 	total_area integer not null,
@@ -68,11 +69,12 @@ create table property_images
 (
 	id serial not null
 		constraint property_images_pkey
-			primary key,
+		primary key,
 	image_src varchar(200) not null,
 	property_id integer
 		constraint property_id
-			references property
+		references property
+		on delete cascade
 )
 ;
 
@@ -87,12 +89,14 @@ create table favourites
 (
 	id_user integer not null
 		constraint wish_users_id_fk
-			references users,
+		references users
+		on delete cascade,
 	id_property integer
 		constraint wish_property_id_fk
-			references property,
+		references property
+		on delete cascade,
 	constraint wish_id_user_id_property_pk
-		unique (id_user, id_property)
+	unique (id_user, id_property)
 )
 ;
 
@@ -109,10 +113,11 @@ create table tags
 	name varchar(50) not null,
 	id_property integer not null
 		constraint tags_property___fk
-			references property,
+		references property
+		on delete cascade,
 	type integer,
 	constraint tags_name_id_property_type_pk
-		unique (name, id_property, type)
+	unique (name, id_property, type)
 )
 ;
 
