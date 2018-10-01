@@ -29,8 +29,9 @@ public class MainController {
 	
 	@Autowired
 	private PropertyService ps;
-	
+
 	private final String PAGE_QUERY_KEY = "page";
+
 
 
 	@RequestMapping("/")
@@ -60,11 +61,6 @@ public class MainController {
 		return mav;
 	
 	}
-
-    @RequestMapping("/search")
-    public ModelAndView search(@RequestParam(value = PAGE_QUERY_KEY, required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
-        return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser());
-    }
 
 	@RequestMapping("/not-found")
 	public ModelAndView notFound() {

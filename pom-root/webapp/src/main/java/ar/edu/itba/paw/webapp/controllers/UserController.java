@@ -49,6 +49,7 @@ public class UserController {
     private ImageUploaderService ius;
 
     private final String DEFAULT_CONTACT_SUBJECT = "Contact from Chozapp";  //TODO: Set HTML Content by language
+    private final String PAGE_QUERY_KEY = "page";
 
 
     @RequestMapping(value = "/user/login")
@@ -116,6 +117,10 @@ public class UserController {
     @RequestMapping("/myproperties")
     public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
         return Paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser());
+    }
+    @RequestMapping("/search")
+    public ModelAndView search(@RequestParam(value = PAGE_QUERY_KEY, required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
+        return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser());
     }
 
 }

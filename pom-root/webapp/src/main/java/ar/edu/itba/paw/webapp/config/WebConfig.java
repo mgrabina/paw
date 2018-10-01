@@ -50,10 +50,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		ds.setUrl("jdbc:postgresql://35.199.77.209:5432/dev-paw-db");
 		ds.setUsername("dev");
 		ds.setPassword("paw2018");
+
 		//TODO mover
-//		Resource resource = new ClassPathResource("/resources/tables.sql");
-//		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
-//		databasePopulator.execute(ds);
+		Resource resource = new ClassPathResource("s.sql");
+//		Resource r = new ReloadableResourceBundleDataSource();
+		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+		databasePopulator.execute(ds);
 		return ds;
 	}
 

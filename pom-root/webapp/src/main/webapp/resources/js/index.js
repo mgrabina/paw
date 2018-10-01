@@ -159,6 +159,17 @@ function checkOperationType(){
 }
 
 function setUpControllers(){
+    $("#english-btn").click(function () {
+       addManyQueryParamsAndRedirect({
+           language:"en"
+       });
+    });
+    $("#spanish-btn").click(function () {
+       addManyQueryParamsAndRedirect({
+           language:"es_AR"
+       });
+    });
+
 
   $(".property-card").hover( function() {
     		$( this ).addClass( "selected-card" );

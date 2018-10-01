@@ -67,8 +67,8 @@
 					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
 					    <li><a href="#!">B</a></li>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					    <li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					    <li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
 					  </ul>
 		  		</div>

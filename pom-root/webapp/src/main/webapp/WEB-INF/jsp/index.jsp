@@ -67,8 +67,8 @@
                               <li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
                           </c:if>
                           <li class="divider" tabindex="-1"></li>
-                          <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-                          <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+                          <li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+                          <li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -98,8 +98,8 @@
 						
 					</div>
 				</div>
-
-				<div class="shadow-box filters-box">
+				<c:if test="${propertiesCount > 0}">
+					<div class="shadow-box filters-box">
 					<div class="title-box">
 						<span class="filters-title"><spring:message code="index/filters"/></span>
 					</div>
@@ -305,6 +305,9 @@
 						      				<c:when test="${filterEntry.key eq 'index/filters/published/last-week'}">
 						      						<c:set var = "dValue" scope = "session" value = "7"/>
 						      				</c:when>
+											<c:when test="${filterEntry.key eq 'index/filters/published/today'}">
+												<c:set var = "dValue" scope = "session" value = "1"/>
+											</c:when>
 						      				<c:otherwise>
 						      						<c:set var = "dValue" scope = "session" value = "0"/>
 						      				</c:otherwise>
@@ -324,6 +327,7 @@
 						</ul>
 					</div>
 				</div>
+				</c:if>
 			</div>
 
 			<div class="properties-column">
@@ -351,7 +355,7 @@
 							<c:when test="${orderBy eq 'price_desc'}">
 								<spring:message code="index/sort/expensive"/>
 							</c:when>
-							<c:when test="${orderBy eq 'date_desc'}">
+							<c:when test="${orderBy eq 'date_asc'}">
 								<spring:message code="index/sort/old"/>
 							</c:when>
 							<c:otherwise>
@@ -362,8 +366,8 @@
 		  			  <ul id='dropdown2' class='dropdown-content'>
 					    <li><a class="order-btn" data-id="price_asc"><spring:message code="index/sort/cheap"/></a></li>
 					    <li><a class="order-btn" data-id="price_desc"><spring:message code="index/sort/expensive"/></a></li>
-					    <li><a class="order-btn" data-id="date_asc"><spring:message code="index/sort/new"/></a></li>
-					    <li><a class="order-btn" data-id="date_desc"><spring:message code="index/sort/old"/></a></li>
+					    <li><a class="order-btn" data-id="date_desc"><spring:message code="index/sort/new"/></a></li>
+					    <li><a class="order-btn" data-id="date_asc"><spring:message code="index/sort/old"/></a></li>
 
 					  </ul>
 				</div>

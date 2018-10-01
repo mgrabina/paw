@@ -66,8 +66,8 @@
 						<li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
 					</c:if>
 					<li class="divider" tabindex="-1"></li>
-					<li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					<li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+					<li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					<li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
 				</ul>
 			</div>
 		</div>

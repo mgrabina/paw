@@ -123,7 +123,7 @@ public class PropertyServiceImpl implements PropertyService {
 				order = orderMap.get(filters.get("order_by"));
 			else return Collections.emptyList();
 			filters.remove("order_by");
-		}else order="p.ad_date ASC";
+		}else order="p.ad_date DESC";
 		if(filters.containsKey("language"))
 			filters.remove("language");
 

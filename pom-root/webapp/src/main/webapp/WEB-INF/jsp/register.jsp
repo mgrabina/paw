@@ -54,7 +54,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  </div>
 					  <div class="row padding">
 						  <div class="input-field">
-							  <form:input id="u-password" type="text" path="password" />
+							  <form:input id="u-password" type="password" path="password" />
 							  <label for="u-password"><spring:message code="register/password"/></label>
 						  </div>
 					  </div>
