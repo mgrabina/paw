@@ -36,6 +36,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="center-align">
 						<h1 class="title bold"><spring:message code="register/title"/></h1>
 					</div>
+
+					<c:if test="${not empty errors}">
+						<div class="card materialize-red-text padding" >
+							<c:forEach var="error" items="${errors}">
+								<span>~ ${error}</span><br>
+							</c:forEach>
+						</div>
+					</c:if>
+
 				  <form class="register-form">
 					  <div class="row padding">
 						  <div class="input-field">

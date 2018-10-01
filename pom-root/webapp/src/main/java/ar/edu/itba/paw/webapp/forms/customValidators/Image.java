@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = {ImageValidator.class})
 public @interface Image {
 
-    String message() default "{ar.edu.itba.paw.webapp.constraints.validImage}";
+    String message() default "Invalid Image";
 
     Class<?>[] groups() default {};
 

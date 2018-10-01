@@ -376,7 +376,7 @@
 
 					<c:forEach items="${propertiesList}" var="property" varStatus="loop">
 
-						<div class="shadow-box property-card" id="property-${loop.index}">
+						<div class="shadow-box property-card hoverable" id="property-${loop.index}">
 							<div class="left">
 								<div class="image-container">
 									<c:choose>

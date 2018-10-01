@@ -1,5 +1,9 @@
 package ar.edu.itba.paw.webapp.forms.customValidators;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+
+import javax.annotation.Resource;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Retention;
@@ -13,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = {NullableImageValidator.class})
 public @interface NullableImage {
 
-    String message() default "{ar.edu.itba.paw.webapp.constraints.validImage}";
+    String message() default "Invalid Image";
 
     Class<?>[] groups() default {};
 

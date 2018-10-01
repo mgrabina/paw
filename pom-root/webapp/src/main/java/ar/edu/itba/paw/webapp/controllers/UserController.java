@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,8 +24,10 @@ import ar.edu.itba.paw.interfaces.UserService;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 import javax.imageio.ImageIO;
@@ -78,9 +81,13 @@ public class UserController {
 //    @Transactional
     public ModelAndView postRegister(@Valid @ModelAttribute("registerForm") final RegisterForm form, final BindingResult result) throws IOException {
 
-//        if(result.hasErrors()){
-//            return getRegister(form);
-//        }
+        if(result.hasErrors()){
+            List<String> errors = new LinkedList<>();
+            errors.addAll(result.getFieldErrors().stream().map(objectError -> objectError.getField() + " | " + objectError.getDefaultMessage()).collect(Collectors.toList()));
+            ModelAndView mav = new ModelAndView("register");
+            mav.addObject("errors", errors);
+            return mav;
+        }
 
         if(us.userExist(form.getMail())){
             ModelAndView m =new ModelAndView("register");
