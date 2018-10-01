@@ -23,6 +23,9 @@ public class TestConfig {
         ds.setUrl("jdbc:hsqldb:mem:paw");
         ds.setUsername("ha");
         ds.setPassword("");
+        Resource resource = new ClassPathResource("tables.sql");
+        ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
+        databasePopulator.execute(ds);
         return ds;
     }
 }
