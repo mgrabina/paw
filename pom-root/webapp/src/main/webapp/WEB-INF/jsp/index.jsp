@@ -357,13 +357,9 @@
 							<c:when test="${orderBy eq 'date_desc'}">
 								<spring:message code="index/sort/old"/>
 							</c:when>
-							<c:otherwise>
-								<spring:message code="index/sort/relevant"/>
-							</c:otherwise>
 						</c:choose>
-					</a>
+ 					</a>
 		  			  <ul id='dropdown2' class='dropdown-content'>
-		  			  	<li><a class="order-btn" data-id=" "><spring:message code="index/sort/relevant"/></a></li>
 					    <li><a class="order-btn" data-id="price_asc"><spring:message code="index/sort/cheap"/></a></li>
 					    <li><a class="order-btn" data-id="price_desc"><spring:message code="index/sort/expensive"/></a></li>
 					    <li><a class="order-btn" data-id="date_asc"><spring:message code="index/sort/new"/></a></li>
@@ -466,7 +462,7 @@
 									</div>
 
 									<div class="action">
-										<c:if test="${not empty myUser}">
+										<c:if test="${not empty myUser && myUser.id != property.publisherUser.id}">
 											<a class="modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
 										</c:if>
 									</div>
@@ -479,14 +475,13 @@
 
 					<div class="pagination-container">
 						<ul class="pagination">
-						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-						    <c:forEach begin="0" end="${pagesCount - 1}" var="i">
-						    	<li class="<c:if test="${i} == 0">active</c:if>"><a onclick="getPage(${i + 1})">${i + 1}</a></li>
-						    </c:forEach>
-						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-					  	</ul>
+							<li class="disabled"><a onclick="getPage(0)"><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i></a></li>
+							<c:forEach begin="0" end="${pagesCount - 1}" varStatus="loop">
+								<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
+							</c:forEach>
+							<li class="waves-effect"><a onclick="getPage(${pagesCount})"><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i></a></li>
+						</ul>
 					</div>
-
 				</div>
 
 

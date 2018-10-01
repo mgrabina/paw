@@ -20,38 +20,59 @@
 	
 	<body>
 
-		<nav class="navbar nav-header">
+	<nav class="navbar nav-header">
 
-			<div class="navbar-logo">
-				<a href="${pageContext.servletContext.contextPath}/" ><img class="logo" src="<c:url value="/resources/images/logo.png"></c:url>"></a>
-		  	</div>
+		<div class="navbar-logo">
+			<a href="${pageContext.servletContext.contextPath}/" ><img class="logo" src="<c:url value="/resources/images/logo.png"></c:url>"></a>
+		</div>
 
-		  	<div class="search-box">
-			  	<div class="nav-wrapper">
-                    <form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
-                        <div class="input-field">
-                            <input id="search" type="search" name="query" placeholder="Buscar" required>
-                            <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
-                    </form>
-			    </div>
+		<div class="search-box">
+			<div class="nav-wrapper">
+				<form action="<%= response.encodeURL(request.getContextPath() + "/search") %>" method="get">
+					<div class="input-field">
+						<input id="search" type="search" name="query" placeholder="Buscar" required>
+						<label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
+						<i class="material-icons">close</i>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="buttons-box">
+			<div class="labels">
+				<c:if test="${empty myUser}">
+					<div class="nav-item">
+						<a href="<%= response.encodeURL(request.getContextPath() + "/user/register") %>"><spring:message code="index/register" /></a>
+					</div>
+					<div class="nav-item">
+						<a href="<%= response.encodeURL(request.getContextPath() + "/user/login") %>"><spring:message code="index/login"/></a>
+					</div>
+				</c:if>
+				<c:if test="${not empty myUser}">
+					<div class="nav-item">
+						<a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/>
+					</div>
+				</c:if>
+				<div class="nav-item">
+					<a href='<%= response.encodeURL(request.getContextPath() + "/property/register") %>'><spring:message code="index/publish"/></a>
+				</div>
 			</div>
 
-		  	<div class="buttons-box">
-		  		<div class="extras">
-		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
-		  			  <ul id='dropdown1' class='dropdown-content'>
-					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
-					    <li><a href="#!">B</a></li>
-					    <li class="divider" tabindex="-1"></li>
-					    <li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
-					  </ul>
-		  		</div>
-		  	</div>
-		
-		</nav>
+			<div class="extras">
+				<a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
+				<ul id='dropdown1' class='dropdown-content'>
+					<c:if test="${not empty myUser}">
+						<li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a></li>
+						<li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
+					</c:if>
+					<li class="divider" tabindex="-1"></li>
+					<li><a href="?language=en"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
+					<li><a href="?language=es_AR"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
 
 		<div class="main-row-container">
 
@@ -65,7 +86,7 @@
                     </c:if>
 					<c:forEach items="${propertiesList}" var="property" varStatus="loop">
 
-						<div class="shadow-box property-card" id="property-${loop.index}">
+						<div class="shadow-box property-card hoverable" id="property-${loop.index}">
 							<div class="left">
 								<div class="image-container">
 									<c:choose>
@@ -155,7 +176,9 @@
 									</div>
 
 									<div class="action">
-										<a href=""><spring:message code="index/card/contact"/></a>
+										<c:if test="${not empty myUser && myUser.id != property.publisherUser.id}">
+											<a class="modal-trigger contact-modal-link" data-id="${property.id}" data-name="${property.adMessage}" href="#contact-modal"><spring:message code="index/card/contact"/></a>
+										</c:if>
 									</div>
 								</div>
 
@@ -166,12 +189,12 @@
 
 					<div class="pagination-container">
 						<ul class="pagination">
-						    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-						    <c:forEach begin="0" end="${pagesCount}" varStatus="loop">
-						    	<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
-						    </c:forEach>
-						    <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-					  	</ul>
+							<li class="disabled"><a onclick="getPage(0)"><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i></a></li>
+							<c:forEach begin="0" end="${pagesCount - 1}" varStatus="loop">
+								<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
+							</c:forEach>
+							<li class="waves-effect"><a onclick="getPage(${pagesCount})"><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i></a></li>
+						</ul>
 					</div>
 
 				</div>

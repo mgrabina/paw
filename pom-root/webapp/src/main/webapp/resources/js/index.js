@@ -275,7 +275,7 @@ function addManyQueryParamsAndRedirect(json){
     var newSearchQuery = Object.keys(currentParams).map(function(k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(currentParams[k])
     }).join('&');
-    window.location.replace(location.origin  + '?' + newSearchQuery);
+    window.location.replace(location.origin + location.pathname+ '?' + newSearchQuery);
 }
 
 /*
@@ -291,7 +291,7 @@ function removeManyQueryParamsAndRedirect(array) {
     var newSearchQuery = Object.keys(currentParams).map(function(k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(currentParams[k])
     }).join('&');
-    window.location.replace(location.origin  + '?' + newSearchQuery);
+    window.location.replace(location.origin + location.pathname  + '?' + newSearchQuery);
 }
 //Helper Function
 function urlParamsToJson(url) {
