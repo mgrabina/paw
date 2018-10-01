@@ -33,5 +33,6 @@ public interface PropertyService {
     public Map<String, Long> getPropertiesDateBreakdown(List<Property> list);
 	public Map<String, String> getShowableFilters(Map<String,String> m);
 	public Map<String, String> getFiltrableFields(Map<String,String> m);
-
-}
+    public boolean deleteProperty(final long id);
+    public boolean updateProperty(final long id, final String desc, final long price, final String message);
+    }

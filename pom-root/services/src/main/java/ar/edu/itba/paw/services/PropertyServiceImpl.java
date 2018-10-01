@@ -293,4 +293,19 @@ public class PropertyServiceImpl implements PropertyService {
 				.filter(entry -> !unfiltrableFields.contains(entry.getKey()))
 				.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 	}
+
+	public boolean deleteProperty(final long id){
+		if(!getPropertyById(id).isPresent())
+			return false;
+		propertyDao.delete(id);
+		return true;
+	}
+
+	public boolean updateProperty(final long id, final String desc, final long price,final String message){
+		if(!getPropertyById(id).isPresent())
+			return false;
+		propertyDao.update(id,desc,price,message);
+		return true;
+	}
+
 }
