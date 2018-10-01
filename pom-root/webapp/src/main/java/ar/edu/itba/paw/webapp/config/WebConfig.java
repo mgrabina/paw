@@ -48,7 +48,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		final SimpleDriverDataSource ds = new SimpleDriverDataSource();
 		ds.setDriverClass(org.postgresql.Driver.class);
 		String url="jdbc:postgresql://35.199.77.209:5432/dev-paw-db";
-		String username="dev";
+		String username="mgrabina";
 		String password="paw2018";
 //
 //		String url= "jdbc:postgresql://localhost:5432/paw-2018b-05";

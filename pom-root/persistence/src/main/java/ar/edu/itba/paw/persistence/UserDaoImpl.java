@@ -122,7 +122,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<User> getAll(){
-		final List<User> list = jdbcTemplate.query("SELEC T * FROM users",
+		final List<User> list = jdbcTemplate.query("SELECT * FROM users",
 				ROW_MAPPER);
 		if (list.isEmpty()) {
 			return null;

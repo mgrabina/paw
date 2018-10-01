@@ -31,7 +31,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	public Property findById(final long id) {
-		final List<Property> list = jdbcTemplate.query("SELECT * FROM property WHERE id = ?;",
+		final List<Property> list = jdbcTemplate.query("SELECT * FROM property JOIN users ON property.user_id = users.id FULL OUTER JOIN property_images i on property.id = i.property_id where property.id=?",
 		ROW_MAPPER, id);
 		if (list.isEmpty()) {
 			return null;
