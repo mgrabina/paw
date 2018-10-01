@@ -476,8 +476,8 @@
 					<div class="pagination-container">
 						<ul class="pagination">
 							<li class="disabled"><a onclick="getPage(0)"><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i><i class="material-icons">chevron_left</i></a></li>
-							<c:forEach begin="0" end="${pagesCount - 1}" varStatus="loop">
-								<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index + 1})">${loop.index + 1}</a></li>
+							<c:forEach begin="1" end="${pagesCount}" varStatus="loop">
+								<li class="<c:if test="${loop.index} == 0">active</c:if>"><a onclick="getPage(${loop.index})">${loop.index}</a></li>
 							</c:forEach>
 							<li class="waves-effect"><a onclick="getPage(${pagesCount})"><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i><i class="material-icons">chevron_right</i></a></li>
 						</ul>
