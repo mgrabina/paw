@@ -351,12 +351,12 @@
 							<c:when test="${orderBy eq 'price_desc'}">
 								<spring:message code="index/sort/expensive"/>
 							</c:when>
-							<c:when test="${orderBy eq 'date_asc'}">
-								<spring:message code="index/sort/new"/>
-							</c:when>
 							<c:when test="${orderBy eq 'date_desc'}">
 								<spring:message code="index/sort/old"/>
 							</c:when>
+							<c:otherwise>
+								<spring:message code="index/sort/new"/>
+							</c:otherwise>
 						</c:choose>
  					</a>
 		  			  <ul id='dropdown2' class='dropdown-content'>
