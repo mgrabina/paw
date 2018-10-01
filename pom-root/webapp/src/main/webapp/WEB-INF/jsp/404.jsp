@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!--
 Author: W3layouts
@@ -25,8 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 	<div class="four">
 		<img src="<c:url value="/resources/images/404.png"></c:url>"  alt="" />
-		<p>Roto.</p>
-		<a href="<%= response.encodeURL(request.getContextPath()) %>" class="hvr-shutter-in-horizontal">Go To Home</a>
+		<a href="${pageContext.servletContext.contextPath}" class="hvr-shutter-in-horizontal"><spring:message code="error-page/return-home"/></a>
 	</div>
 		<!---->
 <div class="copy-right">

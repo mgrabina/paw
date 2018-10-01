@@ -159,6 +159,12 @@
 				<i class="material-icons">home</i>
 				<span class="about"><spring:message code="detailview/about" /></span>
 			</div>
+			<div class="right-align">
+				<div class="about-title-container">
+					<i class="material-icons">edit</i>
+					<span class="about"><spring:message code="detailview/edit" /></span>
+				</div>
+			</div>
 			<div class="divider"></div>
 			<div class="divider"></div>
 			<div class="about-content-container">
@@ -166,7 +172,7 @@
 				<p class="street-info" id="street">${property.street}</p>
 				<p class="floor bold"><spring:message code="detailview/floor" /></p>
 				<p class="floor-info">${property.floor}</p>
-				<p class="neighborhood bold"><spring:message code="detailview/street" /></p>
+				<p class="neighborhood bold"><spring:message code="detailview/neigborhood" /></p>
 				<p class="neighborhood-info"  id="neighborhood">${property.neighborhood}</p>
 				<p class="type bold"><spring:message code="detailview/type" /></p>
 				<p class="type-info">${property.type}</p>

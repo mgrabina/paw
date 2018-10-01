@@ -15,6 +15,7 @@
     <div class="row">
         <c:if test="${statusCode >= 0}">
             <h1>${statusCode}</h1>
+            <img src="<c:url value="/resources/images/oops.jpg"></c:url>" />
             <c:choose>
                 <c:when test = "${statusCode == 400}">
                     <h2><spring:message code="error-page/400"/></h2>
