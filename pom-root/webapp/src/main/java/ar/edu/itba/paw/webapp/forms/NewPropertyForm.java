@@ -10,8 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 public class NewPropertyForm {
-    
-    //TODO: IMAGES
 
     @Size(min = 3, max = 30)
     @Pattern(regexp = "[a-zA-Z]+")

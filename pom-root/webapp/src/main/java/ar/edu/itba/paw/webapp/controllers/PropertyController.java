@@ -90,7 +90,7 @@ public class PropertyController {
         	ps.linkImage(imageSrc, pId);
     	}
                 
-        return new ModelAndView("redirect:/"); //agregar que vaya al detail
+        return new ModelAndView("redirect:/property/"+pId);
     }
 
     @RequestMapping(value = "/property/{id}", method = RequestMethod.GET)

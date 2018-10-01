@@ -1,26 +1,33 @@
 package ar.edu.itba.paw.webapp.controllers;
 
 import ar.edu.itba.paw.interfaces.EmailService;
+import ar.edu.itba.paw.interfaces.ImageUploaderService;
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.User;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.itba.paw.interfaces.UserService;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
+import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 @Controller
@@ -34,6 +41,9 @@ public class UserController {
     private PropertyService ps;
     @Autowired
     private EmailService es;
+
+    @Autowired
+    private ImageUploaderService ius;
 
     private final String DEFAULT_CONTACT_SUBJECT = "Contact from Chozapp";  //TODO: Set HTML Content by language
 
@@ -63,12 +73,14 @@ public class UserController {
             return new ModelAndView("error");
         }
     }
-        @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+//    @Transactional
     public ModelAndView postRegister(@Valid @ModelAttribute("registerForm") final RegisterForm form, final BindingResult result) throws IOException {
 
-        if(result.hasErrors()){
-            return getRegister(form);
-        }
+//        if(result.hasErrors()){
+//            return getRegister(form);
+//        }
 
         if(us.userExist(form.getMail())){
             ModelAndView m =new ModelAndView("register");
@@ -76,7 +88,14 @@ public class UserController {
             return m;
         }
 
-        us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), " ");
+        // Image upload
+        MultipartFile image = form.getImage();
+        BufferedImage bImage = ImageIO.read(new ByteArrayInputStream(image.getBytes()));
+        String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+        long size = image.getSize();
+        String imageSrc = ius.uploadImage(bImage, extension, image.getOriginalFilename(), size);
+
+        Long id = us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), imageSrc);
 
         return new ModelAndView("redirect:/");
     }

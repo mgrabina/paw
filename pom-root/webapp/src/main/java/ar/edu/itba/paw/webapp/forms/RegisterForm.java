@@ -1,7 +1,12 @@
 package ar.edu.itba.paw.webapp.forms;
 
+import ar.edu.itba.paw.webapp.forms.customValidators.Image;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.imageio.ImageIO;
+import javax.validation.Valid;
 
 
 public class RegisterForm {
@@ -22,6 +27,10 @@ public class RegisterForm {
 
     @Size(min = 1, max = 100)
     private String phone;
+
+    @Image
+    private MultipartFile image;
+
 
     public String getUsername() {
         return username;
@@ -62,4 +71,14 @@ public class RegisterForm {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
+    }
+
+
 }
