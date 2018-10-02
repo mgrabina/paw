@@ -108,6 +108,46 @@ i:focus {outline:0;}
 	object-fit: fill;
 }
 
+.lang-container {
+	display: flex;
+	width: 100%;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.lang-container > img {
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+}
+
+.language {
+	font-size: 0.8em;
+}
+
+.profile-container {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	padding-left: 14px;
+	padding-right: 14px;
+}
+
+.profile-img-container{
+	width: 32px;
+	height: 32px;
+}
+
+.profile-img-container > img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+.rounded-image{
+	border-radius: 50%;
+}
+
 /* Materialize */
 
 

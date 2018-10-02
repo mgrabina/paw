@@ -12,6 +12,7 @@ $(document).ready(function(){
 
 	var title, description, opType, delType, price, street, number, floor, apartment, neighborhood, propType, cArea, tArea, tPrice, rooms, baths, garage;
 
+	$('.dropdown-trigger').dropdown({ constrainWidth: false });
 	setUpVariables();
 	setUpFormSelectors();
 	setUpButtons();
@@ -307,8 +308,7 @@ function setUpChangeHooks(){
 	apartment.on("input", function(e) {
 		var input = $(this).val();
 
-		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_SIZE, [1, 10] ]];
+		var rules = [];
  		stepOne[2] = checkField($(this), input, rules);
 	});
 

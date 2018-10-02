@@ -62,14 +62,43 @@
 		  		</div>
 
 		  		<div class="extras">
+
+
 		  			  <a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 		  			  <ul id='dropdown1' class='dropdown-content'>
-					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myfavourites") %>'><spring:message code="index/myfavourites"/></a> <!--hardcoded--></li>
-					    <li><a href="#!">B</a></li>
+
+		  			  	<c:if test="${not empty myUser}">
+		  			  		<li class="profile-container">
+				  				<div class="profile-img-container">
+			  						<img class="rounded-image" alt="profile picture" src="<c:out value="${myUser.imageSrc}"/>">
+				  				</div>
+				  				<span><c:out value="${myUser.name}"/></span>
+				  			</li>
+			  			</c:if>
+			  			
+			  			<li class="divider" tabindex="-1"></li>
+
+					    <c:if test="${not empty myUser}">
+                              <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a></li>
+                              <li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
+                        </c:if>
 					    <li class="divider" tabindex="-1"></li>
-					    <li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-					    <li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
-					    <li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a> <!--hardcoded--></li>
+					    <li>
+                          	<a href="?language=en">
+                          		<div class="lang-container">
+                          			<img class="lang-flag" src="<c:url value="/resources/images/usa.png"></c:url>">
+                          			<span class="language"><spring:message code="navbar/languages/english"/></span>
+                          		</div>
+                          	</a>
+                          </li>
+                          <li>
+                          	<a href="?language=es_AR">
+                          		<div class="lang-container">
+                          			<img class="lang-flag" src="<c:url value="/resources/images/spain.png"></c:url>">
+                          			<span class="language"><spring:message code="navbar/languages/spanish"/></span>
+                          		</div>
+                          	</a>
+                          </li>
 					  </ul>
 		  		</div>
 		  	</div>
@@ -96,7 +125,7 @@
 							
 							<div class="publication-div form-group">
 								
-								<div class="row padding">
+								<div class="padding">
 							    	<div class="input-field">
 							        	<form:input id="p-title" path="adMessage" type="text" class="validate" maxlength="80" data-length="80"/>
 							        	<label for="p-title"><spring:message code="register_property/builder/title"/></label>
@@ -104,8 +133,8 @@
 							        </div>
 						    	</div>
 
-						    	<div class="row padding">
-									<div class="row">
+						    	<div class="padding">
+									<div class="">
 										<div class="input-field">
 											<form:textarea maxlength="300" id="p-desc" path="adDescription" class="materialize-textarea validate" data-length="300"/>
 											<label for="p-desc"><spring:message code="register_property/builder/description"/></label>
