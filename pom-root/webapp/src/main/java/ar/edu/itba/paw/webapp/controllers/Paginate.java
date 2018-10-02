@@ -16,8 +16,11 @@ public class Paginate {
 
     private static final int PAGE_SIZE = 10;
     private static final int FIRST_PAGE = 1;
+    public enum pageType{
+        myProperties, myFavourites, search
+    }
 
-    protected static ModelAndView basicPaginatedListMAV(String name, List<Property> list, String pageNumberParam,User user){
+    protected static ModelAndView basicPaginatedListMAV(String name, List<Property> list, String pageNumberParam,User user, Integer pageType){
         final ModelAndView mav = new ModelAndView(name);
         List<Property> propertiesList;
         if(list != null)
@@ -30,6 +33,7 @@ public class Paginate {
         mav.addObject("propertiesCount", propertiesCount);
         mav.addObject("pagesCount", pagesCount);
         mav.addObject("myUser", user);
+        mav.addObject("title", pageType);
         if(user!=null)
             mav.addObject("userId", user.getId());
         return mav;

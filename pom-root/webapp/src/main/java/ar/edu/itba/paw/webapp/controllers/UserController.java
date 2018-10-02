@@ -9,7 +9,10 @@ import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.itba.paw.interfaces.UserService;
+import sun.misc.Resource;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -31,6 +35,7 @@ import java.util.stream.Collectors;
 
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -51,6 +56,7 @@ public class UserController {
     private final String DEFAULT_CONTACT_SUBJECT = "Contact from Chozapp";  //TODO: Set HTML Content by language
     private final String PAGE_QUERY_KEY = "page";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping(value = "/user/login")
     public ModelAndView getLogin(@ModelAttribute("loginForm") final LoginForm form) {
@@ -80,7 +86,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/register", method = RequestMethod.POST)
 //    @Transactional
-    public ModelAndView postRegister(@Valid @ModelAttribute("registerForm") final RegisterForm form, final BindingResult result) throws IOException {
+    public ModelAndView postRegister(@Valid @ModelAttribute("registerForm") final RegisterForm form, final BindingResult result, HttpServletRequest request) throws IOException {
 
         if(result.hasErrors()){
             List<String> errors = new LinkedList<>();
@@ -105,22 +111,27 @@ public class UserController {
 
         Long id = us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), imageSrc);
 
+        try{
+            request.login(form.getMail(), form.getPassword());
+        }catch (Exception e){
+            LOGGER.debug("Could not login on register." + e.getMessage());
+        }
         return new ModelAndView("redirect:/");
     }
 
 
     @RequestMapping("/myfavourites")
     public ModelAndView myFavourites(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return Paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser());
+        return Paginate.basicPaginatedListMAV("property_list", us.getFavourites(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser(), Paginate.pageType.myFavourites.ordinal());
     }
 
     @RequestMapping("/myproperties")
     public ModelAndView myProperties(@RequestParam(value = "page", required = false) String pageNumberParam) {
-        return Paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser());
+        return Paginate.basicPaginatedListMAV("property_list", ps.getAllByUserId(us.getCurrentUser().getId()), pageNumberParam,us.getCurrentUser(), Paginate.pageType.myProperties.ordinal());
     }
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(value = PAGE_QUERY_KEY, required = false) String pageNumberParam, @RequestParam(value = "query", required = false) String query) {
-        return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser());
+        return Paginate.basicPaginatedListMAV("property_list", ps.getPropertiesByTagsSearch(query), pageNumberParam,us.getCurrentUser(), Paginate.pageType.search.ordinal());
     }
 
 }

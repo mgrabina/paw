@@ -77,6 +77,18 @@
 		<div class="main-row-container">
 
 			<div class="properties-column">
+				<c:choose >
+					<c:when test="${title == 0}">
+						<h1 class="title"><spring:message code="listview/myProperties"/></h1>
+					</c:when>
+					<c:when test="${title == 1}">
+						<h1 class="title"><spring:message code="listview/myFavourites"/></h1>
+					</c:when>
+					<c:when test="${title == 2}">
+						<h1 class="title"><spring:message code="listview/search"/></h1>
+					</c:when>
+				</c:choose>
+
 
 				<span class="properties-count"><span id="pCount" class="bold">${propertiesCount}</span> <spring:message code="property_list/properties"/></span>
 
