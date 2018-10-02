@@ -47,14 +47,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public DataSource dataSource() {
 		final SimpleDriverDataSource ds = new SimpleDriverDataSource();
 		ds.setDriverClass(org.postgresql.Driver.class);
-		ds.setUrl("jdbc:postgresql://35.199.77.209:5432/dev-paw-db");
-		ds.setUsername("dev");
-		ds.setPassword("paw2018");
+		String url="jdbc:postgresql://35.199.77.209:5432/dev-paw-db";
+		String username="mgrabina";
+		String password="paw2018";
+//
+//		String url= "jdbc:postgresql://localhost:5432/paw-2018b-05";
+//		String username="paw-2018b-05";
+//		String password="a9hUSn3yn";
 
-		//TODO mover
-		Resource resource = new ClassPathResource("s.sql");
-//		Resource r = new ReloadableResourceBundleDataSource();
-		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+		ds.setUrl(url);
+		ds.setUsername(username);
+		ds.setPassword(password);
+
+		Resource resource = new ClassPathResource("schema.sql");
+		ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
 		databasePopulator.execute(ds);
 		return ds;
 	}

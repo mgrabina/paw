@@ -1,4 +1,4 @@
-create table operation
+create table if not exists operation
 (
 	buyer integer not null,
 	seller integer not null,
@@ -12,11 +12,11 @@ create table operation
 )
 ;
 
-create unique index operation_id_uindex
+create unique index if not exists operation_id_uindex
 	on operation (id)
 ;
 
-create table users
+create table if not exists users
 (
 	name varchar(50) not null,
 	password varchar(200) not null,
@@ -29,7 +29,7 @@ create table users
 )
 ;
 
-create table property
+create table if not exists property
 (
 	id serial not null
 		constraint property_pkey
@@ -61,11 +61,11 @@ create table property
 comment on table property is 'A property model, with all its data to value it.'
 ;
 
-create unique index property_id_uindex
+create unique index if not exists property_id_uindex
 	on property (id)
 ;
 
-create table property_images
+create table if not exists property_images
 (
 	id serial not null
 		constraint property_images_pkey
@@ -81,11 +81,11 @@ create table property_images
 comment on table property_images is 'The images from properties.'
 ;
 
-create unique index property_images_id_uindex
+create unique index if not exists property_images_id_uindex
 	on property_images (id)
 ;
 
-create table favourites
+create table if not exists favourites
 (
 	id_user integer not null
 		constraint wish_users_id_fk
@@ -100,15 +100,15 @@ create table favourites
 )
 ;
 
-create unique index users_mail_uindex
+create unique index if not exists users_mail_uindex
 	on users (mail)
 ;
 
-create unique index users_id_uindex
+create unique index if not exists users_id_uindex
 	on users (id)
 ;
 
-create table tags
+create table if not exists tags
 (
 	name varchar(50) not null,
 	id_property integer not null
