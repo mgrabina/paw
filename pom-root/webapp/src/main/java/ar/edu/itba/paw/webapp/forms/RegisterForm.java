@@ -11,17 +11,17 @@ import javax.validation.Valid;
 
 public class RegisterForm {
 
-    @Size(min = 1, max = 20)
+    @Size(min = 5, max = 20)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String username;
 
-    @Size(min = 1, max = 20)
+    @Size(min = 5, max = 20)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String surname;
 
     private String mail;
 
-    @Size(min = 1, max = 100)
+    @Size(min = 5, max = 50)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String password;
 
