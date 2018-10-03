@@ -31,7 +31,7 @@ function setUpFilters(){
         } else {
           json[field] = $(this).text();
         }
-        
+        json["page"] = 1;
         addManyQueryParamsAndRedirect(json);
     });
   });
@@ -52,6 +52,7 @@ function setUpFilters(){
       if (max >= min){
         json["minPrice"] = min;
         json["maxPrice"] = max;
+        json["page"] = 1;
         addManyQueryParamsAndRedirect(json);
       } 
 
@@ -66,6 +67,7 @@ function setUpFilters(){
       if (max >= min){
         json["minArea"] = min;
         json["maxArea"] = max;
+        json["page"] = 1;
         addManyQueryParamsAndRedirect(json);
       } 
 
@@ -83,6 +85,7 @@ function setUpFilters(){
     json["garage"] = gValue;
 
     if (gValue == 1) {
+      json["page"] = 1;
       addManyQueryParamsAndRedirect(json);
     } else {
       removeManyQueryParamsAndRedirect(['garage']);
@@ -102,6 +105,7 @@ function setUpFilters(){
         if (id == " ") {
           removeManyQueryParamsAndRedirect(['order_by']);
         } else {
+          json["page"] = 1;
           addManyQueryParamsAndRedirect(json);
         }
       });

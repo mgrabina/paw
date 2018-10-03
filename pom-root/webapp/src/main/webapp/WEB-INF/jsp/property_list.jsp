@@ -197,17 +197,6 @@
 											<i data-id="${property.id}" data-action="0" class="fa fa-trash delete-property-link modal-trigger " href="#deleteModal"></i>
 										</c:if>
 
-										<c:if test="${not empty myUser}">
-											<c:choose>
-												<c:when test="${not empty favList[property.id]}">
-													<i id="fav-${property.id}" data-id="${property.id}" data-action="0" class="fav-btn fa fa-heart"></i>
-												</c:when>
-												<c:otherwise>
-													<i id="fav-${property.id}" data-id="${property.id}" data-action="1" class="fav-btn far fa-heart"></i>
-												</c:otherwise>
-											</c:choose>
-										</c:if>
-
 									</div>
 
 									<div class="action">
