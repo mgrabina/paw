@@ -88,7 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						  </div>
 					  </div>
 					  <div class="button-container center-align">
-						  <input type="submit" class="btn btn-outline-success" value="<spring:message code="register/register"/>"/>
+						  <input type="submit" class="btn btn-outline-success"  id="submit-btn" value="<spring:message code="register/register"/>"/>
 						  <br>
 						  <p class="message"><spring:message code="register/already_registered"/><a href="<%= response.encodeURL(request.getContextPath() + "/user/login") %>"> <spring:message code="register/login"/></a></p>
 					  </div>
@@ -106,6 +106,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				async defer></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/inputValidator.js"></c:url>"></script>
 		<script type="text/javascript" src="<c:url value="/resources/js/register_property.js"></c:url>"></script>
+		<script type="text/javascript" src="<c:url value="/resources/js/register.js"></c:url>"></script>
 	</body>
 </html>
 
