@@ -116,45 +116,48 @@ public class PropertyServiceImpl implements PropertyService {
 		ArrayList<Object> params =new ArrayList();
 		StringBuilder query = new StringBuilder(200);
 		String order=null;
+		int date;
+		try {
+			if (filters.containsKey("order_by")) {
+				if (orderMap.containsKey(filters.get("order_by")))
+					order = orderMap.get(filters.get("order_by"));
+				else return Collections.emptyList();
+				filters.remove("order_by");
+			} else order = "p.ad_date DESC";
+			if (filters.containsKey("language"))
+				filters.remove("language");
+
+			date = removeFilters(filters, query, params);
+
+			int i = filters.size();
+			if (i > filterIntMap.size() + filterStringMap.size() + filterBoolMap.size()) return Collections.emptyList();
 
 
-		if(filters.containsKey("order_by")) {
-			if (orderMap.containsKey(filters.get("order_by")))
-				order = orderMap.get(filters.get("order_by"));
-			else return Collections.emptyList();
-			filters.remove("order_by");
-		}else order="p.ad_date DESC";
-		if(filters.containsKey("language"))
-			filters.remove("language");
-
-		int date=removeFilters(filters,query,params);
-
-		int i = filters.size();
-		if(i>filterIntMap.size()+filterStringMap.size()+filterBoolMap.size()) return Collections.emptyList();
-
-
-		for (Map.Entry<String, String> entry : filters.entrySet()) {
-			if(filterStringMap.containsKey(entry.getKey())) {
-				query.append(filterStringMap.get(entry.getKey()));
-				query.append("?");
-				params.add(entry.getValue());
-			}else {
-				if (filterIntMap.containsKey(entry.getKey())) {
-					query.append(filterIntMap.get(entry.getKey()));
+			for (Map.Entry<String, String> entry : filters.entrySet()) {
+				if (filterStringMap.containsKey(entry.getKey())) {
+					query.append(filterStringMap.get(entry.getKey()));
 					query.append("?");
-					params.add(Integer.parseInt(entry.getValue()));
-				} else{
-					if (filterBoolMap.containsKey(entry.getKey())) {
-						query.append(filterBoolMap.get(entry.getKey()));
+					params.add(entry.getValue());
+				} else {
+					if (filterIntMap.containsKey(entry.getKey())) {
+						query.append(filterIntMap.get(entry.getKey()));
 						query.append("?");
-						params.add(Boolean.parseBoolean(entry.getValue()));
-					}else  return Collections.emptyList();
+						params.add(Integer.parseInt(entry.getValue()));
+					} else {
+						if (filterBoolMap.containsKey(entry.getKey())) {
+							query.append(filterBoolMap.get(entry.getKey()));
+							query.append("?");
+							params.add(Boolean.parseBoolean(entry.getValue()));
+						} else return Collections.emptyList();
+					}
 				}
-			}
 
-			i--;
-			if(i>0)
-				query.append(" AND ");
+				i--;
+				if (i > 0)
+					query.append(" AND ");
+			}
+		}catch (Exception e){
+			return Collections.emptyList();
 		}
 
 		List<Property> propertiesList= propertyDao.getFiltered(query.toString(), params, order);
