@@ -62,13 +62,37 @@
 		<div class="extras">
 			<a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 			<ul id='dropdown1' class='dropdown-content'>
+
+				<c:if test="${not empty myUser}">
+					<li class="profile-container">
+						<div class="profile-img-container">
+							<img class="rounded-image" alt="profile picture" src="<c:out value="${myUser.imageSrc}"/>">
+						</div>
+						<span><c:out value="${myUser.name}"/></span>
+					</li>
+				</c:if>
+				<li class="divider" tabindex="-1"></li>
+
 				<c:if test="${not empty myUser}">
 					<li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a></li>
 					<li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
 				</c:if>
-				<li class="divider" tabindex="-1"></li>
-				<li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-				<li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+				<li>
+					<a id="english-btn">
+						<div class="lang-container">
+							<img class="lang-flag" src="<c:url value="/resources/images/usa.png"></c:url>">
+							<span class="language"><spring:message code="navbar/languages/english"/></span>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a id="spanish-btn">
+						<div class="lang-container">
+							<img class="lang-flag" src="<c:url value="/resources/images/spain.png"></c:url>">
+							<span class="language"><spring:message code="navbar/languages/spanish"/></span>
+						</div>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -249,19 +273,19 @@
 				<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/contact") %>">
 					<div class="row">
 						<div class="input-field">
-							<textarea id="message" class="materialize-textarea"></textarea>
+							<textarea id="message" name="message" class="materialize-textarea"></textarea>
 							<label for="message"><spring:message code="detailview/message" /></label>
 						</div>
 					</div>
 					<div class="row" style="display: none;">
 						<%-- Hide Data for form --%>
 						<div class="input-field">
-							<textarea id="propertyId" class="materialize-textarea" value="${property.id}"></textarea>
+							<input id="propertyId" name="propertyId" class="materialize-textarea" value="${property.id}" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field">
-							<input id="email" type="email" class="validate">
+							<input id="email" name="mail" type="email" class="validate">
 							<label for="email"><spring:message code="detailview/email" /></label>
 						</div>
 					</div>

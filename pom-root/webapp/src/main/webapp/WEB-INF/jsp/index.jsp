@@ -16,7 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/materialize.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/base.css"></c:url>">
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"></c:url>">
-		<link rel="shortcut icon" type="image/png" href="<c:url value="/resources/images/logo2.png"></c:url>"/>
 	</head>
 	
 	<body>
@@ -78,7 +77,7 @@
                               <li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
                           </c:if>
                           <li>
-                          	<a href="?language=en">
+                          	<a id="english-btn">
                           		<div class="lang-container">
                           			<img class="lang-flag" src="<c:url value="/resources/images/usa.png"></c:url>">
                           			<span class="language"><spring:message code="navbar/languages/english"/></span>
@@ -86,7 +85,7 @@
                           	</a>
                           </li>
                           <li>
-                          	<a href="?language=es_AR">
+                          	<a id="spanish-btn">
                           		<div class="lang-container">
                           			<img class="lang-flag" src="<c:url value="/resources/images/spain.png"></c:url>">
                           			<span class="language"><spring:message code="navbar/languages/spanish"/></span>
