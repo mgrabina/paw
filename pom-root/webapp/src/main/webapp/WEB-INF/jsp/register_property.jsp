@@ -32,7 +32,7 @@
 				        <div class="input-field">
 				          <input id="search" type="search" placeholder="Buscar" required>
 				          <label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
-				          <i class="material-icons">close</i>
+
 				        </div>
 			      </form>
 			    </div>
@@ -393,6 +393,7 @@
         async defer></script>
 	    <script type="text/javascript" src="<c:url value="/resources/js/inputValidator.js"></c:url>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/register_property.js"></c:url>"></script>
-		
+        <script type="text/javascript" src="<c:url value="/resources/js/index.js"></c:url>"></script>
+
 	</body>
 </html>

@@ -31,7 +31,7 @@
 					<div class="input-field">
 						<input id="search" type="search" name="query" placeholder="Buscar" required>
 						<label class="label-icon" for="search"><i class="material-icons icon-black">search</i></label>
-						<i class="material-icons">close</i>
+
 					</div>
 				</form>
 			</div>
