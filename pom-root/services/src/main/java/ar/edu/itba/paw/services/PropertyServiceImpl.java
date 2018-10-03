@@ -8,6 +8,7 @@ import ar.edu.itba.paw.models.*;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -51,6 +52,7 @@ public class PropertyServiceImpl implements PropertyService {
 		return propertyDao.createProperty(street, floor, apartment, type, userId, price, null, null, null, null, null, null);
 	}
 
+	@Transactional
 	public Long createProperty(String street, Integer floor, String apartment, String neighborhood, OperationType operationType, PropertyType type, User publisherUser, Long price, Integer coveredArea, Integer totalArea, Integer rooms, Integer baths, Boolean garage, Integer taxPrice, String adMessage, String adDescription, Boolean inmediateDelivery) {
 	    Map<String, Integer> tags = new HashMap<String, Integer>();
 		Arrays.stream(street.trim().toLowerCase().split("\\s+")).forEach(
