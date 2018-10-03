@@ -11,8 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class NewPropertyForm {
 
-    @Size(min = 3, max = 30)
-    @Pattern(regexp = "[a-zA-Z]+")
+    @Size(min = 3, max = 999)
     @NotNull
     private String street;
 
@@ -22,12 +21,10 @@ public class NewPropertyForm {
 	private Integer floor=0;
 
     @Size(min = 0, max = 10)
-    @Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
     private String apartment=" ";
 
 	@Size(min = 5, max = 30)
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
     private String neighborhood;
 
@@ -69,12 +66,10 @@ public class NewPropertyForm {
     private Integer taxPrice;
 
 	@Size(min = 6, max = 80)
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
 	private String adMessage;
 
 	@Size(min = 6, max = 300)
-	@Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
 	private String adDescription;
 
