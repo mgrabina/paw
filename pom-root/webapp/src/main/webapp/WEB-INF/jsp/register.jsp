@@ -90,7 +90,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  <div class="button-container center-align">
 						  <input type="submit" class="btn btn-outline-success" value="<spring:message code="register/register"/>"/>
 						  <br>
-						  <p class="message"><spring:message code="register/already_registered"/><a href="#"> <spring:message code="register/login"/></a></p>
+						  <p class="message"><spring:message code="register/already_registered"/><a href="<%= response.encodeURL(request.getContextPath() + "/user/login") %>"> <spring:message code="register/login"/></a></p>
 					  </div>
 
 				</form>
