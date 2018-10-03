@@ -39,6 +39,7 @@
                                 <form:input type="password" placeholder='${auxPassword}' required="" id="password" path="password" name="password"/>
                                 <label for="password"><spring:message code="login/password"/></label>
                             </div>
+                            <span style="display: none;" id="invalid-login-credentials"><spring:message code="login/invalid_credentials"/></span>
                         </div>
                         <div class="col-md-6 login-do">
                             <br>
@@ -60,6 +61,7 @@
                 async defer></script>
         <script type="text/javascript" src="<c:url value="/resources/js/inputValidator.js"></c:url>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/register_property.js"></c:url>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/login.js"></c:url>"></script>
 
     </body>
 </html>
