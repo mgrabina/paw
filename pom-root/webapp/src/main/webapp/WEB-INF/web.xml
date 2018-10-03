@@ -54,13 +54,13 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   <!--<error-code>404</error-code>-->
   <!--<location>/AppExceptionHandler</location>-->
   <!--</error-page>-->
-  <!--<error-page>-->
-  <!--<error-code>500</error-code>-->
-  <!--<location>/AppExceptionHandler</location>-->
-  <!--</error-page>-->
+  <error-page>
+    <error-code>500</error-code>
+    <location>/not-found</location>
+  </error-page>
 
-  <!--<error-page>-->
-  <!--<exception-type>javax.servlet.ServletException</exception-type>-->
-  <!--<location>/AppExceptionHandler</location>-->
-  <!--</error-page>-->
+  <error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/not-found</location>
+  </error-page>
 </web-app>
