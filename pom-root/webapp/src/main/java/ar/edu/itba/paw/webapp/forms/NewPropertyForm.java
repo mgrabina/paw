@@ -16,15 +16,15 @@ public class NewPropertyForm {
     @NotNull
     private String street;
 
-	@Min(1)
+	@Min(0)
 	@Max(200)
 	@NotNull
-    private Integer floor;
+	private Integer floor=0;
 
-    @Size(min = 1, max = 10)
+    @Size(min = 0, max = 10)
     @Pattern(regexp = "[a-zA-Z0-9]+")
 	@NotNull
-    private String apartment;
+    private String apartment=" ";
 
 	@Size(min = 5, max = 30)
 	@Pattern(regexp = "[a-zA-Z0-9]+")
