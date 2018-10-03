@@ -289,7 +289,9 @@ function addManyQueryParamsAndRedirect(json){
     var newSearchQuery = Object.keys(currentParams).map(function(k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(currentParams[k])
     }).join('&');
-    window.location.replace(location.origin + location.pathname+ '?' + newSearchQuery);
+    var aux = location.origin + location.pathname+ '?' + newSearchQuery;
+    aux = aux.replace("%2B", "+");
+    window.location.replace(aux);
 }
 
 /*
