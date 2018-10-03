@@ -62,13 +62,37 @@
 		<div class="extras">
 			<a class='dropdown-trigger' data-target='dropdown1'><i class="medium material-icons">menu</i></a>
 			<ul id='dropdown1' class='dropdown-content'>
+
+				<c:if test="${not empty myUser}">
+					<li class="profile-container">
+						<div class="profile-img-container">
+							<img class="rounded-image" alt="profile picture" src="<c:out value="${myUser.imageSrc}"/>">
+						</div>
+						<span><c:out value="${myUser.name}"/></span>
+					</li>
+				</c:if>
+				<li class="divider" tabindex="-1"></li>
+
 				<c:if test="${not empty myUser}">
 					<li><a href='<%= response.encodeURL(request.getContextPath() + "/myproperties") %>'><spring:message code="index/myproperties"/></a></li>
 					<li><a href='<%= response.encodeURL(request.getContextPath() + "/user/logout") %>'><spring:message code="index/logout"/></a></li>
 				</c:if>
-				<li class="divider" tabindex="-1"></li>
-				<li><a id="english-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/english"/></a></li>
-				<li><a id="spanish-btn"><i class="material-icons">language</i><spring:message code="navbar/languages/spanish"/></a></li>
+				<li>
+					<a id="english-btn">
+						<div class="lang-container">
+							<img class="lang-flag" src="<c:url value="/resources/images/usa.png"></c:url>">
+							<span class="language"><spring:message code="navbar/languages/english"/></span>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a id="spanish-btn">
+						<div class="lang-container">
+							<img class="lang-flag" src="<c:url value="/resources/images/spain.png"></c:url>">
+							<span class="language"><spring:message code="navbar/languages/spanish"/></span>
+						</div>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
