@@ -426,7 +426,7 @@
 												</c:if>
 
 												<c:forEach items="${property.images}" var="imageSrc" varStatus="loop">
-													<a class="carousel-item" href="">
+													<a class="carousel-item" href="<%= response.encodeURL(request.getContextPath() + "/property/")%>${property.id}">
 														<div class="image-cont">
 															<img src="<c:out value="${imageSrc}"/>">
 														</div>
