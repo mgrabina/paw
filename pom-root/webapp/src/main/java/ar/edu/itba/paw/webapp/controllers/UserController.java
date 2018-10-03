@@ -5,6 +5,7 @@ import ar.edu.itba.paw.interfaces.ImageUploaderService;
 import ar.edu.itba.paw.interfaces.PropertyService;
 import ar.edu.itba.paw.models.Property;
 import ar.edu.itba.paw.models.User;
+import ar.edu.itba.paw.webapp.config.WebConfig;
 import ar.edu.itba.paw.webapp.forms.RegisterForm;
 import ar.edu.itba.paw.webapp.forms.LoginForm;
 
@@ -12,7 +13,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.MessageSourceResourceBundle;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +56,9 @@ public class UserController {
     @Autowired
     private ImageUploaderService ius;
 
-    private final String DEFAULT_CONTACT_SUBJECT = "Contact from Chozapp";  //TODO: Set HTML Content by language
+    private final String DEFAULT_CONTACT_SUBJECT = "Contact from Chozapp";
+    private final String DEFAULT_IMAGE_VALIDATION_ERROR = "Invalid Image";
+    private final String DEFAULT_EXISTING_USER = "Existing user";
     private final String PAGE_QUERY_KEY = "page";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -76,10 +81,10 @@ public class UserController {
             String destMail = ps.getPropertyById(Integer.parseInt(propertyId)).get().getPublisherUser().getMail();
             es.sendMessage(destMail, DEFAULT_CONTACT_SUBJECT + " - " + ((dest != null)?dest:""), message);
             ModelAndView mav = new ModelAndView("alert");
-            mav.addObject("title", "Message Sent"); //TODO: Language support
             return mav;
         }catch (Exception e){
             // Couldnt send mail
+            LOGGER.debug("Could not send mail to for id {} with message {}", propertyId, message);
             return new ModelAndView("error");
         }
     }
@@ -98,18 +103,30 @@ public class UserController {
 
         if(us.userExist(form.getMail())){
             ModelAndView m =new ModelAndView("register");
-            m.addObject("errorMessage", "Existing user");
+            List<String> errors = new LinkedList<>();
+            errors.add(DEFAULT_EXISTING_USER);
+            m.addObject("errors", errors);
+            return m;
+        }
+        String imageSrc;
+        try{
+            // Image upload
+            MultipartFile image = form.getImage();
+            BufferedImage bImage = ImageIO.read(new ByteArrayInputStream(image.getBytes()));
+            String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+            long size = image.getSize();
+            imageSrc = ius.uploadImage(bImage, extension, image.getOriginalFilename(), size);
+        }catch (Exception e){
+            LOGGER.debug("Could not upload photo");
+            ModelAndView m =new ModelAndView("register");
+            List<String> errors = new LinkedList<>();
+            errors.add(DEFAULT_IMAGE_VALIDATION_ERROR);
+            m.addObject("errors", errors);
             return m;
         }
 
-        // Image upload
-        MultipartFile image = form.getImage();
-        BufferedImage bImage = ImageIO.read(new ByteArrayInputStream(image.getBytes()));
-        String extension = FilenameUtils.getExtension(image.getOriginalFilename());
-        long size = image.getSize();
-        String imageSrc = ius.uploadImage(bImage, extension, image.getOriginalFilename(), size);
 
-        Long id = us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), imageSrc);
+        us.createUser(form.getUsername(), pw.encode(form.getPassword()), form.getMail(), form.getPhone(), imageSrc);
 
         try{
             request.login(form.getMail(), form.getPassword());

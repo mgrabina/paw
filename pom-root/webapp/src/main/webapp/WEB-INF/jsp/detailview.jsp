@@ -249,19 +249,19 @@
 				<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/contact") %>">
 					<div class="row">
 						<div class="input-field">
-							<textarea id="message" class="materialize-textarea"></textarea>
+							<textarea id="message" name="message" class="materialize-textarea"></textarea>
 							<label for="message"><spring:message code="detailview/message" /></label>
 						</div>
 					</div>
 					<div class="row" style="display: none;">
 						<%-- Hide Data for form --%>
 						<div class="input-field">
-							<textarea id="propertyId" class="materialize-textarea" value="${property.id}"></textarea>
+							<input id="propertyId" name="propertyId" class="materialize-textarea" value="${property.id}" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field">
-							<input id="email" type="email" class="validate">
+							<input id="email" name="mail" type="email" class="validate">
 							<label for="email"><spring:message code="detailview/email" /></label>
 						</div>
 					</div>

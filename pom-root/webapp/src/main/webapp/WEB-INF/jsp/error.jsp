@@ -38,7 +38,7 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
-
+        <h3 class="title white-text"><spring:message code="error-page/unknown"/></h3>
         <p><a href="${pageContext.servletContext.contextPath}/"><spring:message code="error-page/return-home"/></a></p>
     </div>
 </div>

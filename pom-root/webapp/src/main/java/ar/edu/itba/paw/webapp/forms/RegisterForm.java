@@ -19,13 +19,14 @@ public class RegisterForm {
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String surname;
 
+    @Size(min = 5, max = 80)
     private String mail;
 
     @Size(min = 5, max = 50)
     @Pattern(regexp = "[a-zA-Z0-9]+")
     private String password;
 
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 25)
     private String phone;
 
     @Image
