@@ -74,7 +74,7 @@ function setUpFilters(){
   });
 
   $('#remove-filters').click(function(e){
-    window.location =  window.location.origin;
+    window.location =  location.origin + location.pathname;
   });
 
   $('#general-filter').click(function(e){

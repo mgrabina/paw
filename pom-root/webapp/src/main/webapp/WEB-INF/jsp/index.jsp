@@ -119,7 +119,7 @@
 						</div>
 						<div class="footer">
 							
-							<%--<a id="remove-filters"><i class="material-icons left">delete</i><spring:message code="index/filters/delete-filters"/></a>--%>
+							<a id="remove-filters"><i class="material-icons left">delete</i><spring:message code="index/filters/delete-filters"/></a>
 						</div>
 					</div>
 				</c:if>
