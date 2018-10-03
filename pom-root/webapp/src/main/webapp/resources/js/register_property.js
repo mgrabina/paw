@@ -300,8 +300,7 @@ function setUpChangeHooks(){
 	floor.on("input", function(e) {
 		var input = $(this).val();
 
-		var rules = [[RulesEnum.NOT_NULL, null],
- 					[RulesEnum.LIMITED_NUMBER, [0, 200] ]];
+		var rules = [];
  		stepOne[1] = checkField($(this), input, rules);
 	});
 

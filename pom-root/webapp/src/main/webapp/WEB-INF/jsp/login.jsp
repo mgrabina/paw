@@ -32,27 +32,13 @@
                     <form>
                         <div class="col-md-6">
                             <div class="input-field">
-                                <%--<spring:message code='login/email' var="auxEmail"/>--%>
                                 <form:input type="text" placeholder="${auxEmail}" required="" id="mail" path="mail" name="mail"/>
-                                <%--<i class="fa fa-envelope"></i>--%>
                                 <label for="mail"><spring:message code="login/email"/></label>
                             </div>
                             <div class="input-field">
-                                <%--<spring:message code="login/password" var="auxPassword"/>--%>
                                 <form:input type="password" placeholder='${auxPassword}' required="" id="password" path="password" name="password"/>
-                                <%--<i class="fa fa-lock"></i>--%>
                                 <label for="password"><spring:message code="login/password"/></label>
                             </div>
-                                <%--<div class="login-mail">--%>
-                                <%--<spring:message code='login/email' var="auxEmail"/>--%>
-                                <%--<form:input type="text" placeholder="${auxEmail}" required="" id="mail" path="mail" name="mail"/>--%>
-                                <%--<i class="fa fa-envelope"></i>--%>
-                            <%--</div>--%>
-                            <%--<div class="login-mail">--%>
-                                <%--<spring:message code="login/password" var="auxPassword"/>--%>
-                                <%--<form:input type="password" placeholder='${auxPassword}' required="" id="password" path="password" name="password"/>--%>
-                                <%--<i class="fa fa-lock"></i>--%>
-                            <%--</div>--%>
                         </div>
                         <div class="col-md-6 login-do">
                             <br>
