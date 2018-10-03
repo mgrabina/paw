@@ -63,7 +63,7 @@
 		  			  <ul id='dropdown1' class='dropdown-content'>
 
 		  			  	<c:if test="${not empty myUser}">
-		  			  		<li class="profile-container">
+		  			  		<li class="profile-container" style="cursor: default !important;">
 				  				<div class="profile-img-container">
 			  						<img class="rounded-image" alt="profile picture" src="<c:out value="${myUser.imageSrc}"/>">
 				  				</div>
