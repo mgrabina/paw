@@ -143,6 +143,9 @@ public class PropertyController {
         } catch (Exception e){
             return new ModelAndView("404");
         }
+        if(description.length()>80 || message.length()>300 || longPrice<1 || longId<1){
+            return new ModelAndView("404");
+        }
         if( ps.updateProperty(longId,description,longPrice,message)){
             return new ModelAndView("redirect:/property/"+idProperty);
         }
